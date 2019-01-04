@@ -1,8 +1,12 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./DogBuddy.css";
-import "./Person";
-import "./Dog.js";
+import Person from "./Person";
+import PlayDate from "./PlayDate";
+import Dog from "./Dog";
+import axios from "axios";
+import Search from "./Search";
 
 class DogBuddy extends Component {
   constructor(props) {
@@ -10,7 +14,7 @@ class DogBuddy extends Component {
     this.state = {
       users: [],
       dogs: [],
-      messages: [],
+      playDates: [],
       alertMessage: ""
     };
   }
@@ -33,19 +37,96 @@ class DogBuddy extends Component {
   };
 
   //load dogs axios get method saved as loadDogs
-
+  loadDogs() {
+    axios
+      .get("http://localhost:8080/dogs")
+      .then(response => {
+        const dogComponents = response.data.map(dog => {
+          return (
+            <Dog
+              key={dog.id}
+              id={dog.id}
+              name={dog.name}
+              age={dog.age}
+              size={dog.size}
+              vaccinated={dog.vaccinated}
+              about={dog.about}
+              photo={dog.photo}
+              breed={dog.breed}
+              preferredPlayBuddy={dog.preferredPlayBuddy}
+            />
+          );
+        });
+        this.setState({
+          dogs: dogComponents
+        });
+      })
+      .catch(error => {
+        this.changeMessage(error.message);
+      });
+  }
   // load users axios get method saved as loadUsers
-
-  // load messages axios get method saved as loadMessages
-
+  loadUsers() {
+    axios
+      .get("http://localhost:8080/persons")
+      .then(response => {
+        const UserComponents = response.data.map(user => {
+          return (
+            <Person
+              key={user.id}
+              id={user.id}
+              firstNamename={user.firstName}
+              lastName={user.lastName}
+              city={user.city}
+              state={user.state}
+              zipCode={user.zipCode}
+              about={user.about}
+              photo={user.photo}
+            />
+          );
+        });
+        this.setState({
+          dogs: UserComponents
+        });
+      })
+      .catch(error => {
+        this.changeMessage(error.message);
+      });
+  }
+  // load playdates axios get method saved as loadMessages
+  loadPlaydates() {
+    axios
+      .get("http://localhost:8080/playDates")
+      .then(response => {
+        // might need to do response.playDates
+        const PlayDateComponents = response.data.map(playDate => {
+          return (
+            <PlayDate
+              key={playDate.id}
+              id={playDate.id}
+              date={playDate.date}
+              startTime={playDate.startTime}
+              endTime={playDate.endTime}
+              city={playDate.city}
+              state={playDate.state}
+              zipCode={playDate.zipCode}
+              status={playDate.status}
+            />
+          );
+        });
+        this.setState({
+          dogs: PlayDateComponents
+        });
+      })
+      .catch(error => {
+        this.changeMessage(error.message);
+      });
+  }
   // componentDidMount method that loads the users/dogs/messages
 
   render() {
     const dogs = this.state.dogs;
     const users = this.state.users;
-    const userCollection = users.map((users, i) => {
-      //return <Person key={i} />;
-    });
     return <h1>Dog Buddy App</h1>;
     // Add ul for router links to home, search, users, dogs, dashboard, maybe sign out/sign up?
     // Add a router with routes  to users/dogs /passing the route this.state.users or dogs
