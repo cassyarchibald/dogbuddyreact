@@ -86,7 +86,7 @@ class DogBuddy extends Component {
           );
         });
         this.setState({
-          dogs: UserComponents
+          users: UserComponents
         });
       })
       .catch(error => {
@@ -115,7 +115,7 @@ class DogBuddy extends Component {
           );
         });
         this.setState({
-          dogs: PlayDateComponents
+          playDates: PlayDateComponents
         });
       })
       .catch(error => {
@@ -125,9 +125,7 @@ class DogBuddy extends Component {
   // componentDidMount method that loads the users/dogs/messages
 
   render() {
-    const dogs = this.state.dogs;
-    const users = this.state.users;
-    return <h1>Dog Buddy App</h1>;
+    return <h2>Dog Buddy</h2>;
     // Add ul for router links to home, search, users, dogs, dashboard, maybe sign out/sign up?
     // Add a router with routes  to users/dogs /passing the route this.state.users or dogs
   }
