@@ -8,8 +8,8 @@ const PersonCollection = props => {
     let user = props.users.map(user => {
       return (
         <Person
-          key={user.id}
-          id={user.id}
+          key={user.resourceId}
+          id={user.resourceId}
           firstNamename={user.firstName}
           lastName={user.lastName}
           city={user.city}

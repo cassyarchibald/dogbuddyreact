@@ -7,6 +7,7 @@ const Dog = props => {
 };
 
 Dog.propTypes = {
+  id: PropTypes.number,
   name: PropTypes.string,
   age: PropTypes.number,
   size: PropTypes.string,

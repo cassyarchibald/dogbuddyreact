@@ -6,10 +6,11 @@ import "./DogCollection.css";
 const DogCollection = props => {
   if (props.dogs.length > 0) {
     let dog = props.dogs.map(dog => {
+      console.log(dog);
       return (
         <Dog
-          key={dog.id}
-          id={dog.id}
+          key={dog.resourceId}
+          id={dog.resourceId}
           name={dog.name}
           age={dog.age}
           size={dog.size}
@@ -36,6 +37,7 @@ const DogCollection = props => {
 };
 
 DogCollection.propTypes = {
+  id: PropTypes.number,
   name: PropTypes.string,
   age: PropTypes.number,
   size: PropTypes.string,

@@ -4,8 +4,8 @@ h1 {
   padding: 2rem;
   padding-top: 5rem;
   color: #fff;
-  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080, 0 0 30px #ff0080,
-    0 0 40px #ff0080, 0 0 55px #ff0080, 0 0 75px #ff0080;
+  /* text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080, 0 0 30px #ff0080,
+    0 0 40px #ff0080, 0 0 55px #ff0080, 0 0 75px #ff0080; */
   animation: text-flicker 3s linear infinite;
 }
 
@@ -35,8 +35,8 @@ img {
 }
 
 a:hover {
-  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080, 0 0 30px #ff0080,
-    0 0 40px #ff0080, 0 0 55px #ff0080, 0 0 75px #ff0080;
+  /* text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080, 0 0 30px #ff0080,
+    0 0 40px #ff0080, 0 0 55px #ff0080, 0 0 75px #ff0080; */
 }
 
 a::after {

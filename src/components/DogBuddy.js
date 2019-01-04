@@ -44,11 +44,17 @@ class DogBuddy extends Component {
     axios
       .get("http://localhost:8080/dogs")
       .then(response => {
-        const dogComponents = response.data.map(dog => {
+        console.log("Value of response.data._embedded");
+        console.log(response.data._embedded);
+        console.log("Value of response.data._embedded.dogs");
+        console.log(response.data._embedded.dogs);
+        const dogComponents = response.data._embedded.dogs.map(dog => {
+          console.log("Mapping dog");
+          console.log(dog);
           return (
             <Dog
-              key={dog.id}
-              id={dog.id}
+              key={dog.resourceId}
+              id={dog.resourceId}
               name={dog.name}
               age={dog.age}
               size={dog.size}
@@ -60,9 +66,13 @@ class DogBuddy extends Component {
             />
           );
         });
+        console.log("dog component value");
+        console.log(dogComponents);
         this.setState({
           dogs: dogComponents
         });
+        console.log("Value of dogs in state ");
+        console.log(this.state.dogs);
       })
       .catch(error => {
         this.changeMessage(error.message);
@@ -76,8 +86,8 @@ class DogBuddy extends Component {
         const UserComponents = response.data.map(user => {
           return (
             <Person
-              key={user.id}
-              id={user.id}
+              key={user.resourceId}
+              id={user.resourceId}
               firstNamename={user.firstName}
               lastName={user.lastName}
               city={user.city}
@@ -105,8 +115,8 @@ class DogBuddy extends Component {
         const PlayDateComponents = response.data.map(playDate => {
           return (
             <PlayDate
-              key={playDate.id}
-              id={playDate.id}
+              key={playDate.resourceId}
+              id={playDate.resourceId}
               date={playDate.date}
               startTime={playDate.startTime}
               endTime={playDate.endTime}
@@ -128,11 +138,11 @@ class DogBuddy extends Component {
   // componentDidMount method that loads the users/dogs/playdates
   componentDidMount() {
     // API request to load users
-    this.loadUsers();
+    //this.loadUsers();
     // API request to load dogs
     this.loadDogs();
     // API request to laod playdates
-    this.loadPlaydates();
+    //this.loadPlaydates();
   }
 
   render() {
