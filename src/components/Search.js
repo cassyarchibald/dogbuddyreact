@@ -74,17 +74,14 @@ class Search extends Component {
             `Showing ${this.state.resultList.length} results`}
         </h3>
         <h4 className="alertMessage text-center">{this.state.alertMessage}</h4>
-        <SearchList
-          resultList={this.state.resultList}
-          updateMoviesCallback={this.props.updateMoviesCallback}
-        />
+        <SearchList resultList={this.state.resultList} />
       </section>
     );
   }
 }
 
 Search.propTypes = {
-  updateMoviesCallback: PropTypes.func
+  // updateMoviesCallback: PropTypes.func
 };
 
 export default Search;

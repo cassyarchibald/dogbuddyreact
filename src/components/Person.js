@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Person.css";
 
-const Person = () => {
-  return <h2>Person</h2>;
+const Person = props => {
+  return <h2>{props.firstName}</h2>;
 };
 
 Person.propTypes = {
