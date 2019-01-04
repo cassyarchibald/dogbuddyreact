@@ -12,12 +12,10 @@ Person.propTypes = {
   city: PropTypes.string,
   state: PropTypes.string,
   zipCode: PropTypes.number,
-  milesWillingToDrive: PropTypes.number,
   about: PropTypes.string,
-  photo: PropTypes.string,
-  gender: PropTypes.string
+  photo: PropTypes.string
   // dogs here
-  // messages here ?
+  // playdates here ?
 };
 
 export default Person;
