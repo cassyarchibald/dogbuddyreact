@@ -17,6 +17,7 @@ const PersonCollection = props => {
           zipCode={user.zipCode}
           about={user.about}
           photo={user.photo}
+          addUserCallback={this.addUserCallback}
         />
       );
     });
@@ -41,7 +42,8 @@ PersonCollection.propTypes = {
   state: PropTypes.string,
   zipCode: PropTypes.number,
   about: PropTypes.string,
-  photo: PropTypes.string
+  photo: PropTypes.string,
+  addUserCallback: PropTypes.func
 };
 
 export default PersonCollection;

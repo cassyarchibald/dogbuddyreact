@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./NewUserForm.css";
+import "./NewPersonForm.css";
 
-class NewUserForm extends Component {
+class NewPersonForm extends Component {
   constructor() {
     super();
     this.state = {
@@ -128,4 +128,4 @@ class NewUserForm extends Component {
   }
 }
 
-export default NewUserForm;
+export default NewPersonForm;

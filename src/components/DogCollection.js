@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import Dog from "./Dog";
 import "./DogCollection.css";
+import NewDogForm from "./NewDogForm";
 
 const DogCollection = props => {
   if (props.dogs.length > 0) {
     let dog = props.dogs.map(dog => {
-      console.log(dog);
       return (
         <Dog
           key={dog.resourceId}
@@ -19,6 +19,7 @@ const DogCollection = props => {
           photo={dog.photo}
           breed={dog.breed}
           preferredPlayBuddy={dog.preferredPlayBuddy}
+          addDogCallback={props.addDogCallback}
         />
       );
     });
@@ -45,7 +46,8 @@ DogCollection.propTypes = {
   about: PropTypes.string,
   photo: PropTypes.string,
   breed: PropTypes.string,
-  preferredPlayBuddy: PropTypes.string
+  preferredPlayBuddy: PropTypes.string,
+  addDogCallback: PropTypes.func
 };
 
 export default DogCollection;

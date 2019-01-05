@@ -3,7 +3,16 @@ import PropTypes from "prop-types";
 import "./PlayDate.css";
 
 const PlayDate = props => {
-  const { date, startTime, endTime, city, state, zipCode, status } = props;
+  const {
+    date,
+    startTime,
+    endTime,
+    city,
+    state,
+    zipCode,
+    status,
+    playDateCallback
+  } = props;
   return (
     <div className="card d-inline-block">
       <p>Date: {date}</p>
@@ -24,7 +33,8 @@ PlayDate.propTypes = {
   city: PropTypes.string,
   state: PropTypes.string,
   zipCode: PropTypes.number,
-  status: PropTypes.string
+  status: PropTypes.string,
+  addPlayDateCallback: PropTypes.addPlayDateCallback
   // requestor here
   // responder here
 };

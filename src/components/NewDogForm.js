@@ -41,7 +41,7 @@ class NewDogForm extends Component {
       preferredPlayBuddy: this.state.preferredPlayBuddy
     };
 
-    // Need to add the user
+    // Need to add the user, post request?
     this.props.addDogCallback(newDog);
     this.setState({ errorMessages: [] });
   };

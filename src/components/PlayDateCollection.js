@@ -16,7 +16,8 @@ const PlayDateCollection = props => {
           city={playDate.state}
           state={playDate.zipCode}
           zipCode={playDate.about}
-          status={playDate.photo}
+          status={playDate.status}
+          addPlayDateCallback={props.addPlayDateCallback}
         />
       );
     });
@@ -41,7 +42,8 @@ PlayDateCollection.propTypes = {
   city: PropTypes.string,
   state: PropTypes.string,
   zipCode: PropTypes.number,
-  status: PropTypes.string
+  status: PropTypes.string,
+  addPlayDateCallback: PropTypes.addPlayDateCallback
   // requestor here
   // responder here
 };

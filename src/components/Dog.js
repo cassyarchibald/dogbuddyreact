@@ -12,8 +12,10 @@ const Dog = props => {
     vaccinated,
     about,
     photo,
-    preferredPlayBuddy
+    preferredPlayBuddy,
+    addDogCallback
   } = props;
+
   return (
     <div className="card d-inline-block">
       <h3 className="text-center">{name}</h3>

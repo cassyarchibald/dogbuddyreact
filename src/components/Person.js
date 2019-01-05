@@ -3,7 +3,18 @@ import PropTypes from "prop-types";
 import "./Person.css";
 
 const Person = props => {
-  const { firstName, lastName, city, state, zipCode, about, photo } = props;
+  const {
+    firstName,
+    lastName,
+    city,
+    state,
+    zipCode,
+    about,
+    photo,
+    addUserCallback
+  } = props;
+
+  // Do axios request to render person's dogs
   return (
     <div className="card d-inline-block">
       <h3 className="text-center">
@@ -24,7 +35,8 @@ Person.propTypes = {
   state: PropTypes.string,
   zipCode: PropTypes.number,
   about: PropTypes.string,
-  photo: PropTypes.string
+  photo: PropTypes.string,
+  addUserCallback: PropTypes.func
   // dogs here
   // playdates here ?
 };
