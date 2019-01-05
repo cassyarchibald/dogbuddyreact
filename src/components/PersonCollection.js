@@ -5,22 +5,7 @@ import "./PersonCollection.css";
 
 const PersonCollection = props => {
   if (props.users.length > 0) {
-    let user = props.users.map(user => {
-      return (
-        <Person
-          key={user.resourceId}
-          id={user.resourceId}
-          firstNamename={user.firstName}
-          lastName={user.lastName}
-          city={user.city}
-          state={user.state}
-          zipCode={user.zipCode}
-          about={user.about}
-          photo={user.photo}
-          addUserCallback={this.addUserCallback}
-        />
-      );
-    });
+    let user = props.users;
     return (
       <section>
         <div className="componentcontainer">{user}</div>

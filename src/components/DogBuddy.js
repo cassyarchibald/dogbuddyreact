@@ -87,7 +87,6 @@ class DogBuddy extends Component {
     axios
       .get("http://localhost:8080/persons")
       .then(response => {
-        console.log(response);
         const UserComponents = response.data._embedded.persons.map(user => {
           return (
             <Person
@@ -168,7 +167,7 @@ class DogBuddy extends Component {
                 <Link to="/search">Search</Link>
               </li>
               <li>
-                <Link to="/customers">Users</Link>
+                <Link to="/users">Users</Link>
               </li>
               <li>
                 <Link to="/dogs">Dogs</Link>
@@ -184,18 +183,10 @@ class DogBuddy extends Component {
                 <DogCollection dogComponentsCollection={this.state.dogs} />
               )}
             />
-            <Route
-              path="/search"
-              render={() => <Search updateMoviesCallback={this.loadMovies} />}
-            />
+            <Route path="/search" render={() => <Search />} />
             <Route
               path="/users"
-              render={() => (
-                <PersonCollection
-                  users={this.state.users}
-                  addUserCallback={this.addUser}
-                />
-              )}
+              render={() => <PersonCollection users={this.state.users} />}
             />
             <Route
               path="/dogs"
