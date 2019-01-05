@@ -44,14 +44,7 @@ class DogBuddy extends Component {
     axios
       .get("http://localhost:8080/dogs")
       .then(response => {
-        // console.log("Value of response.data._embedded");
-        // console.log(response.data._embedded);
-        // console.log("Value of response.data._embedded.dogs");
-        // console.log(response.data._embedded.dogs);
         const dogComponents = response.data._embedded.dogs.map(dog => {
-          // console.log("Mapping dog");
-          console.log(dog);
-          console.log(dog.name);
           return (
             <Dog
               key={dog.resourceId}
@@ -84,12 +77,13 @@ class DogBuddy extends Component {
     axios
       .get("http://localhost:8080/persons")
       .then(response => {
-        const UserComponents = response.data.map(user => {
+        console.log(response);
+        const UserComponents = response.data._embedded.persons.map(user => {
           return (
             <Person
               key={user.resourceId}
               id={user.resourceId}
-              firstNamename={user.firstName}
+              firstName={user.firstName}
               lastName={user.lastName}
               city={user.city}
               state={user.state}
@@ -139,7 +133,7 @@ class DogBuddy extends Component {
   // componentDidMount method that loads the users/dogs/playdates
   componentDidMount() {
     // API request to load users
-    //this.loadUsers();
+    this.loadUsers();
     // API request to load dogs
     this.loadDogs();
     // API request to laod playdates
@@ -148,7 +142,7 @@ class DogBuddy extends Component {
 
   render() {
     return (
-      <div>{this.state.dogs}</div>
+      <div>{this.state.users}</div>
       // <section>
       // <div className="text">
       //   <h1 className="text-center">Dog Buddy</h1>​

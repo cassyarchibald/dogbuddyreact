@@ -17,12 +17,12 @@ const Dog = props => {
   return (
     <div className="card d-inline-block">
       <h3 className="text-center">{name}</h3>
-      <p>{age}</p>
-      <p>{size}</p>
-      <p>{breed}</p>
-      <p>{vaccinated}</p>
-      <p>{about}</p>
-      <p>{preferredPlayBuddy}</p>
+      <p>Age:{age}</p>
+      <p>size:{size}</p>
+      <p>breed:{breed}</p>
+      <p>vaccinated:{vaccinated}</p>
+      <p>about:{about}</p>
+      <p>Preferred Play Buddy:{preferredPlayBuddy}</p>
     </div>
   );
 };

@@ -3,7 +3,18 @@ import PropTypes from "prop-types";
 import "./Person.css";
 
 const Person = props => {
-  return <h2>{props.firstName}</h2>;
+  const { firstName, lastName, city, state, zipCode, about, photo } = props;
+  return (
+    <div className="card d-inline-block">
+      <h3 className="text-center">
+        {firstName} {lastName}
+      </h3>
+      <p>City: {city}</p>
+      <p>State: {state}</p>
+      <p>Zip Code: {zipCode}</p>
+      <p>About: {about}</p>
+    </div>
+  );
 };
 
 Person.propTypes = {
