@@ -107,21 +107,23 @@ class DogBuddy extends Component {
       .get("http://localhost:8080/playDates")
       .then(response => {
         // might need to do response.playDates
-        const PlayDateComponents = response.data.map(playDate => {
-          return (
-            <PlayDate
-              key={playDate.resourceId}
-              id={playDate.resourceId}
-              date={playDate.date}
-              startTime={playDate.startTime}
-              endTime={playDate.endTime}
-              city={playDate.city}
-              state={playDate.state}
-              zipCode={playDate.zipCode}
-              status={playDate.status}
-            />
-          );
-        });
+        const PlayDateComponents = response.data._embedded.playDates.map(
+          playDate => {
+            return (
+              <PlayDate
+                key={playDate.resourceId}
+                id={playDate.resourceId}
+                date={playDate.date}
+                startTime={playDate.startTime}
+                endTime={playDate.endTime}
+                city={playDate.city}
+                state={playDate.state}
+                zipCode={playDate.zipCode}
+                status={playDate.status}
+              />
+            );
+          }
+        );
         this.setState({
           playDates: PlayDateComponents
         });
@@ -142,7 +144,7 @@ class DogBuddy extends Component {
 
   render() {
     return (
-      <div>{this.state.users}</div>
+      <div>{this.state.playDates}</div>
       // <section>
       // <div className="text">
       //   <h1 className="text-center">Dog Buddy</h1>​

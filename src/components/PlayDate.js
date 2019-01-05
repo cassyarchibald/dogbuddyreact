@@ -2,8 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./PlayDate.css";
 
-const PlayDate = () => {
-  return <h2>PlayDate</h2>;
+const PlayDate = props => {
+  const { date, startTime, endTime, city, state, zipCode, status } = props;
+  return (
+    <div className="card d-inline-block">
+      <p>Date: {date}</p>
+      <p>Start Time: {startTime}</p>
+      <p>End Time: {endTime}</p>
+      <p>City: {city}</p>
+      <p>State: {state}</p>
+      <p>Zip Code: {zipCode}</p>
+      <p>Status: {status}</p>
+    </div>
+  );
 };
 
 PlayDate.propTypes = {
