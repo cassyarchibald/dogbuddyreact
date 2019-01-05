@@ -33,12 +33,21 @@ class DogBuddy extends Component {
     const dogs = this.state.dogs;
     dogs.push(newDog);
     this.setState({ dogs: dogs });
+    // do post request
   };
 
   addUser = newUser => {
     const users = this.state.users;
     users.push(newUser);
     this.setState({ users: users });
+    // do post request
+  };
+
+  addPlaydate = newPlayDate => {
+    const playDates = this.state.playDates;
+    playDates.push(newPlayDate);
+    this.setState({ playDates: playDates });
+    // do post request
   };
 
   //load dogs axios get method saved as loadDogs
@@ -47,7 +56,7 @@ class DogBuddy extends Component {
       .get("http://localhost:8080/dogs")
       .then(response => {
         const dogComponents = response.data._embedded.dogs.map(dog => {
-          console.log(dog.resourceId);
+          //console.log(dog);
           return (
             <Dog
               key={dog.resourceId}
@@ -59,17 +68,15 @@ class DogBuddy extends Component {
               about={dog.about}
               photo={dog.photo}
               breed={dog.breed}
+              personLink={dog._links.person.href}
               preferredPlayBuddy={dog.preferredPlayBuddy}
             />
           );
         });
-        // console.log("dog component value");
-        // console.log(dogComponents);
+
         this.setState({
           dogs: dogComponents
         });
-        // console.log("Value of dogs in state ");
-        // console.log(this.state.dogs);
       })
       .catch(error => {
         this.changeMessage(error.message);
@@ -149,7 +156,7 @@ class DogBuddy extends Component {
     return (
       <section>
         <div className="text">
-          <h1 className="text-center">Dog Buddy</h1>​{this.state.dogs}
+          <h1 className="text-center">Dog Buddy</h1>
         </div>
         <Router>
           <div>
@@ -173,7 +180,9 @@ class DogBuddy extends Component {
             <Route
               exact
               path="/"
-              render={() => <DogCollection dogs={this.state.dogs} />}
+              render={() => (
+                <DogCollection dogComponentsCollection={this.state.dogs} />
+              )}
             />
             <Route
               path="/search"

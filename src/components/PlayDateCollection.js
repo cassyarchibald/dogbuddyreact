@@ -6,6 +6,7 @@ import "./PlayDateCollection.css";
 const PlayDateCollection = props => {
   if (props.playDates.length > 0) {
     let playDate = props.playDates.map(playDate => {
+      // Need to add requestor and receiver to this somehow
       return (
         <PlayDate
           key={playDate.id}

@@ -1,18 +1,17 @@
 import React, { Component } from "react";
-import "./NewDogForm.css";
+import "./NewPlayDateForm.css";
 
-class NewDogForm extends Component {
+class NewPlayDateForm extends Component {
   constructor() {
     super();
     this.state = {
-      name: "",
-      age: "",
-      size: "",
-      vaccinated: "",
-      about: "",
-      photo: "",
-      breed: "",
-      preferredPlayBuddy: "",
+      date: "",
+      startTime: "",
+      endTime: "",
+      city: "",
+      state: "",
+      zipCode: "",
+      status: "",
       errorMessages: []
     };
   }
@@ -29,14 +28,13 @@ class NewDogForm extends Component {
 
   resetState = () => {
     this.setState({
-      name: "",
-      age: "",
-      size: "",
-      vaccinated: "",
-      about: "",
-      photo: "",
-      breed: "",
-      preferredPlayBuddy: ""
+      date: "",
+      startTime: "",
+      endTime: "",
+      city: "",
+      state: "",
+      zipCode: "",
+      status: ""
     });
   };
 
@@ -44,17 +42,24 @@ class NewDogForm extends Component {
     event.preventDefault();
 
     const {
-      name,
-      age,
-      size,
-      vaccinated,
-      about,
-      photo,
-      breed,
-      preferredPlayBuddy
+      date,
+      startTime,
+      endTime,
+      city,
+      state,
+      zipCode,
+      status
     } = this.state;
 
-    if (name === "") return;
+    if (
+      date === "" ||
+      startTime === "" ||
+      endTime === "" ||
+      city === "" ||
+      state === "" ||
+      zipCode === ""
+    )
+      return;
 
     const newDog = {
       name: this.state.name,
@@ -154,4 +159,4 @@ class NewDogForm extends Component {
   }
 }
 
-export default NewDogForm;
+export default NewPlayDateForm;
