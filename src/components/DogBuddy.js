@@ -44,13 +44,14 @@ class DogBuddy extends Component {
     axios
       .get("http://localhost:8080/dogs")
       .then(response => {
-        console.log("Value of response.data._embedded");
-        console.log(response.data._embedded);
-        console.log("Value of response.data._embedded.dogs");
-        console.log(response.data._embedded.dogs);
+        // console.log("Value of response.data._embedded");
+        // console.log(response.data._embedded);
+        // console.log("Value of response.data._embedded.dogs");
+        // console.log(response.data._embedded.dogs);
         const dogComponents = response.data._embedded.dogs.map(dog => {
-          console.log("Mapping dog");
+          // console.log("Mapping dog");
           console.log(dog);
+          console.log(dog.name);
           return (
             <Dog
               key={dog.resourceId}
@@ -66,13 +67,13 @@ class DogBuddy extends Component {
             />
           );
         });
-        console.log("dog component value");
-        console.log(dogComponents);
+        // console.log("dog component value");
+        // console.log(dogComponents);
         this.setState({
           dogs: dogComponents
         });
-        console.log("Value of dogs in state ");
-        console.log(this.state.dogs);
+        // console.log("Value of dogs in state ");
+        // console.log(this.state.dogs);
       })
       .catch(error => {
         this.changeMessage(error.message);
@@ -147,55 +148,66 @@ class DogBuddy extends Component {
 
   render() {
     return (
-      <section>
-        <div className="text">
-          <h1 className="text-center">Dog Buddy</h1>​
-        </div>
-        <Router>
-          <div>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/search">Search</Link>
-              </li>
-              <li>
-                <Link to="/customers">Users</Link>
-              </li>
-              <li>
-                <Link to="/dogs">Dogs</Link>
-              </li>
-            </ul>
-            <h4 duration={5000} className="alertMessage text-center">
-              {this.state.alertMessage}
-            </h4>
-            <Route
-              exact
-              path="/"
-              render={() => <DogCollection dogs={this.state.dogs} />}
-            />
-            <Route
-              path="/search"
-              render={() => <Search updateMoviesCallback={this.loadMovies} />}
-            />
-            <Route
-              path="/users"
-              render={() => <PersonCollection users={this.state.users} />}
-            />
-            <Route
-              path="/dogs"
-              render={() => <DogCollection dogs={this.state.dogs} />}
-            />
-          </div>
-        </Router>
-      </section>
+      <div>{this.state.dogs}</div>
+      // <section>
+      // <div className="text">
+      //   <h1 className="text-center">Dog Buddy</h1>​
+      // </div>
+      // <Router>
+      //   <div>
+      //     <ul>
+      //       <li>
+      //         <Link to="/">Home</Link>
+      //       </li>
+      //       <li>
+      //         <Link to="/search">Search</Link>
+      //       </li>
+      //       <li>
+      //         <Link to="/customers">Users</Link>
+      //       </li>
+      //       <li>
+      //         <Link to="/dogs">Dogs</Link>
+      //       </li>
+      //     </ul>
+      //     <h4 duration={5000} className="alertMessage text-center">
+      //       {this.state.alertMessage}
+      //     </h4>
+      //     <Route
+      //       exact
+      //       path="/"
+      //       render={() => <DogCollection dogs={this.state.dogs} />}
+      //     />
+      //     <Route
+      //       path="/search"
+      //       render={() => <Search updateMoviesCallback={this.loadMovies} />}
+      //     />
+      //     <Route
+      //       path="/users"
+      //       render={() => <PersonCollection users={this.state.users} />}
+      //     />
+      //     <Route
+      //       path="/dogs"
+      //       render={() => <DogCollection dogs={this.state.dogs} />}
+      //     />
+      //   </div>
+      // </Router>
+      // </section>
     );
     // Add ul for router links to home, search, users, dogs, dashboard, maybe sign out/sign up?
     // Add a router with routes  to users/dogs /passing the route this.state.users or dogs
   }
 }
 
-DogBuddy.propTypes = {};
+DogBuddy.propTypes = {
+  id: PropTypes.number,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  size: PropTypes.string,
+  vaccinated: PropTypes.bool,
+  about: PropTypes.string,
+  photo: PropTypes.string,
+  breed: PropTypes.string,
+  preferredPlayBuddy: PropTypes.string
+};
 
 export default DogBuddy;

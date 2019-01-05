@@ -3,7 +3,28 @@ import PropTypes from "prop-types";
 import "./Dog.css";
 
 const Dog = props => {
-  return <h2>{props.name}</h2>;
+  const {
+    id,
+    name,
+    age,
+    size,
+    breed,
+    vaccinated,
+    about,
+    photo,
+    preferredPlayBuddy
+  } = props;
+  return (
+    <div className="card d-inline-block">
+      <h3 className="text-center">{name}</h3>
+      <p>{age}</p>
+      <p>{size}</p>
+      <p>{breed}</p>
+      <p>{vaccinated}</p>
+      <p>{about}</p>
+      <p>{preferredPlayBuddy}</p>
+    </div>
+  );
 };
 
 Dog.propTypes = {
