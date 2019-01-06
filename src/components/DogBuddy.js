@@ -50,6 +50,17 @@ class DogBuddy extends Component {
     // do post request
   };
 
+  // TODO May not need this funtion
+  // updateShowingOwnerOrDogs = () => {
+  //   console.log("update showing owner");
+  //   this.setState({
+  //     showOwnerComponent: !this.state.showOwnerComponent,
+  //     showDogsCallback: !this.state.showDogsCallback
+  //   });
+  //   this.loadDogs();
+  //   this.loadUsers();
+  // };
+
   //load dogs axios get method saved as loadDogs
   loadDogs() {
     axios
@@ -193,7 +204,7 @@ class DogBuddy extends Component {
               path="/dogs"
               render={() => (
                 <DogCollection
-                  dogs={this.state.dogs}
+                  dogComponentsCollection={this.state.dogs}
                   addDogCallback={this.addDogCallback}
                 />
               )}

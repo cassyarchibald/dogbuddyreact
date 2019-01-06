@@ -24,12 +24,12 @@ class Person extends Component {
     };
   }
 
+  // Might not need this...
   loadDogs() {
     axios
       .get(this.state.dogLink)
       .then(response => {
         const dogComponents = response.data._embedded.dogs.map(dog => {
-          //console.log(dog);
           return (
             <Dog
               key={dog.resourceId}
@@ -76,17 +76,6 @@ class Person extends Component {
         <p>State: {this.state.state}</p>
         <p>Zip Code: {this.state.zipCode}</p>
         <p>About: {this.state.about}</p>
-        <button onClick={this.showDogs} className="btn">
-          {this.state.showDogs ? "Hide Dogs" : "Show Dogs"}
-        </button>
-        <div>
-          {this.state.showDogs ? (
-            <DogCollection
-              dogComponentsCollection={this.state.dogs}
-              addDogCallback={this.addDogCallback}
-            />
-          ) : null}
-        </div>
       </div>
     );
   }

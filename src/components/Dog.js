@@ -17,10 +17,11 @@ class Dog extends Component {
       about: this.props.about,
       preferredPlayBuddy: this.props.preferredPlayBuddy,
       owner: "",
-      ownerLink: this.props.personLink,
+      ownerLink: this.props.ownerLink,
       errorMessages: [],
-      showOwner: false,
-      zipCode: ""
+      showOwner: this.props.showOwner,
+      zipCode: "",
+      showOwnerCallback: this.props.showOwnerCallback
     };
   }
 
@@ -52,7 +53,10 @@ class Dog extends Component {
         this.changeMessage(error.message);
       });
   }
-
+  changeMessage = message => {
+    this.setState({ alertMessage: message });
+    setTimeout(() => this.setState({ alertMessage: "" }), 2500);
+  };
   componentDidMount() {
     this.loadOwner();
   }
@@ -71,10 +75,6 @@ class Dog extends Component {
         <p>vaccinated:{this.state.vaccinated}</p>
         <p>about:{this.state.about}</p>
         <p>Preferred Play Buddy:{this.state.preferredPlayBuddy}</p>
-        <button onClick={this.showOwner} className="btn">
-          {this.state.showOwner ? "Hide Owner" : "Show Owner"}
-        </button>
-        <div>{this.state.showOwner ? this.state.owner : null}</div>
       </div>
     );
   }
