@@ -184,6 +184,15 @@ class DogBuddy extends Component {
               <li>
                 <Link to="/dogs">Dogs</Link>
               </li>
+              <li>
+                <Link to="/addPerson">Add Person</Link>
+              </li>
+              <li>
+                <Link to="/addDog">Add Dog</Link>
+              </li>
+              <li>
+                <Link to="/addPlayDate">Add Playdate</Link>
+              </li>
             </ul>
             <h4 duration={5000} className="alertMessage text-center">
               {this.state.alertMessage}
@@ -192,9 +201,9 @@ class DogBuddy extends Component {
               exact
               path="/"
               render={() => (
-                <NewPersonForm />
+                //<NewPersonForm />
                 //<NewPlayDateForm />
-                //<DogCollection dogComponentsCollection={this.state.dogs} />
+                <DogCollection dogComponentsCollection={this.state.dogs} />
               )}
             />
             <Route path="/search" render={() => <Search />} />
@@ -209,6 +218,22 @@ class DogBuddy extends Component {
                   dogComponentsCollection={this.state.dogs}
                   addDogCallback={this.addDogCallback}
                 />
+              )}
+            />
+            <Route
+              path="/addPerson"
+              render={() => (
+                <NewPersonForm addPersonCallback={this.state.addPerson} />
+              )}
+            />
+            <Route
+              path="/addDog"
+              render={() => <NewDogForm addDogCallback={this.state.addDog} />}
+            />
+            <Route
+              path="/addPlayDate"
+              render={() => (
+                <NewPlayDateForm addPlayDateCallback={this.state.addPlayDate} />
               )}
             />
           </div>

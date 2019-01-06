@@ -30,7 +30,7 @@ class NewPersonForm extends Component {
   onFormSubmit = event => {
     event.preventDefault();
 
-    const newUser = {
+    const newPerson = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       city: this.state.city,
@@ -40,7 +40,7 @@ class NewPersonForm extends Component {
     };
 
     // Need to add the user to the parent collection/do post request
-    this.props.addUserCallback(newUser);
+    this.props.addPersonCallback(newPerson);
     this.setState({ errorMessages: [] });
   };
 
