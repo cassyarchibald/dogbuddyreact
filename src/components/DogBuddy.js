@@ -18,7 +18,7 @@ class DogBuddy extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: [],
+      persons: [],
       dogs: [],
       playDates: [],
       alertMessage: ""
@@ -31,24 +31,65 @@ class DogBuddy extends Component {
   };
 
   addDog = newDog => {
-    const dogs = this.state.dogs;
-    dogs.push(newDog);
-    this.setState({ dogs: dogs });
-    // do post request
+    axios
+      .post("http://localhost:8080/dogs", newDog)
+      .then(response => {
+        let updatedData = this.state.dogs;
+        updatedData.push(newDog);
+        this.setState({ dogs: updatedData });
+      })
+      .catch(error => {
+        this.setState({ alertMessage: error.message });
+      });
   };
 
-  addUser = newUser => {
-    const users = this.state.users;
-    users.push(newUser);
-    this.setState({ users: users });
-    // do post request
+  removeDog = dogId => {
+    // loop through dogs
+    // if id matches, set the delete index to that index
+    // then splice that index out via dogs.splice(deleteIndex, 1)
+    // update the state to equal the new value
+    // do delete axios request
   };
 
-  addPlaydate = newPlayDate => {
-    const playDates = this.state.playDates;
-    playDates.push(newPlayDate);
-    this.setState({ playDates: playDates });
-    // do post request
+  addPerson = newPerson => {
+    axios
+      .post("http://localhost:8080/persons", newPerson)
+      .then(response => {
+        let updatedData = this.state.persons;
+        updatedData.push(newPerson);
+        this.setState({ persons: updatedData });
+      })
+      .catch(error => {
+        this.setState({ alertMessage: error.message });
+      });
+  };
+
+  removeUser = userId => {
+    // loop through users
+    // if id matches, set delte index to that index
+    // splice that index out
+    // update the state to equal the new value
+    // do delete axios request
+  };
+
+  addPlayDate = newPlayDate => {
+    axios
+      .post("http://localhost:8080/playDates", newPlayDate)
+      .then(response => {
+        let updatedData = this.state.playDates;
+        updatedData.push(newPlayDate);
+        this.setState({ playDates: updatedData });
+      })
+      .catch(error => {
+        this.setState({ alertMessage: error.message });
+      });
+  };
+
+  removePlaydate = playDateId => {
+    // loop through playdates
+    // if id matches, set delete index to that index
+    // splice that index out
+    // update the state to equal the new value
   };
 
   // TODO May not need this funtion

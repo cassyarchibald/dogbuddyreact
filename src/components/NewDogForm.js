@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./NewDogForm.css";
 
 class NewDogForm extends Component {
@@ -165,5 +166,9 @@ class NewDogForm extends Component {
     );
   }
 }
+
+NewDogForm.propTypes = {
+  addDogCallback: PropTypes.func
+};
 
 export default NewDogForm;
