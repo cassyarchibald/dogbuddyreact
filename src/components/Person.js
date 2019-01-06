@@ -19,7 +19,8 @@ class Person extends Component {
       addUserCallback: props.addUserCallback,
       dogLink: props.dogLink,
       dogs: [],
-      errorMessages: []
+      errorMessages: [],
+      showDogs: false
     };
   }
 
@@ -59,6 +60,18 @@ class Person extends Component {
     this.loadDogs();
   }
 
+  showDogs = () => {
+    this.setState({
+      showDogs: true
+    });
+  };
+
+  hideDogs = () => {
+    this.setState({
+      showDogs: false
+    });
+  };
+
   render() {
     return (
       <div className="card d-inline-block">
@@ -69,11 +82,19 @@ class Person extends Component {
         <p>State: {this.state.state}</p>
         <p>Zip Code: {this.state.zipCode}</p>
         <p>About: {this.state.about}</p>
-        <div className="dog-collection">
-          <DogCollection
-            dogComponentsCollection={this.state.dogs}
-            addDogCallback={this.addDogCallback}
-          />
+        <button onClick={this.showDogs} className="btn">
+          View Dogs
+        </button>
+        <button onClick={this.hideDogs} className="btn">
+          Hide Dogs
+        </button>
+        <div>
+          {this.state.showDogs ? (
+            <DogCollection
+              dogComponentsCollection={this.state.dogs}
+              addDogCallback={this.addDogCallback}
+            />
+          ) : null}
         </div>
       </div>
     );
