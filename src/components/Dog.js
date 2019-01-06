@@ -68,7 +68,9 @@ class Dog extends Component {
   render() {
     return (
       <div className="card d-inline-block">
-        <h3 className="text-center">{this.state.name}</h3>
+        <h3 className="text-center" id="dog-name">
+          {this.state.name}
+        </h3>
         <p>Age:{this.state.age}</p>
         <p>size:{this.state.size}</p>
         <p>breed:{this.state.breed}</p>
