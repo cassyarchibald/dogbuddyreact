@@ -192,7 +192,8 @@ class DogBuddy extends Component {
               exact
               path="/"
               render={() => (
-                <NewPlayDateForm />
+                <NewPersonForm />
+                //<NewPlayDateForm />
                 //<DogCollection dogComponentsCollection={this.state.dogs} />
               )}
             />
@@ -220,6 +221,7 @@ class DogBuddy extends Component {
 }
 
 DogBuddy.propTypes = {
+  // Dogs
   id: PropTypes.number,
   name: PropTypes.string,
   age: PropTypes.number,
@@ -228,7 +230,22 @@ DogBuddy.propTypes = {
   about: PropTypes.string,
   photo: PropTypes.string,
   breed: PropTypes.string,
-  preferredPlayBuddy: PropTypes.string
+  preferredPlayBuddy: PropTypes.string,
+  // Playdate
+  startTime: PropTypes.string,
+  endTime: PropTypes.string,
+  city: PropTypes.string,
+  state: PropTypes.string,
+  zipCode: PropTypes.number,
+  status: PropTypes.string,
+  // Person
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  city: PropTypes.string,
+  state: PropTypes.string,
+  zipCode: PropTypes.number,
+  about: PropTypes.string,
+  photo: PropTypes.string
 };
 
 export default DogBuddy;

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import "./NewPlayDateForm.css";
-import TimePicker from "react-time-picker";
-import DatePicker from "react-date-picker";
 
 // TODO Would be nice if the playdate form would
 // automatically add the requestor (current logged in user)
@@ -81,7 +79,7 @@ class NewPlayDateForm extends Component {
       receiver: this.state.receiver
     };
 
-    // Need to add the user, post request?
+    // Need to add the requestor/receiver, add playdate to parent state/do post request?
     this.props.addPlayDateCallback(newPlayDate, this.state);
     this.resetState();
   };

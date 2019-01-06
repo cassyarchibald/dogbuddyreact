@@ -42,7 +42,7 @@ PlayDateCollection.propTypes = {
   state: PropTypes.string,
   zipCode: PropTypes.number,
   status: PropTypes.string,
-  addPlayDateCallback: PropTypes.addPlayDateCallback
+  addPlayDateCallback: PropTypes.func
   // requestor here
   // responder here
 };

@@ -10,7 +10,6 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <p>HELLO WORLD</p>
           <DogBuddy />
         </header>
       </div>
