@@ -62,13 +62,7 @@ class Person extends Component {
 
   showDogs = () => {
     this.setState({
-      showDogs: true
-    });
-  };
-
-  hideDogs = () => {
-    this.setState({
-      showDogs: false
+      showDogs: !this.state.showDogs
     });
   };
 
@@ -83,10 +77,7 @@ class Person extends Component {
         <p>Zip Code: {this.state.zipCode}</p>
         <p>About: {this.state.about}</p>
         <button onClick={this.showDogs} className="btn">
-          View Dogs
-        </button>
-        <button onClick={this.hideDogs} className="btn">
-          Hide Dogs
+          {this.state.showDogs ? "Hide Dogs" : "Show Dogs"}
         </button>
         <div>
           {this.state.showDogs ? (

@@ -68,7 +68,7 @@ class DogBuddy extends Component {
               about={dog.about}
               photo={dog.photo}
               breed={dog.breed}
-              personLink={dog._links.person.href}
+              ownerLink={dog._links.person.href}
               preferredPlayBuddy={dog.preferredPlayBuddy}
             />
           );

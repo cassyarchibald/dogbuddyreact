@@ -5,7 +5,6 @@ import "./DogCollection.css";
 
 const DogCollection = props => {
   let dog = props.dogComponentsCollection;
-  console.log(props.dogComponentsCollection);
   if (props.dogComponentsCollection.length > 0) {
     return (
       <section>
