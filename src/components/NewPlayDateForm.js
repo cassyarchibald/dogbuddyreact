@@ -1,5 +1,12 @@
 import React, { Component } from "react";
 import "./NewPlayDateForm.css";
+import TimePicker from "react-time-picker";
+import DatePicker from "react-date-picker";
+
+// TODO Would be nice if the playdate form would
+// automatically add the requestor (current logged in user)
+// and the receiver (owner of the dog)
+// might have to wait for dashboard/login logic
 
 class NewPlayDateForm extends Component {
   constructor() {
@@ -99,6 +106,7 @@ class NewPlayDateForm extends Component {
             <input
               value={this.state.date}
               className="form-control"
+              type="date"
               name="date"
               onChange={this.onInputChange}
             />
@@ -108,6 +116,7 @@ class NewPlayDateForm extends Component {
             <input
               value={this.state.startTime}
               className="form-control"
+              type="datetime-local"
               name="startTime"
               onChange={this.onInputChange}
             />
@@ -117,6 +126,7 @@ class NewPlayDateForm extends Component {
             <input
               value={this.state.endTime}
               className="form-control"
+              type="datetime-local"
               name="endTime"
               onChange={this.onInputChange}
             />
@@ -171,10 +181,11 @@ class NewPlayDateForm extends Component {
             <input
               value={this.state.requestor}
               className="form-control"
-              name="reque."
+              name="requestor"
               onChange={this.onInputChange}
             />
           </div>
+
           <input
             type="submit"
             value="Send Playdate Request"
