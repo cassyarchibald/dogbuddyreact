@@ -4,12 +4,17 @@ import Dog from "./Dog";
 import "./DogCollection.css";
 
 const DogCollection = props => {
-  let dog = props.dogs;
-  return (
-    <section>
-      <div className="componentcontainer">{dog}</div>
-    </section>
-  );
+  let dog = props.dogComponentsCollection;
+  console.log(props.dogComponentsCollection);
+  if (props.dogComponentsCollection.length > 0) {
+    return (
+      <section>
+        <div className="componentcontainer">{dog}</div>
+      </section>
+    );
+  } else {
+    return <p>Loading</p>;
+  }
 };
 
 DogCollection.propTypes = {

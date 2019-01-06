@@ -12,7 +12,8 @@ const Dog = props => {
     vaccinated,
     about,
     photo,
-    preferredPlayBuddy
+    preferredPlayBuddy,
+    personLink
   } = props;
 
   return (

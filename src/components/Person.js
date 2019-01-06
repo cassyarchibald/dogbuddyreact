@@ -11,7 +11,8 @@ const Person = props => {
     zipCode,
     about,
     photo,
-    addUserCallback
+    addUserCallback,
+    dogLink
   } = props;
 
   // Do axios request to render person's dogs

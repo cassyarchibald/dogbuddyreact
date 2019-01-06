@@ -99,6 +99,7 @@ class DogBuddy extends Component {
               zipCode={user.zipCode}
               about={user.about}
               photo={user.photo}
+              dogLink={user._links.dogs.href}
             />
           );
         });
