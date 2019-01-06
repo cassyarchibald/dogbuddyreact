@@ -69,7 +69,7 @@ class Person extends Component {
   render() {
     return (
       <div className="card d-inline-block">
-        <h3 className="text-center">
+        <h3 className="text-center" id="person-name">
           {this.state.firstName} {this.state.lastName}
         </h3>
         <p>City: {this.state.city}</p>

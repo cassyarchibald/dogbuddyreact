@@ -4,11 +4,11 @@ import Person from "./Person";
 import "./PersonCollection.css";
 
 const PersonCollection = props => {
-  if (props.users.length > 0) {
-    let user = props.users;
+  if (props.persons.length > 0) {
+    let persons = props.persons;
     return (
       <section>
-        <div className="componentcontainer">{user}</div>
+        <div className="componentcontainer">{persons}</div>
       </section>
     );
   } else {

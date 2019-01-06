@@ -64,7 +64,7 @@ class DogBuddy extends Component {
       });
   };
 
-  removeUser = userId => {
+  removePerson = personId => {
     // loop through users
     // if id matches, set delte index to that index
     // splice that index out
@@ -140,7 +140,7 @@ class DogBuddy extends Component {
     axios
       .get("http://localhost:8080/persons")
       .then(response => {
-        const UserComponents = response.data._embedded.persons.map(user => {
+        const PersonComponenets = response.data._embedded.persons.map(user => {
           return (
             <Person
               key={user.resourceId}
@@ -157,7 +157,7 @@ class DogBuddy extends Component {
           );
         });
         this.setState({
-          users: UserComponents
+          persons: PersonComponenets
         });
       })
       .catch(error => {
@@ -200,7 +200,7 @@ class DogBuddy extends Component {
     this.loadUsers();
     // API request to load dogs
     this.loadDogs();
-    // API request to laod playdates
+    // API request to load playdates
     //this.loadPlaydates();
   }
 
@@ -250,7 +250,7 @@ class DogBuddy extends Component {
             <Route path="/search" render={() => <Search />} />
             <Route
               path="/users"
-              render={() => <PersonCollection users={this.state.users} />}
+              render={() => <PersonCollection persons={this.state.persons} />}
             />
             <Route
               path="/dogs"
