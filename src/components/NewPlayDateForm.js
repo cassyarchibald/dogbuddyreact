@@ -12,6 +12,8 @@ class NewPlayDateForm extends Component {
       state: "",
       zipCode: "",
       status: "",
+      requestor: "",
+      receiver: "",
       errorMessages: []
     };
   }
@@ -34,7 +36,9 @@ class NewPlayDateForm extends Component {
       city: "",
       state: "",
       zipCode: "",
-      status: ""
+      status: "",
+      requestor: "",
+      receiver: ""
     });
   };
 
@@ -48,7 +52,9 @@ class NewPlayDateForm extends Component {
       city,
       state,
       zipCode,
-      status
+      status,
+      requestor,
+      receiver
     } = this.state;
 
     if (
@@ -87,72 +93,93 @@ class NewPlayDateForm extends Component {
         <section className="errors">
           <ul>{errorMessages}</ul>
         </section>
-        <form className="new-dog-form" onSubmit={this.onFormSubmit}>
+        <form className="form-group" onSubmit={this.onFormSubmit}>
           <div>
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">Date</label>
             <input
-              value={this.state.name}
-              name="name"
+              value={this.state.date}
+              className="form-control"
+              name="date"
               onChange={this.onInputChange}
             />
           </div>
           <div>
-            <label htmlFor="age">Age</label>
+            <label htmlFor="startTime">Start Time</label>
             <input
-              value={this.state.age}
-              name="age"
+              value={this.state.startTime}
+              className="form-control"
+              name="startTime"
               onChange={this.onInputChange}
             />
           </div>
           <div>
-            <label htmlFor="size">Size</label>
+            <label htmlFor="endTime">End Time</label>
             <input
-              value={this.state.size}
-              name="size"
+              value={this.state.endTime}
+              className="form-control"
+              name="endTime"
+              onChange={this.onInputChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="city">City</label>
+            <input
+              value={this.state.city}
+              className="form-control"
+              name="city"
               onChange={this.onInputChange}
             />
           </div>
           <div>
             <label htmlFor="state">State</label>
             <input
-              value={this.state.vaccinated}
-              name="vaccinated"
+              value={this.state.state}
+              className="form-control"
+              name="state"
               onChange={this.onInputChange}
             />
           </div>
           <div>
-            <label htmlFor="zipCode">about</label>
+            <label htmlFor="zipCode">Zip Code</label>
             <input
-              value={this.state.about}
-              name="about"
+              value={this.state.zipCode}
+              className="form-control"
+              name="zipCode"
               onChange={this.onInputChange}
             />
           </div>
           <div>
-            <label htmlFor="photo">photo</label>
+            <label htmlFor="status">Status</label>
             <input
-              value={this.state.photo}
-              name="photo"
+              value={this.state.status}
+              name="status"
+              className="form-control"
               onChange={this.onInputChange}
             />
           </div>
           <div>
-            <label htmlFor="breed">Breed</label>
+            <label htmlFor="receiver">Sent Request To</label>
             <input
-              value={this.state.breed}
-              name="breed"
+              value={this.state.receiver}
+              className="form-control"
+              name="receiver"
               onChange={this.onInputChange}
             />
           </div>
           <div>
-            <label htmlFor="preferredPlayBuddy">preferredPlayBuddy</label>
+            <label htmlFor="requestor">Request From</label>
             <input
-              value={this.state.preferredPlayBuddy}
-              name="gender"
+              value={this.state.requestor}
+              className="form-control"
+              name="reque."
               onChange={this.onInputChange}
             />
           </div>
-          <input type="submit" value="Create Dog Profile" />
+          <input
+            type="submit"
+            value="Send Playdate Request"
+            className="btn btn-primary"
+          />
         </form>
       </div>
     );

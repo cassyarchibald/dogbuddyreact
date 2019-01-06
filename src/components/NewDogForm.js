@@ -83,34 +83,38 @@ class NewDogForm extends Component {
           <ul>{errorMessages}</ul>
         </section>
         <form className="new-dog-form" onSubmit={this.onFormSubmit}>
-          <div>
+          <div className="form-group">
             <label htmlFor="name">Name</label>
             <input
               value={this.state.name}
+              className="form-control"
               name="name"
               onChange={this.onInputChange}
             />
           </div>
-          <div>
+          <div className="form-group">
             <label htmlFor="age">Age</label>
             <input
               value={this.state.age}
+              className="form-control"
               name="age"
               onChange={this.onInputChange}
             />
           </div>
-          <div>
+          <div className="form-group">
             <label htmlFor="size">Size</label>
             <input
               value={this.state.size}
+              className="form-control"
               name="size"
               onChange={this.onInputChange}
             />
           </div>
-          <div>
+          <div className="form-group">
             <label htmlFor="state">State</label>
             <input
               value={this.state.vaccinated}
+              className="form-control"
               name="vaccinated"
               onChange={this.onInputChange}
             />
@@ -119,35 +123,43 @@ class NewDogForm extends Component {
             <label htmlFor="zipCode">about</label>
             <input
               value={this.state.about}
+              className="form-control"
               name="about"
               onChange={this.onInputChange}
             />
           </div>
-          <div>
+          <div className="form-group">
             <label htmlFor="photo">photo</label>
             <input
               value={this.state.photo}
+              className="form-control"
               name="photo"
               onChange={this.onInputChange}
             />
           </div>
-          <div>
+          <div className="form-group">
             <label htmlFor="breed">Breed</label>
             <input
               value={this.state.breed}
+              className="form-control"
               name="breed"
               onChange={this.onInputChange}
             />
           </div>
-          <div>
-            <label htmlFor="preferredPlayBuddy">preferredPlayBuddy</label>
+          <div className="form-group">
+            <label htmlFor="preferredPlayBuddy">Preferred Play Buddy</label>
             <input
               value={this.state.preferredPlayBuddy}
+              className="form-control"
               name="gender"
               onChange={this.onInputChange}
             />
           </div>
-          <input type="submit" value="Create Dog Profile" />
+          <input
+            type="submit"
+            className="btn btn-primary"
+            value="Create Dog Profile"
+          />
         </form>
       </div>
     );

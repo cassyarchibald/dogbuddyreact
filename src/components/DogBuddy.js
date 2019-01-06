@@ -7,6 +7,7 @@ import PersonCollection from "./PersonCollection";
 import NewPersonForm from "./NewPersonForm";
 import PlayDate from "./PlayDate";
 import PlayDateCollection from "./PlayDateCollection";
+import NewPlayDateForm from "./NewPlayDateForm";
 import Dog from "./Dog";
 import DogCollection from "./DogCollection";
 import NewDogForm from "./NewDogForm";
@@ -192,7 +193,8 @@ class DogBuddy extends Component {
               exact
               path="/"
               render={() => (
-                <DogCollection dogComponentsCollection={this.state.dogs} />
+                <NewPlayDateForm />
+                //<DogCollection dogComponentsCollection={this.state.dogs} />
               )}
             />
             <Route path="/search" render={() => <Search />} />
