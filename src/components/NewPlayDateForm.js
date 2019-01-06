@@ -12,7 +12,6 @@ class NewPlayDateForm extends Component {
   constructor() {
     super();
     this.state = {
-      date: "",
       startTime: "",
       endTime: "",
       city: "",
@@ -37,7 +36,6 @@ class NewPlayDateForm extends Component {
 
   resetState = () => {
     this.setState({
-      date: "",
       startTime: "",
       endTime: "",
       city: "",
@@ -53,7 +51,6 @@ class NewPlayDateForm extends Component {
     event.preventDefault();
 
     const {
-      date,
       startTime,
       endTime,
       city,
@@ -65,7 +62,6 @@ class NewPlayDateForm extends Component {
     } = this.state;
 
     if (
-      date === "" ||
       startTime === "" ||
       endTime === "" ||
       city === "" ||
@@ -74,19 +70,19 @@ class NewPlayDateForm extends Component {
     )
       return;
 
-    const newDog = {
-      name: this.state.name,
-      age: this.state.age,
-      size: this.state.size,
-      vaccinated: this.state.vaccinated,
-      about: this.state.about,
-      photo: this.state.photo,
-      breed: this.state.breed,
-      preferredPlayBuddy: this.state.preferredPlayBuddy
+    const newPlayDate = {
+      startTime: this.state.startTime,
+      endTime: this.state.endTime,
+      city: this.state.city,
+      state: this.state.state,
+      zipCode: this.state.zipCode,
+      status: this.state.status,
+      requestor: this.state.requestor,
+      receiver: this.state.receiver
     };
 
     // Need to add the user, post request?
-    this.props.addDogCallback(newDog, this.state);
+    this.props.addPlayDateCallback(newPlayDate, this.state);
     this.resetState();
   };
 

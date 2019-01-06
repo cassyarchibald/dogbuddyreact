@@ -11,7 +11,6 @@ const PlayDateCollection = props => {
         <PlayDate
           key={playDate.id}
           id={playDate.id}
-          date={playDate.firstName}
           startTime={playDate.lastName}
           endTime={playDate.city}
           city={playDate.state}
@@ -37,7 +36,6 @@ const PlayDateCollection = props => {
 };
 
 PlayDateCollection.propTypes = {
-  date: PropTypes.string,
   startTime: PropTypes.string,
   endTime: PropTypes.string,
   city: PropTypes.string,

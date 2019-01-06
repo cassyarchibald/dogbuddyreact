@@ -135,7 +135,6 @@ class DogBuddy extends Component {
               <PlayDate
                 key={playDate.resourceId}
                 id={playDate.resourceId}
-                date={playDate.date}
                 startTime={playDate.startTime}
                 endTime={playDate.endTime}
                 city={playDate.city}

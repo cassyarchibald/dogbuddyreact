@@ -4,7 +4,6 @@ import "./PlayDate.css";
 
 const PlayDate = props => {
   const {
-    date,
     startTime,
     endTime,
     city,
@@ -16,7 +15,6 @@ const PlayDate = props => {
   } = props;
   return (
     <div className="card d-inline-block">
-      <p>Date: {date}</p>
       <p>Start Time: {startTime}</p>
       <p>End Time: {endTime}</p>
       <p>City: {city}</p>
@@ -28,7 +26,6 @@ const PlayDate = props => {
 };
 
 PlayDate.propTypes = {
-  date: PropTypes.string,
   startTime: PropTypes.string,
   endTime: PropTypes.string,
   city: PropTypes.string,
