@@ -9,9 +9,7 @@ const PlayDate = props => {
     city,
     state,
     zipCode,
-    status,
-    playDateCallback
-    // Need requestor and responder
+    status // Need requestor and responder
   } = props;
   return (
     <div className="card d-inline-block">

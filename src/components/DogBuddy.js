@@ -8,6 +8,7 @@ import NewPersonForm from "./NewPersonForm";
 import PlayDate from "./PlayDate";
 import PlayDateCollection from "./PlayDateCollection";
 import NewPlayDateForm from "./NewPlayDateForm";
+import Dashboard from "./Dashboard";
 import Dog from "./Dog";
 import DogCollection from "./DogCollection";
 import NewDogForm from "./NewDogForm";
@@ -23,9 +24,7 @@ class DogBuddy extends Component {
       dogs: [],
       playDates: [],
       alertMessage: "",
-      userName: "",
       currentItem: "",
-      items: [],
       // application will act like user is not logged in on initial load
       user: null
     };
@@ -169,26 +168,17 @@ class DogBuddy extends Component {
       });
   };
 
-  // TODO May not need this funtion
-  // updateShowingOwnerOrDogs = () => {
-  //   console.log("update showing owner");
-  //   this.setState({
-  //     showOwnerComponent: !this.state.showOwnerComponent,
-  //     showDogsCallback: !this.state.showDogsCallback
-  //   });
-  //   this.loadDogs();
-  //   this.loadUsers();
-  // };
-
   //load dogs axios get method saved as loadDogs
   loadDogs() {
     axios
       .get("http://localhost:8080/dogs")
       .then(response => {
         const dogComponents = response.data._embedded.dogs.map(dog => {
-          //console.log(dog);
+          // console.log("value of user in loading dogs");
+          // console.log(this.state.user);
           return (
             <Dog
+              user={this.state.user}
               key={dog.resourceId}
               id={dog.resourceId}
               name={dog.name}
@@ -210,6 +200,7 @@ class DogBuddy extends Component {
       })
       .catch(error => {
         this.changeMessage(error.message);
+        console.log(error.message);
       });
   }
   // load users axios get method saved as loadUsers
@@ -282,20 +273,6 @@ class DogBuddy extends Component {
     });
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    const itemsRef = firebase.database().ref("items");
-    const item = {
-      title: this.state.currentItem,
-      user: this.state.username
-    };
-    itemsRef.push(item);
-    this.setState({
-      currentItem: "",
-      username: ""
-    });
-  };
-
   // componentDidMount method that loads the users/dogs/playdates
   componentDidMount() {
     // API request to load users
@@ -306,47 +283,32 @@ class DogBuddy extends Component {
     //this.loadPlaydates();
 
     // FIREBASE DATABASE
-    const itemsRef = firebase.database().ref("items");
-    itemsRef.on("value", snapshot => {
-      let items = snapshot.val();
-      // Create empty array/populate with results
-      // from value listener
-      let newState = [];
-      for (let item in items) {
-        // push result of object to array
-        newState.push({
-          id: item,
-          title: items[item].title,
-          user: items[item].user
-        });
-      }
-      // update state with items from firebase database
-      this.setState({
-        items: newState
-      });
-    });
 
     // remember people that have logged in
     auth.onAuthStateChanged(user => {
       if (user) {
+        console.log("on auth change update user state");
         this.setState({ user });
+        console.log(this.state.user);
+        //this.loadDogs();
       }
     });
-  }
-
-  removeItem(itemId) {
-    const itemRef = firebase.database().ref(`/items/${itemId}`);
-    itemRef.remove();
   }
 
   login = () => {
     // handles the callback for us
     auth.signInWithPopup(provider).then(result => {
       const user = result.user;
+      console.log("sign in - update user");
+      console.log(result.user);
+
       this.setState({
         user
       });
+      //this.loadDogs();
     });
+    // reload dog components so user is now not null
+    // schedule playdate shows
   };
 
   logout = () => {
@@ -354,11 +316,13 @@ class DogBuddy extends Component {
       this.setState({
         user: null
       });
+      // QUESTION do i need to manually
+      // reload the dogs ?
+      //this.loadDogs();
     });
   };
 
   render() {
-    console.log(this.state.user);
     return (
       <section>
         <header>
@@ -373,6 +337,8 @@ class DogBuddy extends Component {
         <div className="text">
           <h1 className="text-center">Dog Buddy</h1>
         </div>
+        {this.state.user ? <Dashboard user={this.state.user} /> : null}
+
         <Router>
           <div>
             <ul id="router-list">
@@ -405,8 +371,6 @@ class DogBuddy extends Component {
               exact
               path="/"
               render={() => (
-                //<NewPersonForm />
-                //<NewPlayDateForm />
                 <DogCollection dogComponentsCollection={this.state.dogs} />
               )}
             />
@@ -420,12 +384,14 @@ class DogBuddy extends Component {
                 />
               )}
             />
+
             <Route
               path="/dogs"
               render={() => (
                 <DogCollection
                   dogComponentsCollection={this.state.dogs}
                   addDogCallback={this.addDog}
+                  user={this.state.user}
                 />
               )}
             />
