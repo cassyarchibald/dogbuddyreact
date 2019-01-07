@@ -83,8 +83,6 @@ class NewPlayDateForm extends Component {
     this.resetState();
   };
   render() {
-    console.log("Reciver value");
-    console.log(this.state.receiver);
     const errorMessages = this.state.errorMessages.map(message => {
       return <li>{message}</li>;
     });

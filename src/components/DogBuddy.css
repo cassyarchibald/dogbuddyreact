@@ -26,6 +26,10 @@ ul {
   width: 100%;
 }
 
+#router-list li {
+  list-style-type: none;
+}
+
 a {
   color: white;
 }

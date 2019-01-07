@@ -279,7 +279,7 @@ class DogBuddy extends Component {
         </div>
         <Router>
           <div>
-            <ul>
+            <ul id="router-list">
               <li>
                 <Link to="/">Home</Link>
               </li>
