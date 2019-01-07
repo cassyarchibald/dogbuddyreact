@@ -28,7 +28,7 @@ PersonCollection.propTypes = {
   zipCode: PropTypes.number,
   about: PropTypes.string,
   photo: PropTypes.string,
-  addUserCallback: PropTypes.func
+  addPersonCallback: PropTypes.func
 };
 
 export default PersonCollection;

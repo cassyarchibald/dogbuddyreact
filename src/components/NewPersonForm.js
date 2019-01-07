@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./NewPersonForm.css";
+import PropTypes from "prop-types";
 
 class NewPersonForm extends Component {
   constructor() {
@@ -120,5 +121,9 @@ class NewPersonForm extends Component {
     );
   }
 }
+
+NewPersonForm.propTypes = {
+  addPersonCallback: PropTypes.func
+};
 
 export default NewPersonForm;

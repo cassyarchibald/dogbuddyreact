@@ -45,10 +45,29 @@ class DogBuddy extends Component {
 
   removeDog = dogId => {
     // loop through dogs
-    // if id matches, set the delete index to that index
-    // then splice that index out via dogs.splice(deleteIndex, 1)
+    // if id matches, set delete index to that index
+    // splice that index out
     // update the state to equal the new value
     // do delete axios request
+    axios
+      .delete("http://localhost:8080/persons/${dogId}")
+      .then(response => {
+        let deleteIndex = -1;
+        this.state.dogs.forEach((dog, index) => {
+          if (dogId === dog.id) {
+            deleteIndex = index;
+          }
+        });
+
+        this.state.dogs.splice(deleteIndex, 1);
+
+        this.setState({
+          dogs: this.state.dogs
+        });
+      })
+      .catch(error => {
+        this.setState({ alertMessage: error.message });
+      });
   };
 
   addPerson = newPerson => {
@@ -66,10 +85,29 @@ class DogBuddy extends Component {
 
   removePerson = personId => {
     // loop through users
-    // if id matches, set delte index to that index
+    // if id matches, set delete index to that index
     // splice that index out
     // update the state to equal the new value
     // do delete axios request
+    axios
+      .delete("http://localhost:8080/persons/${personId}")
+      .then(response => {
+        let deleteIndex = -1;
+        this.state.persons.forEach((person, index) => {
+          if (personId === person.id) {
+            deleteIndex = index;
+          }
+        });
+
+        this.state.persons.splice(deleteIndex, 1);
+
+        this.setState({
+          persons: this.state.persons
+        });
+      })
+      .catch(error => {
+        this.setState({ alertMessage: error.message });
+      });
   };
 
   addPlayDate = newPlayDate => {
@@ -85,11 +123,31 @@ class DogBuddy extends Component {
       });
   };
 
-  removePlaydate = playDateId => {
-    // loop through playdates
+  removePlayDate = playDateId => {
+    // loop through users
     // if id matches, set delete index to that index
     // splice that index out
     // update the state to equal the new value
+    // do delete axios request
+    axios
+      .delete("http://localhost:8080/playDates/${playDateId}")
+      .then(response => {
+        let deleteIndex = -1;
+        this.state.playDates.forEach((playDate, index) => {
+          if (playDateId === playDate.id) {
+            deleteIndex = index;
+          }
+        });
+
+        this.state.playDates.splice(deleteIndex, 1);
+
+        this.setState({
+          playDates: this.state.playDates
+        });
+      })
+      .catch(error => {
+        this.setState({ alertMessage: error.message });
+      });
   };
 
   // TODO May not need this funtion

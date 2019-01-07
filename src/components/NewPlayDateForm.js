@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./NewPlayDateForm.css";
+import PropTypes from "prop-types";
 
 // TODO Would be nice if the playdate form would
 // automatically add the requestor (current logged in user)
@@ -190,5 +191,9 @@ class NewPlayDateForm extends Component {
     );
   }
 }
+
+NewPlayDateForm.propTypes = {
+  addPlayDateCallback: PropTypes.func
+};
 
 export default NewPlayDateForm;
