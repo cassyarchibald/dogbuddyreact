@@ -82,6 +82,7 @@ class NewPlayDateForm extends Component {
     this.props.addPlayDateCallback(newPlayDate, this.state);
     this.resetState();
   };
+
   render() {
     const errorMessages = this.state.errorMessages.map(message => {
       return <li>{message}</li>;

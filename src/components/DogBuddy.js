@@ -224,6 +224,8 @@ class DogBuddy extends Component {
                 about={person.about}
                 photo={person.photo}
                 dogLink={person._links.dogs.href}
+                receievedPlayDatesLink={person._links.receivedPlaydates.href}
+                requestedPlayDatesLink={person._links.requestedPlaydates.href}
               />
             );
           }

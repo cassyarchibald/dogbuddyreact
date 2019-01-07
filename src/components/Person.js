@@ -4,6 +4,7 @@ import "./Person.css";
 import axios from "axios";
 import Dog from "./Dog";
 import DogCollection from "./DogCollection";
+import PlayDate from "./PlayDate";
 
 class Person extends Component {
   constructor(props) {
@@ -19,12 +20,82 @@ class Person extends Component {
       addPersonCallback: this.props.addPersonCallback,
       dogLink: props.dogLink,
       dogs: [],
+      requestedPlayDates: [],
+      receivedPlayDates: [],
       errorMessages: [],
       showDogs: false
     };
   }
 
-  // Might not need this...
+  changeMessage = message => {
+    this.setState({ alertMessage: message });
+    setTimeout(() => this.setState({ alertMessage: "" }), 2500);
+  };
+
+  // Make loadPlaydates method
+  loadRequestedPlayDates() {
+    axios
+      .get(this.state.requestedPlayDatesLink)
+      .then(response => {
+        const requestedPlayDateComponents = response.data._embedded.playDates.map(
+          playDate => {
+            return (
+              // Add requestor person/dog, requestee person/dog?
+              <PlayDate
+                key={playDate.resourceId}
+                id={playDate.resourceId}
+                startTime={playDate.startTime}
+                endTime={playDate.endTime}
+                city={playDate.city}
+                state={playDate.state}
+                zipCode={playDate.zipCode}
+                status={playDate.status}
+              />
+            );
+          }
+        );
+
+        this.setState({
+          requestedPlayDates: requestedPlayDateComponents
+        });
+      })
+      .catch(error => {
+        this.changeMessage(error.message);
+      });
+  }
+
+  // Make loadPlaydates method
+  loadRecievedPlayDates() {
+    axios
+      .get(this.state.recievedPlayDatesLink)
+      .then(response => {
+        const recievedPlayDateComponents = response.data._embedded.playDates.map(
+          playDate => {
+            return (
+              // Add requestor person/dog, requestee person/dog?
+              <PlayDate
+                key={playDate.resourceId}
+                id={playDate.resourceId}
+                startTime={playDate.startTime}
+                endTime={playDate.endTime}
+                city={playDate.city}
+                state={playDate.state}
+                zipCode={playDate.zipCode}
+                status={playDate.status}
+              />
+            );
+          }
+        );
+
+        this.setState({
+          recievedPlayDates: recievedPlayDateComponents
+        });
+      })
+      .catch(error => {
+        this.changeMessage(error.message);
+      });
+  }
+
   loadDogs() {
     axios
       .get(this.state.dogLink)
@@ -58,6 +129,8 @@ class Person extends Component {
 
   componentDidMount() {
     this.loadDogs();
+    this.loadRecievedPlayDates();
+    this.loadRequestedPlayDates();
   }
 
   showDogs = () => {
