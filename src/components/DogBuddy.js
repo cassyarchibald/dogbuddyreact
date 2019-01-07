@@ -13,6 +13,7 @@ import DogCollection from "./DogCollection";
 import NewDogForm from "./NewDogForm";
 import axios from "axios";
 import Search from "./Search";
+import firebase, { auth, provider } from "../firebase.js";
 
 class DogBuddy extends Component {
   constructor(props) {
@@ -21,7 +22,12 @@ class DogBuddy extends Component {
       persons: [],
       dogs: [],
       playDates: [],
-      alertMessage: ""
+      alertMessage: "",
+      userName: "",
+      currentItem: "",
+      items: [],
+      // application will act like user is not logged in on initial load
+      user: null
     };
   }
 
@@ -32,6 +38,7 @@ class DogBuddy extends Component {
 
   // TODO - Untested - need to know owner id to add to
   // new dog form/post to /persons/${personId}/dogs
+  // Could pass id back via callback ?
   addDog = newDog => {
     axios
       .post("http://localhost:8080/dogs", newDog)
@@ -268,6 +275,27 @@ class DogBuddy extends Component {
         this.changeMessage(error.message);
       });
   }
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const itemsRef = firebase.database().ref("items");
+    const item = {
+      title: this.state.currentItem,
+      user: this.state.username
+    };
+    itemsRef.push(item);
+    this.setState({
+      currentItem: "",
+      username: ""
+    });
+  };
+
   // componentDidMount method that loads the users/dogs/playdates
   componentDidMount() {
     // API request to load users
@@ -276,11 +304,72 @@ class DogBuddy extends Component {
     this.loadDogs();
     // API request to load playdates
     //this.loadPlaydates();
+
+    // FIREBASE DATABASE
+    const itemsRef = firebase.database().ref("items");
+    itemsRef.on("value", snapshot => {
+      let items = snapshot.val();
+      // Create empty array/populate with results
+      // from value listener
+      let newState = [];
+      for (let item in items) {
+        // push result of object to array
+        newState.push({
+          id: item,
+          title: items[item].title,
+          user: items[item].user
+        });
+      }
+      // update state with items from firebase database
+      this.setState({
+        items: newState
+      });
+    });
+
+    // remember people that have logged in
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        this.setState({ user });
+      }
+    });
   }
 
+  removeItem(itemId) {
+    const itemRef = firebase.database().ref(`/items/${itemId}`);
+    itemRef.remove();
+  }
+
+  login = () => {
+    // handles the callback for us
+    auth.signInWithPopup(provider).then(result => {
+      const user = result.user;
+      this.setState({
+        user
+      });
+    });
+  };
+
+  logout = () => {
+    auth.signOut().then(() => {
+      this.setState({
+        user: null
+      });
+    });
+  };
+
   render() {
+    console.log(this.state.user);
     return (
       <section>
+        <header>
+          <div className="wrapper">
+            {this.state.user ? (
+              <button onClick={this.logout}>Logout</button>
+            ) : (
+              <button onClick={this.login}>Log In</button>
+            )}
+          </div>
+        </header>
         <div className="text">
           <h1 className="text-center">Dog Buddy</h1>
         </div>
@@ -385,12 +474,7 @@ DogBuddy.propTypes = {
   status: PropTypes.string,
   // Person
   firstName: PropTypes.string,
-  lastName: PropTypes.string,
-  city: PropTypes.string,
-  state: PropTypes.string,
-  zipCode: PropTypes.number,
-  about: PropTypes.string,
-  photo: PropTypes.string
+  lastName: PropTypes.string
 };
 
 export default DogBuddy;

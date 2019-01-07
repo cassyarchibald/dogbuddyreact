@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import "./Person.css";
 import axios from "axios";
 import Dog from "./Dog";
-import DogCollection from "./DogCollection";
 import PlayDate from "./PlayDate";
 
 class Person extends Component {
