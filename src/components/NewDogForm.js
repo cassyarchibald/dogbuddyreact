@@ -16,12 +16,11 @@ class NewDogForm extends Component {
       photo: "",
       breed: "",
       preferredPlayBuddy: "",
+      owner: "",
       errorMessages: []
     };
   }
   onInputChange = event => {
-    console.log("In on input change");
-
     const field = event.target.name;
     const value = event.target.value;
 
@@ -39,7 +38,8 @@ class NewDogForm extends Component {
       about: "",
       photo: "",
       breed: "",
-      preferredPlayBuddy: ""
+      preferredPlayBuddy: "",
+      owner: ""
     });
   };
 
@@ -54,11 +54,12 @@ class NewDogForm extends Component {
       about,
       photo,
       breed,
-      preferredPlayBuddy
+      preferredPlayBuddy,
+      owner
     } = this.state;
 
     if (name === "") return;
-
+    // TODO - Load in owner based on who is logged in
     const newDog = {
       name: this.state.name,
       age: this.state.age,
@@ -67,10 +68,12 @@ class NewDogForm extends Component {
       about: this.state.about,
       photo: this.state.photo,
       breed: this.state.breed,
-      preferredPlayBuddy: this.state.preferredPlayBuddy
+      preferredPlayBuddy: this.state.preferredPlayBuddy,
+      owner: ""
     };
 
-    // Need to add the user, post request?
+    // Need to add the dog to state and do post request
+    // to /dogs then reload the dogs/persons...
     this.props.addDogCallback(newDog, this.state);
     this.resetState();
   };
@@ -114,7 +117,7 @@ class NewDogForm extends Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="state">State</label>
+            <label htmlFor="vaccinated">Vaccinated</label>
             <input
               value={this.state.vaccinated}
               className="form-control"
@@ -123,7 +126,7 @@ class NewDogForm extends Component {
             />
           </div>
           <div>
-            <label htmlFor="zipCode">about</label>
+            <label htmlFor="about">About</label>
             <input
               value={this.state.about}
               className="form-control"

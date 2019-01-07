@@ -52,7 +52,7 @@ class DogBuddy extends Component {
     // update the state to equal the new value
     // do delete axios request
     axios
-      .delete("http://localhost:8080/persons/${dogId}")
+      .delete("http://localhost:8080/dogs")
       .then(response => {
         let deleteIndex = -1;
         this.state.dogs.forEach((dog, index) => {
@@ -91,8 +91,10 @@ class DogBuddy extends Component {
     // splice that index out
     // update the state to equal the new value
     // do delete axios request
+    // QUESTION should I also do axios request to delete their dogs/
+    // any playdates associated with them (might be a cascade setting in api)
     axios
-      .delete("http://localhost:8080/persons/${personId}")
+      .delete("http://localhost:8080/persons")
       .then(response => {
         let deleteIndex = -1;
         this.state.persons.forEach((person, index) => {
@@ -137,9 +139,10 @@ class DogBuddy extends Component {
     // if id matches, set delete index to that index
     // splice that index out
     // update the state to equal the new value
-    // do delete axios request
+    // do delete axios request for playdate
+    // reload all playdates to update requestor/receiver sides
     axios
-      .delete("http://localhost:8080/playDates/${playDateId}")
+      .delete("http://localhost:8080/playDates/")
       .then(response => {
         let deleteIndex = -1;
         this.state.playDates.forEach((playDate, index) => {
@@ -207,22 +210,24 @@ class DogBuddy extends Component {
     axios
       .get("http://localhost:8080/persons")
       .then(response => {
-        const PersonComponenets = response.data._embedded.persons.map(user => {
-          return (
-            <Person
-              key={user.resourceId}
-              id={user.resourceId}
-              firstName={user.firstName}
-              lastName={user.lastName}
-              city={user.city}
-              state={user.state}
-              zipCode={user.zipCode}
-              about={user.about}
-              photo={user.photo}
-              dogLink={user._links.dogs.href}
-            />
-          );
-        });
+        const PersonComponenets = response.data._embedded.persons.map(
+          person => {
+            return (
+              <Person
+                key={person.resourceId}
+                id={person.resourceId}
+                firstName={person.firstName}
+                lastName={person.lastName}
+                city={person.city}
+                state={person.state}
+                zipCode={person.zipCode}
+                about={person.about}
+                photo={person.photo}
+                dogLink={person._links.dogs.href}
+              />
+            );
+          }
+        );
         this.setState({
           persons: PersonComponenets
         });
