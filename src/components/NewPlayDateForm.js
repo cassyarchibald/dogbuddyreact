@@ -154,7 +154,11 @@ class NewPlayDateForm extends Component {
           <div>
             <label htmlFor="receiver">Sent Request To</label>
             <input
-              value={this.state.receiver}
+              value={
+                this.state.receiver.props.firstName +
+                " " +
+                this.state.receiver.props.lastName
+              }
               className="form-control"
               name="receiver"
               onChange={this.onInputChange}
