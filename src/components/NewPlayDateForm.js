@@ -8,8 +8,8 @@ import PropTypes from "prop-types";
 // might have to wait for dashboard/login logic
 
 class NewPlayDateForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       startTime: "",
       endTime: "",
@@ -18,13 +18,11 @@ class NewPlayDateForm extends Component {
       zipCode: "",
       status: "",
       requestor: "",
-      receiver: "",
+      receiver: this.props.receiver,
       errorMessages: []
     };
   }
   onInputChange = event => {
-    console.log("In on input change");
-
     const field = event.target.name;
     const value = event.target.value;
 
@@ -84,8 +82,9 @@ class NewPlayDateForm extends Component {
     this.props.addPlayDateCallback(newPlayDate, this.state);
     this.resetState();
   };
-
   render() {
+    console.log("Reciver value");
+    console.log(this.state.receiver);
     const errorMessages = this.state.errorMessages.map(message => {
       return <li>{message}</li>;
     });
@@ -96,16 +95,6 @@ class NewPlayDateForm extends Component {
           <ul>{errorMessages}</ul>
         </section>
         <form className="form-group" onSubmit={this.onFormSubmit}>
-          <div>
-            <label htmlFor="name">Date</label>
-            <input
-              value={this.state.date}
-              className="form-control"
-              type="date"
-              name="date"
-              onChange={this.onInputChange}
-            />
-          </div>
           <div>
             <label htmlFor="startTime">Start Time</label>
             <input

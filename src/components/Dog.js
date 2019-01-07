@@ -87,9 +87,13 @@ class Dog extends Component {
             });
           }}
         >
-          {this.state.showAddPlayDateForm ? "Hide Form" : "Add Play Date"}
-          {this.state.showAddPlayDateForm ? <NewPlayDateForm /> : null}
+          {this.state.showAddPlayDateForm
+            ? "Hide Form"
+            : "Send Play Date Request"}
         </button>
+        {this.state.showAddPlayDateForm ? (
+          <NewPlayDateForm receiver={this.state.owner} />
+        ) : null}
       </div>
     );
   }
