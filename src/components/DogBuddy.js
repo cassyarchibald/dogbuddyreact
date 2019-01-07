@@ -30,6 +30,8 @@ class DogBuddy extends Component {
     setTimeout(() => this.setState({ alertMessage: "" }), 2500);
   };
 
+  // TODO - Untested - need to know owner id to add to
+  // new dog form/post to /persons/${personId}/dogs
   addDog = newDog => {
     axios
       .post("http://localhost:8080/dogs", newDog)
@@ -110,6 +112,12 @@ class DogBuddy extends Component {
       });
   };
 
+  // TODO - on hold, can't test until we have a way
+  // to determine who the receiver/requestor is
+  // reçiever = dropdown list on form?
+  // requestor = person currently logged in
+  // do post to playdates/manually reload the playdates
+  // to update the requestor/receiver playdates
   addPlayDate = newPlayDate => {
     axios
       .post("http://localhost:8080/playDates", newPlayDate)
@@ -117,6 +125,7 @@ class DogBuddy extends Component {
         let updatedData = this.state.playDates;
         updatedData.push(newPlayDate);
         this.setState({ playDates: updatedData });
+        this.loadPlaydates();
       })
       .catch(error => {
         this.setState({ alertMessage: error.message });

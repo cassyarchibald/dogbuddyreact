@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import "./NewDogForm.css";
 
+// How does it know who the owner is?
+// Would need to be the person that is logged in
 class NewDogForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       name: "",
       age: "",
