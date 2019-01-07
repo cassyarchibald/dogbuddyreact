@@ -63,7 +63,6 @@ class Search extends Component {
         });
       });
   };
-  debugger;
 
   render() {
     return (

@@ -4,6 +4,7 @@ import "./Dog.css";
 import Person from "./Person";
 import "./Person.css";
 import axios from "axios";
+import NewPlayDateForm from "./NewPlayDateForm";
 
 class Dog extends Component {
   constructor(props) {
@@ -21,7 +22,8 @@ class Dog extends Component {
       errorMessages: [],
       showOwner: this.props.showOwner,
       zipCode: "",
-      showOwnerCallback: this.props.showOwnerCallback
+      showOwnerCallback: this.props.showOwnerCallback,
+      showAddPlayDateForm: false
     };
   }
 
@@ -77,6 +79,17 @@ class Dog extends Component {
         <p>vaccinated:{this.state.vaccinated}</p>
         <p>about:{this.state.about}</p>
         <p>Preferred Play Buddy:{this.state.preferredPlayBuddy}</p>
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            this.setState({
+              showAddPlayDateForm: !this.state.showAddPlayDateForm
+            });
+          }}
+        >
+          {this.state.showAddPlayDateForm ? "Hide Form" : "Add Play Date"}
+          {this.state.showAddPlayDateForm ? <NewPlayDateForm /> : null}
+        </button>
       </div>
     );
   }
