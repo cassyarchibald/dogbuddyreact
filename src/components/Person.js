@@ -16,7 +16,7 @@ class Person extends Component {
       zipCode: props.zipCode,
       about: props.about,
       photo: props.photo,
-      addUserCallback: props.addUserCallback,
+      addPersonCallback: this.props.addPersonCallback,
       dogLink: props.dogLink,
       dogs: [],
       errorMessages: [],

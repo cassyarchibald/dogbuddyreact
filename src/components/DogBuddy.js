@@ -124,7 +124,7 @@ class DogBuddy extends Component {
   };
 
   removePlayDate = playDateId => {
-    // loop through users
+    // loop through playDates
     // if id matches, set delete index to that index
     // splice that index out
     // update the state to equal the new value
@@ -308,31 +308,36 @@ class DogBuddy extends Component {
             <Route path="/search" render={() => <Search />} />
             <Route
               path="/users"
-              render={() => <PersonCollection persons={this.state.persons} />}
+              render={() => (
+                <PersonCollection
+                  persons={this.state.persons}
+                  addPersonCallback={this.state.addPerson}
+                />
+              )}
             />
             <Route
               path="/dogs"
               render={() => (
                 <DogCollection
                   dogComponentsCollection={this.state.dogs}
-                  addDogCallback={this.addDogCallback}
+                  addDogCallback={this.addDog}
                 />
               )}
             />
             <Route
               path="/addPerson"
               render={() => (
-                <NewPersonForm addPersonCallback={this.state.addPerson} />
+                <NewPersonForm addPersonCallback={this.addPerson} />
               )}
             />
             <Route
               path="/addDog"
-              render={() => <NewDogForm addDogCallback={this.state.addDog} />}
+              render={() => <NewDogForm addDogCallback={this.addDog} />}
             />
             <Route
               path="/addPlayDate"
               render={() => (
-                <NewPlayDateForm addPlayDateCallback={this.state.addPlayDate} />
+                <NewPlayDateForm addPlayDateCallback={this.addPlayDate} />
               )}
             />
           </div>

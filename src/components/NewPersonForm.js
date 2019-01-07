@@ -3,8 +3,8 @@ import "./NewPersonForm.css";
 import PropTypes from "prop-types";
 
 class NewPersonForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       firstName: "",
       lastName: "",
