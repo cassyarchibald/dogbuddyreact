@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Link,
+  Switch
+} from "react-router-dom";
 import AllRoutes from "./AllRoutes";
 import ProtectedRoute from "./ProtectedRoute";
 import PropTypes from "prop-types";
@@ -32,7 +38,8 @@ class DogBuddy extends Component {
       // application will act like user is not logged in on initial load
       user: null,
       isLoggedIn: false,
-      profileCreated: false
+      profileCreated: false,
+      uid: null
     };
   }
 
@@ -46,16 +53,14 @@ class DogBuddy extends Component {
     // find person by uid
     // if get request is successful,
     // update state of
-    // profile created to true
+    // profile created to true/redirect to Dashboard
     // else, redirect to createprofile
   };
 
-  // TODO - Untested - need to know owner id to add to
   // new dog form/post to /persons/${personId}/dogs
-  // Could pass id back via callback ?
-  addDog = newDog => {
+  addDog = (newDog, personID) => {
     axios
-      .post("http://localhost:8080/dogs", newDog)
+      .post("http://localhost:8080/persons/${personId}/dogs", newDog)
       .then(response => {
         let updatedData = this.state.dogs;
         updatedData.push(newDog);
@@ -73,7 +78,7 @@ class DogBuddy extends Component {
     // update the state to equal the new value
     // do delete axios request
     axios
-      .delete("http://localhost:8080/dogs")
+      .delete("http://localhost:8080/dogs/${dogId}")
       .then(response => {
         let deleteIndex = -1;
         this.state.dogs.forEach((dog, index) => {
@@ -115,7 +120,7 @@ class DogBuddy extends Component {
     // QUESTION should I also do axios request to delete their dogs/
     // any playdates associated with them (might be a cascade setting in api)
     axios
-      .delete("http://localhost:8080/persons")
+      .delete("http://localhost:8080/persons/${personId}")
       .then(response => {
         let deleteIndex = -1;
         this.state.persons.forEach((person, index) => {
@@ -163,7 +168,7 @@ class DogBuddy extends Component {
     // do delete axios request for playdate
     // reload all playdates to update requestor/receiver sides
     axios
-      .delete("http://localhost:8080/playDates/")
+      .delete("http://localhost:8080/playDates/${playDateId}")
       .then(response => {
         let deleteIndex = -1;
         this.state.playDates.forEach((playDate, index) => {
@@ -215,7 +220,6 @@ class DogBuddy extends Component {
       })
       .catch(error => {
         this.changeMessage(error.message);
-        console.log(error.message);
       });
   }
   // load users axios get method saved as loadUsers
@@ -302,22 +306,19 @@ class DogBuddy extends Component {
     // remember people that have logged in
     auth.onAuthStateChanged(user => {
       if (user) {
-        console.log("on auth change update user state");
-        this.setState({ user });
-        console.log(this.state.user);
+        this.setState({ user: user, uid: user.uid });
         //this.loadDogs();
       }
     });
   }
 
   login = () => {
-    console.log("in start of login");
     // handles the callback for us
     auth.signInWithPopup(provider).then(result => {
       const user = result.user;
-      console.log("in sign in with popup");
       this.setState({
-        user
+        user: user,
+        uid: user.uid
       });
       this.loadDogs();
     });
@@ -327,7 +328,6 @@ class DogBuddy extends Component {
 
   logout = () => {
     auth.signOut().then(() => {
-      console.log("in logout");
       this.setState({
         user: null
       });
@@ -353,14 +353,19 @@ class DogBuddy extends Component {
           <Switch>
             <Route
               path="/"
-              render={() => (
-                <Login
-                  user={this.state.user}
-                  loginCallback={this.login}
-                  logoutCallback={this.logout}
-                />
-              )}
+              render={() =>
+                this.state.isLoggedIn ? (
+                  <Redirect to="/dashboard" />
+                ) : (
+                  <Login
+                    user={this.state.user}
+                    loginCallback={this.login}
+                    logoutCallback={this.logout}
+                  />
+                )
+              }
             />
+
             <Route
               path="/login"
               render={() => (
@@ -371,7 +376,13 @@ class DogBuddy extends Component {
                 />
               )}
             />
+            <Route
+              path="/createProfile"
+              render={() => <CreateProfile uid={this.state.uid} />}
+            />
             <ProtectedRoute
+              isLoggedIn={this.state.isLoggedIn}
+              profileCreated={this.state.profileCreated}
               path="/dashboard"
               render={() => (
                 <Dashboard

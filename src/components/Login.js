@@ -5,7 +5,7 @@ import Dashboard from "./Dashboard";
 import "./Login.css";
 
 const Login = props => {
-  console.log("in login");
+  console.log("in login component");
   return (
     <header>
       <div className="wrapper">
