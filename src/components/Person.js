@@ -9,6 +9,7 @@ class Person extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      uid: props.uid,
       firstName: props.firstName,
       lastName: props.lastName,
       city: props.city,
@@ -154,6 +155,7 @@ class Person extends Component {
 }
 
 Person.propTypes = {
+  uid: PropTypes.string,
   firstName: PropTypes.string,
   lastName: PropTypes.string,
   city: PropTypes.string,

@@ -6,19 +6,17 @@ class CreateProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      uid: this.props.uid,
       firstName: "",
       lastName: "",
       city: "",
       state: "",
       zipCode: "",
       about: "",
-      uid: this.props.uid,
       errorMessages: []
     };
   }
   onInputChange = event => {
-    console.log("In on input change");
-
     const field = event.target.name;
     const value = event.target.value;
 

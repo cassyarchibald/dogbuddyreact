@@ -104,7 +104,7 @@ class DogBuddy extends Component {
       .then(response => {
         let updatedData = this.state.persons;
         updatedData.push(newPerson);
-        this.setState({ persons: updatedData });
+        this.setState({ persons: updatedData, profileCreated: true });
       })
       .catch(error => {
         this.setState({ alertMessage: error.message });
@@ -255,6 +255,23 @@ class DogBuddy extends Component {
         this.changeMessage(error.message);
       });
   }
+
+  // call during login
+  // will update profile created from false
+  // to true if one exists
+  findByUid(uid) {
+    axios
+      .get(`http://localhost:8080/persons/search/findByUid{?uid}=${uid}`)
+      .then(response => {
+        // If successful, update profile created
+
+        if (response.status === 200) {
+          this.setState({
+            profileCreated: true
+          });
+        }
+      });
+  }
   // load playdates axios get method saved as loadMessages
   loadPlaydates() {
     axios
@@ -320,10 +337,11 @@ class DogBuddy extends Component {
         user: user,
         uid: user.uid
       });
-      this.loadDogs();
+      //TODO  Search for profile created based on uid
+      // this will update the profileCreated to true
+      // if it's successful
+      this.findByUid(user.uid);
     });
-    // reload dog components so user is now not null
-    // schedule playdate shows
   };
 
   logout = () => {
