@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import "./NewPersonForm.css";
+import "./CreateProfile.css";
 import PropTypes from "prop-types";
 
-class NewPersonForm extends Component {
+class CreateProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -122,8 +122,8 @@ class NewPersonForm extends Component {
   }
 }
 
-NewPersonForm.propTypes = {
+CreateProfile.propTypes = {
   addPersonCallback: PropTypes.func
 };
 
-export default NewPersonForm;
+export default CreateProfile;

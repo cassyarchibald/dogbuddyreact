@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import "./DogBuddy.css";
 import Person from "./Person";
 import PersonCollection from "./PersonCollection";
-import NewPersonForm from "./NewPersonForm";
+import CreateProfile from "./CreateProfile";
 import PlayDate from "./PlayDate";
 import PlayDateCollection from "./PlayDateCollection";
 import NewPlayDateForm from "./NewPlayDateForm";
@@ -26,13 +26,24 @@ class DogBuddy extends Component {
       alertMessage: "",
       currentItem: "",
       // application will act like user is not logged in on initial load
-      user: null
+      user: null,
+      isLoggedIn: false,
+      profileCreated: false
     };
   }
 
   changeMessage = message => {
     this.setState({ alertMessage: message });
     setTimeout(() => this.setState({ alertMessage: "" }), 2500);
+  };
+
+  verifyProfileCreated = () => {
+    // do this method if user logs in
+    // find person by uid
+    // if get request is successful,
+    // update state of
+    // profile created to true
+    // else, redirect to createprofile
   };
 
   // TODO - Untested - need to know owner id to add to
@@ -299,13 +310,11 @@ class DogBuddy extends Component {
     // handles the callback for us
     auth.signInWithPopup(provider).then(result => {
       const user = result.user;
-      console.log("sign in - update user");
-      console.log(result.user);
 
       this.setState({
         user
       });
-      //this.loadDogs();
+      this.loadDogs();
     });
     // reload dog components so user is now not null
     // schedule playdate shows
@@ -337,7 +346,13 @@ class DogBuddy extends Component {
         <div className="text">
           <h1 className="text-center">Dog Buddy</h1>
         </div>
-        {this.state.user ? <Dashboard user={this.state.user} /> : null}
+        {this.state.user ? (
+          <Dashboard
+            user={this.state.user}
+            persons={this.state.persons}
+            addPersonCallback={this.state.addPerson}
+          />
+        ) : null}
 
         <Router>
           <div>
@@ -398,7 +413,7 @@ class DogBuddy extends Component {
             <Route
               path="/addPerson"
               render={() => (
-                <NewPersonForm addPersonCallback={this.addPerson} />
+                <CreateProfile addPersonCallback={this.addPerson} />
               )}
             />
             <Route

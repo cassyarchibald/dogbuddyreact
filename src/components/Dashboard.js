@@ -8,10 +8,48 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: this.props.user
+      user: this.props.user,
+      persons: this.props.persons
     };
-    console.log("within Dashboard");
-    console.log(props.user.displayName);
+  }
+
+  addPerson = newPerson => {
+    axios
+      .post("http://localhost:8080/persons", newPerson)
+      .then(response => {
+        let updatedData = this.state.persons;
+        updatedData.push(newPerson);
+        this.setState({ persons: updatedData });
+      })
+      .catch(error => {
+        this.setState({ alertMessage: error.message });
+      });
+  };
+
+  componentDidMount() {
+    // find by id via api call -
+    // if person logged in, try to find them
+    // if not found - direct to registration form
+    // else, good to go - dashboard
+    // pass uer object data from user -
+    // hidden field
+    // Part from input/part from oauth,
+    // save when form is filled out
+    // only see that form if information is incomplete
+
+    console.log("component did mount dashboard");
+    // check if already in system
+    let filterResult = this.state.persons.filter(
+      person => person.id === this.state.user.uid
+    );
+
+    if (filterResult.length === 0) {
+      console.log("empty");
+      console.log(this.props.addPersonCallback);
+    } else {
+      console.log("filter result not empty");
+      console.log(filterResult);
+    }
   }
 
   // look in persons array to see if user is already
@@ -28,5 +66,7 @@ class Dashboard extends Component {
   }
 }
 
-Dashboard.propTypes = {};
+Dashboard.propTypes = {
+  addPersonCallback: PropTypes.func
+};
 export default Dashboard;
