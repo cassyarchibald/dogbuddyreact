@@ -1,24 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
-import NewPersonForm from "./NewPersonForm";
+import CreateProfile from "./CreateProfile";
 import Dashboard from "./Dashboard";
 import "./Login.css";
 
 const Login = props => {
+  console.log("in login");
   return (
-    <div>
-      <h1>Welcome</h1>
-
-      <header>
-        <div className="wrapper">
-          {this.state.user ? (
-            <button onClick={this.logout}>Logout</button>
-          ) : (
-            <button onClick={this.login}>Log In</button>
-          )}
-        </div>
-      </header>
-    </div>
+    <header>
+      <div className="wrapper">
+        {props.user ? (
+          <button onClick={props.logoutCallback}>Logout</button>
+        ) : (
+          <button onClick={props.loginCallback}>Log In</button>
+        )}
+      </div>
+    </header>
   );
 };
 

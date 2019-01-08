@@ -12,8 +12,7 @@ class CreateProfile extends Component {
       state: "",
       zipCode: "",
       about: "",
-      milesWillingToDrive: "",
-      gender: "",
+      uid: this.props.uid,
       errorMessages: []
     };
   }

@@ -1,7 +1,11 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import AllRoutes from "./AllRoutes";
+import ProtectedRoute from "./ProtectedRoute";
 import PropTypes from "prop-types";
 import "./DogBuddy.css";
+import Login from "./Login";
+
 import Person from "./Person";
 import PersonCollection from "./PersonCollection";
 import CreateProfile from "./CreateProfile";
@@ -307,10 +311,11 @@ class DogBuddy extends Component {
   }
 
   login = () => {
+    console.log("in start of login");
     // handles the callback for us
     auth.signInWithPopup(provider).then(result => {
       const user = result.user;
-
+      console.log("in sign in with popup");
       this.setState({
         user
       });
@@ -322,6 +327,7 @@ class DogBuddy extends Component {
 
   logout = () => {
     auth.signOut().then(() => {
+      console.log("in logout");
       this.setState({
         user: null
       });
@@ -333,64 +339,56 @@ class DogBuddy extends Component {
 
   render() {
     return (
-      <section>
-        <header>
-          <div className="wrapper">
-            {this.state.user ? (
-              <button onClick={this.logout}>Logout</button>
-            ) : (
-              <button onClick={this.login}>Log In</button>
-            )}
-          </div>
-        </header>
-        <div className="text">
-          <h1 className="text-center">Dog Buddy</h1>
-        </div>
-        {this.state.user ? (
-          <Dashboard
-            user={this.state.user}
-            persons={this.state.persons}
-            addPersonCallback={this.state.addPerson}
-          />
-        ) : null}
-
-        <Router>
-          <div>
-            <ul id="router-list">
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/search">Search</Link>
-              </li>
-              <li>
-                <Link to="/users">Users</Link>
-              </li>
-              <li>
-                <Link to="/dogs">Dogs</Link>
-              </li>
-              <li>
-                <Link to="/addPerson">Add Person</Link>
-              </li>
-              <li>
-                <Link to="/addDog">Add Dog</Link>
-              </li>
-              <li>
-                <Link to="/addPlayDate">Add Playdate</Link>
-              </li>
-            </ul>
-            <h4 duration={5000} className="alertMessage text-center">
-              {this.state.alertMessage}
-            </h4>
+      //<section>
+      <Router>
+        <div>
+          <nav id="router-list">
+            <Link to="/">login</Link>
+            <Link to="/createProfile">Create Profile</Link>
+            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/dogs">View Dogs</Link>
+            <Link to="/users">View Users</Link>
+            <Link to="search">Search</Link>
+          </nav>
+          <Switch>
             <Route
-              exact
               path="/"
               render={() => (
-                <DogCollection dogComponentsCollection={this.state.dogs} />
+                <Login
+                  user={this.state.user}
+                  loginCallback={this.login}
+                  logoutCallback={this.logout}
+                />
               )}
             />
-            <Route path="/search" render={() => <Search />} />
             <Route
+              path="/login"
+              render={() => (
+                <Login
+                  user={this.state.user}
+                  loginCallback={this.login}
+                  logoutCallback={this.logout}
+                />
+              )}
+            />
+            <ProtectedRoute
+              path="/dashboard"
+              render={() => (
+                <Dashboard
+                  isLoggedIn={this.state.isLoggedIn}
+                  profileCreated={this.state.profileCreated}
+                />
+              )}
+            />
+            <ProtectedRoute
+              path="/dogs"
+              render={() => (
+                <DogCollection dogComponentsCollection={this.props.dogs} />
+              )}
+              isLoggedIn={this.state.isLoggedIn}
+              profileCreated={this.state.profileCreated}
+            />
+            <ProtectedRoute
               path="/users"
               render={() => (
                 <PersonCollection
@@ -398,37 +396,113 @@ class DogBuddy extends Component {
                   addPersonCallback={this.state.addPerson}
                 />
               )}
+              isLoggedIn={this.state.isLoggedIn}
+              profileCreated={this.state.profileCreated}
             />
+            <ProtectedRoute
+              path="/search"
+              component={Search}
+              isLoggedIn={this.state.isLoggedIn}
+              profileCreated={this.state.profileCreated}
+            />
+          </Switch>
+        </div>
+      </Router>
+      // <header>
+      //   <div className="wrapper">
+      //     {this.state.user ? (
+      //       <button onClick={this.logout}>Logout</button>
+      //     ) : (
+      //       <button onClick={this.login}>Log In</button>
+      //     )}
+      //   </div>
+      // </header>
+      // <div className="text">
+      //   <h1 className="text-center">Dog Buddy</h1>
+      // </div>
+      // {this.state.user ? (
+      //   <Dashboard
+      //     user={this.state.user}
+      //     persons={this.state.persons}
+      //     addPersonCallback={this.state.addPerson}
+      //   />
+      // ) : null}
 
-            <Route
-              path="/dogs"
-              render={() => (
-                <DogCollection
-                  dogComponentsCollection={this.state.dogs}
-                  addDogCallback={this.addDog}
-                  user={this.state.user}
-                />
-              )}
-            />
-            <Route
-              path="/addPerson"
-              render={() => (
-                <CreateProfile addPersonCallback={this.addPerson} />
-              )}
-            />
-            <Route
-              path="/addDog"
-              render={() => <NewDogForm addDogCallback={this.addDog} />}
-            />
-            <Route
-              path="/addPlayDate"
-              render={() => (
-                <NewPlayDateForm addPlayDateCallback={this.addPlayDate} />
-              )}
-            />
-          </div>
-        </Router>
-      </section>
+      // <Router>
+      //   <div>
+      //     <ul id="router-list">
+      //       <li>
+      //         <Link to="/">Home</Link>
+      //       </li>
+      //       <li>
+      //         <Link to="/search">Search</Link>
+      //       </li>
+      //       <li>
+      //         <Link to="/users">Users</Link>
+      //       </li>
+      //       <li>
+      //         <Link to="/dogs">Dogs</Link>
+      //       </li>
+      //       <li>
+      //         <Link to="/addPerson">Add Person</Link>
+      //       </li>
+      //       <li>
+      //         <Link to="/addDog">Add Dog</Link>
+      //       </li>
+      //       <li>
+      //         <Link to="/addPlayDate">Add Playdate</Link>
+      //       </li>
+      //     </ul>
+      //     <h4 duration={5000} className="alertMessage text-center">
+      //       {this.state.alertMessage}
+      //     </h4>
+      //     <Route
+      //       exact
+      //       path="/"
+      //       render={() => (
+      //         <DogCollection dogComponentsCollection={this.state.dogs} />
+      //       )}
+      //     />
+      //     <Route path="/search" render={() => <Search />} />
+      //     <Route
+      //       path="/users"
+      //       render={() => (
+      //         <PersonCollection
+      //           persons={this.state.persons}
+      //           addPersonCallback={this.state.addPerson}
+      //         />
+      //       )}
+      //     />
+      //
+      //     <Route
+      //       path="/dogs"
+      //       render={() => (
+      //         <DogCollection
+      //           dogComponentsCollection={this.state.dogs}
+      //           addDogCallback={this.addDog}
+      //           user={this.state.user}
+      //         />
+      //       )}
+      //     />
+      //     <Route
+      //       path="/addPerson"
+      //       render={() => (
+      //         <CreateProfile addPersonCallback={this.addPerson} />
+      //       )}
+      //     />
+      //     <Route
+      //       path="/addDog"
+      //       render={() => <NewDogForm addDogCallback={this.addDog} />}
+      //     />
+      //     <Route
+      //       path="/addPlayDate"
+      //       render={() => (
+      //         <NewPlayDateForm addPlayDateCallback={this.addPlayDate} />
+      //       )}
+      //     />
+      //   </div>
+      // </Router>
+      //</section>
     );
     // Add ul for router links to home, search, users, dogs, dashboard, maybe sign out/sign up?
     // Add a router with routes  to users/dogs /passing the route this.state.users or dogs
