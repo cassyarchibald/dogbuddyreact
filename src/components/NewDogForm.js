@@ -68,8 +68,7 @@ class NewDogForm extends Component {
       about: this.state.about,
       photo: this.state.photo,
       breed: this.state.breed,
-      preferredPlayBuddy: this.state.preferredPlayBuddy,
-      owner: ""
+      preferredPlayBuddy: this.state.preferredPlayBuddy
     };
 
     // Need to add the dog to state and do post request

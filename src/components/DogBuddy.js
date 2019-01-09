@@ -54,16 +54,25 @@ class DogBuddy extends Component {
   };
 
   // new dog form/post to /persons/${personId}/dogs
-  addDog = (newDog, personID) => {
+  addDog = newDog => {
+    console.log("in add dog");
     axios
-      .post("http://localhost:8080/persons/${personId}/dogs", newDog)
+      .post(
+        `http://localhost:8080/persons/${
+          this.state.currentUserObject.resourceId
+        }/dogs`,
+        newDog
+      )
       .then(response => {
+        console.log(response);
         let updatedData = this.state.dogs;
         updatedData.push(newDog);
         this.setState({ dogs: updatedData });
+        this.loadDogs();
       })
       .catch(error => {
         this.setState({ alertMessage: error.message });
+        console.log(error.message);
       });
   };
 
@@ -106,6 +115,7 @@ class DogBuddy extends Component {
         let updatedData = this.state.persons;
         updatedData.push(newPerson);
         this.setState({ persons: updatedData, profileCreated: true });
+        this.loadUsers();
       })
       .catch(error => {
         console.log("did not add person");
@@ -263,25 +273,20 @@ class DogBuddy extends Component {
   // will update profile created from false
   // to true if one exists
   findByUid(uid) {
-    console.log("find user by uid");
     axios
       .get(`http://localhost:8080/persons/search/findByUid?uid=${uid}`)
       .then(response => {
-        console.log("find user by uid response");
-        console.log(response.data._embedded.persons);
-
         // If successful, update profile created
 
         if (
           response.status === 200 &&
           response.data._embedded.persons.length === 1
         ) {
-          console.log("update profile created to true ");
-          console.log(response.data._embedded.persons[0]);
           this.setState({
             profileCreated: true,
-            currentUserObject: response.data
+            currentUserObject: response.data._embedded.persons[0]
           });
+          console.log(this.state.currentUserObject);
         } else {
           console.log("don't update profile created to true");
           this.setState({
@@ -386,6 +391,10 @@ class DogBuddy extends Component {
       });
   };
 
+  returnUser = () => {
+    return this.state.user;
+  };
+
   logout = () => {
     auth.signOut().then(() => {
       this.setState({
@@ -457,6 +466,7 @@ class DogBuddy extends Component {
                   profileCreated={this.state.profileCreated}
                   user={this.state.user}
                   persons={this.state.persons}
+                  addDogCallback={this.addDog}
                 />
               )}
             />
