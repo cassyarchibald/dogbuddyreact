@@ -4,6 +4,14 @@ import "./Dashboard.css";
 import axios from "axios";
 import NewDogForm from "./NewDogForm";
 import Dog from "./Dog";
+import EditUserForm from "/EditUserForm";
+
+//TODO show requested playdate,
+// received playdates
+// a way to edit their info via patch request/form
+
+// load component that allows editing info
+// does an update callback to axios request
 
 class Dashboard extends Component {
   constructor(props) {
@@ -14,7 +22,8 @@ class Dashboard extends Component {
       requestedPlaydates: null,
       receivedPlaydates: null,
       currentUserObject: null,
-      showAddDogForm: false
+      showAddDogForm: false,
+      currentUserObject: null
     };
   }
 
@@ -134,6 +143,9 @@ class Dashboard extends Component {
           {this.state.currentUserObject &&
             this.state.currentUserObject.firstName}
         </h1>
+        {this.state.currentUserObject ? (
+          <EditUserForm editPersonCallback={this.props.editPersonCallback} />
+        ) : null}
         {this.state.dogs ? this.state.dogs : null}
         <button
           className="btn btn-primary"

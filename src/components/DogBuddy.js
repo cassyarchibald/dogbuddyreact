@@ -152,6 +152,13 @@ class DogBuddy extends Component {
       });
   };
 
+  //TODO //TODO //TODO
+  updateUser = newPerson => {
+    // do axios patch request or
+    // would it be a put?
+    console.log("update user method in dogbuddy");
+  };
+
   // TODO - on hold, can't test until we have a way
   // to determine who the receiver/requestor is
   // reçiever = dropdown list on form?
@@ -475,6 +482,7 @@ class DogBuddy extends Component {
                   user={this.state.user}
                   persons={this.state.persons}
                   addDogCallback={this.addDog}
+                  editPersonCallback={this.updateUser}
                 />
               )}
             />

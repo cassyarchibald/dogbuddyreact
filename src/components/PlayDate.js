@@ -9,7 +9,9 @@ const PlayDate = props => {
     city,
     state,
     zipCode,
-    status // Need requestor and responder
+    status,
+    location,
+    details // Need requestor and responder
   } = props;
   return (
     <div className="card d-inline-block">
@@ -18,6 +20,8 @@ const PlayDate = props => {
       <p>City: {city}</p>
       <p>State: {state}</p>
       <p>Zip Code: {zipCode}</p>
+      <p>Location: {location}</p>
+      <p>Details: {details}</p>
       <p>Status: {status}</p>
     </div>
   );
@@ -30,6 +34,8 @@ PlayDate.propTypes = {
   state: PropTypes.string,
   zipCode: PropTypes.number,
   status: PropTypes.string,
+  details: PropTypes.string,
+  location: PropTypes.string,
   addPlayDateCallback: PropTypes.addPlayDateCallback
   // requestor here
   // responder here

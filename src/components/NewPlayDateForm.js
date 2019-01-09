@@ -53,9 +53,8 @@ class NewPlayDateForm extends Component {
       city,
       state,
       zipCode,
-      status,
-      requestor,
-      receiver
+      location,
+      details
     } = this.state;
 
     if (
@@ -73,9 +72,8 @@ class NewPlayDateForm extends Component {
       city: this.state.city,
       state: this.state.state,
       zipCode: this.state.zipCode,
-      status: this.state.status,
-      requestor: this.state.requestor,
-      receiver: this.state.receiver
+      location: this.state.location,
+      details: this.state.details
     };
 
     console.log(this.props);
@@ -141,6 +139,25 @@ class NewPlayDateForm extends Component {
               value={this.state.zipCode}
               className="form-control"
               name="zipCode"
+              onChange={this.onInputChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="location">Location</label>
+            <input
+              value={this.state.location}
+              className="form-control"
+              name="location"
+              onChange={this.onInputChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="details">Details</label>
+            <input
+              value={this.state.details}
+              className="form-control"
+              name="details"
+              type="textarea"
               onChange={this.onInputChange}
             />
           </div>
