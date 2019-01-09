@@ -10,7 +10,7 @@ class Dog extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: this.props.user,
+      currentUserObject: this.props.currentUserObject,
       name: this.props.name,
       age: this.props.age,
       size: this.props.size,
@@ -27,7 +27,6 @@ class Dog extends Component {
       showAddPlayDateForm: false
     };
   }
-
   loadOwner() {
     axios
       .get(this.state.ownerLink)
@@ -70,6 +69,8 @@ class Dog extends Component {
     this.setState({ showOwner: !this.state.showOwner });
   };
   render() {
+    console.log(this.props);
+
     return (
       <div className="card d-inline-block">
         <h3 className="text-center" id="dog-name">
@@ -81,23 +82,24 @@ class Dog extends Component {
         <p>vaccinated:{this.state.vaccinated}</p>
         <p>about:{this.state.about}</p>
         <p>Preferred Play Buddy:{this.state.preferredPlayBuddy}</p>
-        {this.state.user ? (
-          <button
-            className="btn btn-primary"
-            onClick={() => {
-              this.setState({
-                showAddPlayDateForm: !this.state.showAddPlayDateForm
-              });
-            }}
-          >
-            {this.state.showAddPlayDateForm
-              ? "Hide Form"
-              : "Send Play Date Request"}
-          </button>
-        ) : null}
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            this.setState({
+              showAddPlayDateForm: !this.state.showAddPlayDateForm
+            });
+          }}
+        >
+          {this.state.showAddPlayDateForm
+            ? "Hide Form"
+            : "Send Play Date Request"}
+        </button>
 
         {this.state.showAddPlayDateForm ? (
-          <NewPlayDateForm receiver={this.state.owner} />
+          <NewPlayDateForm
+            addPlayDateCallback={this.props.addPlayDateCallback}
+            receiver={this.state.owner}
+          />
         ) : null}
       </div>
     );

@@ -159,6 +159,12 @@ class DogBuddy extends Component {
   // do post to playdates/manually reload the playdates
   // to update the requestor/receiver playdates
   addPlayDate = newPlayDate => {
+    newPlayDate.requestor = `/persons/${
+      this.state.currentUserObject.resourceId
+    }`;
+    newPlayDate.receiver = `/persons/${newPlayDate.receiver.resourceId}`;
+    newPlayDate.status = "Pending";
+    console.log(newPlayDate);
     axios
       .post("http://localhost:8080/playDates", newPlayDate)
       .then(response => {
@@ -210,7 +216,8 @@ class DogBuddy extends Component {
           // console.log(this.state.user);
           return (
             <Dog
-              user={this.state.user}
+              addPlayDateCallback={this.addPlayDate}
+              currentUserObject={this.state.currentUserObject}
               key={dog.resourceId}
               id={dog.resourceId}
               name={dog.name}
@@ -472,7 +479,10 @@ class DogBuddy extends Component {
             <Route
               path="/dogs"
               render={() => (
-                <DogCollection dogComponentsCollection={this.state.dogs} />
+                <DogCollection
+                  dogComponentsCollection={this.state.dogs}
+                  addPlayDateCallback={this.addPlaydate}
+                />
               )}
               isLoggedIn={this.state.isLoggedIn}
               profileCreated={this.state.profileCreated}

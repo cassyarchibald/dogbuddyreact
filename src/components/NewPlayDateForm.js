@@ -78,6 +78,7 @@ class NewPlayDateForm extends Component {
       receiver: this.state.receiver
     };
 
+    console.log(this.props);
     // Need to add the requestor/receiver, add playdate to parent state/do post request?
     this.props.addPlayDateCallback(newPlayDate, this.state);
     this.resetState();
@@ -120,6 +121,7 @@ class NewPlayDateForm extends Component {
               value={this.state.city}
               className="form-control"
               name="city"
+              value="Seattle"
               onChange={this.onInputChange}
             />
           </div>
@@ -129,6 +131,7 @@ class NewPlayDateForm extends Component {
               value={this.state.state}
               className="form-control"
               name="state"
+              value="Washington"
               onChange={this.onInputChange}
             />
           </div>
@@ -141,38 +144,6 @@ class NewPlayDateForm extends Component {
               onChange={this.onInputChange}
             />
           </div>
-          <div>
-            <label htmlFor="status">Status</label>
-            <input
-              value={this.state.status}
-              name="status"
-              className="form-control"
-              onChange={this.onInputChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="receiver">Sent Request To</label>
-            <input
-              value={
-                this.state.receiver.props.firstName +
-                " " +
-                this.state.receiver.props.lastName
-              }
-              className="form-control"
-              name="receiver"
-              onChange={this.onInputChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="requestor">Request From</label>
-            <input
-              value={this.state.requestor}
-              className="form-control"
-              name="requestor"
-              onChange={this.onInputChange}
-            />
-          </div>
-
           <input
             type="submit"
             value="Send Playdate Request"
@@ -180,6 +151,29 @@ class NewPlayDateForm extends Component {
           />
         </form>
       </div>
+      // <div>
+      //   <label htmlFor="status">Status</label>
+      //   <input
+      //     value={this.state.status}
+      //     name="status"
+      //     className="form-control"
+      //     onChange={this.onInputChange}
+      //   />
+      // </div>
+
+      // <div>
+      //   <label htmlFor="receiver">Sent Request To</label>
+      //   <input
+      //     value={
+      //       this.state.receiver.props.firstName +
+      //       " " +
+      //       this.state.receiver.props.lastName
+      //     }
+      //     className="form-control"
+      //     name="receiver"
+      //     onChange={this.onInputChange}
+      //   />
+      // </div>
     );
   }
 }
