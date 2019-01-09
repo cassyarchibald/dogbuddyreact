@@ -43,7 +43,8 @@ class DogBuddy extends Component {
       // update with person object
       // when logged in/profile created?
       // via findByUid method
-      currentUserObject: null
+      currentUserObject: null,
+      redirecToCreateProfile: false
     };
   }
 
@@ -96,14 +97,19 @@ class DogBuddy extends Component {
   // occures after CreateProfile form is submitted
   // if successful, update persons/profileCreated
   addPerson = newPerson => {
+    newPerson.uid = this.state.uid;
     axios
       .post("http://localhost:8080/persons", newPerson)
       .then(response => {
+        console.log(response);
+        console.log("Added person");
         let updatedData = this.state.persons;
         updatedData.push(newPerson);
         this.setState({ persons: updatedData, profileCreated: true });
       })
       .catch(error => {
+        console.log("did not add person");
+        console.log(error.message);
         this.setState({ alertMessage: error.message });
       });
   };
@@ -278,6 +284,9 @@ class DogBuddy extends Component {
           });
         } else {
           console.log("don't update profile created to true");
+          this.setState({
+            redirecToCreateProfile: true
+          });
         }
         if (response.status === 404) {
           console.log("uid not found");
@@ -393,6 +402,7 @@ class DogBuddy extends Component {
   };
 
   render() {
+    const { redirect } = this.state.redirecToCreateProfile;
     return (
       //<section>
       <Router>
@@ -430,9 +440,14 @@ class DogBuddy extends Component {
             />
             <Route
               path="/createProfile"
-              render={() => <CreateProfile uid={this.state.uid} />}
+              render={() => (
+                <CreateProfile
+                  uid={this.state.uid}
+                  addPersonCallback={this.addPerson}
+                />
+              )}
             />
-            <ProtectedRoute
+            <Route
               isLoggedIn={this.state.isLoggedIn}
               profileCreated={this.state.profileCreated}
               path="/dashboard"
@@ -443,15 +458,15 @@ class DogBuddy extends Component {
                 />
               )}
             />
-            <ProtectedRoute
+            <Route
               path="/dogs"
               render={() => (
-                <DogCollection dogComponentsCollection={this.props.dogs} />
+                <DogCollection dogComponentsCollection={this.state.dogs} />
               )}
               isLoggedIn={this.state.isLoggedIn}
               profileCreated={this.state.profileCreated}
             />
-            <ProtectedRoute
+            <Route
               path="/users"
               render={() => (
                 <PersonCollection
@@ -462,7 +477,7 @@ class DogBuddy extends Component {
               isLoggedIn={this.state.isLoggedIn}
               profileCreated={this.state.profileCreated}
             />
-            <ProtectedRoute
+            <Route
               path="/search"
               component={Search}
               isLoggedIn={this.state.isLoggedIn}
@@ -471,6 +486,7 @@ class DogBuddy extends Component {
           </Switch>
         </div>
       </Router>
+
       // <header>
       //   <div className="wrapper">
       //     {this.state.user ? (

@@ -16,20 +16,50 @@ class ProtectedRoute extends Component {
     console.log(this.props.profileCreated);
     this.state = {
       isLoggedIn: this.props.isLoggedIn,
-      profileCreated: this.props.profileCreated
-      //authenticated: this.props.isLoggedIn && this.props.profileCreated
+      profileCreated: this.props.profileCreated,
+      authenticated: null
     };
   }
+
   render() {
+    if (this.props.isLoggedIn && this.props.profileCreated) {
+      this.setState({
+        authenticated: true
+      });
+    }
+    console.log("In protected route method");
+    console.log(this.props);
+    console.log("Value of isLoggedIn");
+    console.log(this.props.isLoggedIn);
+    console.log("Value of profile created");
+    console.log(this.props.profileCreated);
     const { component: Component, ...props } = this.props;
+
+    const PrivateRoute = ({ component: Component, ...rest }) => (
+      <Route
+        {...rest}
+        render={props =>
+          this.state.authenticated === true ? (
+            <Component {...props} />
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/login",
+                state: { from: props.location }
+              }}
+            />
+          )
+        }
+      />
+    );
 
     return (
       <Route
         {...props}
         render={
           (props =>
-            this.state.isLoggedIn && this.state.profileCreated
-              ? (console.log("render componenet, is logged in"),
+            this.state.authenticated
+              ? (console.log("render componenet, is logged in and has profile"),
                 <Component {...props} />) // either not logged in or profile not created
               : // if not logged in, redirect to login
                 console.log("Not logged in, redirect to login"),

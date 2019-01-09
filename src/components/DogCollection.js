@@ -4,12 +4,19 @@ import Dog from "./Dog";
 import "./DogCollection.css";
 
 const DogCollection = props => {
+  console.log(props);
   let dog = props.dogComponentsCollection;
   if (props.dogComponentsCollection.length > 0) {
     return (
       <section>
         <div className="componentcontainer">{dog}</div>
       </section>
+    );
+  } else if (props.dogComponentsCollection.length === 0) {
+    return (
+      <div>
+        <h1>There are no dogs</h1>
+      </div>
     );
   } else {
     return <p>Loading</p>;

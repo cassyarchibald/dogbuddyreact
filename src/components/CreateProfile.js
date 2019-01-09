@@ -6,7 +6,7 @@ class CreateProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      uid: this.props.uid,
+      uid: null,
       firstName: "",
       lastName: "",
       city: "",
@@ -15,7 +15,9 @@ class CreateProfile extends Component {
       about: "",
       errorMessages: []
     };
+    console.log(this.props.uid);
   }
+
   onInputChange = event => {
     const field = event.target.name;
     const value = event.target.value;
