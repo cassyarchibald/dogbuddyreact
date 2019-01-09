@@ -455,6 +455,8 @@ class DogBuddy extends Component {
                 <Dashboard
                   isLoggedIn={this.state.isLoggedIn}
                   profileCreated={this.state.profileCreated}
+                  user={this.state.user}
+                  persons={this.state.persons}
                 />
               )}
             />
