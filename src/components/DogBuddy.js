@@ -262,7 +262,8 @@ class DogBuddy extends Component {
       .get(`http://localhost:8080/persons/search/findByUid?uid=${uid}`)
       .then(response => {
         console.log("find user by uid response");
-        console.log(response);
+        console.log(response.data._embedded.persons);
+
         // If successful, update profile created
 
         if (
@@ -275,13 +276,14 @@ class DogBuddy extends Component {
             profileCreated: true,
             currentUserObject: response.data
           });
+        } else {
+          console.log("don't update profile created to true");
         }
-
         if (response.status === 404) {
           console.log("uid not found");
-          this.setState({
-            profileCreated: false
-          });
+          // this.setState({
+          //   profileCreated: false
+          // });
         }
       })
       .catch(error => {
