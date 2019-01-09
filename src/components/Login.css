@@ -1,0 +1,9 @@
+.loginBtn {
+  margin: 2rem;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.loginBtn:hover {
+  border-style: inset;
+}

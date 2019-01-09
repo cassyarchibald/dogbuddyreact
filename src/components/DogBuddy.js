@@ -39,22 +39,17 @@ class DogBuddy extends Component {
       user: null,
       isLoggedIn: false,
       profileCreated: false,
-      uid: null
+      uid: null,
+      // update with person object
+      // when logged in/profile created?
+      // via findByUid method
+      currentUserObject: null
     };
   }
 
   changeMessage = message => {
     this.setState({ alertMessage: message });
     setTimeout(() => this.setState({ alertMessage: "" }), 2500);
-  };
-
-  verifyProfileCreated = () => {
-    // do this method if user logs in
-    // find person by uid
-    // if get request is successful,
-    // update state of
-    // profile created to true/redirect to Dashboard
-    // else, redirect to createprofile
   };
 
   // new dog form/post to /persons/${personId}/dogs
@@ -98,6 +93,8 @@ class DogBuddy extends Component {
       });
   };
 
+  // occures after CreateProfile form is submitted
+  // if successful, update persons/profileCreated
   addPerson = newPerson => {
     axios
       .post("http://localhost:8080/persons", newPerson)
@@ -143,7 +140,7 @@ class DogBuddy extends Component {
   // TODO - on hold, can't test until we have a way
   // to determine who the receiver/requestor is
   // reçiever = dropdown list on form?
-  // requestor = person currently logged in
+  // requestor = person currently logged in (find by uid/ store in state )
   // do post to playdates/manually reload the playdates
   // to update the requestor/receiver playdates
   addPlayDate = newPlayDate => {
@@ -261,15 +258,19 @@ class DogBuddy extends Component {
   // to true if one exists
   findByUid(uid) {
     axios
-      .get(`http://localhost:8080/persons/search/findByUid{?uid}=${uid}`)
+      .get(`http://localhost:8080/persons/search/findByUid?uid=${uid}`)
       .then(response => {
         // If successful, update profile created
 
         if (response.status === 200) {
           this.setState({
-            profileCreated: true
+            profileCreated: true,
+            currentUserObject: response.data
           });
         }
+      })
+      .catch(error => {
+        console.log(error.message);
       });
   }
   // load playdates axios get method saved as loadMessages
@@ -331,17 +332,23 @@ class DogBuddy extends Component {
 
   login = () => {
     // handles the callback for us
-    auth.signInWithPopup(provider).then(result => {
-      const user = result.user;
-      this.setState({
-        user: user,
-        uid: user.uid
+    auth
+      .signInWithPopup(provider)
+      .then(result => {
+        const user = result.user;
+        this.setState({
+          user: user,
+          uid: user.uid,
+          isLoggedIn: true
+        });
+        //TODO  Search for profile created based on uid
+        // this will update the profileCreated to true
+        // if it's successful
+        this.findByUid(user.uid);
+      })
+      .catch(error => {
+        console.log(error.message);
       });
-      //TODO  Search for profile created based on uid
-      // this will update the profileCreated to true
-      // if it's successful
-      this.findByUid(user.uid);
-    });
   };
 
   logout = () => {
@@ -361,7 +368,7 @@ class DogBuddy extends Component {
       <Router>
         <div>
           <nav id="router-list">
-            <Link to="/">login</Link>
+            <Link to="/">Login/Sign Up</Link>
             <Link to="/createProfile">Create Profile</Link>
             <Link to="/dashboard">Dashboard</Link>
             <Link to="/dogs">View Dogs</Link>
@@ -370,16 +377,13 @@ class DogBuddy extends Component {
           </nav>
           <Switch>
             <Route
+              exact
               path="/"
               render={() =>
-                this.state.isLoggedIn ? (
+                this.state.isLoggedIn && this.state.profileCreated ? (
                   <Redirect to="/dashboard" />
                 ) : (
-                  <Login
-                    user={this.state.user}
-                    loginCallback={this.login}
-                    logoutCallback={this.logout}
-                  />
+                  <Redirect to="/login" />
                 )
               }
             />

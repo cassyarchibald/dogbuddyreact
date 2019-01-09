@@ -16,8 +16,8 @@ class ProtectedRoute extends Component {
     console.log(this.props.profileCreated);
     this.state = {
       isLoggedIn: this.props.isLoggedIn,
-      profileCreated: this.props.profileCreated,
-      authenticated: this.props.isLoggedIn && this.props.profileCreated
+      profileCreated: this.props.profileCreated
+      //authenticated: this.props.isLoggedIn && this.props.profileCreated
     };
   }
   render() {

@@ -29,6 +29,7 @@ class CreateProfile extends Component {
     event.preventDefault();
 
     const newPerson = {
+      uid: this.state.uid,
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       city: this.state.city,
