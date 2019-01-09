@@ -217,6 +217,7 @@ class DogBuddy extends Component {
           return (
             <Dog
               addPlayDateCallback={this.addPlayDate}
+              isLoggedIn={this.state.isLoggedIn}
               currentUserObject={this.state.currentUserObject}
               key={dog.resourceId}
               id={dog.resourceId}
@@ -371,7 +372,7 @@ class DogBuddy extends Component {
         // this will update the profileCreated to true
         // if it's successful
         this.findByUid(user.uid);
-        //this.loadDogs();
+        this.loadDogs();
       }
     });
   }
@@ -391,6 +392,7 @@ class DogBuddy extends Component {
         // this will update the profileCreated to true
         // if it's successful
         this.findByUid(user.uid);
+        this.loadDogs();
       })
       .catch(error => {
         console.log(error.message);

@@ -11,6 +11,7 @@ class Dog extends Component {
     super(props);
     this.state = {
       currentUserObject: this.props.currentUserObject,
+      isLoggedIn: this.props.isLoggedIn,
       name: this.props.name,
       age: this.props.age,
       size: this.props.size,
@@ -61,6 +62,7 @@ class Dog extends Component {
   };
   componentDidMount() {
     this.loadOwner();
+    console.log(this.props.isLoggedIn);
     // console.log("is value of user null in dog component?");
     // console.log(this.state.user === null);
   }
@@ -68,32 +70,34 @@ class Dog extends Component {
   showOwner = () => {
     this.setState({ showOwner: !this.state.showOwner });
   };
-  render() {
-    console.log(this.props);
 
+  render() {
     return (
       <div className="card d-inline-block">
         <h3 className="text-center" id="dog-name">
           {this.state.name}
         </h3>
+        <h1>{this.props.isLoggedIn}</h1>
         <p>Age:{this.state.age}</p>
         <p>size:{this.state.size}</p>
         <p>breed:{this.state.breed}</p>
         <p>vaccinated:{this.state.vaccinated}</p>
         <p>about:{this.state.about}</p>
         <p>Preferred Play Buddy:{this.state.preferredPlayBuddy}</p>
-        <button
-          className="btn btn-primary"
-          onClick={() => {
-            this.setState({
-              showAddPlayDateForm: !this.state.showAddPlayDateForm
-            });
-          }}
-        >
-          {this.state.showAddPlayDateForm
-            ? "Hide Form"
-            : "Send Play Date Request"}
-        </button>
+        {this.state.isLoggedIn ? (
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              this.setState({
+                showAddPlayDateForm: !this.state.showAddPlayDateForm
+              });
+            }}
+          >
+            {this.state.showAddPlayDateForm
+              ? "Hide Form"
+              : "Send Play Date Request"}
+          </button>
+        ) : null}
 
         {this.state.showAddPlayDateForm ? (
           <NewPlayDateForm
