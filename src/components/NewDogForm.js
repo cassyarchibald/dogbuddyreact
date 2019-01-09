@@ -156,7 +156,7 @@ class NewDogForm extends Component {
             <input
               value={this.state.preferredPlayBuddy}
               className="form-control"
-              name="gender"
+              name="preferredPlayBuddy"
               onChange={this.onInputChange}
             />
           </div>

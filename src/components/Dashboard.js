@@ -138,10 +138,10 @@ class Dashboard extends Component {
         <button
           className="btn btn-primary"
           onClick={() => {
-            this.setState({ showAddDogForm: true });
+            this.setState({ showAddDogForm: !this.state.showAddDogForm });
           }}
         >
-          Add Dog
+          {this.state.showAddDogForm ? "Hide Form" : "Add Dog"}
         </button>
         {this.state.showAddDogForm ? (
           <NewDogForm addDogCallback={this.props.addDogCallback} />
