@@ -55,20 +55,19 @@ class DogBuddy extends Component {
 
   // new dog form/post to /persons/${personId}/dogs
   addDog = newDog => {
+    newDog.person = `/persons/${this.state.currentUserObject.resourceId}`;
+    console.log(newDog);
     console.log("in add dog");
     axios
-      .post(
-        `http://localhost:8080/persons/${
-          this.state.currentUserObject.resourceId
-        }/dogs`,
-        newDog
-      )
+      .post(`http://localhost:8080/dogs/`, newDog)
       .then(response => {
         console.log(response);
         let updatedData = this.state.dogs;
         updatedData.push(newDog);
         this.setState({ dogs: updatedData });
+        console.log(updatedData);
         this.loadDogs();
+        this.loadUsers();
       })
       .catch(error => {
         this.setState({ alertMessage: error.message });

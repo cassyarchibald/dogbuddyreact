@@ -130,7 +130,7 @@ class Dashboard extends Component {
     return (
       <div>
         <h1>
-          Welcome to your dashboard{" "}
+          Welcome to your dashboard
           {this.state.currentUserObject &&
             this.state.currentUserObject.firstName}
         </h1>
