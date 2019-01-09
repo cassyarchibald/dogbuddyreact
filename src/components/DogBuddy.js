@@ -257,19 +257,35 @@ class DogBuddy extends Component {
   // will update profile created from false
   // to true if one exists
   findByUid(uid) {
+    console.log("find user by uid");
     axios
       .get(`http://localhost:8080/persons/search/findByUid?uid=${uid}`)
       .then(response => {
+        console.log("find user by uid response");
+        console.log(response);
         // If successful, update profile created
 
-        if (response.status === 200) {
+        if (
+          response.status === 200 &&
+          response.data._embedded.persons.length === 1
+        ) {
+          console.log("update profile created to true ");
+          console.log(response.data._embedded.persons[0]);
           this.setState({
             profileCreated: true,
             currentUserObject: response.data
           });
         }
+
+        if (response.status === 404) {
+          console.log("uid not found");
+          this.setState({
+            profileCreated: false
+          });
+        }
       })
       .catch(error => {
+        console.log("find by uid not successful");
         console.log(error.message);
       });
   }
@@ -324,7 +340,15 @@ class DogBuddy extends Component {
     // remember people that have logged in
     auth.onAuthStateChanged(user => {
       if (user) {
-        this.setState({ user: user, uid: user.uid });
+        this.setState({
+          user: user,
+          uid: user.uid,
+          isLoggedIn: true
+        });
+        //TODO  Search for profile created based on uid
+        // this will update the profileCreated to true
+        // if it's successful
+        this.findByUid(user.uid);
         //this.loadDogs();
       }
     });
@@ -354,7 +378,11 @@ class DogBuddy extends Component {
   logout = () => {
     auth.signOut().then(() => {
       this.setState({
-        user: null
+        user: null,
+        isLoggedIn: false,
+        profileCreated: false,
+        uid: null,
+        currentUserObject: null
       });
       // QUESTION do i need to manually
       // reload the dogs ?
