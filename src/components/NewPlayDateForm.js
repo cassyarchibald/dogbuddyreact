@@ -143,6 +143,7 @@ class NewPlayDateForm extends Component {
               value={this.state.zipCode}
               className="form-control"
               name="zipCode"
+              type="number"
               onChange={this.onInputChange}
             />
           </div>
