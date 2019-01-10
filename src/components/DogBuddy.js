@@ -213,13 +213,12 @@ class DogBuddy extends Component {
       });
   }
 
-  //TODO //TODO //TODO
   loadUsersRequestedPlayDates(personId) {
     axios
       .get(`http://localhost:8080/persons/${personId}/requestedPlaydates`)
       .then(response => {
         // console.log("loading dogs from resposne");
-        console.log(response.data);
+        //console.log(response.data);
         const requestedPlayDatesComponents = response.data._embedded.playDates.map(
           playDate => {
             // console.log("value of user in loading dogs");
@@ -369,10 +368,13 @@ class DogBuddy extends Component {
       this.state.currentUserObject.resourceId
     }`;
 
-    newPlayDate.receiver = `/persons/${recieverId}`;
+    newPlayDate.reciever = `/persons/${recieverId}`;
     newPlayDate.status = "Pending";
 
+    // why is the receiver an
     console.log(newPlayDate);
+    console.log(newPlayDate.requestor);
+    console.log(newPlayDate.receiver);
 
     axios
       .post("http://localhost:8080/playDates", newPlayDate)
