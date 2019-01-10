@@ -76,12 +76,12 @@ class Dashboard extends Component {
     axios
       .get(`http://localhost:8080/persons/${personId}/dogs`)
       .then(response => {
-        console.log("loading dogs from resposne");
-        console.log(response.data);
+        // console.log("loading dogs from resposne");
+        // console.log(response.data);
         const dogComponents = response.data._embedded.dogs.map(dog => {
           // console.log("value of user in loading dogs");
           // console.log(this.state.user);
-          console.log(this.props);
+          // console.log(this.props);
           return (
             <Dog
               user={this.state.currentUserObject}
@@ -103,7 +103,7 @@ class Dashboard extends Component {
             />
           );
         });
-        console.log(dogComponents);
+        // console.log(dogComponents);
 
         this.setState({
           dogs: dogComponents
@@ -128,7 +128,7 @@ class Dashboard extends Component {
     // check if already in system
     if (this.props.user) {
       this.findByUid(this.props.user.uid);
-      console.log(this.state);
+      // console.log(this.state);
     } else {
       console.log("no user in state");
     }

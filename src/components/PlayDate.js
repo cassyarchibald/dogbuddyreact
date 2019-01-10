@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./PlayDate.css";
-
 const PlayDate = props => {
   const {
     startTime,
@@ -11,7 +10,7 @@ const PlayDate = props => {
     zipCode,
     status,
     location,
-    details // Need requestor and responder
+    details
   } = props;
   return (
     <div className="card d-inline-block">

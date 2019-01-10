@@ -28,3 +28,7 @@ p {
 #dog-name {
   color: black;
 }
+
+button {
+  margin: 1rem;
+}

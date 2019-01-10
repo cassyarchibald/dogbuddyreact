@@ -213,14 +213,17 @@ class DogBuddy extends Component {
   // requestor = person currently logged in (find by uid/ store in state )
   // do post to playdates/manually reload the playdates
   // to update the requestor/receiver playdates
-  addPlayDate = newPlayDate => {
+  addPlayDate = (newPlayDate, recieverId) => {
     console.log("in add playdate in dogbuddy");
     newPlayDate.requestor = `/persons/${
       this.state.currentUserObject.resourceId
     }`;
-    newPlayDate.receiver = `/persons/${newPlayDate.receiver.resourceId}`;
+
+    newPlayDate.receiver = `/persons/${recieverId}`;
     newPlayDate.status = "Pending";
+
     console.log(newPlayDate);
+
     axios
       .post("http://localhost:8080/playDates", newPlayDate)
       .then(response => {

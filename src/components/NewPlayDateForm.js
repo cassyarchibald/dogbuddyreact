@@ -22,6 +22,7 @@ class NewPlayDateForm extends Component {
       errorMessages: []
     };
     console.log(this.props);
+    console.log(this.props.receiver.props.id);
   }
   onInputChange = event => {
     const field = event.target.name;
@@ -55,7 +56,8 @@ class NewPlayDateForm extends Component {
       state,
       zipCode,
       location,
-      details
+      details,
+      receiever
     } = this.state;
 
     if (
@@ -74,11 +76,16 @@ class NewPlayDateForm extends Component {
       state: this.state.state,
       zipCode: this.state.zipCode,
       location: this.state.location,
-      details: this.state.details
+      details: this.state.details,
+      receiever: this.props.receiver
     };
-
+    console.log("submitting form");
+    console.log(newPlayDate);
+    console.log(this.props.receiver.id);
+    //console.log(this.state);
+    //newPlayDate.receiver = this.props.receiver;
     // Need to add the requestor/receiver, add playdate to parent state/do post request?
-    this.props.addPlayDateCallback(newPlayDate, this.state);
+    this.props.addPlayDateCallback(newPlayDate, this.props.receiver.props.id);
     this.resetState();
   };
 
@@ -119,7 +126,6 @@ class NewPlayDateForm extends Component {
               value={this.state.city}
               className="form-control"
               name="city"
-              value="Seattle"
               onChange={this.onInputChange}
             />
           </div>
@@ -129,7 +135,6 @@ class NewPlayDateForm extends Component {
               value={this.state.state}
               className="form-control"
               name="state"
-              value="Washington"
               onChange={this.onInputChange}
             />
           </div>
@@ -145,7 +150,6 @@ class NewPlayDateForm extends Component {
           <div>
             <label htmlFor="location">Location</label>
             <input
-              value={this.state.location}
               className="form-control"
               name="location"
               onChange={this.onInputChange}
@@ -154,7 +158,6 @@ class NewPlayDateForm extends Component {
           <div>
             <label htmlFor="details">Details</label>
             <input
-              value={this.state.details}
               className="form-control"
               name="details"
               type="textarea"
