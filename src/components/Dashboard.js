@@ -46,20 +46,18 @@ class Dashboard extends Component {
           response.status === 200 &&
           response.data._embedded.persons.length === 1
         ) {
-          console.log("success in finding by uid");
           // console.log("update profile created to true ");
           // console.log(response.data._embedded.persons[0]);
           this.setState({
             currentUserObject: response.data._embedded.persons[0]
           });
-          console.log(this.state.currentUserObject);
+
           // console.log(this.state.currentUserObject);
           // console.log(this.state.currentUserObject.resourceId);
           // load dogs for this person
-          console.log("loading dogs");
+
           this.loadUsersDogs(this.state.currentUserObject.resourceId);
         } else {
-          console.log("did not work");
         }
         if (response.status === 404) {
           console.log("uid not found");
@@ -83,6 +81,7 @@ class Dashboard extends Component {
         const dogComponents = response.data._embedded.dogs.map(dog => {
           // console.log("value of user in loading dogs");
           // console.log(this.state.user);
+          console.log(this.props);
           return (
             <Dog
               user={this.state.currentUserObject}
@@ -97,9 +96,14 @@ class Dashboard extends Component {
               breed={dog.breed}
               ownerLink={dog._links.person.href}
               preferredPlayBuddy={dog.preferredPlayBuddy}
+              addPlayDateCallback={this.props.addPlayDateCallback}
+              showEditDelete={true}
+              editDogCallback={this.props.editDogCallback}
+              removeDogCallback={this.props.removeDogCallback}
             />
           );
         });
+        console.log(dogComponents);
 
         this.setState({
           dogs: dogComponents
@@ -109,8 +113,6 @@ class Dashboard extends Component {
         this.changeMessage(error.message);
         console.log(error.message);
       });
-
-    console.log(this.state.dogs);
   }
 
   componentDidMount() {
@@ -138,43 +140,45 @@ class Dashboard extends Component {
   // if so, render a form with their details filled in
   // let them add/edit details that Google doesn't give us
   render() {
-    console.log(this.state.currentUserObject);
     return (
-      <div id="dashboard-container">
-        <h1>Welcome</h1>
-        {this.state.currentUserObject ? (
-          <section id="user-information">
-            <h2>
-              {this.state.currentUserObject.firstName}{" "}
-              {this.state.currentUserObject.lastName}
-            </h2>
-            <p>{this.state.currentUserObject.city}</p>
-            <p>{this.state.currentUserObject.state}</p>
+      <div>
+        <div id="dashboard-container">
+          <h1>Welcome</h1>
+          {this.state.currentUserObject ? (
+            <section id="user-information">
+              <h2>
+                {this.state.currentUserObject.firstName}{" "}
+                {this.state.currentUserObject.lastName}
+              </h2>
+              <p>{this.state.currentUserObject.city}</p>
+              <p>{this.state.currentUserObject.state}</p>
 
-            <p>{this.state.currentUserObject.zipCode}</p>
+              <p>{this.state.currentUserObject.zipCode}</p>
 
-            <p>{this.state.currentUserObject.about}</p>
-            <p>{this.state.currentUserObject.photo}</p>
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                this.setState({
-                  showEditUserForm: !this.state.showEditUserForm
-                });
-              }}
-            >
-              Edit Profile
-            </button>
-          </section>
-        ) : null}
+              <p>{this.state.currentUserObject.about}</p>
+              <p>{this.state.currentUserObject.photo}</p>
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  this.setState({
+                    showEditUserForm: !this.state.showEditUserForm
+                  });
+                }}
+              >
+                Edit Profile
+              </button>
+            </section>
+          ) : null}
 
-        {this.state.currentUserObject && this.state.showEditUserForm ? (
-          <EditUserForm
-            editPersonCallback={this.props.editPersonCallback}
-            person={this.state.currentUserObject}
-          />
-        ) : null}
-        {this.state.dogs ? this.state.dogs : null}
+          {this.state.currentUserObject && this.state.showEditUserForm ? (
+            <EditUserForm
+              editPersonCallback={this.props.editPersonCallback}
+              person={this.state.currentUserObject}
+            />
+          ) : null}
+          {this.state.dogs ? this.state.dogs : null}
+        </div>
+
         <button
           className="btn btn-primary"
           onClick={() => {

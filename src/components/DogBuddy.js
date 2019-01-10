@@ -55,35 +55,39 @@ class DogBuddy extends Component {
 
   // new dog form/post to /persons/${personId}/dogs
   addDog = newDog => {
+    console.log("in add dog in dogbuddy");
     newDog.person = `/persons/${this.state.currentUserObject.resourceId}`;
-    console.log(newDog);
-    console.log("in add dog");
+
     axios
       .post(`http://localhost:8080/dogs/`, newDog)
       .then(response => {
-        console.log(response);
+        console.log("adding dog success");
         let updatedData = this.state.dogs;
         updatedData.push(newDog);
         this.setState({ dogs: updatedData });
-        console.log(updatedData);
         this.loadDogs();
         this.loadUsers();
       })
       .catch(error => {
+        console.log("adding dog failure");
         this.setState({ alertMessage: error.message });
         console.log(error.message);
       });
   };
 
   removeDog = dogId => {
+    console.log("in remove dog from dogbuddy");
     // loop through dogs
     // if id matches, set delete index to that index
     // splice that index out
     // update the state to equal the new value
     // do delete axios request
+    console.log(`http://localhost:8080/dogs/${dogId}`);
     axios
-      .delete("http://localhost:8080/dogs/${dogId}")
+      .delete(`http://localhost:8080/dogs/${dogId}`)
       .then(response => {
+        console.log("remove dog successful?");
+        console.log(response);
         let deleteIndex = -1;
         this.state.dogs.forEach((dog, index) => {
           if (dogId === dog.id) {
@@ -96,8 +100,11 @@ class DogBuddy extends Component {
         this.setState({
           dogs: this.state.dogs
         });
+        console.log(this.state.dogs);
       })
       .catch(error => {
+        console.log("remove dog not successful");
+        console.log(error.message);
         this.setState({ alertMessage: error.message });
       });
   };
@@ -105,6 +112,7 @@ class DogBuddy extends Component {
   // occures after CreateProfile form is submitted
   // if successful, update persons/profileCreated
   addPerson = newPerson => {
+    console.log("in add person in dogbuddy");
     newPerson.uid = this.state.uid;
     axios
       .post("http://localhost:8080/persons", newPerson)
@@ -124,6 +132,7 @@ class DogBuddy extends Component {
   };
 
   removePerson = personId => {
+    console.log("in delete person in dog buddy");
     // loop through users
     // if id matches, set delete index to that index
     // splice that index out
@@ -132,7 +141,7 @@ class DogBuddy extends Component {
     // QUESTION should I also do axios request to delete their dogs/
     // any playdates associated with them (might be a cascade setting in api)
     axios
-      .delete("http://localhost:8080/persons/${personId}")
+      .delete(`http://localhost:8080/persons/${personId}`)
       .then(response => {
         let deleteIndex = -1;
         this.state.persons.forEach((person, index) => {
@@ -154,6 +163,7 @@ class DogBuddy extends Component {
 
   //TODO //TODO //TODO
   updateUser = updatedPerson => {
+    console.log("in update user in dog buddy");
     // do axios patch request or
     // would it be a put?
     updatedPerson.uid = this.state.uid;
@@ -165,11 +175,33 @@ class DogBuddy extends Component {
         updatedPerson
       )
       .then(response => {
+        console.log("successful update of person");
         let updatedData = this.state.persons;
         updatedData.push(updatedPerson);
         this.setState({ persons: updatedData });
       })
       .catch(error => {
+        console.log("unable to update person");
+        console.log(error.message);
+        this.setState({ alertMessage: error.message });
+      });
+  };
+
+  //TODO //TODO //TODO
+  updateDog = (updatedDog, dogId) => {
+    console.log("in update dog in dogbuddy");
+    // do axios patch request or
+    // would it be a put?
+    axios
+      .patch(`http://localhost:8080/dogs/${dogId}`, updatedDog)
+      .then(response => {
+        console.log("update dog successful");
+        let updatedData = this.state.dogs;
+        updatedData.push(updatedDog);
+        this.setState({ dogs: updatedData });
+      })
+      .catch(error => {
+        console.log("update dog not successful");
         console.log(error.message);
         this.setState({ alertMessage: error.message });
       });
@@ -182,6 +214,7 @@ class DogBuddy extends Component {
   // do post to playdates/manually reload the playdates
   // to update the requestor/receiver playdates
   addPlayDate = newPlayDate => {
+    console.log("in add playdate in dogbuddy");
     newPlayDate.requestor = `/persons/${
       this.state.currentUserObject.resourceId
     }`;
@@ -191,17 +224,22 @@ class DogBuddy extends Component {
     axios
       .post("http://localhost:8080/playDates", newPlayDate)
       .then(response => {
+        console.log("response of addplaydate, successful?");
+        console.log(response);
         let updatedData = this.state.playDates;
         updatedData.push(newPlayDate);
         this.setState({ playDates: updatedData });
         this.loadPlaydates();
       })
       .catch(error => {
+        console.log("error with adding playdate");
+        console.log(error.message);
         this.setState({ alertMessage: error.message });
       });
   };
 
   removePlayDate = playDateId => {
+    console.log("in remove playdate in dogbuddy");
     // loop through playDates
     // if id matches, set delete index to that index
     // splice that index out
@@ -209,8 +247,9 @@ class DogBuddy extends Component {
     // do delete axios request for playdate
     // reload all playdates to update requestor/receiver sides
     axios
-      .delete("http://localhost:8080/playDates/${playDateId}")
+      .delete(`http://localhost:8080/playDates/${playDateId}`)
       .then(response => {
+        console.log("remove playdate successful?");
         let deleteIndex = -1;
         this.state.playDates.forEach((playDate, index) => {
           if (playDateId === playDate.id) {
@@ -225,6 +264,8 @@ class DogBuddy extends Component {
         });
       })
       .catch(error => {
+        console.log("remove playdate not successful");
+        console.log(error.message);
         this.setState({ alertMessage: error.message });
       });
   };
@@ -498,7 +539,10 @@ class DogBuddy extends Component {
                   user={this.state.user}
                   persons={this.state.persons}
                   addDogCallback={this.addDog}
+                  removeDogCallback={this.removeDog}
+                  editDogCallback={this.updateDog}
                   editPersonCallback={this.updateUser}
+                  addPlayDateCallback={this.addPlayDate}
                 />
               )}
             />

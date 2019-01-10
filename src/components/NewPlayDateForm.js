@@ -21,6 +21,7 @@ class NewPlayDateForm extends Component {
       receiver: this.props.receiver,
       errorMessages: []
     };
+    console.log(this.props);
   }
   onInputChange = event => {
     const field = event.target.name;
@@ -76,7 +77,6 @@ class NewPlayDateForm extends Component {
       details: this.state.details
     };
 
-    console.log(this.props);
     // Need to add the requestor/receiver, add playdate to parent state/do post request?
     this.props.addPlayDateCallback(newPlayDate, this.state);
     this.resetState();

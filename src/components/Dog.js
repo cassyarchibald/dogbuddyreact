@@ -12,6 +12,7 @@ class Dog extends Component {
     this.state = {
       currentUserObject: this.props.currentUserObject,
       isLoggedIn: this.props.isLoggedIn,
+      id: this.props.id,
       name: this.props.name,
       age: this.props.age,
       size: this.props.size,
@@ -27,6 +28,7 @@ class Dog extends Component {
       showOwnerCallback: this.props.showOwnerCallback,
       showAddPlayDateForm: false
     };
+    console.log(this.props);
   }
   loadOwner() {
     axios
@@ -51,6 +53,7 @@ class Dog extends Component {
           owner: owner,
           zipCode: response.data.zipCode
         });
+        console.log(owner);
       })
       .catch(error => {
         this.changeMessage(error.message);
@@ -62,9 +65,6 @@ class Dog extends Component {
   };
   componentDidMount() {
     this.loadOwner();
-    console.log(this.props.isLoggedIn);
-    // console.log("is value of user null in dog component?");
-    // console.log(this.state.user === null);
   }
 
   showOwner = () => {
@@ -83,6 +83,27 @@ class Dog extends Component {
         <p>Vaccinated:{this.state.vaccinated}</p>
         <p>About:{this.state.about}</p>
         <p>Preferred Play Buddy:{this.state.preferredPlayBuddy}</p>
+
+        {this.props.showEditDelete ? (
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              this.props.editDogCallback();
+            }}
+          >
+            Edit
+          </button>
+        ) : null}
+        {this.props.showEditDelete ? (
+          <button
+            className="btn btn-danger"
+            onClick={() => {
+              this.props.removeDogCallback(this.props.id);
+            }}
+          >
+            Delete
+          </button>
+        ) : null}
         {this.state.isLoggedIn ? (
           <button
             className="btn btn-primary"
