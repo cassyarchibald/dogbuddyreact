@@ -98,12 +98,15 @@ class DogBuddy extends Component {
             deleteIndex = index;
           }
         });
-
+        console.log("deleting dog with index");
+        console.log(deleteIndex);
+        console.log(this.state.dogs);
         this.state.dogs.splice(deleteIndex, 1);
 
         this.setState({
           dogs: this.state.dogs
         });
+        console.log("after delete");
         console.log(this.state.dogs);
       })
       .catch(error => {
@@ -202,7 +205,7 @@ class DogBuddy extends Component {
         this.setState({
           currentUserDogs: dogComponents
         });
-        console.log(this.state.currentUserDogs);
+        //console.log(this.state.currentUserDogs);
       })
       .catch(error => {
         this.changeMessage(error.message);
@@ -216,8 +219,8 @@ class DogBuddy extends Component {
       .get(`http://localhost:8080/persons/${personId}/requestedPlaydates`)
       .then(response => {
         // console.log("loading dogs from resposne");
-        // console.log(response.data);
-        const requestedPlayDatesComponents = response.data._embedded.dogs.map(
+        console.log(response.data);
+        const requestedPlayDatesComponents = response.data._embedded.playDates.map(
           playDate => {
             // console.log("value of user in loading dogs");
             // console.log(this.state.user);
@@ -240,7 +243,7 @@ class DogBuddy extends Component {
             );
           }
         );
-        // console.log(dogComponents);
+        //console.log(requestedPlayDatesComponents);
 
         this.setState({
           currentUserRequestedPlayDates: requestedPlayDatesComponents
@@ -248,18 +251,19 @@ class DogBuddy extends Component {
       })
       .catch(error => {
         this.changeMessage(error.message);
-        console.log(error.message);
+        //console.log(error.message);
       });
   }
 
   //TODO //TODO //TODO
+  // http://localhost:8080/persons/15/receivedPlaydates
   loadUsersRecievedPlayDates(personId) {
     axios
-      .get(`http://localhost:8080/persons/${personId}/recievedPlaydates`)
+      .get(`http://localhost:8080/persons/${personId}/receivedPlaydates`)
       .then(response => {
         // console.log("loading dogs from resposne");
         // console.log(response.data);
-        const recievedPlayDatesComponents = response.data._embedded.dogs.map(
+        const recievedPlayDatesComponents = response.data._embedded.playDates.map(
           playDate => {
             // console.log("value of user in loading dogs");
             // console.log(this.state.user);
@@ -282,7 +286,7 @@ class DogBuddy extends Component {
             );
           }
         );
-        // console.log(dogComponents);
+        //console.log(recievedPlayDatesComponents);
 
         this.setState({
           currentUserRequestedPlayDates: recievedPlayDatesComponents
@@ -510,8 +514,7 @@ class DogBuddy extends Component {
             profileCreated: true,
             currentUserObject: response.data._embedded.persons[0]
           });
-          console.log(this.state.currentUserObject);
-          // TODO TODO
+
           // Load the dogs for the current person
           // Load requested playdates for the current person
           // Load received playdates for the current person
