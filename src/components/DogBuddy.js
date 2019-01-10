@@ -321,6 +321,7 @@ class DogBuddy extends Component {
           return (
             <Dog
               addPlayDateCallback={this.addPlayDate}
+              editDogCallback={this.updateDog}
               isLoggedIn={this.state.isLoggedIn}
               currentUserObject={this.state.currentUserObject}
               key={dog.resourceId}
@@ -617,105 +618,7 @@ class DogBuddy extends Component {
           </Switch>
         </div>
       </Router>
-
-      // <header>
-      //   <div className="wrapper">
-      //     {this.state.user ? (
-      //       <button onClick={this.logout}>Logout</button>
-      //     ) : (
-      //       <button onClick={this.login}>Log In</button>
-      //     )}
-      //   </div>
-      // </header>
-      // <div className="text">
-      //   <h1 className="text-center">Dog Buddy</h1>
-      // </div>
-      // {this.state.user ? (
-      //   <Dashboard
-      //     user={this.state.user}
-      //     persons={this.state.persons}
-      //     addPersonCallback={this.state.addPerson}
-      //   />
-      // ) : null}
-
-      // <Router>
-      //   <div>
-      //     <ul id="router-list">
-      //       <li>
-      //         <Link to="/">Home</Link>
-      //       </li>
-      //       <li>
-      //         <Link to="/search">Search</Link>
-      //       </li>
-      //       <li>
-      //         <Link to="/users">Users</Link>
-      //       </li>
-      //       <li>
-      //         <Link to="/dogs">Dogs</Link>
-      //       </li>
-      //       <li>
-      //         <Link to="/addPerson">Add Person</Link>
-      //       </li>
-      //       <li>
-      //         <Link to="/addDog">Add Dog</Link>
-      //       </li>
-      //       <li>
-      //         <Link to="/addPlayDate">Add Playdate</Link>
-      //       </li>
-      //     </ul>
-      //     <h4 duration={5000} className="alertMessage text-center">
-      //       {this.state.alertMessage}
-      //     </h4>
-      //     <Route
-      //       exact
-      //       path="/"
-      //       render={() => (
-      //         <DogCollection dogComponentsCollection={this.state.dogs} />
-      //       )}
-      //     />
-      //     <Route path="/search" render={() => <Search />} />
-      //     <Route
-      //       path="/users"
-      //       render={() => (
-      //         <PersonCollection
-      //           persons={this.state.persons}
-      //           addPersonCallback={this.state.addPerson}
-      //         />
-      //       )}
-      //     />
-      //
-      //     <Route
-      //       path="/dogs"
-      //       render={() => (
-      //         <DogCollection
-      //           dogComponentsCollection={this.state.dogs}
-      //           addDogCallback={this.addDog}
-      //           user={this.state.user}
-      //         />
-      //       )}
-      //     />
-      //     <Route
-      //       path="/addPerson"
-      //       render={() => (
-      //         <CreateProfile addPersonCallback={this.addPerson} />
-      //       )}
-      //     />
-      //     <Route
-      //       path="/addDog"
-      //       render={() => <NewDogForm addDogCallback={this.addDog} />}
-      //     />
-      //     <Route
-      //       path="/addPlayDate"
-      //       render={() => (
-      //         <NewPlayDateForm addPlayDateCallback={this.addPlayDate} />
-      //       )}
-      //     />
-      //   </div>
-      // </Router>
-      //</section>
     );
-    // Add ul for router links to home, search, users, dogs, dashboard, maybe sign out/sign up?
-    // Add a router with routes  to users/dogs /passing the route this.state.users or dogs
   }
 }
 

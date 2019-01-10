@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import "./NewDogForm.css";
 
-// How does it know who the owner is?
-// Would need to be the person that is logged in
 class EditDogForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: this.props.dog.id,
       name: this.props.dog.name,
       age: this.props.dog.age,
       size: this.props.dog.size,
@@ -61,6 +60,7 @@ class EditDogForm extends Component {
     if (name === "") return;
     // TODO - Load in owner based on who is logged in
     const updatedDog = {
+      id: this.state.id,
       name: this.state.name,
       age: this.state.age,
       size: this.state.size,
@@ -73,7 +73,7 @@ class EditDogForm extends Component {
 
     // Need to add the dog to state and do post request
     // to /dogs then reload the dogs/persons...
-    this.props.addDogCallback(updatedDog);
+    this.props.editDogCallback(updatedDog, updatedDog.id);
     this.resetState();
   };
 
