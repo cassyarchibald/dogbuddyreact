@@ -18,13 +18,13 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       user: this.props.user,
-      dogs: null,
-      requestedPlaydates: null,
-      receivedPlaydates: null,
-      currentUserObject: null,
+      dogs: this.props.currentUserDogs,
+      requestedPlaydates: this.props.currentUserRequestedPlayDates,
+      receivedPlaydates: this.props.currentUserReceivedPlayDates,
+      currentUserObject: this.props.currentUserObject,
+      isLoggedIn: this.props.isLoggedIn,
       showAddDogForm: false,
-      showEditUserForm: false,
-      currentUserObject: null
+      showEditUserForm: false
     };
   }
 

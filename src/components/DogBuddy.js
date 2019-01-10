@@ -232,6 +232,7 @@ class DogBuddy extends Component {
                 location={playDate.location}
                 details={playDate.details}
                 addPlayDateCallback={this.addPlayDate}
+                editPlayDateCallback={this.updatePlayDate}
               />
             );
           }
@@ -273,6 +274,7 @@ class DogBuddy extends Component {
                 location={playDate.location}
                 details={playDate.details}
                 addPlayDateCallback={this.addPlayDate}
+                editPlayDateCallback={this.updatePlayDate}
               />
             );
           }
@@ -488,6 +490,9 @@ class DogBuddy extends Component {
   // call during login
   // will update profile created from false
   // to true if one exists
+  // and will add the current user object to state
+  // will load current user's dogs/playdates and
+  // will pass those to the dashboard
   findByUid(uid) {
     axios
       .get(`http://localhost:8080/persons/search/findByUid?uid=${uid}`)
@@ -504,10 +509,17 @@ class DogBuddy extends Component {
           });
           console.log(this.state.currentUserObject);
           // TODO TODO
-          // Also load the dogs for the current person
-          // the playdates for the current person
-          // and pass them to dashboard
+          // Load the dogs for the current person
+          // Load requested playdates for the current person
+          // Load received playdates for the current person
+          // pass them to dashboard
           this.loadUsersDogs(this.state.currentUserObject.resourceId);
+          this.loadUsersRecievedPlayDates(
+            this.state.currentUserObject.resourceId
+          );
+          this.loadUsersRequestedPlayDates(
+            this.state.currentUserObject.resourceId
+          );
         } else {
           console.log("don't update profile created to true");
           this.setState({
@@ -689,12 +701,21 @@ class DogBuddy extends Component {
                   isLoggedIn={this.state.isLoggedIn}
                   profileCreated={this.state.profileCreated}
                   user={this.state.user}
+                  currentUserObject={this.state.currentUserObject}
                   persons={this.state.persons}
                   addDogCallback={this.addDog}
                   removeDogCallback={this.removeDog}
                   editDogCallback={this.updateDog}
                   editPersonCallback={this.updateUser}
                   addPlayDateCallback={this.addPlayDate}
+                  editPlayDateCallback={this.updatePlayDate}
+                  currentUserDogs={this.state.currentUserDogs}
+                  currentUserReceivedPlayDates={
+                    this.state.currentUserReceivedPlayDates
+                  }
+                  currentUserRequestedPlayDates={
+                    this.state.currentUserRequestedPlayDates
+                  }
                 />
               )}
             />
