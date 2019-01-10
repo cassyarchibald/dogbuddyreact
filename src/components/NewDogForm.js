@@ -73,7 +73,7 @@ class NewDogForm extends Component {
 
     // Need to add the dog to state and do post request
     // to /dogs then reload the dogs/persons...
-    this.props.addDogCallback(newDog, this.state);
+    this.props.addDogCallback(newDog);
     this.resetState();
   };
 

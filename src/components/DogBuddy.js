@@ -59,6 +59,7 @@ class DogBuddy extends Component {
   // new dog form/post to /persons/${personId}/dogs
   addDog = newDog => {
     console.log("in add dog in dogbuddy");
+    console.log(this.state.currentUserObject);
     newDog.person = `/persons/${this.state.currentUserObject.resourceId}`;
 
     axios
@@ -68,7 +69,7 @@ class DogBuddy extends Component {
         let updatedData = this.state.dogs;
         updatedData.push(newDog);
         this.setState({ dogs: updatedData });
-        this.loadDogs();
+        this.loadUsersDogs();
         this.loadUsers();
       })
       .catch(error => {
@@ -165,6 +166,7 @@ class DogBuddy extends Component {
   };
 
   loadUsersDogs(personId) {
+    console.log("loading user dogs");
     axios
       .get(`http://localhost:8080/persons/${personId}/dogs`)
       .then(response => {
@@ -198,8 +200,9 @@ class DogBuddy extends Component {
         // console.log(dogComponents);
 
         this.setState({
-          dogs: dogComponents
+          currentUserDogs: dogComponents
         });
+        console.log(this.state.currentUserDogs);
       })
       .catch(error => {
         this.changeMessage(error.message);
@@ -513,10 +516,13 @@ class DogBuddy extends Component {
           // Load requested playdates for the current person
           // Load received playdates for the current person
           // pass them to dashboard
+          console.log("calling load user dogs");
           this.loadUsersDogs(this.state.currentUserObject.resourceId);
+          console.log("calling load received playdates");
           this.loadUsersRecievedPlayDates(
             this.state.currentUserObject.resourceId
           );
+          console.log("calling load requested playdates");
           this.loadUsersRequestedPlayDates(
             this.state.currentUserObject.resourceId
           );
