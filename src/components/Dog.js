@@ -5,6 +5,7 @@ import Person from "./Person";
 import "./Person.css";
 import axios from "axios";
 import NewPlayDateForm from "./NewPlayDateForm";
+import EditDogForm from "./EditDogForm";
 
 class Dog extends Component {
   constructor(props) {
@@ -26,7 +27,8 @@ class Dog extends Component {
       showOwner: this.props.showOwner,
       zipCode: "",
       showOwnerCallback: this.props.showOwnerCallback,
-      showAddPlayDateForm: false
+      showAddPlayDateForm: false,
+      showEditDogForm: false
     };
     console.log(this.props);
   }
@@ -88,7 +90,9 @@ class Dog extends Component {
           <button
             className="btn btn-primary"
             onClick={() => {
-              this.props.editDogCallback();
+              this.setState({
+                showEditDogForm: !this.state.showEditDogForm
+              });
             }}
           >
             Edit
@@ -104,6 +108,14 @@ class Dog extends Component {
             Delete
           </button>
         ) : null}
+
+        {this.state.owner && this.state.showEditDogForm ? (
+          <EditDogForm
+            editDogCallback={this.props.editDogCallback}
+            dog={this.props}
+          />
+        ) : null}
+
         {this.state.isLoggedIn ? (
           <button
             className="btn btn-primary"

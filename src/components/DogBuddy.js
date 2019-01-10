@@ -161,6 +161,49 @@ class DogBuddy extends Component {
       });
   };
 
+  loadUsersDogs(personId) {
+    axios
+      .get(`http://localhost:8080/persons/${personId}/dogs`)
+      .then(response => {
+        // console.log("loading dogs from resposne");
+        // console.log(response.data);
+        const dogComponents = response.data._embedded.dogs.map(dog => {
+          // console.log("value of user in loading dogs");
+          // console.log(this.state.user);
+          // console.log(this.props);
+          return (
+            <Dog
+              user={this.state.currentUserObject}
+              key={dog.resourceId}
+              id={dog.resourceId}
+              name={dog.name}
+              age={dog.age}
+              size={dog.size}
+              vaccinated={dog.vaccinated}
+              about={dog.about}
+              photo={dog.photo}
+              breed={dog.breed}
+              ownerLink={dog._links.person.href}
+              preferredPlayBuddy={dog.preferredPlayBuddy}
+              addPlayDateCallback={this.props.addPlayDateCallback}
+              showEditDelete={true}
+              editDogCallback={this.props.editDogCallback}
+              removeDogCallback={this.props.removeDogCallback}
+            />
+          );
+        });
+        // console.log(dogComponents);
+
+        this.setState({
+          dogs: dogComponents
+        });
+      })
+      .catch(error => {
+        this.changeMessage(error.message);
+        console.log(error.message);
+      });
+  }
+
   //TODO //TODO //TODO
   updateUser = updatedPerson => {
     console.log("in update user in dog buddy");
@@ -207,12 +250,6 @@ class DogBuddy extends Component {
       });
   };
 
-  // TODO - on hold, can't test until we have a way
-  // to determine who the receiver/requestor is
-  // reçiever = dropdown list on form?
-  // requestor = person currently logged in (find by uid/ store in state )
-  // do post to playdates/manually reload the playdates
-  // to update the requestor/receiver playdates
   addPlayDate = (newPlayDate, recieverId) => {
     console.log("in add playdate in dogbuddy");
     newPlayDate.requestor = `/persons/${
