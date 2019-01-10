@@ -6,13 +6,13 @@ class EditUserForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      uid: this.props.uid,
-      firstName: this.props.firstName,
-      lastName: this.props.lastName,
-      city: this.props.city,
-      state: this.props.state,
-      zipCode: this.props.zipCode,
-      about: this.props.about,
+      uid: this.props.person.uid,
+      firstName: this.props.person.firstName,
+      lastName: this.props.person.lastName,
+      city: this.props.person.city,
+      state: this.props.person.state,
+      zipCode: this.props.person.zipCode,
+      about: this.props.person.about,
       errorMessages: []
     };
   }
@@ -112,7 +112,7 @@ class EditUserForm extends Component {
 
           <input
             type="submit"
-            value="Create Profile"
+            value="Update Profile"
             className="btn btn-primary"
           />
         </form>
@@ -121,8 +121,8 @@ class EditUserForm extends Component {
   }
 }
 
-CreateProfile.propTypes = {
+EditUserForm.propTypes = {
   addPersonCallback: PropTypes.func
 };
 
-export default CreateProfile;
+export default EditUserForm;

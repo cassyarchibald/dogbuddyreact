@@ -4,7 +4,7 @@ import "./Dashboard.css";
 import axios from "axios";
 import NewDogForm from "./NewDogForm";
 import Dog from "./Dog";
-import EditUserForm from "/EditUserForm";
+import EditUserForm from "./EditUserForm";
 
 //TODO show requested playdate,
 // received playdates
@@ -51,6 +51,7 @@ class Dashboard extends Component {
           this.setState({
             currentUserObject: response.data._embedded.persons[0]
           });
+          console.log(this.state.currentUserObject);
           // console.log(this.state.currentUserObject);
           // console.log(this.state.currentUserObject.resourceId);
           // load dogs for this person
@@ -144,7 +145,10 @@ class Dashboard extends Component {
             this.state.currentUserObject.firstName}
         </h1>
         {this.state.currentUserObject ? (
-          <EditUserForm editPersonCallback={this.props.editPersonCallback} />
+          <EditUserForm
+            editPersonCallback={this.props.editPersonCallback}
+            person={this.state.currentUserObject}
+          />
         ) : null}
         {this.state.dogs ? this.state.dogs : null}
         <button
