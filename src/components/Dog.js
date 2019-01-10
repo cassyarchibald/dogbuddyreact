@@ -77,12 +77,11 @@ class Dog extends Component {
         <h3 className="text-center" id="dog-name">
           {this.state.name}
         </h3>
-        <h1>{this.props.isLoggedIn}</h1>
         <p>Age:{this.state.age}</p>
-        <p>size:{this.state.size}</p>
-        <p>breed:{this.state.breed}</p>
-        <p>vaccinated:{this.state.vaccinated}</p>
-        <p>about:{this.state.about}</p>
+        <p>Size:{this.state.size}</p>
+        <p>Breed:{this.state.breed}</p>
+        <p>Vaccinated:{this.state.vaccinated}</p>
+        <p>About:{this.state.about}</p>
         <p>Preferred Play Buddy:{this.state.preferredPlayBuddy}</p>
         {this.state.isLoggedIn ? (
           <button

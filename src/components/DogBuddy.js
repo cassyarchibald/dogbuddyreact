@@ -153,28 +153,23 @@ class DogBuddy extends Component {
   };
 
   //TODO //TODO //TODO
-  updateUser = newPerson => {
+  updateUser = updatedPerson => {
     // do axios patch request or
     // would it be a put?
-    console.log("update user method in dogbuddy");
-    newPerson.uid = this.state.uid;
+    updatedPerson.uid = this.state.uid;
     axios
       .patch(
         `http://localhost:8080/persons/${
           this.state.currentUserObject.resourceId
         }`,
-        newPerson
+        updatedPerson
       )
       .then(response => {
-        console.log(response);
-        console.log("Added person");
         let updatedData = this.state.persons;
-        updatedData.push(newPerson);
+        updatedData.push(updatedPerson);
         this.setState({ persons: updatedData });
-        this.loadUsers();
       })
       .catch(error => {
-        console.log("did not add person");
         console.log(error.message);
         this.setState({ alertMessage: error.message });
       });

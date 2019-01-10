@@ -29,7 +29,7 @@ class EditUserForm extends Component {
   onFormSubmit = event => {
     event.preventDefault();
 
-    const newPerson = {
+    const updatedPerson = {
       uid: this.state.uid,
       firstName: this.state.firstName,
       lastName: this.state.lastName,
@@ -40,7 +40,7 @@ class EditUserForm extends Component {
     };
 
     // Need to add the user to the parent collection/do post request
-    this.props.editPersonCallback(newPerson);
+    this.props.editPersonCallback(updatedPerson);
     this.setState({ errorMessages: [] });
   };
 
@@ -54,7 +54,7 @@ class EditUserForm extends Component {
         <section className="errors">
           <ul>{errorMessages}</ul>
         </section>
-        <form className="new-user-form" onSubmit={this.props.editUserCallback}>
+        <form className="edit-user-form" onSubmit={this.props.editUserCallback}>
           <div className="form-group">
             <label htmlFor="firstName">First Name</label>
             <input

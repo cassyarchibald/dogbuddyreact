@@ -23,6 +23,7 @@ class Dashboard extends Component {
       receivedPlaydates: null,
       currentUserObject: null,
       showAddDogForm: false,
+      showEditUserForm: false,
       currentUserObject: null
     };
   }
@@ -137,14 +138,37 @@ class Dashboard extends Component {
   // if so, render a form with their details filled in
   // let them add/edit details that Google doesn't give us
   render() {
+    console.log(this.state.currentUserObject);
     return (
-      <div>
-        <h1>
-          Welcome to your dashboard
-          {this.state.currentUserObject &&
-            this.state.currentUserObject.firstName}
-        </h1>
+      <div id="dashboard-container">
+        <h1>Welcome</h1>
         {this.state.currentUserObject ? (
+          <section id="user-information">
+            <h2>
+              {this.state.currentUserObject.firstName}{" "}
+              {this.state.currentUserObject.lastName}
+            </h2>
+            <p>{this.state.currentUserObject.city}</p>
+            <p>{this.state.currentUserObject.state}</p>
+
+            <p>{this.state.currentUserObject.zipCode}</p>
+
+            <p>{this.state.currentUserObject.about}</p>
+            <p>{this.state.currentUserObject.photo}</p>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                this.setState({
+                  showEditUserForm: !this.state.showEditUserForm
+                });
+              }}
+            >
+              Edit Profile
+            </button>
+          </section>
+        ) : null}
+
+        {this.state.currentUserObject && this.state.showEditUserForm ? (
           <EditUserForm
             editPersonCallback={this.props.editPersonCallback}
             person={this.state.currentUserObject}

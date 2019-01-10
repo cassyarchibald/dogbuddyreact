@@ -1,0 +1,26 @@
+#user-information {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  text-align: left;
+  margin: 2rem;
+  justify-content: center;
+}
+
+#user-information h2 {
+  text-align: center;
+}
+
+#dashboard-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  width: 30rem;
+  margin: 4rem;
+}
+
+img {
+  margin-bottom: 2rem;
+}

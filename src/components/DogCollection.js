@@ -4,7 +4,6 @@ import Dog from "./Dog";
 import "./DogCollection.css";
 
 const DogCollection = props => {
-  console.log(props);
   let dog = props.dogComponentsCollection;
   if (props.dogComponentsCollection.length > 0) {
     return (
