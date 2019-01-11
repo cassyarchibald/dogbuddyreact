@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 // TODO Would be nice if the playdate form would
 // automatically add the requestor (current logged in user)
-// and the receiver (owner of the dog)
+// and the reciever (owner of the dog)
 // might have to wait for dashboard/login logic
 
 class NewPlayDateForm extends Component {
@@ -17,11 +17,13 @@ class NewPlayDateForm extends Component {
       state: "",
       zipCode: "",
       status: "",
+      location: "",
+      details: "",
       requestor: "",
-      receiver: this.props.receiver,
+      reciever: this.props.reciever,
       errorMessages: []
     };
-    console.log(this.props.receiver.props.id);
+    console.log(this.props.reciever.props.id);
   }
   onInputChange = event => {
     const field = event.target.name;
@@ -41,7 +43,9 @@ class NewPlayDateForm extends Component {
       zipCode: "",
       status: "",
       requestor: "",
-      receiver: ""
+      reciever: "",
+      location: "",
+      details: ""
     });
   };
 
@@ -56,7 +60,7 @@ class NewPlayDateForm extends Component {
       zipCode,
       location,
       details,
-      receiever
+      reciever
     } = this.state;
 
     if (
@@ -76,15 +80,15 @@ class NewPlayDateForm extends Component {
       zipCode: this.state.zipCode,
       location: this.state.location,
       details: this.state.details,
-      receiever: this.props.receiver
+      reciever: this.props.reciever
     };
     console.log("submitting form");
     console.log(newPlayDate);
-    //console.log(this.props.receiver.id);
+    //console.log(this.props.reciever.id);
     //console.log(this.state);
-    //newPlayDate.receiver = this.props.receiver;
-    // Need to add the requestor/receiver, add playdate to parent state/do post request?
-    this.props.addPlayDateCallback(newPlayDate, this.props.receiver.props.id);
+    //newPlayDate.reciever = this.props.reciever;
+    // Need to add the requestor/reciever, add playdate to parent state/do post request?
+    this.props.addPlayDateCallback(newPlayDate, this.props.reciever.props.id);
     this.resetState();
   };
 
@@ -182,15 +186,15 @@ class NewPlayDateForm extends Component {
       // </div>
 
       // <div>
-      //   <label htmlFor="receiver">Sent Request To</label>
+      //   <label htmlFor="reciever">Sent Request To</label>
       //   <input
       //     value={
-      //       this.state.receiver.props.firstName +
+      //       this.state.reciever.props.firstName +
       //       " " +
-      //       this.state.receiver.props.lastName
+      //       this.state.reciever.props.lastName
       //     }
       //     className="form-control"
-      //     name="receiver"
+      //     name="reciever"
       //     onChange={this.onInputChange}
       //   />
       // </div>

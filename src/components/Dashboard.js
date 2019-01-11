@@ -7,7 +7,7 @@ import Dog from "./Dog";
 import EditUserForm from "./EditUserForm";
 
 //TODO show requested playdate,
-// received playdates
+// recieved playdates
 // a way to edit their info via patch request/form
 
 // load component that allows editing info
@@ -20,12 +20,15 @@ class Dashboard extends Component {
       user: this.props.user,
       dogs: this.props.currentUserDogs,
       requestedPlaydates: this.props.currentUserRequestedPlayDates,
-      recievedPlaydates: this.props.currentUserReceivedPlayDates,
+      recievedPlaydates: this.props.currentUserRecievedPlayDates,
       currentUserObject: this.props.currentUserObject,
       isLoggedIn: this.props.isLoggedIn,
       showAddDogForm: false,
-      showEditUserForm: false
+      showEditUserForm: false,
+      recieverObject: this.props.recieverObject,
+      requestorObject: this.props.requestorObject
     };
+    console.log(this.props);
   }
 
   // findByUid(uid) {
@@ -141,7 +144,7 @@ class Dashboard extends Component {
   // let them add/edit details that Google doesn't give us
   render() {
     console.log("dashboard requested playdates value");
-    console.log(this.props.requestedPlaydates);
+    console.log(this.state.requestedPlaydates);
     //console.log(this.props.recievedPlaydates);
     return (
       <div className="container">
@@ -179,16 +182,19 @@ class Dashboard extends Component {
               person={this.state.currentUserObject}
             />
           ) : null}
+          <h2>Dogs</h2>
           <section className="user-dogs">
             {this.state.dogs ? this.state.dogs : null}
           </section>
           <section className="user-playdates">
+            <h2>Requested Playdates</h2>
             {this.state.requestedPlaydates
               ? this.state.requestedPlaydates
               : null}
           </section>
           <section className="user-playdates">
-            {this.state.receivedPlaydates ? this.state.receivedPlaydates : null}
+            <h2>Recieved Playdates</h2>
+            {this.state.recievedPlaydates ? this.state.recievedPlaydates : null}
           </section>
         </div>
 

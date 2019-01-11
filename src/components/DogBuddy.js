@@ -46,7 +46,7 @@ class DogBuddy extends Component {
       currentUserObject: null,
       currentUserDogs: null,
       currentUserRequestedPlayDates: null,
-      currentUserReceivedPlayDates: null,
+      currentUserRecievedPlayDates: null,
       redirecToCreateProfile: false
     };
   }
@@ -114,7 +114,6 @@ class DogBuddy extends Component {
         console.log("remove dog successful?");
         console.log(response);
         let deleteIndex = -1;
-        console.log(this.state.dogs);
         this.state.dogs.forEach((dog, index) => {
           if (dogId === dog.props.id) {
             deleteIndex = index;
@@ -136,7 +135,7 @@ class DogBuddy extends Component {
         });
 
         // also reload the current user dogs?
-        //this.loadUsersDogs();
+        this.loadUsersDogs();
       })
       .catch(error => {
         console.log("remove dog not successful");
@@ -256,7 +255,7 @@ class DogBuddy extends Component {
                 about={person.about}
                 photo={person.photo}
                 dogLink={person._links.dogs.href}
-                receievedPlayDatesLink={person._links.receivedPlaydates.href}
+                recievedPlayDatesLink={person._links.recievedPlaydates.href}
                 requestedPlayDatesLink={person._links.requestedPlaydates.href}
               />
             );
@@ -284,10 +283,7 @@ class DogBuddy extends Component {
       .then(response => {
         // If successful, update profile created
 
-        if (
-          response.status === 200 &&
-          response.data._embedded.persons.length === 1
-        ) {
+        if (response.status === 200) {
           this.setState({
             profileCreated: true,
             currentUserObject: response.data._embedded.persons[0]
@@ -295,11 +291,11 @@ class DogBuddy extends Component {
 
           // Load the dogs for the current person
           // Load requested playdates for the current person
-          // Load received playdates for the current person
+          // Load recieved playdates for the current person
           // pass them to dashboard
           console.log("calling load user dogs");
           this.loadUsersDogs(this.state.currentUserObject.resourceId);
-          console.log("calling load received playdates");
+          console.log("calling load recieved playdates");
           this.loadUsersRecievedPlayDates(
             this.state.currentUserObject.resourceId
           );
@@ -426,9 +422,6 @@ class DogBuddy extends Component {
         console.log(response.data);
         const requestedPlayDatesComponents = response.data._embedded.playDates.map(
           playDate => {
-            // console.log("value of user in loading dogs");
-            // console.log(this.state.user);
-            // console.log(playDate);
             return (
               <PlayDate
                 key={playDate.resourceId}
@@ -443,8 +436,8 @@ class DogBuddy extends Component {
                 details={playDate.details}
                 addPlayDateCallback={this.addPlayDate}
                 editPlayDateCallback={this.updatePlayDate}
-                requestor={this.loadPlayDateRequestor(playDate)}
-                reciever={this.loadPlayDateReciever(playDate)}
+                loadPlayDateRequestorCallback={this.loadPlayDateRequestor}
+                loadPlayDateRecieverCallback={this.loadPlayDateReciever}
               />
             );
           }
@@ -463,16 +456,14 @@ class DogBuddy extends Component {
   }
 
   loadUsersRecievedPlayDates(personId) {
+    console.log("loading recieved playdates");
     axios
-      .get(`http://localhost:8080/persons/${personId}/receivedPlaydates`)
+      .get(`http://localhost:8080/persons/${personId}/recievedPlaydates`)
       .then(response => {
-        // console.log("loading dogs from resposne");
-        // console.log(response.data);
         const recievedPlayDatesComponents = response.data._embedded.playDates.map(
           playDate => {
-            // console.log("value of user in loading dogs");
-            // console.log(this.state.user);
-            // console.log(this.props);
+            console.log(playDate);
+            console.log(this.loadPlayDateReciever(playDate));
             return (
               <PlayDate
                 key={playDate.resourceId}
@@ -487,8 +478,8 @@ class DogBuddy extends Component {
                 details={playDate.details}
                 addPlayDateCallback={this.addPlayDate}
                 editPlayDateCallback={this.updatePlayDate}
-                requestor={this.loadPlayDateRequestor(playDate)}
-                reciever={this.loadPlayDateReciever(playDate)}
+                loadPlayDateRequestorCallback={this.loadPlayDateRequestor}
+                loadPlayDateRecieverCallback={this.loadPlayDateReciever}
               />
             );
           }
@@ -542,10 +533,9 @@ class DogBuddy extends Component {
     newPlayDate.reciever = `/persons/${recieverId}`;
     newPlayDate.status = "Pending";
 
-    // why is the receiver an
-    console.log(newPlayDate);
     console.log(newPlayDate.requestor);
     console.log(newPlayDate.reciever);
+    console.log(newPlayDate);
 
     axios
       .post("http://localhost:8080/playDates", newPlayDate)
@@ -590,7 +580,7 @@ class DogBuddy extends Component {
     // splice that index out
     // update the state to equal the new value
     // do delete axios request for playdate
-    // reload all playdates to update requestor/receiver sides
+    // reload all playdates to update requestor/reciever sides
     axios
       .delete(`http://localhost:8080/playDates/${playDateId}`)
       .then(response => {
@@ -635,8 +625,8 @@ class DogBuddy extends Component {
                 status={playDate.status}
                 location={playDate.location}
                 details={playDate.details}
-                requestor={this.loadPlayDateRequestor(playDate)}
-                receiver={this.loadPlayDateReciever(playDate)}
+                loadPlayDateRequestorCallback={this.loadPlayDateRequestor}
+                loadPlayDateRecieverCallback={this.loadPlayDateReciever}
               />
             );
           }
@@ -656,16 +646,15 @@ class DogBuddy extends Component {
     });
   };
 
-  loadPlayDateReciever(playDate) {
-    console.log(playDate);
+  loadPlayDateReciever(recievedPlayDatesLink) {
+    console.log(recievedPlayDatesLink);
     console.log("calling load loadPlayDateReciever");
-    console.log(playDate._links.reciever.href);
+    // console.log(playDate._links.reciever.href);
     axios
-      .get(`${playDate._links.reciever.href}`)
+      .get(recievedPlayDatesLink)
       .then(response => {
         console.log("success in loading reciever?");
         console.log(response.data);
-        //  console.log("value of user in loading dogs");
 
         return (
           <Person
@@ -686,24 +675,23 @@ class DogBuddy extends Component {
           />
         );
         // });
-        //console.log(requestedPlayDatesComponents);
 
         // this.setState({
         //   currentUserRequestedPlayDates: requestedPlayDatesComponents
         // });
       })
       .catch(error => {
-        console.log("fail in loading receiver");
+        console.log("fail in loading reciever");
         this.changeMessage(error.message);
         //console.log(error.message);
       });
   }
 
-  loadPlayDateRequestor(playDate) {
+  loadPlayDateRequestor(requestedPlayDatesLink) {
     console.log("calling load loadPlayDateRequestor");
-    console.log(playDate._links.requestor.href);
+    console.log(requestedPlayDatesLink);
     axios
-      .get(`${playDate._links.requestor.href}`)
+      .get(requestedPlayDatesLink)
       .then(response => {
         console.log("success in loading requestor?");
         console.log(response.data);
@@ -719,7 +707,7 @@ class DogBuddy extends Component {
             about={response.data.about}
             photo={response.data.photo}
             dogLink={response.data._links.dogs.href}
-            recievedPlayDatesLink={response.data._links.receivedPlaydates.href}
+            recievedPlayDatesLink={response.data._links.recievedPlaydates.href}
             requestedPlayDatesLink={
               response.data._links.requestedPlaydates.href
             }
@@ -727,7 +715,7 @@ class DogBuddy extends Component {
         );
       })
       .catch(error => {
-        console.log("fail in loading receiver");
+        console.log("fail in loading reciever");
         this.changeMessage(error.message);
         //console.log(error.message);
       });
@@ -824,8 +812,8 @@ class DogBuddy extends Component {
                   addPlayDateCallback={this.addPlayDate}
                   editPlayDateCallback={this.updatePlayDate}
                   currentUserDogs={this.state.currentUserDogs}
-                  currentUserReceivedPlayDates={
-                    this.state.currentUserReceivedPlayDates
+                  currentUserRecievedPlayDates={
+                    this.state.currentUserRecievedPlayDates
                   }
                   currentUserRequestedPlayDates={
                     this.state.currentUserRequestedPlayDates

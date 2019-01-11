@@ -134,7 +134,7 @@ class Dog extends Component {
         {this.state.showAddPlayDateForm ? (
           <NewPlayDateForm
             addPlayDateCallback={this.props.addPlayDateCallback}
-            receiver={this.state.owner}
+            reciever={this.state.owner}
           />
         ) : null}
       </div>

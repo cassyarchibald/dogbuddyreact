@@ -21,7 +21,7 @@ class Person extends Component {
       dogLink: props.dogLink,
       dogs: [],
       requestedPlayDates: [],
-      receivedPlayDates: [],
+      recievedPlayDates: [],
       errorMessages: [],
       showDogs: false
     };
