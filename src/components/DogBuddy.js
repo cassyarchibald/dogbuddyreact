@@ -278,7 +278,6 @@ class DogBuddy extends Component {
       .get(`http://localhost:8080/persons/search/findByUid?uid=${uid}`)
       .then(response => {
         // If successful, update profile created
-        console.log(response);
 
         if (
           response.status === 200 &&
@@ -363,10 +362,15 @@ class DogBuddy extends Component {
     });
   };
 
-  loadUsersDogs(personId) {
+  loadUsersDogs() {
     console.log("loading user dogs");
+    console.log(this.state.currentUserObject);
     axios
-      .get(`http://localhost:8080/persons/${personId}/dogs`)
+      .get(
+        `http://localhost:8080/persons/${
+          this.state.currentUserObject.resourceId
+        }/dogs`
+      )
       .then(response => {
         // console.log("loading dogs from resposne");
         // console.log(response.data);
