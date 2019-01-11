@@ -143,9 +143,6 @@ class Dashboard extends Component {
   // if so, render a form with their details filled in
   // let them add/edit details that Google doesn't give us
   render() {
-    console.log("dashboard requested playdates value");
-    console.log(this.state.requestedPlaydates);
-    //console.log(this.props.recievedPlaydates);
     return (
       <div className="container">
         <div id="dashboard-container">

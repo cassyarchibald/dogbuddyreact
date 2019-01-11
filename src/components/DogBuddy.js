@@ -92,6 +92,9 @@ class DogBuddy extends Component {
         let updatedData = this.state.dogs;
         updatedData.push(updatedDog);
         this.setState({ dogs: updatedData });
+        console.log(this.state.dogs);
+        this.loadUsersDogs();
+        this.loadDogs();
       })
       .catch(error => {
         console.log("update dog not successful");
@@ -393,7 +396,7 @@ class DogBuddy extends Component {
               preferredPlayBuddy={dog.preferredPlayBuddy}
               addPlayDateCallback={this.props.addPlayDateCallback}
               showEditDelete={true}
-              editDogCallback={this.props.editDogCallback}
+              editDogCallback={this.updateDog}
               removeDogCallback={this.removeDog}
             />
           );
@@ -455,13 +458,15 @@ class DogBuddy extends Component {
 
   loadUsersRecievedPlayDates(personId) {
     console.log("loading recieved playdates");
+    console.log(`http://localhost:8080/persons/${personId}/recievedPlaydates`);
     axios
       .get(`http://localhost:8080/persons/${personId}/recievedPlaydates`)
       .then(response => {
+        console.log("success loading recieved playdates?");
+        console.log(response);
         const recievedPlayDatesComponents = response.data._embedded.playDates.map(
           playDate => {
             console.log(playDate);
-            console.log(this.loadPlayDateReciever(playDate));
             return (
               <PlayDate
                 key={playDate.resourceId}
@@ -485,7 +490,7 @@ class DogBuddy extends Component {
         console.log(recievedPlayDatesComponents);
 
         this.setState({
-          currentUserRequestedPlayDates: recievedPlayDatesComponents
+          currentUserRecievedPlayDates: recievedPlayDatesComponents
         });
       })
       .catch(error => {
