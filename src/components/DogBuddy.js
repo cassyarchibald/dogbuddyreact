@@ -116,13 +116,16 @@ class DogBuddy extends Component {
         let deleteIndex = -1;
         console.log(this.state.dogs);
         this.state.dogs.forEach((dog, index) => {
-          if (dogId === dog.id) {
+          console.log(dogId);
+          console.log(dog.props.id);
+          if (dogId === dog.props.id) {
             deleteIndex = index;
           }
         });
         console.log("deleting dog with index");
         console.log(deleteIndex);
         console.log(this.state.dogs);
+
         this.state.dogs.splice(deleteIndex, 1);
 
         this.setState({
