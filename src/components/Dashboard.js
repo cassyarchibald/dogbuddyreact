@@ -20,7 +20,7 @@ class Dashboard extends Component {
       user: this.props.user,
       dogs: this.props.currentUserDogs,
       requestedPlaydates: this.props.currentUserRequestedPlayDates,
-      receivedPlaydates: this.props.currentUserReceivedPlayDates,
+      recievedPlaydates: this.props.currentUserReceivedPlayDates,
       currentUserObject: this.props.currentUserObject,
       isLoggedIn: this.props.isLoggedIn,
       showAddDogForm: false,
@@ -140,8 +140,11 @@ class Dashboard extends Component {
   // if so, render a form with their details filled in
   // let them add/edit details that Google doesn't give us
   render() {
+    console.log("dashboard requested playdates value");
+    console.log(this.props.requestedPlaydates);
+    //console.log(this.props.recievedPlaydates);
     return (
-      <div>
+      <div className="container">
         <div id="dashboard-container">
           <h1>Welcome</h1>
           {this.state.currentUserObject ? (
@@ -176,7 +179,17 @@ class Dashboard extends Component {
               person={this.state.currentUserObject}
             />
           ) : null}
-          {this.state.dogs ? this.state.dogs : null}
+          <section className="user-dogs">
+            {this.state.dogs ? this.state.dogs : null}
+          </section>
+          <section className="user-playdates">
+            {this.state.requestedPlaydates
+              ? this.state.requestedPlaydates
+              : null}
+          </section>
+          <section className="user-playdates">
+            {this.state.receivedPlaydates ? this.state.receivedPlaydates : null}
+          </section>
         </div>
 
         <button

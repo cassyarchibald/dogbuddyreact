@@ -30,7 +30,7 @@ class Dog extends Component {
       showAddPlayDateForm: false,
       showEditDogForm: false
     };
-    console.log(this.props);
+    //console.log(this.props);
   }
   loadOwner() {
     axios
@@ -55,7 +55,7 @@ class Dog extends Component {
           owner: owner,
           zipCode: response.data.zipCode
         });
-        console.log(owner);
+        //console.log(owner);
       })
       .catch(error => {
         this.changeMessage(error.message);

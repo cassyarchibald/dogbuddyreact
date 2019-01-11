@@ -56,6 +56,7 @@ class DogBuddy extends Component {
     setTimeout(() => this.setState({ alertMessage: "" }), 2500);
   };
 
+  // ***************** DOGS *****************
   // new dog form/post to /persons/${personId}/dogs
   addDog = newDog => {
     console.log("in add dog in dogbuddy");
@@ -69,13 +70,33 @@ class DogBuddy extends Component {
         let updatedData = this.state.dogs;
         updatedData.push(newDog);
         this.setState({ dogs: updatedData });
-        this.loadUsersDogs();
+        this.loadUsersDogs(this.state.currentUserObject.resourceId);
         this.loadUsers();
       })
       .catch(error => {
         console.log("adding dog failure");
         this.setState({ alertMessage: error.message });
         console.log(error.message);
+      });
+  };
+
+  //TODO //TODO //TODO
+  updateDog = (updatedDog, dogId) => {
+    console.log("in update dog in dogbuddy");
+    // do axios patch request or
+    // would it be a put?
+    axios
+      .patch(`http://localhost:8080/dogs/${dogId}`, updatedDog)
+      .then(response => {
+        console.log("update dog successful");
+        let updatedData = this.state.dogs;
+        updatedData.push(updatedDog);
+        this.setState({ dogs: updatedData });
+      })
+      .catch(error => {
+        console.log("update dog not successful");
+        console.log(error.message);
+        this.setState({ alertMessage: error.message });
       });
   };
 
@@ -93,6 +114,7 @@ class DogBuddy extends Component {
         console.log("remove dog successful?");
         console.log(response);
         let deleteIndex = -1;
+        console.log(this.state.dogs);
         this.state.dogs.forEach((dog, index) => {
           if (dogId === dog.id) {
             deleteIndex = index;
@@ -108,6 +130,8 @@ class DogBuddy extends Component {
         });
         console.log("after delete");
         console.log(this.state.dogs);
+        // also reload the current user dogs?
+        this.loadUsersDogs();
       })
       .catch(error => {
         console.log("remove dog not successful");
@@ -116,6 +140,46 @@ class DogBuddy extends Component {
       });
   };
 
+  //load dogs axios get method saved as loadDogs
+  loadDogs() {
+    axios
+      .get("http://localhost:8080/dogs")
+      .then(response => {
+        const dogComponents = response.data._embedded.dogs.map(dog => {
+          // console.log("value of user in loading dogs");
+          // console.log(this.state.user);
+          return (
+            <Dog
+              addPlayDateCallback={this.addPlayDate}
+              editDogCallback={this.updateDog}
+              removeDogCallback={this.removeDog}
+              isLoggedIn={this.state.isLoggedIn}
+              currentUserObject={this.state.currentUserObject}
+              key={dog.resourceId}
+              id={dog.resourceId}
+              name={dog.name}
+              age={dog.age}
+              size={dog.size}
+              vaccinated={dog.vaccinated}
+              about={dog.about}
+              photo={dog.photo}
+              breed={dog.breed}
+              ownerLink={dog._links.person.href}
+              preferredPlayBuddy={dog.preferredPlayBuddy}
+            />
+          );
+        });
+
+        this.setState({
+          dogs: dogComponents
+        });
+      })
+      .catch(error => {
+        this.changeMessage(error.message);
+      });
+  }
+
+  // ***************** Person *****************
   // occures after CreateProfile form is submitted
   // if successful, update persons/profileCreated
   addPerson = newPerson => {
@@ -168,300 +232,6 @@ class DogBuddy extends Component {
       });
   };
 
-  loadUsersDogs(personId) {
-    console.log("loading user dogs");
-    axios
-      .get(`http://localhost:8080/persons/${personId}/dogs`)
-      .then(response => {
-        // console.log("loading dogs from resposne");
-        // console.log(response.data);
-        const dogComponents = response.data._embedded.dogs.map(dog => {
-          // console.log("value of user in loading dogs");
-          // console.log(this.state.user);
-          // console.log(this.props);
-          return (
-            <Dog
-              user={this.state.currentUserObject}
-              key={dog.resourceId}
-              id={dog.resourceId}
-              name={dog.name}
-              age={dog.age}
-              size={dog.size}
-              vaccinated={dog.vaccinated}
-              about={dog.about}
-              photo={dog.photo}
-              breed={dog.breed}
-              ownerLink={dog._links.person.href}
-              preferredPlayBuddy={dog.preferredPlayBuddy}
-              addPlayDateCallback={this.props.addPlayDateCallback}
-              showEditDelete={true}
-              editDogCallback={this.props.editDogCallback}
-              removeDogCallback={this.props.removeDogCallback}
-            />
-          );
-        });
-        // console.log(dogComponents);
-
-        this.setState({
-          currentUserDogs: dogComponents
-        });
-        //console.log(this.state.currentUserDogs);
-      })
-      .catch(error => {
-        this.changeMessage(error.message);
-        console.log(error.message);
-      });
-  }
-
-  loadUsersRequestedPlayDates(personId) {
-    axios
-      .get(`http://localhost:8080/persons/${personId}/requestedPlaydates`)
-      .then(response => {
-        // console.log("loading dogs from resposne");
-        //console.log(response.data);
-        const requestedPlayDatesComponents = response.data._embedded.playDates.map(
-          playDate => {
-            // console.log("value of user in loading dogs");
-            // console.log(this.state.user);
-            // console.log(this.props);
-            return (
-              <PlayDate
-                key={playDate.resourceId}
-                id={playDate.resourceId}
-                startTime={playDate.startTime}
-                endTime={playDate.endTime}
-                city={playDate.city}
-                state={playDate.state}
-                zipCode={playDate.zipCode}
-                status={playDate.status}
-                location={playDate.location}
-                details={playDate.details}
-                addPlayDateCallback={this.addPlayDate}
-                editPlayDateCallback={this.updatePlayDate}
-              />
-            );
-          }
-        );
-        //console.log(requestedPlayDatesComponents);
-
-        this.setState({
-          currentUserRequestedPlayDates: requestedPlayDatesComponents
-        });
-      })
-      .catch(error => {
-        this.changeMessage(error.message);
-        //console.log(error.message);
-      });
-  }
-
-  //TODO //TODO //TODO
-  // http://localhost:8080/persons/15/receivedPlaydates
-  loadUsersRecievedPlayDates(personId) {
-    axios
-      .get(`http://localhost:8080/persons/${personId}/receivedPlaydates`)
-      .then(response => {
-        // console.log("loading dogs from resposne");
-        // console.log(response.data);
-        const recievedPlayDatesComponents = response.data._embedded.playDates.map(
-          playDate => {
-            // console.log("value of user in loading dogs");
-            // console.log(this.state.user);
-            // console.log(this.props);
-            return (
-              <PlayDate
-                key={playDate.resourceId}
-                id={playDate.resourceId}
-                startTime={playDate.startTime}
-                endTime={playDate.endTime}
-                city={playDate.city}
-                state={playDate.state}
-                zipCode={playDate.zipCode}
-                status={playDate.status}
-                location={playDate.location}
-                details={playDate.details}
-                addPlayDateCallback={this.addPlayDate}
-                editPlayDateCallback={this.updatePlayDate}
-              />
-            );
-          }
-        );
-        //console.log(recievedPlayDatesComponents);
-
-        this.setState({
-          currentUserRequestedPlayDates: recievedPlayDatesComponents
-        });
-      })
-      .catch(error => {
-        this.changeMessage(error.message);
-        console.log(error.message);
-      });
-  }
-
-  //TODO //TODO //TODO
-  updateUser = updatedPerson => {
-    console.log("in update user in dog buddy");
-    // do axios patch request or
-    // would it be a put?
-    updatedPerson.uid = this.state.uid;
-    axios
-      .patch(
-        `http://localhost:8080/persons/${
-          this.state.currentUserObject.resourceId
-        }`,
-        updatedPerson
-      )
-      .then(response => {
-        console.log("successful update of person");
-        let updatedData = this.state.persons;
-        updatedData.push(updatedPerson);
-        this.setState({ persons: updatedData });
-      })
-      .catch(error => {
-        console.log("unable to update person");
-        console.log(error.message);
-        this.setState({ alertMessage: error.message });
-      });
-  };
-
-  //TODO //TODO //TODO
-  updateDog = (updatedDog, dogId) => {
-    console.log("in update dog in dogbuddy");
-    // do axios patch request or
-    // would it be a put?
-    axios
-      .patch(`http://localhost:8080/dogs/${dogId}`, updatedDog)
-      .then(response => {
-        console.log("update dog successful");
-        let updatedData = this.state.dogs;
-        updatedData.push(updatedDog);
-        this.setState({ dogs: updatedData });
-      })
-      .catch(error => {
-        console.log("update dog not successful");
-        console.log(error.message);
-        this.setState({ alertMessage: error.message });
-      });
-  };
-
-  updatePlayDate = (updatedPlayDate, playDateId) => {
-    console.log("in update playdate in dogbuddy");
-    // do axios patch request or
-    // would it be a put?
-    axios
-      .patch(`http://localhost:8080/playDates/${playDateId}`, updatedPlayDate)
-      .then(response => {
-        console.log("update playdate successful");
-        let updatedData = this.state.playDates;
-        updatedData.push(updatedPlayDate);
-        this.setState({ playDates: updatedData });
-      })
-      .catch(error => {
-        console.log("update playdate not successful");
-        console.log(error.message);
-        this.setState({ alertMessage: error.message });
-      });
-  };
-
-  addPlayDate = (newPlayDate, recieverId) => {
-    console.log("in add playdate in dogbuddy");
-    newPlayDate.requestor = `/persons/${
-      this.state.currentUserObject.resourceId
-    }`;
-
-    newPlayDate.reciever = `/persons/${recieverId}`;
-    newPlayDate.status = "Pending";
-
-    // why is the receiver an
-    console.log(newPlayDate);
-    console.log(newPlayDate.requestor);
-    console.log(newPlayDate.receiver);
-
-    axios
-      .post("http://localhost:8080/playDates", newPlayDate)
-      .then(response => {
-        console.log("response of addplaydate, successful?");
-        console.log(response);
-        let updatedData = this.state.playDates;
-        updatedData.push(newPlayDate);
-        this.setState({ playDates: updatedData });
-        this.loadPlaydates();
-      })
-      .catch(error => {
-        console.log("error with adding playdate");
-        console.log(error.message);
-        this.setState({ alertMessage: error.message });
-      });
-  };
-
-  removePlayDate = playDateId => {
-    console.log("in remove playdate in dogbuddy");
-    // loop through playDates
-    // if id matches, set delete index to that index
-    // splice that index out
-    // update the state to equal the new value
-    // do delete axios request for playdate
-    // reload all playdates to update requestor/receiver sides
-    axios
-      .delete(`http://localhost:8080/playDates/${playDateId}`)
-      .then(response => {
-        console.log("remove playdate successful?");
-        let deleteIndex = -1;
-        this.state.playDates.forEach((playDate, index) => {
-          if (playDateId === playDate.id) {
-            deleteIndex = index;
-          }
-        });
-
-        this.state.playDates.splice(deleteIndex, 1);
-
-        this.setState({
-          playDates: this.state.playDates
-        });
-      })
-      .catch(error => {
-        console.log("remove playdate not successful");
-        console.log(error.message);
-        this.setState({ alertMessage: error.message });
-      });
-  };
-
-  //load dogs axios get method saved as loadDogs
-  loadDogs() {
-    axios
-      .get("http://localhost:8080/dogs")
-      .then(response => {
-        const dogComponents = response.data._embedded.dogs.map(dog => {
-          // console.log("value of user in loading dogs");
-          // console.log(this.state.user);
-          return (
-            <Dog
-              addPlayDateCallback={this.addPlayDate}
-              editDogCallback={this.updateDog}
-              isLoggedIn={this.state.isLoggedIn}
-              currentUserObject={this.state.currentUserObject}
-              key={dog.resourceId}
-              id={dog.resourceId}
-              name={dog.name}
-              age={dog.age}
-              size={dog.size}
-              vaccinated={dog.vaccinated}
-              about={dog.about}
-              photo={dog.photo}
-              breed={dog.breed}
-              ownerLink={dog._links.person.href}
-              preferredPlayBuddy={dog.preferredPlayBuddy}
-            />
-          );
-        });
-
-        this.setState({
-          dogs: dogComponents
-        });
-      })
-      .catch(error => {
-        this.changeMessage(error.message);
-      });
-  }
   // load users axios get method saved as loadUsers
   loadUsers() {
     axios
@@ -503,10 +273,12 @@ class DogBuddy extends Component {
   // will load current user's dogs/playdates and
   // will pass those to the dashboard
   findByUid(uid) {
+    console.log(uid);
     axios
       .get(`http://localhost:8080/persons/search/findByUid?uid=${uid}`)
       .then(response => {
         // If successful, update profile created
+        console.log(response);
 
         if (
           response.status === 200 &&
@@ -549,72 +321,6 @@ class DogBuddy extends Component {
         console.log(error.message);
       });
   }
-  // load playdates axios get method saved as loadMessages
-  loadPlaydates() {
-    axios
-      .get("http://localhost:8080/playDates")
-      .then(response => {
-        // might need to do response.playDates
-        const PlayDateComponents = response.data._embedded.playDates.map(
-          playDate => {
-            return (
-              <PlayDate
-                key={playDate.resourceId}
-                id={playDate.resourceId}
-                startTime={playDate.startTime}
-                endTime={playDate.endTime}
-                city={playDate.city}
-                state={playDate.state}
-                zipCode={playDate.zipCode}
-                status={playDate.status}
-                location={playDate.location}
-                details={playDate.details}
-              />
-            );
-          }
-        );
-        this.setState({
-          playDates: PlayDateComponents
-        });
-      })
-      .catch(error => {
-        this.changeMessage(error.message);
-      });
-  }
-
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
-
-  // componentDidMount method that loads the users/dogs/playdates
-  componentDidMount() {
-    // API request to load users
-    this.loadUsers();
-    // API request to load dogs
-    this.loadDogs();
-    // API request to load playdates
-    this.loadPlaydates();
-
-    // FIREBASE DATABASE
-
-    // remember people that have logged in
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        this.setState({
-          user: user,
-          uid: user.uid,
-          isLoggedIn: true
-        });
-        //TODO  Search for profile created based on uid
-        // this will update the profileCreated to true
-        // if it's successful
-        this.findByUid(user.uid);
-        this.loadDogs();
-      }
-    });
-  }
 
   login = () => {
     // handles the callback for us
@@ -656,6 +362,394 @@ class DogBuddy extends Component {
       //this.loadDogs();
     });
   };
+
+  loadUsersDogs(personId) {
+    console.log("loading user dogs");
+    axios
+      .get(`http://localhost:8080/persons/${personId}/dogs`)
+      .then(response => {
+        // console.log("loading dogs from resposne");
+        // console.log(response.data);
+        const dogComponents = response.data._embedded.dogs.map(dog => {
+          // console.log("value of user in loading dogs");
+          // console.log(this.state.user);
+          // console.log(this.props);
+          return (
+            <Dog
+              user={this.state.currentUserObject}
+              key={dog.resourceId}
+              id={dog.resourceId}
+              name={dog.name}
+              age={dog.age}
+              size={dog.size}
+              vaccinated={dog.vaccinated}
+              about={dog.about}
+              photo={dog.photo}
+              breed={dog.breed}
+              ownerLink={dog._links.person.href}
+              preferredPlayBuddy={dog.preferredPlayBuddy}
+              addPlayDateCallback={this.props.addPlayDateCallback}
+              showEditDelete={true}
+              editDogCallback={this.props.editDogCallback}
+              removeDogCallback={this.removeDog}
+            />
+          );
+        });
+        // console.log(dogComponents);
+
+        this.setState({
+          currentUserDogs: dogComponents
+        });
+        //console.log(this.state.currentUserDogs);
+      })
+      .catch(error => {
+        this.changeMessage(error.message);
+        console.log(error.message);
+      });
+  }
+
+  loadUsersRequestedPlayDates(personId) {
+    console.log("loading users requested playdates");
+    axios
+      .get(`http://localhost:8080/persons/${personId}/requestedPlaydates`)
+      .then(response => {
+        console.log("success loading users requested playdates");
+        console.log(response.data);
+        const requestedPlayDatesComponents = response.data._embedded.playDates.map(
+          playDate => {
+            // console.log("value of user in loading dogs");
+            // console.log(this.state.user);
+            // console.log(playDate);
+            return (
+              <PlayDate
+                key={playDate.resourceId}
+                id={playDate.resourceId}
+                startTime={playDate.startTime}
+                endTime={playDate.endTime}
+                city={playDate.city}
+                state={playDate.state}
+                zipCode={playDate.zipCode}
+                status={playDate.status}
+                location={playDate.location}
+                details={playDate.details}
+                addPlayDateCallback={this.addPlayDate}
+                editPlayDateCallback={this.updatePlayDate}
+                requestor={this.loadPlayDateRequestor(playDate)}
+                reciever={this.loadPlayDateReciever(playDate)}
+              />
+            );
+          }
+        );
+        console.log("requestedPlayDatesComponents");
+        console.log(requestedPlayDatesComponents);
+        this.setState({
+          currentUserRequestedPlayDates: requestedPlayDatesComponents
+        });
+        console.log(this.state.currentUserRequestedPlayDates);
+      })
+      .catch(error => {
+        this.changeMessage(error.message);
+        console.log(error.message);
+      });
+  }
+
+  loadUsersRecievedPlayDates(personId) {
+    axios
+      .get(`http://localhost:8080/persons/${personId}/receivedPlaydates`)
+      .then(response => {
+        // console.log("loading dogs from resposne");
+        // console.log(response.data);
+        const recievedPlayDatesComponents = response.data._embedded.playDates.map(
+          playDate => {
+            // console.log("value of user in loading dogs");
+            // console.log(this.state.user);
+            // console.log(this.props);
+            return (
+              <PlayDate
+                key={playDate.resourceId}
+                id={playDate.resourceId}
+                startTime={playDate.startTime}
+                endTime={playDate.endTime}
+                city={playDate.city}
+                state={playDate.state}
+                zipCode={playDate.zipCode}
+                status={playDate.status}
+                location={playDate.location}
+                details={playDate.details}
+                addPlayDateCallback={this.addPlayDate}
+                editPlayDateCallback={this.updatePlayDate}
+                requestor={this.loadPlayDateRequestor(playDate)}
+                reciever={this.loadPlayDateReciever(playDate)}
+              />
+            );
+          }
+        );
+        console.log(recievedPlayDatesComponents);
+
+        this.setState({
+          currentUserRequestedPlayDates: recievedPlayDatesComponents
+        });
+      })
+      .catch(error => {
+        this.changeMessage(error.message);
+        console.log(error.message);
+      });
+  }
+
+  //TODO //TODO //TODO
+  updateUser = updatedPerson => {
+    console.log("in update user in dog buddy");
+    // do axios patch request or
+    // would it be a put?
+    updatedPerson.uid = this.state.uid;
+    axios
+      .patch(
+        `http://localhost:8080/persons/${
+          this.state.currentUserObject.resourceId
+        }`,
+        updatedPerson
+      )
+      .then(response => {
+        console.log("successful update of person");
+        let updatedData = this.state.persons;
+        updatedData.push(updatedPerson);
+        this.setState({ persons: updatedData });
+      })
+      .catch(error => {
+        console.log("unable to update person");
+        console.log(error.message);
+        this.setState({ alertMessage: error.message });
+      });
+  };
+
+  // ***************** PLAYDATES *****************
+
+  addPlayDate = (newPlayDate, recieverId) => {
+    console.log("in add playdate in dogbuddy");
+    newPlayDate.requestor = `/persons/${
+      this.state.currentUserObject.resourceId
+    }`;
+
+    newPlayDate.reciever = `/persons/${recieverId}`;
+    newPlayDate.status = "Pending";
+
+    // why is the receiver an
+    console.log(newPlayDate);
+    console.log(newPlayDate.requestor);
+    console.log(newPlayDate.reciever);
+
+    axios
+      .post("http://localhost:8080/playDates", newPlayDate)
+      .then(response => {
+        console.log("response of addplaydate, successful?");
+        console.log(response);
+        let updatedData = this.state.playDates;
+        updatedData.push(newPlayDate);
+        this.setState({ playDates: updatedData });
+        this.loadPlaydates();
+      })
+      .catch(error => {
+        console.log("error with adding playdate");
+        console.log(error.message);
+        this.setState({ alertMessage: error.message });
+      });
+  };
+
+  updatePlayDate = (updatedPlayDate, playDateId) => {
+    console.log("in update playdate in dogbuddy");
+    // do axios patch request or
+    // would it be a put?
+    axios
+      .patch(`http://localhost:8080/playDates/${playDateId}`, updatedPlayDate)
+      .then(response => {
+        console.log("update playdate successful");
+        let updatedData = this.state.playDates;
+        updatedData.push(updatedPlayDate);
+        this.setState({ playDates: updatedData });
+      })
+      .catch(error => {
+        console.log("update playdate not successful");
+        console.log(error.message);
+        this.setState({ alertMessage: error.message });
+      });
+  };
+
+  removePlayDate = playDateId => {
+    console.log("in remove playdate in dogbuddy");
+    // loop through playDates
+    // if id matches, set delete index to that index
+    // splice that index out
+    // update the state to equal the new value
+    // do delete axios request for playdate
+    // reload all playdates to update requestor/receiver sides
+    axios
+      .delete(`http://localhost:8080/playDates/${playDateId}`)
+      .then(response => {
+        console.log("remove playdate successful?");
+        let deleteIndex = -1;
+        this.state.playDates.forEach((playDate, index) => {
+          if (playDateId === playDate.id) {
+            deleteIndex = index;
+          }
+        });
+
+        this.state.playDates.splice(deleteIndex, 1);
+
+        this.setState({
+          playDates: this.state.playDates
+        });
+      })
+      .catch(error => {
+        console.log("remove playdate not successful");
+        console.log(error.message);
+        this.setState({ alertMessage: error.message });
+      });
+  };
+
+  // load playdates axios get method saved as loadMessages
+  loadPlaydates() {
+    axios
+      .get("http://localhost:8080/playDates")
+      .then(response => {
+        // might need to do response.playDates
+        const PlayDateComponents = response.data._embedded.playDates.map(
+          playDate => {
+            return (
+              <PlayDate
+                key={playDate.resourceId}
+                id={playDate.resourceId}
+                startTime={playDate.startTime}
+                endTime={playDate.endTime}
+                city={playDate.city}
+                state={playDate.state}
+                zipCode={playDate.zipCode}
+                status={playDate.status}
+                location={playDate.location}
+                details={playDate.details}
+                requestor={this.loadPlayDateRequestor(playDate)}
+                receiver={this.loadPlayDateReciever(playDate)}
+              />
+            );
+          }
+        );
+        this.setState({
+          playDates: PlayDateComponents
+        });
+      })
+      .catch(error => {
+        this.changeMessage(error.message);
+      });
+  }
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  loadPlayDateReciever(playDate) {
+    console.log(playDate);
+    console.log("calling load loadPlayDateReciever");
+    console.log(playDate._links.reciever.href);
+    axios
+      .get(`${playDate._links.reciever.href}`)
+      .then(response => {
+        console.log("success in loading reciever?");
+        console.log(response.data);
+        //  console.log("value of user in loading dogs");
+
+        return (
+          <Person
+            key={response.data.resourceId}
+            id={response.data.resourceId}
+            firstName={response.data.firstName}
+            lastName={response.data.lastName}
+            city={response.data.city}
+            state={response.data.state}
+            zipCode={response.data.zipCode}
+            about={response.data.about}
+            photo={response.data.photo}
+            dogLink={response.data._links.dogs.href}
+            recievedPlayDatesLink={response.data._links.recievedPlaydates.href}
+            requestedPlayDatesLink={
+              response.data._links.requestedPlaydates.href
+            }
+          />
+        );
+        // });
+        //console.log(requestedPlayDatesComponents);
+
+        // this.setState({
+        //   currentUserRequestedPlayDates: requestedPlayDatesComponents
+        // });
+      })
+      .catch(error => {
+        console.log("fail in loading receiver");
+        this.changeMessage(error.message);
+        //console.log(error.message);
+      });
+  }
+
+  loadPlayDateRequestor(playDate) {
+    console.log("calling load loadPlayDateRequestor");
+    console.log(playDate._links.requestor.href);
+    axios
+      .get(`${playDate._links.requestor.href}`)
+      .then(response => {
+        console.log("success in loading requestor?");
+        console.log(response.data);
+        return (
+          <Person
+            key={response.data.resourceId}
+            id={response.data.resourceId}
+            firstName={response.data.firstName}
+            lastName={response.data.lastName}
+            city={response.data.city}
+            state={response.data.state}
+            zipCode={response.data.zipCode}
+            about={response.data.about}
+            photo={response.data.photo}
+            dogLink={response.data._links.dogs.href}
+            recievedPlayDatesLink={response.data._links.receivedPlaydates.href}
+            requestedPlayDatesLink={
+              response.data._links.requestedPlaydates.href
+            }
+          />
+        );
+      })
+      .catch(error => {
+        console.log("fail in loading receiver");
+        this.changeMessage(error.message);
+        //console.log(error.message);
+      });
+  }
+
+  // componentDidMount method that loads the users/dogs/playdates
+  componentDidMount() {
+    // API request to load users
+    this.loadUsers();
+    // API request to load dogs
+    this.loadDogs();
+    // API request to load playdates
+    this.loadPlaydates();
+
+    // FIREBASE DATABASE
+    // remember people that have logged in
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        this.setState({
+          user: user,
+          uid: user.uid,
+          isLoggedIn: true
+        });
+        //TODO  Search for profile created based on uid
+        // this will update the profileCreated to true
+        // if it's successful
+        this.findByUid(user.uid);
+        this.loadDogs();
+      }
+    });
+  }
 
   render() {
     const { redirect } = this.state.redirecToCreateProfile;

@@ -24,3 +24,7 @@
 img {
   margin-bottom: 2rem;
 }
+
+.user-dogs {
+  display: flex;
+}

@@ -10,10 +10,17 @@ const PlayDate = props => {
     zipCode,
     status,
     location,
-    details
+    details,
+    reciever,
+    requestor
   } = props;
+
+  console.log(props);
+
   return (
     <div className="card d-inline-block">
+      <p>Reciever: {reciever}</p>
+      <p>Requestor: {requestor}</p>
       <p>Start Time: {startTime}</p>
       <p>End Time: {endTime}</p>
       <p>City: {city}</p>
