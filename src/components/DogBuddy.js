@@ -116,25 +116,27 @@ class DogBuddy extends Component {
         let deleteIndex = -1;
         console.log(this.state.dogs);
         this.state.dogs.forEach((dog, index) => {
-          console.log(dogId);
-          console.log(dog.props.id);
           if (dogId === dog.props.id) {
             deleteIndex = index;
           }
         });
-        console.log("deleting dog with index");
-        console.log(deleteIndex);
-        console.log(this.state.dogs);
+
+        let deleteIndexCurrentUserDogs = -1;
+        this.state.currentUserDogs.forEach((dog, index) => {
+          if (dogId === dog.props.id) {
+            deleteIndexCurrentUserDogs = index;
+          }
+        });
 
         this.state.dogs.splice(deleteIndex, 1);
-
+        this.state.currentUserDogs.splice(deleteIndexCurrentUserDogs, 1);
         this.setState({
-          dogs: this.state.dogs
+          dogs: this.state.dogs,
+          currentUserDogs: this.state.currentUserDogs
         });
-        console.log("after delete");
-        console.log(this.state.dogs);
+
         // also reload the current user dogs?
-        this.loadUsersDogs();
+        //this.loadUsersDogs();
       })
       .catch(error => {
         console.log("remove dog not successful");
@@ -366,8 +368,8 @@ class DogBuddy extends Component {
   };
 
   loadUsersDogs() {
-    console.log("loading user dogs");
-    console.log(this.state.currentUserObject);
+    // console.log("loading user dogs");
+    // console.log(this.state.currentUserObject);
     axios
       .get(
         `http://localhost:8080/persons/${
@@ -375,7 +377,7 @@ class DogBuddy extends Component {
         }/dogs`
       )
       .then(response => {
-        // console.log("loading dogs from resposne");
+        console.log("loading dogs from response");
         // console.log(response.data);
         const dogComponents = response.data._embedded.dogs.map(dog => {
           // console.log("value of user in loading dogs");
