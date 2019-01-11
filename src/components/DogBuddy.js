@@ -150,8 +150,6 @@ class DogBuddy extends Component {
       .get("http://localhost:8080/dogs")
       .then(response => {
         const dogComponents = response.data._embedded.dogs.map(dog => {
-          // console.log("value of user in loading dogs");
-          // console.log(this.state.user);
           return (
             <Dog
               addPlayDateCallback={this.addPlayDate}
@@ -436,8 +434,8 @@ class DogBuddy extends Component {
                 details={playDate.details}
                 addPlayDateCallback={this.addPlayDate}
                 editPlayDateCallback={this.updatePlayDate}
-                loadPlayDateRequestorCallback={this.loadPlayDateRequestor}
-                loadPlayDateRecieverCallback={this.loadPlayDateReciever}
+                loadPlayDateRequestorLink={playDate._links.requestor}
+                loadPlayDateRecieverLink={playDate._links.reciever}
               />
             );
           }
@@ -478,8 +476,8 @@ class DogBuddy extends Component {
                 details={playDate.details}
                 addPlayDateCallback={this.addPlayDate}
                 editPlayDateCallback={this.updatePlayDate}
-                loadPlayDateRequestorCallback={this.loadPlayDateRequestor}
-                loadPlayDateRecieverCallback={this.loadPlayDateReciever}
+                loadPlayDateRequestorLink={playDate._links.requestor}
+                loadPlayDateRecieverLink={playDate._links.reciever}
               />
             );
           }
@@ -625,8 +623,8 @@ class DogBuddy extends Component {
                 status={playDate.status}
                 location={playDate.location}
                 details={playDate.details}
-                loadPlayDateRequestorCallback={this.loadPlayDateRequestor}
-                loadPlayDateRecieverCallback={this.loadPlayDateReciever}
+                loadPlayDateRequestorLink={playDate._links.requestor}
+                loadPlayDateRecieverLink={playDate._links.reciever}
               />
             );
           }
@@ -645,81 +643,6 @@ class DogBuddy extends Component {
       [e.target.name]: e.target.value
     });
   };
-
-  loadPlayDateReciever(recievedPlayDatesLink) {
-    console.log(recievedPlayDatesLink);
-    console.log("calling load loadPlayDateReciever");
-    // console.log(playDate._links.reciever.href);
-    axios
-      .get(recievedPlayDatesLink)
-      .then(response => {
-        console.log("success in loading reciever?");
-        console.log(response.data);
-
-        return (
-          <Person
-            key={response.data.resourceId}
-            id={response.data.resourceId}
-            firstName={response.data.firstName}
-            lastName={response.data.lastName}
-            city={response.data.city}
-            state={response.data.state}
-            zipCode={response.data.zipCode}
-            about={response.data.about}
-            photo={response.data.photo}
-            dogLink={response.data._links.dogs.href}
-            recievedPlayDatesLink={response.data._links.recievedPlaydates.href}
-            requestedPlayDatesLink={
-              response.data._links.requestedPlaydates.href
-            }
-          />
-        );
-        // });
-
-        // this.setState({
-        //   currentUserRequestedPlayDates: requestedPlayDatesComponents
-        // });
-      })
-      .catch(error => {
-        console.log("fail in loading reciever");
-        this.changeMessage(error.message);
-        //console.log(error.message);
-      });
-  }
-
-  loadPlayDateRequestor(requestedPlayDatesLink) {
-    console.log("calling load loadPlayDateRequestor");
-    console.log(requestedPlayDatesLink);
-    axios
-      .get(requestedPlayDatesLink)
-      .then(response => {
-        console.log("success in loading requestor?");
-        console.log(response.data);
-        return (
-          <Person
-            key={response.data.resourceId}
-            id={response.data.resourceId}
-            firstName={response.data.firstName}
-            lastName={response.data.lastName}
-            city={response.data.city}
-            state={response.data.state}
-            zipCode={response.data.zipCode}
-            about={response.data.about}
-            photo={response.data.photo}
-            dogLink={response.data._links.dogs.href}
-            recievedPlayDatesLink={response.data._links.recievedPlaydates.href}
-            requestedPlayDatesLink={
-              response.data._links.requestedPlaydates.href
-            }
-          />
-        );
-      })
-      .catch(error => {
-        console.log("fail in loading reciever");
-        this.changeMessage(error.message);
-        //console.log(error.message);
-      });
-  }
 
   // componentDidMount method that loads the users/dogs/playdates
   componentDidMount() {
