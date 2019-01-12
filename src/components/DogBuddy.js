@@ -531,14 +531,23 @@ class DogBuddy extends Component {
 
   // ***************** PLAYDATES *****************
 
-  addPlayDate = (newPlayDate, recieverId) => {
+  addPlayDate = (
+    newPlayDate,
+    recieverId,
+    requestorDogName,
+    recievingDogName
+  ) => {
     console.log("in add playdate in dogbuddy");
+    console.log(requestorDogName);
+    console.log(recievingDogName);
     newPlayDate.requestor = `/persons/${
       this.state.currentUserObject.resourceId
     }`;
 
     newPlayDate.reciever = `/persons/${recieverId}`;
     newPlayDate.status = "Pending";
+    newPlayDate.requestorDogName = requestorDogName;
+    newPlayDate.recieverDogName = recievingDogName;
 
     console.log(newPlayDate.requestor);
     console.log(newPlayDate.reciever);

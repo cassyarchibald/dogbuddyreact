@@ -135,7 +135,7 @@ class Dog extends Component {
           <NewPlayDateForm
             addPlayDateCallback={this.props.addPlayDateCallback}
             reciever={this.state.owner}
-            recieverDog={this.props.name}
+            recieverDogName={this.props.name}
             requestor={this.state.currentUserObject}
             currentUserObject={this.props.currentUserObject}
           />

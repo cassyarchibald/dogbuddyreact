@@ -25,6 +25,7 @@ class NewPlayDateForm extends Component {
       reciever: this.props.reciever,
       requestor: this.props.requestor,
       requestorDogName: null,
+      recieverDogName: this.props.recieverDogName,
       currentUserObject: this.props.currentUserObject,
       errorMessages: [],
       currentUserDogs: null,
@@ -49,10 +50,6 @@ class NewPlayDateForm extends Component {
     const value = event.target.value;
     this.setState({ requestorDogName: value });
   };
-
-  // load user dogs
-
-  // add receiver's dog
 
   resetState = () => {
     this.setState({
@@ -89,43 +86,18 @@ class NewPlayDateForm extends Component {
             <option value={dog.name} key={dog.id}>
               {dog.name}
             </option>
-            // <Dog
-            //   user={this.state.currentUserObject}
-            //   key={dog.resourceId}
-            //   id={dog.resourceId}
-            //   name={dog.name}
-            //   age={dog.age}
-            //   size={dog.size}
-            //   vaccinated={dog.vaccinated}
-            //   about={dog.about}
-            //   photo={dog.photo}
-            //   breed={dog.breed}
-            //   ownerLink={dog._links.person.href}
-            //   preferredPlayBuddy={dog.preferredPlayBuddy}
-            //   addPlayDateCallback={this.props.addPlayDateCallback}
-            //   showEditDelete={true}
-            //   editDogCallback={this.updateDog}
-            //   removeDogCallback={this.removeDog}
-            // />
           );
         });
-        // console.log(dogComponents);
-        // adding initial value of
+
         this.setState({
           currentUserdogNames: dogNames
         });
-        //console.log(this.state.currentUserdogNames);
       })
       .catch(error => {
         this.changeMessage(error.message);
         console.log(error.message);
       });
   }
-
-  // get names of current user's dogs
-  // loop through dogs in state
-  // save their names into an array?
-  // Or maybe as a dropdown option?
 
   componentDidMount() {
     if (this.props.currentUserObject) {
@@ -149,7 +121,8 @@ class NewPlayDateForm extends Component {
       details,
       reciever,
       requestor,
-      requestorDogName
+      requestorDogName,
+      recieverDogName
     } = this.state;
 
     if (
@@ -158,7 +131,7 @@ class NewPlayDateForm extends Component {
       city === "" ||
       state === "" ||
       zipCode === "" ||
-      requestorDogName === "Select A Dog"
+      requestorDogName === ""
     )
       return;
 
@@ -171,17 +144,21 @@ class NewPlayDateForm extends Component {
       location: this.state.location,
       details: this.state.details,
       reciever: this.props.reciever,
-      recieverDog: this.props.name,
-      requestorDogName: this.state.requestorDogName,
       dogNames: []
     };
     console.log("submitting form");
     console.log(newPlayDate);
+    let recieverId = this.props.reciever.props.id;
     //console.log(this.props.reciever.id);
     //console.log(this.state);
     //newPlayDate.reciever = this.props.reciever;
     // Need to add the requestor/reciever, add playdate to parent state/do post request?
-    this.props.addPlayDateCallback(newPlayDate, this.props.reciever.props.id);
+    this.props.addPlayDateCallback(
+      newPlayDate,
+      recieverId,
+      requestorDogName,
+      recieverDogName
+    );
     this.resetState();
   };
 
@@ -202,7 +179,9 @@ class NewPlayDateForm extends Component {
               name="requestorDogName"
               onChange={this.onRequestorDogChange}
             >
-              <option selected="selected">Select A Dog</option>
+              <option value="" disables="true">
+                Select Dog
+              </option>
               {this.state.currentUserdogNames
                 ? this.state.currentUserdogNames
                 : null}
