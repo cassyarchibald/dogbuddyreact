@@ -16,10 +16,13 @@ class PlayDate extends Component {
       status: this.props.status,
       location: this.props.location,
       details: this.props.details,
+      requestorDogName: null,
+      recieverDogName: null,
       recieverObject: null,
       requestorObject: null,
       alertMessage: []
     };
+    console.log(props);
   }
 
   changeMessage = message => {
@@ -107,11 +110,11 @@ PlayDate.propTypes = {
   endTime: PropTypes.string,
   city: PropTypes.string,
   state: PropTypes.string,
-  zipCode: PropTypes.number,
+  zipCode: PropTypes.string,
   status: PropTypes.string,
   details: PropTypes.string,
   location: PropTypes.string,
-  addPlayDateCallback: PropTypes.addPlayDateCallback
+  addPlayDateCallback: PropTypes.func
   // requestor here
   // responder here
 };

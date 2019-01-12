@@ -24,8 +24,8 @@ class NewPlayDateForm extends Component {
       details: "",
       reciever: this.props.reciever,
       requestor: this.props.requestor,
+      requestorDogName: null,
       currentUserObject: this.props.currentUserObject,
-      requestorDog: null,
       errorMessages: [],
       currentUserDogs: null,
       currentUserdogNames: null
@@ -39,6 +39,15 @@ class NewPlayDateForm extends Component {
     const newState = {};
     newState[field] = value;
     this.setState(newState);
+    console.log(field);
+    console.log(value);
+    console.log(this.state);
+    console.log(newState);
+  };
+
+  onRequestorDogChange = event => {
+    const value = event.target.value;
+    this.setState({ requestorDogName: value });
   };
 
   // load user dogs
@@ -77,7 +86,9 @@ class NewPlayDateForm extends Component {
           // console.log(this.state.user);
           // console.log(this.props);
           return (
-            <option value={dog.name}>{dog.name}</option>
+            <option value={dog.name} key={dog.id}>
+              {dog.name}
+            </option>
             // <Dog
             //   user={this.state.currentUserObject}
             //   key={dog.resourceId}
@@ -99,11 +110,11 @@ class NewPlayDateForm extends Component {
           );
         });
         // console.log(dogComponents);
-
+        // adding initial value of
         this.setState({
           currentUserdogNames: dogNames
         });
-        console.log(this.state.currentUserdogNames);
+        //console.log(this.state.currentUserdogNames);
       })
       .catch(error => {
         this.changeMessage(error.message);
@@ -137,7 +148,8 @@ class NewPlayDateForm extends Component {
       location,
       details,
       reciever,
-      requestor
+      requestor,
+      requestorDogName
     } = this.state;
 
     if (
@@ -145,7 +157,8 @@ class NewPlayDateForm extends Component {
       endTime === "" ||
       city === "" ||
       state === "" ||
-      zipCode === ""
+      zipCode === "" ||
+      requestorDogName === "Select A Dog"
     )
       return;
 
@@ -159,7 +172,7 @@ class NewPlayDateForm extends Component {
       details: this.state.details,
       reciever: this.props.reciever,
       recieverDog: this.props.name,
-      requestorDog: this.state.requestorDog,
+      requestorDogName: this.state.requestorDogName,
       dogNames: []
     };
     console.log("submitting form");
@@ -171,8 +184,6 @@ class NewPlayDateForm extends Component {
     this.props.addPlayDateCallback(newPlayDate, this.props.reciever.props.id);
     this.resetState();
   };
-
-  onChange = () => {};
 
   render() {
     const errorMessages = this.state.errorMessages.map(message => {
@@ -187,7 +198,11 @@ class NewPlayDateForm extends Component {
         <form className="form-group" onSubmit={this.onFormSubmit}>
           <p>Playdate request for {this.props.recieverDog} to play with </p>
           <div>
-            <select name="requestorDogName">
+            <select
+              name="requestorDogName"
+              onChange={this.onRequestorDogChange}
+            >
+              <option selected="selected">Select A Dog</option>
               {this.state.currentUserdogNames
                 ? this.state.currentUserdogNames
                 : null}

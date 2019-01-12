@@ -804,7 +804,7 @@ DogBuddy.propTypes = {
   endTime: PropTypes.string,
   city: PropTypes.string,
   state: PropTypes.string,
-  zipCode: PropTypes.number,
+  zipCode: PropTypes.string,
   status: PropTypes.string,
   // Person
   firstName: PropTypes.string,
