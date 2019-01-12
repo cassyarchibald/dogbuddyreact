@@ -441,6 +441,8 @@ class DogBuddy extends Component {
                 editPlayDateCallback={this.updatePlayDate}
                 loadPlayDateRequestorLink={playDate._links.requestor}
                 loadPlayDateRecieverLink={playDate._links.reciever}
+                requestorDogName={playDate.requestorDogName}
+                recievingDogName={playDate.recievingDogName}
               />
             );
           }
@@ -485,6 +487,8 @@ class DogBuddy extends Component {
                 editPlayDateCallback={this.updatePlayDate}
                 loadPlayDateRequestorLink={playDate._links.requestor}
                 loadPlayDateRecieverLink={playDate._links.reciever}
+                requestorDogName={playDate.requestorDogName}
+                recievingDogName={playDate.recievingDogName}
                 showStatusChangeButton={true}
               />
             );
@@ -531,26 +535,23 @@ class DogBuddy extends Component {
 
   // ***************** PLAYDATES *****************
 
-  addPlayDate = (
-    newPlayDate,
-    recieverId,
-    requestorDogName,
-    recievingDogName
-  ) => {
+  addPlayDate = (newPlayDate, recieverId) => {
     console.log("in add playdate in dogbuddy");
-    console.log(requestorDogName);
-    console.log(recievingDogName);
+    console.log(newPlayDate);
+    console.log(newPlayDate.requestorDogName);
+    console.log(newPlayDate.recievingDogName);
+
     newPlayDate.requestor = `/persons/${
       this.state.currentUserObject.resourceId
     }`;
 
     newPlayDate.reciever = `/persons/${recieverId}`;
     newPlayDate.status = "Pending";
-    newPlayDate.requestorDogName = requestorDogName;
-    newPlayDate.recieverDogName = recievingDogName;
+    // newPlayDate.requestorDogName = requestorDogName;
+    // newPlayDate.recievingDogName = recievingDogName;
 
-    console.log(newPlayDate.requestor);
-    console.log(newPlayDate.reciever);
+    // console.log(newPlayDate.requestor);
+    // console.log(newPlayDate.reciever);
     console.log(newPlayDate);
 
     axios
@@ -641,6 +642,8 @@ class DogBuddy extends Component {
                 status={playDate.status}
                 location={playDate.location}
                 details={playDate.details}
+                requestorDogName={playDate.requestorDogName}
+                recievingDogName={playDate.recievingDogName}
                 loadPlayDateRequestorLink={playDate._links.requestor}
                 loadPlayDateRecieverLink={playDate._links.reciever}
               />
@@ -707,13 +710,12 @@ class DogBuddy extends Component {
             <Route
               exact
               path="/"
-              render={() =>
-                this.state.isLoggedIn && this.state.profileCreated ? (
-                  <Redirect to="/dashboard" />
-                ) : (
-                  <Redirect to="/login" />
-                )
-              }
+              render={() => (
+                // this.state.isLoggedIn && this.state.profileCreated ? (
+                //   <Redirect to="/dashboard" />
+
+                <Redirect to="/login" />
+              )}
             />
 
             <Route

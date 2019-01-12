@@ -25,7 +25,7 @@ class NewPlayDateForm extends Component {
       reciever: this.props.reciever,
       requestor: this.props.requestor,
       requestorDogName: null,
-      recieverDogName: this.props.recieverDogName,
+      recievingDogName: this.props.recievingDogName,
       currentUserObject: this.props.currentUserObject,
       errorMessages: [],
       currentUserDogs: null,
@@ -33,23 +33,23 @@ class NewPlayDateForm extends Component {
     };
     console.log(this.props.reciever.props.id);
   }
+
   onInputChange = event => {
     const field = event.target.name;
     const value = event.target.value;
 
     const newState = {};
     newState[field] = value;
-    this.setState(newState);
-    console.log(field);
-    console.log(value);
-    console.log(this.state);
-    console.log(newState);
+    this.setState({ newState });
   };
 
-  onRequestorDogChange = event => {
-    const value = event.target.value;
-    this.setState({ requestorDogName: value });
-  };
+  // onRequestorDogChange = event => {
+  //   console.log("updating requestor dog in state");
+  //   const value = event.target.value;
+  //   console.log(value);
+  //   this.setState({ requestorDogName: value });
+  //   console.log(this.state);
+  // };
 
   resetState = () => {
     this.setState({
@@ -62,7 +62,9 @@ class NewPlayDateForm extends Component {
       requestor: "",
       reciever: "",
       location: "",
-      details: ""
+      details: "",
+      requestorDogName: "",
+      recievingDogName: ""
     });
   };
 
@@ -122,7 +124,7 @@ class NewPlayDateForm extends Component {
       reciever,
       requestor,
       requestorDogName,
-      recieverDogName
+      recievingDogName
     } = this.state;
 
     if (
@@ -131,7 +133,8 @@ class NewPlayDateForm extends Component {
       city === "" ||
       state === "" ||
       zipCode === "" ||
-      requestorDogName === ""
+      requestorDogName === "" ||
+      requestorDogName === null
     )
       return;
 
@@ -144,6 +147,8 @@ class NewPlayDateForm extends Component {
       location: this.state.location,
       details: this.state.details,
       reciever: this.props.reciever,
+      requestorDogName: this.state.requestorDogName,
+      recievingDogName: this.state.recievingDogName,
       dogNames: []
     };
     console.log("submitting form");
@@ -155,9 +160,9 @@ class NewPlayDateForm extends Component {
     // Need to add the requestor/reciever, add playdate to parent state/do post request?
     this.props.addPlayDateCallback(
       newPlayDate,
-      recieverId,
-      requestorDogName,
-      recieverDogName
+      recieverId
+      // requestorDogName,
+      // recieverDogName
     );
     this.resetState();
   };
@@ -173,12 +178,9 @@ class NewPlayDateForm extends Component {
           <ul>{errorMessages}</ul>
         </section>
         <form className="form-group" onSubmit={this.onFormSubmit}>
-          <p>Playdate request for {this.props.recieverDog} to play with </p>
+          <p>Playdate request for {this.props.recieverDogName} to play with </p>
           <div>
-            <select
-              name="requestorDogName"
-              onChange={this.onRequestorDogChange}
-            >
+            <select name="requestorDogName" onChange={this.onInputChange}>
               <option value="" disables="true">
                 Select Dog
               </option>
@@ -258,29 +260,6 @@ class NewPlayDateForm extends Component {
           />
         </form>
       </div>
-      // <div>
-      //   <label htmlFor="status">Status</label>
-      //   <input
-      //     value={this.state.status}
-      //     name="status"
-      //     className="form-control"
-      //     onChange={this.onInputChange}
-      //   />
-      // </div>
-
-      // <div>
-      //   <label htmlFor="reciever">Sent Request To</label>
-      //   <input
-      //     value={
-      //       this.state.reciever.props.firstName +
-      //       " " +
-      //       this.state.reciever.props.lastName
-      //     }
-      //     className="form-control"
-      //     name="reciever"
-      //     onChange={this.onInputChange}
-      //   />
-      // </div>
     );
   }
 }

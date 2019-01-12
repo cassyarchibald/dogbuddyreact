@@ -16,8 +16,8 @@ class PlayDate extends Component {
       status: this.props.status,
       location: this.props.location,
       details: this.props.details,
-      requestorDogName: null,
-      recieverDogName: null,
+      requestorDogName: this.props.requestorDogName,
+      recievingDogName: this.props.recievingDogName,
       recieverObject: null,
       requestorObject: null,
       alertMessage: []

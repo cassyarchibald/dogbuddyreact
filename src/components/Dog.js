@@ -30,7 +30,6 @@ class Dog extends Component {
       showAddPlayDateForm: false,
       showEditDogForm: false
     };
-    console.log(this.props);
   }
   loadOwner() {
     axios
@@ -135,7 +134,7 @@ class Dog extends Component {
           <NewPlayDateForm
             addPlayDateCallback={this.props.addPlayDateCallback}
             reciever={this.state.owner}
-            recieverDogName={this.props.name}
+            recievingDogName={this.state.name}
             requestor={this.state.currentUserObject}
             currentUserObject={this.props.currentUserObject}
           />
