@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./NewPlayDateForm.css";
 import PropTypes from "prop-types";
+import { RadioGroup, RadioButton } from "react-radio-buttons";
 
 // TODO Would be nice if the playdate form would
 // automatically add the requestor (current logged in user)
@@ -21,6 +22,7 @@ class NewPlayDateForm extends Component {
       details: "",
       requestor: "",
       reciever: this.props.reciever,
+      requestor: this.props.requestor,
       errorMessages: []
     };
     console.log(this.props.reciever.props.id);
@@ -33,6 +35,10 @@ class NewPlayDateForm extends Component {
     newState[field] = value;
     this.setState(newState);
   };
+
+  // load user dogs
+
+  // add receiver's dog
 
   resetState = () => {
     this.setState({
@@ -60,7 +66,8 @@ class NewPlayDateForm extends Component {
       zipCode,
       location,
       details,
-      reciever
+      reciever,
+      requestor
     } = this.state;
 
     if (
@@ -80,7 +87,9 @@ class NewPlayDateForm extends Component {
       zipCode: this.state.zipCode,
       location: this.state.location,
       details: this.state.details,
-      reciever: this.props.reciever
+      reciever: this.props.reciever,
+      recieverDog: this.props.name,
+      requestorDog: null
     };
     console.log("submitting form");
     console.log(newPlayDate);
@@ -91,6 +100,8 @@ class NewPlayDateForm extends Component {
     this.props.addPlayDateCallback(newPlayDate, this.props.reciever.props.id);
     this.resetState();
   };
+
+  onChange = () => {};
 
   render() {
     const errorMessages = this.state.errorMessages.map(message => {
@@ -103,6 +114,7 @@ class NewPlayDateForm extends Component {
           <ul>{errorMessages}</ul>
         </section>
         <form className="form-group" onSubmit={this.onFormSubmit}>
+          <p>Playdate for {this.props.recieverDog} and </p>
           <div>
             <label htmlFor="startTime">Start Time</label>
             <input

@@ -70,8 +70,8 @@ class DogBuddy extends Component {
         let updatedData = this.state.dogs;
         updatedData.push(newDog);
         this.setState({ dogs: updatedData });
-        this.loadUsersDogs(this.state.currentUserObject.resourceId);
-        this.loadUsers();
+        this.loadPersonsDogs(this.state.currentUserObject.resourceId);
+        this.loadPersons();
       })
       .catch(error => {
         console.log("adding dog failure");
@@ -93,7 +93,7 @@ class DogBuddy extends Component {
         updatedData.push(updatedDog);
         this.setState({ dogs: updatedData });
         console.log(this.state.dogs);
-        this.loadUsersDogs();
+        this.loadPersonsDogs();
         this.loadDogs();
       })
       .catch(error => {
@@ -138,7 +138,7 @@ class DogBuddy extends Component {
         });
 
         // also reload the current user dogs?
-        this.loadUsersDogs();
+        this.loadPersonsDogs();
       })
       .catch(error => {
         console.log("remove dog not successful");
@@ -198,7 +198,7 @@ class DogBuddy extends Component {
         let updatedData = this.state.persons;
         updatedData.push(newPerson);
         this.setState({ persons: updatedData, profileCreated: true });
-        this.loadUsers();
+        this.loadPersons();
       })
       .catch(error => {
         console.log("did not add person");
@@ -237,8 +237,8 @@ class DogBuddy extends Component {
       });
   };
 
-  // load users axios get method saved as loadUsers
-  loadUsers() {
+  // load users axios get method saved as loadPersons
+  loadPersons() {
     axios
       .get("http://localhost:8080/persons")
       .then(response => {
@@ -295,13 +295,13 @@ class DogBuddy extends Component {
           // Load recieved playdates for the current person
           // pass them to dashboard
           console.log("calling load user dogs");
-          this.loadUsersDogs(this.state.currentUserObject.resourceId);
+          this.loadPersonsDogs(this.state.currentUserObject.resourceId);
           console.log("calling load recieved playdates");
-          this.loadUsersRecievedPlayDates(
+          this.loadPersonsRecievedPlayDates(
             this.state.currentUserObject.resourceId
           );
           console.log("calling load requested playdates");
-          this.loadUsersRequestedPlayDates(
+          this.loadPersonsRequestedPlayDates(
             this.state.currentUserObject.resourceId
           );
         } else {
@@ -364,7 +364,7 @@ class DogBuddy extends Component {
     });
   };
 
-  loadUsersDogs() {
+  loadPersonsDogs() {
     // console.log("loading user dogs");
     // console.log(this.state.currentUserObject);
     axios
@@ -414,7 +414,7 @@ class DogBuddy extends Component {
       });
   }
 
-  loadUsersRequestedPlayDates(personId) {
+  loadPersonsRequestedPlayDates(personId) {
     console.log("loading users requested playdates");
     axios
       .get(`http://localhost:8080/persons/${personId}/requestedPlaydates`)
@@ -456,7 +456,7 @@ class DogBuddy extends Component {
       });
   }
 
-  loadUsersRecievedPlayDates(personId) {
+  loadPersonsRecievedPlayDates(personId) {
     console.log("loading recieved playdates");
     console.log(`http://localhost:8080/persons/${personId}/recievedPlaydates`);
     axios
@@ -483,6 +483,7 @@ class DogBuddy extends Component {
                 editPlayDateCallback={this.updatePlayDate}
                 loadPlayDateRequestorLink={playDate._links.requestor}
                 loadPlayDateRecieverLink={playDate._links.reciever}
+                showStatusChangeButton={true}
               />
             );
           }
@@ -500,11 +501,11 @@ class DogBuddy extends Component {
   }
 
   //TODO //TODO //TODO
-  updateUser = updatedPerson => {
+  updatePerson = updatedPerson => {
     console.log("in update user in dog buddy");
+    console.log(updatedPerson);
     // do axios patch request or
     // would it be a put?
-    updatedPerson.uid = this.state.uid;
     axios
       .patch(
         `http://localhost:8080/persons/${
@@ -517,6 +518,7 @@ class DogBuddy extends Component {
         let updatedData = this.state.persons;
         updatedData.push(updatedPerson);
         this.setState({ persons: updatedData });
+        this.loadPersons();
       })
       .catch(error => {
         console.log("unable to update person");
@@ -652,7 +654,7 @@ class DogBuddy extends Component {
   // componentDidMount method that loads the users/dogs/playdates
   componentDidMount() {
     // API request to load users
-    this.loadUsers();
+    this.loadPersons();
     // API request to load dogs
     this.loadDogs();
     // API request to load playdates
@@ -736,7 +738,7 @@ class DogBuddy extends Component {
                   addDogCallback={this.addDog}
                   removeDogCallback={this.removeDog}
                   editDogCallback={this.updateDog}
-                  editPersonCallback={this.updateUser}
+                  editPersonCallback={this.updatePerson}
                   addPlayDateCallback={this.addPlayDate}
                   editPlayDateCallback={this.updatePlayDate}
                   currentUserDogs={this.state.currentUserDogs}

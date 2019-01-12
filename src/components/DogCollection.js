@@ -6,11 +6,7 @@ import "./DogCollection.css";
 const DogCollection = props => {
   let dog = props.dogComponentsCollection;
   if (props.dogComponentsCollection.length > 0) {
-    return (
-      <section>
-        <div className="componentcontainer">{dog}</div>
-      </section>
-    );
+    return <section className="componentcontainer">{dog}</section>;
   } else if (props.dogComponentsCollection.length === 0) {
     return (
       <div>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import "./PlayDate.css";
 import axios from "axios";
+import { RadioGroup, RadioButton } from "react-radio-buttons";
 
 class PlayDate extends Component {
   constructor(props) {
@@ -93,6 +94,9 @@ class PlayDate extends Component {
         <p>Location: {this.state.location}</p>
         <p>Details: {this.state.details}</p>
         <p>Status: {this.state.status}</p>
+        {this.props.showStatusChangeButton ? (
+          <h1>Show Update Status Button</h1>
+        ) : null}
       </div>
     );
   }
