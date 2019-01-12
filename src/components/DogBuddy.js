@@ -296,6 +296,7 @@ class DogBuddy extends Component {
           // pass them to dashboard
           console.log("calling load user dogs");
           this.loadPersonsDogs(this.state.currentUserObject.resourceId);
+          this.loadDogs();
           console.log("calling load recieved playdates");
           this.loadPersonsRecievedPlayDates(
             this.state.currentUserObject.resourceId
@@ -384,6 +385,7 @@ class DogBuddy extends Component {
             <Dog
               user={this.state.currentUserObject}
               key={dog.resourceId}
+              currentUserObject={this.state.currentUserObject}
               id={dog.resourceId}
               name={dog.name}
               age={dog.age}

@@ -30,7 +30,7 @@ class Dog extends Component {
       showAddPlayDateForm: false,
       showEditDogForm: false
     };
-    //console.log(this.props);
+    console.log(this.props);
   }
   loadOwner() {
     axios
@@ -137,6 +137,7 @@ class Dog extends Component {
             reciever={this.state.owner}
             recieverDog={this.props.name}
             requestor={this.state.currentUserObject}
+            currentUserObject={this.props.currentUserObject}
           />
         ) : null}
       </div>

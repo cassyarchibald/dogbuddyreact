@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./NewPlayDateForm.css";
 import PropTypes from "prop-types";
 import { RadioGroup, RadioButton } from "react-radio-buttons";
+import axios from "axios";
+import Dog from "./Dog";
 
 // TODO Would be nice if the playdate form would
 // automatically add the requestor (current logged in user)
@@ -20,10 +22,13 @@ class NewPlayDateForm extends Component {
       status: "",
       location: "",
       details: "",
-      requestor: "",
       reciever: this.props.reciever,
       requestor: this.props.requestor,
-      errorMessages: []
+      currentUserObject: this.props.currentUserObject,
+      requestorDog: null,
+      errorMessages: [],
+      currentUserDogs: null,
+      currentUserdogNames: null
     };
     console.log(this.props.reciever.props.id);
   }
@@ -54,6 +59,71 @@ class NewPlayDateForm extends Component {
       details: ""
     });
   };
+
+  loadPersonsDogs() {
+    // console.log("loading user dogs");
+    // console.log(this.state.currentUserObject);
+    axios
+      .get(
+        `http://localhost:8080/persons/${
+          this.props.currentUserObject.resourceId
+        }/dogs`
+      )
+      .then(response => {
+        console.log("loading dogs from response");
+        // console.log(response.data);
+        const dogNames = response.data._embedded.dogs.map(dog => {
+          // console.log("value of user in loading dogs");
+          // console.log(this.state.user);
+          // console.log(this.props);
+          return (
+            <option value={dog.name}>{dog.name}</option>
+            // <Dog
+            //   user={this.state.currentUserObject}
+            //   key={dog.resourceId}
+            //   id={dog.resourceId}
+            //   name={dog.name}
+            //   age={dog.age}
+            //   size={dog.size}
+            //   vaccinated={dog.vaccinated}
+            //   about={dog.about}
+            //   photo={dog.photo}
+            //   breed={dog.breed}
+            //   ownerLink={dog._links.person.href}
+            //   preferredPlayBuddy={dog.preferredPlayBuddy}
+            //   addPlayDateCallback={this.props.addPlayDateCallback}
+            //   showEditDelete={true}
+            //   editDogCallback={this.updateDog}
+            //   removeDogCallback={this.removeDog}
+            // />
+          );
+        });
+        // console.log(dogComponents);
+
+        this.setState({
+          currentUserdogNames: dogNames
+        });
+        console.log(this.state.currentUserdogNames);
+      })
+      .catch(error => {
+        this.changeMessage(error.message);
+        console.log(error.message);
+      });
+  }
+
+  // get names of current user's dogs
+  // loop through dogs in state
+  // save their names into an array?
+  // Or maybe as a dropdown option?
+
+  componentDidMount() {
+    if (this.props.currentUserObject) {
+      this.loadPersonsDogs();
+    } else {
+      console.log("not current user object in state");
+      console.log(this.state);
+    }
+  }
 
   onFormSubmit = event => {
     event.preventDefault();
@@ -89,7 +159,8 @@ class NewPlayDateForm extends Component {
       details: this.state.details,
       reciever: this.props.reciever,
       recieverDog: this.props.name,
-      requestorDog: null
+      requestorDog: this.state.requestorDog,
+      dogNames: []
     };
     console.log("submitting form");
     console.log(newPlayDate);
@@ -114,8 +185,14 @@ class NewPlayDateForm extends Component {
           <ul>{errorMessages}</ul>
         </section>
         <form className="form-group" onSubmit={this.onFormSubmit}>
-          <p>Playdate for {this.props.recieverDog} and </p>
+          <p>Playdate request for {this.props.recieverDog} to play with </p>
           <div>
+            <select name="requestorDogName">
+              {this.state.currentUserdogNames
+                ? this.state.currentUserdogNames
+                : null}
+            </select>
+            <br />
             <label htmlFor="startTime">Start Time</label>
             <input
               value={this.state.startTime}
