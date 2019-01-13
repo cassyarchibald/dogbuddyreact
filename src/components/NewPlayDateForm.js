@@ -5,10 +5,7 @@ import { RadioGroup, RadioButton } from "react-radio-buttons";
 import axios from "axios";
 import Dog from "./Dog";
 
-// TODO Would be nice if the playdate form would
-// automatically add the requestor (current logged in user)
-// and the reciever (owner of the dog)
-// might have to wait for dashboard/login logic
+let requestorDog = "";
 
 class NewPlayDateForm extends Component {
   constructor(props) {
@@ -24,32 +21,27 @@ class NewPlayDateForm extends Component {
       details: "",
       reciever: this.props.reciever,
       requestor: this.props.requestor,
-      requestorDogName: null,
+      requestorDogName: requestorDog,
       recievingDogName: this.props.recievingDogName,
       currentUserObject: this.props.currentUserObject,
       errorMessages: [],
       currentUserDogs: null,
       currentUserdogNames: null
     };
-    console.log(this.props.reciever.props.id);
   }
 
   onInputChange = event => {
     const field = event.target.name;
     const value = event.target.value;
-
     const newState = {};
     newState[field] = value;
-    this.setState({ newState });
+    this.setState(newState);
   };
 
-  // onRequestorDogChange = event => {
-  //   console.log("updating requestor dog in state");
-  //   const value = event.target.value;
-  //   console.log(value);
-  //   this.setState({ requestorDogName: value });
-  //   console.log(this.state);
-  // };
+  onRequestorDogChange = event => {
+    const value = event.target.value;
+    requestorDog = event.target.value;
+  };
 
   resetState = () => {
     this.setState({
@@ -69,8 +61,6 @@ class NewPlayDateForm extends Component {
   };
 
   loadPersonsDogs() {
-    // console.log("loading user dogs");
-    // console.log(this.state.currentUserObject);
     axios
       .get(
         `http://localhost:8080/persons/${
@@ -79,11 +69,7 @@ class NewPlayDateForm extends Component {
       )
       .then(response => {
         console.log("loading dogs from response");
-        // console.log(response.data);
         const dogNames = response.data._embedded.dogs.map(dog => {
-          // console.log("value of user in loading dogs");
-          // console.log(this.state.user);
-          // console.log(this.props);
           return (
             <option value={dog.name} key={dog.id}>
               {dog.name}
@@ -105,7 +91,7 @@ class NewPlayDateForm extends Component {
     if (this.props.currentUserObject) {
       this.loadPersonsDogs();
     } else {
-      console.log("not current user object in state");
+      console.log("no current user object in state");
       console.log(this.state);
     }
   }
@@ -133,10 +119,13 @@ class NewPlayDateForm extends Component {
       city === "" ||
       state === "" ||
       zipCode === "" ||
-      requestorDogName === "" ||
-      requestorDogName === null
-    )
+      requestorDog === "" ||
+      requestorDog === "Select A Dog"
+    ) {
+      this.setState({ errorMessages: "field is blank or invalid" });
+      console.log("something is blank or invalid");
       return;
+    }
 
     const newPlayDate = {
       startTime: this.state.startTime,
@@ -147,40 +136,34 @@ class NewPlayDateForm extends Component {
       location: this.state.location,
       details: this.state.details,
       reciever: this.props.reciever,
-      requestorDogName: this.state.requestorDogName,
+      requestorDogName: requestorDog,
       recievingDogName: this.state.recievingDogName,
       dogNames: []
     };
     console.log("submitting form");
     console.log(newPlayDate);
     let recieverId = this.props.reciever.props.id;
-    //console.log(this.props.reciever.id);
-    //console.log(this.state);
-    //newPlayDate.reciever = this.props.reciever;
-    // Need to add the requestor/reciever, add playdate to parent state/do post request?
+
     this.props.addPlayDateCallback(
       newPlayDate,
-      recieverId
-      // requestorDogName,
+      recieverId,
+      requestorDogName
       // recieverDogName
     );
     this.resetState();
   };
 
   render() {
-    const errorMessages = this.state.errorMessages.map(message => {
-      return <li>{message}</li>;
-    });
-
     return (
       <div>
-        <section className="errors">
-          <ul>{errorMessages}</ul>
-        </section>
+        <section className="errors" />
         <form className="form-group" onSubmit={this.onFormSubmit}>
           <p>Playdate request for {this.props.recieverDogName} to play with </p>
           <div>
-            <select name="requestorDogName" onChange={this.onInputChange}>
+            <select
+              name="requestorDogName"
+              onChange={this.onRequestorDogChange}
+            >
               <option value="" disables="true">
                 Select Dog
               </option>
@@ -191,49 +174,49 @@ class NewPlayDateForm extends Component {
             <br />
             <label htmlFor="startTime">Start Time</label>
             <input
-              value={this.state.startTime}
               className="form-control"
               type="datetime-local"
               name="startTime"
               onChange={this.onInputChange}
+              value={this.state.startTime}
             />
           </div>
           <div>
             <label htmlFor="endTime">End Time</label>
             <input
-              value={this.state.endTime}
               className="form-control"
               type="datetime-local"
               name="endTime"
               onChange={this.onInputChange}
+              value={this.state.endTime}
             />
           </div>
           <div>
             <label htmlFor="city">City</label>
             <input
-              value={this.state.city}
               className="form-control"
               name="city"
               onChange={this.onInputChange}
+              value={this.state.city}
             />
           </div>
           <div>
             <label htmlFor="state">State</label>
             <input
-              value={this.state.state}
               className="form-control"
               name="state"
               onChange={this.onInputChange}
+              value={this.state.state}
             />
           </div>
           <div>
             <label htmlFor="zipCode">Zip Code</label>
             <input
-              value={this.state.zipCode}
               className="form-control"
               name="zipCode"
               type="number"
               onChange={this.onInputChange}
+              value={this.state.zipCode}
             />
           </div>
           <div>
@@ -242,6 +225,7 @@ class NewPlayDateForm extends Component {
               className="form-control"
               name="location"
               onChange={this.onInputChange}
+              value={this.state.location}
             />
           </div>
           <div>
@@ -251,6 +235,7 @@ class NewPlayDateForm extends Component {
               name="details"
               type="textarea"
               onChange={this.onInputChange}
+              value={this.state.details}
             />
           </div>
           <input

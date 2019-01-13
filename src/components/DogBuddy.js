@@ -535,7 +535,7 @@ class DogBuddy extends Component {
 
   // ***************** PLAYDATES *****************
 
-  addPlayDate = (newPlayDate, recieverId) => {
+  addPlayDate = (newPlayDate, recieverId, requestorDogName) => {
     console.log("in add playdate in dogbuddy");
     console.log(newPlayDate);
     console.log(newPlayDate.requestorDogName);
