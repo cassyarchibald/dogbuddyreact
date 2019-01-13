@@ -67,6 +67,16 @@ class PlayDate extends Component {
     // console.log(this.state);
   }
 
+  approvePlayDate = () => {
+    this.setState({ status: "Approved" });
+    this.props.editPlayDateCallback(this.state, this.props.id);
+  };
+
+  denyPlayDate = () => {
+    this.setState({ status: "Denied" });
+    this.props.editPlayDateCallback(this.state, this.props.id);
+  };
+
   render() {
     return (
       <div className="card d-inline-block">
@@ -102,7 +112,14 @@ class PlayDate extends Component {
         <p>Details: {this.state.details}</p>
         <p>Status: {this.state.status}</p>
         {this.props.showStatusChangeButton ? (
-          <h1>Show Update Status Button</h1>
+          <button className="btn btn-primary" onClick={this.approvePlayDate}>
+            Approve
+          </button>
+        ) : null}
+        {this.props.showStatusChangeButton ? (
+          <button className="btn btn-primary" onClick={this.denyPlayDate}>
+            Deny
+          </button>
         ) : null}
       </div>
     );

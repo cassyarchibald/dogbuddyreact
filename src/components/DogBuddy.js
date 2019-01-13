@@ -506,9 +506,8 @@ class DogBuddy extends Component {
       });
   }
 
-  //TODO //TODO //TODO
   updatePerson = updatedPerson => {
-    console.log("in update user in dog buddy");
+    console.log("in update person in dog buddy");
     console.log(updatedPerson);
     // do axios patch request or
     // would it be a put?
@@ -575,6 +574,7 @@ class DogBuddy extends Component {
     console.log("in update playdate in dogbuddy");
     // do axios patch request or
     // would it be a put?
+    // reload all playdates?
     axios
       .patch(`http://localhost:8080/playDates/${playDateId}`, updatedPlayDate)
       .then(response => {
@@ -644,6 +644,7 @@ class DogBuddy extends Component {
                 details={playDate.details}
                 requestorDogName={playDate.requestorDogName}
                 recievingDogName={playDate.recievingDogName}
+                editPlayDateCallback={this.updatePlayDate}
                 loadPlayDateRequestorLink={playDate._links.requestor}
                 loadPlayDateRecieverLink={playDate._links.reciever}
               />
