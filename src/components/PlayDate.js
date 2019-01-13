@@ -58,6 +58,14 @@ class PlayDate extends Component {
       });
   }
 
+  statusColor = () => {
+    if (this.state.status === "Pending") {
+      return "Orange";
+    } else if (this.state.status === "Denied") {
+      return "Red";
+    } else if (this.state.status === "Approved") return "Green";
+  };
+
   componentDidMount() {
     console.log("playdate did mount");
     // load requestor name and reciever name
@@ -110,14 +118,14 @@ class PlayDate extends Component {
         <p>Zip Code: {this.state.zipCode}</p>
         <p>Location: {this.state.location}</p>
         <p>Details: {this.state.details}</p>
-        <p>Status: {this.state.status}</p>
+        <p className={this.statusColor()}>Status: {this.state.status}</p>
         {this.props.showStatusChangeButton ? (
-          <button className="btn btn-primary" onClick={this.approvePlayDate}>
+          <button className="btn btn-success" onClick={this.approvePlayDate}>
             Approve
           </button>
         ) : null}
         {this.props.showStatusChangeButton ? (
-          <button className="btn btn-primary" onClick={this.denyPlayDate}>
+          <button className="btn btn-danger" onClick={this.denyPlayDate}>
             Deny
           </button>
         ) : null}
