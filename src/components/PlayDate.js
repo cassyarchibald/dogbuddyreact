@@ -74,19 +74,23 @@ class PlayDate extends Component {
           {this.state.alertMessage}
         </h4>
         <p>
-          Reciever:
           {this.state.recieverObject
-            ? ` ${this.state.recieverObject.firstName} ${
+            ? ` To: ${this.state.recieverObject.firstName} ${
                 this.state.recieverObject.lastName
               }`
             : null}
+          {this.state.recievingDogName
+            ? ` and ${this.state.recievingDogName}`
+            : null}
         </p>
         <p>
-          Requestor:
           {this.state.requestorObject
-            ? ` ${this.state.requestorObject.firstName} ${
+            ? `From: ${this.state.requestorObject.firstName} ${
                 this.state.requestorObject.lastName
               }`
+            : null}
+          {this.state.requestorDogName
+            ? ` and ${this.state.requestorDogName}`
             : null}
         </p>
         <p>Start Time: {this.state.startTime}</p>
