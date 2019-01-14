@@ -30,6 +30,8 @@ class Dog extends Component {
       showAddPlayDateForm: false,
       showEditDogForm: false
     };
+    console.log(props);
+    console.log(this.state.vaccinated);
   }
   loadOwner() {
     axios

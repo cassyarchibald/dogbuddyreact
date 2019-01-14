@@ -2,11 +2,22 @@ input {
   color: black;
   padding: 1rem;
   margin-right: 2rem;
+  margin-top: 1rem;
   font-family: "Permanent Marker", cursive;
 }
 
+#search-container {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.form-group {
+}
+
+label {
+}
+
 input[type="search"] {
-  width: 25rem;
-  border-radius: 8px;
-  margin-top: 5rem;
 }

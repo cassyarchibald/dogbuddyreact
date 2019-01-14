@@ -5,7 +5,8 @@ class SearchBar extends Component {
     super(props);
 
     this.state = {
-      searchValue: ""
+      zipCode: "",
+      radius: ""
     };
   }
   onSearchChange = event => {
@@ -16,28 +17,34 @@ class SearchBar extends Component {
 
   onSubmit = event => {
     event.preventDefault();
-    this.props.onSearchCallback(this.state.searchValue);
-    console.log(this.state.searchValue);
+    this.props.onSearchCallback(this.state.zipCode, this.state.radius);
+    console.log(this.state);
   };
   render() {
     return (
-      <section className="text-center">
-        <form onSubmit={this.onSubmit}>
+      <form onSubmit={this.onSubmit} className="text-center">
+        <div className="form-group" id="search-container">
+          <label htmlFor="zipCode">Zip Code</label>
           <input
-            type="search"
+            type="text"
             onChange={this.onSearchChange}
-            value={this.state.searchValue}
-            name="search-bar"
+            value={this.state.zipCode}
+            name="zipCode"
             className="search-bar"
-            placeholder="Search"
+            placeholder="zipCode"
           />
+          <label htmlFor="radius">Miles</label>
           <input
-            className="btn btn-info new-movie-form__form-button"
-            type="submit"
-            name="submit"
+            type="text"
+            onChange={this.onSearchChange}
+            value={this.state.radius}
+            name="radius"
+            className="search-bar"
+            placeholder="Radius"
           />
-        </form>
-      </section>
+          <input className="btn btn-info" type="submit" name="submit" />
+        </div>
+      </form>
     );
   }
 }

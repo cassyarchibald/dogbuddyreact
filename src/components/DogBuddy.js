@@ -51,6 +51,8 @@ class DogBuddy extends Component {
     };
   }
 
+  REACT_APP_API_KEY = process.env.REACT_APP_API_KEY;
+
   changeMessage = message => {
     this.setState({ alertMessage: message });
     setTimeout(() => this.setState({ alertMessage: "" }), 2500);
@@ -467,10 +469,10 @@ class DogBuddy extends Component {
       .get(`http://localhost:8080/persons/${personId}/recievedPlaydates`)
       .then(response => {
         console.log("success loading recieved playdates?");
-        console.log(response);
+        //console.log(response);
         const recievedPlayDatesComponents = response.data._embedded.playDates.map(
           playDate => {
-            console.log(playDate);
+            //console.log(playDate);
             return (
               <PlayDate
                 key={playDate.resourceId}

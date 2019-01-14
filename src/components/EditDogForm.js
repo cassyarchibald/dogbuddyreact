@@ -134,7 +134,7 @@ class EditDogForm extends Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="photo">photo</label>
+            <label htmlFor="photo">Photo</label>
             <input
               value={this.state.photo}
               className="form-control"

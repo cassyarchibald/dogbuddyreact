@@ -67,7 +67,6 @@ class PlayDate extends Component {
   };
 
   componentDidMount() {
-    console.log("playdate did mount");
     // load requestor name and reciever name
     this.loadPlayDateRequestor();
     this.loadPlayDateReciever();
