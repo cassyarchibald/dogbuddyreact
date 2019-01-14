@@ -6,8 +6,8 @@ import {
   Link,
   Switch
 } from "react-router-dom";
-import AllRoutes from "./AllRoutes";
-import ProtectedRoute from "./ProtectedRoute";
+// import AllRoutes from "./AllRoutes";
+// import ProtectedRoute from "./ProtectedRoute";
 import PropTypes from "prop-types";
 import "./DogBuddy.css";
 import Login from "./Login";
@@ -16,12 +16,12 @@ import Person from "./Person";
 import PersonCollection from "./PersonCollection";
 import CreateProfile from "./CreateProfile";
 import PlayDate from "./PlayDate";
-import PlayDateCollection from "./PlayDateCollection";
-import NewPlayDateForm from "./NewPlayDateForm";
+// import PlayDateCollection from "./PlayDateCollection";
+// import NewPlayDateForm from "./NewPlayDateForm";
 import Dashboard from "./Dashboard";
 import Dog from "./Dog";
 import DogCollection from "./DogCollection";
-import NewDogForm from "./NewDogForm";
+// import NewDogForm from "./NewDogForm";
 import axios from "axios";
 import Search from "./Search";
 import firebase, { auth, provider } from "../firebase.js";
@@ -448,12 +448,12 @@ class DogBuddy extends Component {
             );
           }
         );
-        console.log("requestedPlayDatesComponents");
-        console.log(requestedPlayDatesComponents);
+        // console.log("requestedPlayDatesComponents");
+        // console.log(requestedPlayDatesComponents);
         this.setState({
           currentUserRequestedPlayDates: requestedPlayDatesComponents
         });
-        console.log(this.state.currentUserRequestedPlayDates);
+        // console.log(this.state.currentUserRequestedPlayDates);
       })
       .catch(error => {
         this.changeMessage(error.message);
@@ -495,7 +495,7 @@ class DogBuddy extends Component {
             );
           }
         );
-        console.log(recievedPlayDatesComponents);
+        // console.log(recievedPlayDatesComponents);
 
         this.setState({
           currentUserRecievedPlayDates: recievedPlayDatesComponents
@@ -552,13 +552,13 @@ class DogBuddy extends Component {
 
     // console.log(newPlayDate.requestor);
     // console.log(newPlayDate.reciever);
-    console.log(newPlayDate);
+    // console.log(newPlayDate);
 
     axios
       .post("http://localhost:8080/playDates", newPlayDate)
       .then(response => {
         console.log("response of addplaydate, successful?");
-        console.log(response);
+        // console.log(response);
         let updatedData = this.state.playDates;
         updatedData.push(newPlayDate);
         this.setState({ playDates: updatedData });

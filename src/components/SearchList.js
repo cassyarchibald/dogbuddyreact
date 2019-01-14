@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import SearchResult from "./SearchResult";
-import Dog from "./Dog";
 
 const SearchList = props => {
   console.log(props);
@@ -16,7 +15,7 @@ const SearchList = props => {
     );
   });
 
-  return <section>{SearchList};</section>;
+  return <section className="container">{SearchList}</section>;
 };
 
 SearchList.propTypes = {
