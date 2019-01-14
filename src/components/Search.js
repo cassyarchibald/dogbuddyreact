@@ -78,6 +78,10 @@ class Search extends Component {
 
   findDogsWithinZipCodes = () => {
     console.log("find dogs within zip code");
+    // clear out dogs from last result search
+    this.setState({
+      resultList: []
+    });
     // loop through zip codes
     // call backend to push dog results
     // into results array in state
