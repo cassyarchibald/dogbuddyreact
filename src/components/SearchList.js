@@ -5,12 +5,15 @@ import SearchResult from "./SearchResult";
 const SearchList = props => {
   console.log(props);
   const SearchList = props.resultList.map(result => {
+    console.log(result);
+    // need to pass owner link down to search result
     return (
       <SearchResult
         {...result}
-        {...props}
         key={`result${result.id}`}
         addPlayDateCallback={props.addPlayDateCallback}
+        isLoggedIn={props.isLoggedIn}
+        currentUserObject={props.currentUserObject}
       />
     );
   });

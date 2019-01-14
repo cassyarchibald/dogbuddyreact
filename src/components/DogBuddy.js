@@ -75,12 +75,11 @@ class DogBuddy extends Component {
       })
       .catch(error => {
         console.log("adding dog failure");
-        this.setState({ alertMessage: error.message });
+        this.changeMessage(error.message);
         console.log(error.message);
       });
   };
 
-  //TODO //TODO //TODO
   updateDog = (updatedDog, dogId) => {
     console.log("in update dog in dogbuddy");
     // do axios patch request or
@@ -99,7 +98,7 @@ class DogBuddy extends Component {
       .catch(error => {
         console.log("update dog not successful");
         console.log(error.message);
-        this.setState({ alertMessage: error.message });
+        this.changeMessage(error.message);
       });
   };
 
@@ -143,7 +142,7 @@ class DogBuddy extends Component {
       .catch(error => {
         console.log("remove dog not successful");
         console.log(error.message);
-        this.setState({ alertMessage: error.message });
+        this.changeMessage(error.message);
       });
   };
 
@@ -204,10 +203,11 @@ class DogBuddy extends Component {
       .catch(error => {
         console.log("did not add person");
         console.log(error.message);
-        this.setState({ alertMessage: error.message });
+        this.changeMessage(error.message);
       });
   };
 
+  // Not being used currently
   removePerson = personId => {
     console.log("in delete person in dog buddy");
     // loop through users
@@ -234,11 +234,10 @@ class DogBuddy extends Component {
         });
       })
       .catch(error => {
-        this.setState({ alertMessage: error.message });
+        this.changeMessage(error.message);
       });
   };
 
-  // load users axios get method saved as loadPersons
   loadPersons() {
     axios
       .get("http://localhost:8080/persons")
@@ -295,14 +294,11 @@ class DogBuddy extends Component {
           // Load requested playdates for the current person
           // Load recieved playdates for the current person
           // pass them to dashboard
-          console.log("calling load user dogs");
           this.loadPersonsDogs(this.state.currentUserObject.resourceId);
           this.loadDogs();
-          console.log("calling load recieved playdates");
           this.loadPersonsRecievedPlayDates(
             this.state.currentUserObject.resourceId
           );
-          console.log("calling load requested playdates");
           this.loadPersonsRequestedPlayDates(
             this.state.currentUserObject.resourceId
           );
@@ -322,6 +318,7 @@ class DogBuddy extends Component {
       .catch(error => {
         console.log("find by uid not successful");
         console.log(error.message);
+        this.changeMessage(error.message);
       });
   }
 
@@ -344,6 +341,7 @@ class DogBuddy extends Component {
       })
       .catch(error => {
         console.log(error.message);
+        this.changeMessage(error.message);
       });
   };
 
@@ -423,7 +421,7 @@ class DogBuddy extends Component {
       .get(`http://localhost:8080/persons/${personId}/requestedPlaydates`)
       .then(response => {
         console.log("success loading users requested playdates");
-        console.log(response.data);
+        // console.log(response.data);
         const requestedPlayDatesComponents = response.data._embedded.playDates.map(
           playDate => {
             return (
@@ -529,7 +527,7 @@ class DogBuddy extends Component {
       .catch(error => {
         console.log("unable to update person");
         console.log(error.message);
-        this.setState({ alertMessage: error.message });
+        this.changeMessage(error.message);
       });
   };
 
@@ -567,7 +565,7 @@ class DogBuddy extends Component {
       .catch(error => {
         console.log("error with adding playdate");
         console.log(error.message);
-        this.setState({ alertMessage: error.message });
+        this.changeMessage(error.message);
       });
   };
 
@@ -587,7 +585,7 @@ class DogBuddy extends Component {
       .catch(error => {
         console.log("update playdate not successful");
         console.log(error.message);
-        this.setState({ alertMessage: error.message });
+        this.changeMessage(error.message);
       });
   };
 
@@ -619,7 +617,7 @@ class DogBuddy extends Component {
       .catch(error => {
         console.log("remove playdate not successful");
         console.log(error.message);
-        this.setState({ alertMessage: error.message });
+        this.changeMessage(error.message);
       });
   };
 
@@ -796,8 +794,6 @@ class DogBuddy extends Component {
                   isLoggedIn={this.state.isLoggedIn}
                   profileCreated={this.state.profileCreated}
                   addPlayDateCallback={this.addPlayDate}
-                  editDogCallback={this.updateDog}
-                  removeDogCallback={this.removeDog}
                   currentUserObject={this.state.currentUserObject}
                 />
               )}

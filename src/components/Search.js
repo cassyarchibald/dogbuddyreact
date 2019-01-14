@@ -86,7 +86,7 @@ class Search extends Component {
     // call backend to push dog results
     // into results array in state
     this.state.zipCodesInRadius.forEach(zipCode => {
-      // call backend
+      // call backend for dogs that have owner's with zipcode
       axios
         .get(
           `http://localhost:8080/dogs/search/findByPerson_ZipCode?zipCode=${zipCode}`
@@ -95,8 +95,6 @@ class Search extends Component {
         .then(response => {
           console.log("response data for a zip code");
           console.log(response.data._embedded.dogs);
-          // push results into existing list
-          //this.state.resultList = this.state.resultList.concat(response.data._embedded.dogs);
           // update the state
           this.setState({
             resultList: this.state.resultList.concat(

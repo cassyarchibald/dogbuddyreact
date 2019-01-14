@@ -31,8 +31,8 @@ class Dog extends Component {
       showAddPlayDateButton: true,
       showEditDogForm: false
     };
-    console.log(props);
-    console.log(this.state.vaccinated);
+    // console.log(props);
+    // console.log(this.state.vaccinated);
   }
   loadOwner() {
     axios
@@ -58,20 +58,15 @@ class Dog extends Component {
           zipCode: response.data.zipCode
         });
 
-        console.log(this.state.owner.props.id);
-        console.log(this.state.currentUserObject.resourceId);
-
         if (
           this.state.owner &&
           this.state.currentUserObject &&
           this.state.owner.props.id === this.state.currentUserObject.resourceId
         ) {
-          console.log("setting to false due to owner matching current user");
           this.setState({ showAddPlayDateButton: false });
         }
 
         if (this.state.isLoggedIn === false) {
-          console.log("not logged in, setting showing button to false");
           this.setState({
             showAddPlayDateButton: false
           });
