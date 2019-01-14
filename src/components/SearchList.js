@@ -1,19 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
 import SearchResult from "./SearchResult";
+import Dog from "./Dog";
 
 const SearchList = props => {
+  console.log(props);
   const SearchList = props.resultList.map(result => {
     return (
       <SearchResult
-        key={result.external_id}
         {...result}
-        //updateMoviesCallback={props.updateMoviesCallback}
+        {...props}
+        key={`result${result.id}`}
+        addPlayDateCallback={props.addPlayDateCallback}
       />
     );
   });
 
-  return <div className="container">{SearchList}</div>;
+  return <section>{SearchList};</section>;
 };
 
 SearchList.propTypes = {

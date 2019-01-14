@@ -790,10 +790,17 @@ class DogBuddy extends Component {
             />
             <Route
               path="/search"
-              render={() => <Search dogs={this.state.dogs} />}
-              isLoggedIn={this.state.isLoggedIn}
-              profileCreated={this.state.profileCreated}
-              dogs={this.state.dogs}
+              render={() => (
+                <Search
+                  dogs={this.state.dogs}
+                  isLoggedIn={this.state.isLoggedIn}
+                  profileCreated={this.state.profileCreated}
+                  addPlayDateCallback={this.addPlayDate}
+                  editDogCallback={this.updateDog}
+                  removeDogCallback={this.removeDog}
+                  currentUserObject={this.state.currentUserObject}
+                />
+              )}
             />
           </Switch>
         </div>

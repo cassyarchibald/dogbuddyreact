@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import "./SearchResult.css";
 import axios from "axios";
+import NewPlayDateForm from "./NewPlayDateForm";
 
 class SearchResult extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      alertMessage: ""
+      alertMessage: "",
+      isLoggedIn: this.props.isLoggedIn
     };
   }
   changeMessage = message => {
@@ -15,51 +17,44 @@ class SearchResult extends Component {
     setTimeout(() => this.setState({ alertMessage: "" }), 2500);
   };
 
-  // updateMoviesCallback = () => {
-  //   this.props.updateMoviesCallback();
-  // };
-
-  // const { title, releaseDate, overview, imageURL } = props
-  onSearchResultSelect = () => {
-    // TODO Load user profile ?
-    // axios
-    //   .post("https://videostore-hac.herokuapp.com/movies", this.props)
-    //   // console.log(this.props)
-    //   .then(response => {
-    //     this.changeMessage(`${this.props.title} was added to the library`);
-    //     this.updateMoviesCallback();
-    //     console.log(response);
-    //     console.log("request posted");
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //     this.changeMessage(error.message);
-    //   });
-  };
   render() {
     console.log(this.props);
     return (
-      <div className="card user-card">
-        <h4 className="alertMessage text-center">{this.state.alertMessage}</h4>
-        <section className="user-card--header">
-          <h4>{this.props.title}</h4>
-          <img src={this.props.imageURL} />
-        </section>
-        <section className="user-card--body">
-          <div>
-            {this.props.overview.length > 128
-              ? `${this.props.overview.substring(0, 128)}...`
-              : this.props.overview}
-          </div>
+      <div className="card d-inline-block">
+        <h3 className="text-center" id="dog-name">
+          {this.props.name}
+        </h3>
+        <p>Age:{this.props.age}</p>
+        <p>Size:{this.props.size}</p>
+        <p>Breed:{this.props.breed}</p>
+        <p>Vaccinated:{this.props.vaccinated}</p>
+        <p>About:{this.props.about}</p>
+        <p>Preferred Play Buddy:{this.props.preferredPlayBuddy}</p>
+
+        {this.props.isLoggedIn ? (
           <button
+            className="btn btn-primary"
             onClick={() => {
-              this.onSearchResultSelect();
+              this.setState({
+                showAddPlayDateForm: !this.state.showAddPlayDateForm
+              });
             }}
-            className="btn btn-info"
           >
-            Select
+            {this.state.showAddPlayDateForm
+              ? "Hide Form"
+              : "Send Play Date Request"}
           </button>
-        </section>
+        ) : null}
+
+        {this.state.showAddPlayDateForm ? (
+          <NewPlayDateForm
+            addPlayDateCallback={this.props.addPlayDateCallback}
+            reciever={this.props.owner}
+            recievingDogName={this.props.name}
+            requestor={this.props.currentUserObject}
+            currentUserObject={this.props.currentUserObject}
+          />
+        ) : null}
       </div>
     );
   }

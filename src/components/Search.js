@@ -35,8 +35,6 @@ class Search extends Component {
       // Do request to get zip codes
       // use helper method to get search results
       // this.listResults(query);
-      console.log("inside on search change");
-      console.log(zipCode);
       this.getZipCodes(zipCode, radius);
     }
   };
@@ -59,7 +57,6 @@ class Search extends Component {
       .get(this.request_url)
 
       .then(response => {
-        console.log(response.data.zip_codes);
         this.setState({
           zipCodesInRadius: response.data.zip_codes
         });
@@ -86,9 +83,6 @@ class Search extends Component {
     // into results array in state
     this.state.zipCodesInRadius.forEach(zipCode => {
       // call backend
-      console.log(
-        `http://localhost:8080/dogs/search/findByPerson_ZipCode?zipCode=${zipCode}`
-      );
       axios
         .get(
           `http://localhost:8080/dogs/search/findByPerson_ZipCode?zipCode=${zipCode}`
@@ -117,14 +111,22 @@ class Search extends Component {
   render() {
     return (
       <section>
-        <SearchBar onSearchCallback={this.onSearchChange} />
+        <h4 className="alertMessage text-center">{this.state.alertMessage}</h4>
 
+        <SearchBar onSearchCallback={this.onSearchChange} />
         <h3>
           {this.state.resultList.length > 0 &&
             `Showing ${this.state.resultList.length} results`}
         </h3>
-        <h4 className="alertMessage text-center">{this.state.alertMessage}</h4>
-        <SearchList resultList={this.state.resultList} />
+        <SearchList
+          resultList={this.state.resultList}
+          addDogCallback={this.props.addDogCallback}
+          editDogCallback={this.props.editDogCallback}
+          currentUserObject={this.props.currentUserObject}
+          removeDogCallback={this.props.removeDogCallback}
+          isLoggedIn={this.props.isLoggedIn}
+          addPlayDateCallback={this.props.addPlayDateCallback}
+        />
       </section>
     );
   }
