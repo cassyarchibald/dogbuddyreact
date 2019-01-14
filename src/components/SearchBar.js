@@ -6,13 +6,18 @@ class SearchBar extends Component {
 
     this.state = {
       zipCode: "",
-      radius: ""
+      radius: null
     };
   }
   onSearchChange = event => {
-    this.setState({
-      searchValue: event.target.value
-    });
+    const field = event.target.name;
+    const value = event.target.value;
+
+    const newState = {};
+    newState[field] = value;
+    this.setState(newState);
+    console.log(newState);
+    console.log(this.state);
   };
 
   onSubmit = event => {
@@ -31,13 +36,15 @@ class SearchBar extends Component {
             value={this.state.zipCode}
             name="zipCode"
             className="search-bar"
-            placeholder="zipCode"
+            placeholder="Zip Code"
           />
           <label htmlFor="radius">Miles</label>
           <input
-            type="text"
+            type="number"
+            min="0"
+            max="100"
             onChange={this.onSearchChange}
-            value={this.state.radius}
+            value={this.state.radius ? this.state.radius : 5}
             name="radius"
             className="search-bar"
             placeholder="Radius"

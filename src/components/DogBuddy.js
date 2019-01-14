@@ -51,8 +51,6 @@ class DogBuddy extends Component {
     };
   }
 
-  REACT_APP_API_KEY = process.env.REACT_APP_API_KEY;
-
   changeMessage = message => {
     this.setState({ alertMessage: message });
     setTimeout(() => this.setState({ alertMessage: "" }), 2500);
@@ -161,6 +159,7 @@ class DogBuddy extends Component {
               editDogCallback={this.updateDog}
               removeDogCallback={this.removeDog}
               isLoggedIn={this.state.isLoggedIn}
+              zipCode={null}
               currentUserObject={this.state.currentUserObject}
               key={dog.resourceId}
               id={dog.resourceId}
@@ -791,9 +790,10 @@ class DogBuddy extends Component {
             />
             <Route
               path="/search"
-              component={Search}
+              render={() => <Search dogs={this.state.dogs} />}
               isLoggedIn={this.state.isLoggedIn}
               profileCreated={this.state.profileCreated}
+              dogs={this.state.dogs}
             />
           </Switch>
         </div>

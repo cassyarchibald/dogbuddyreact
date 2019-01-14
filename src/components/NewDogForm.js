@@ -59,7 +59,6 @@ class NewDogForm extends Component {
     } = this.state;
 
     if (name === "") return;
-    // TODO - Load in owner based on who is logged in
     const newDog = {
       name: this.state.name,
       age: this.state.age,

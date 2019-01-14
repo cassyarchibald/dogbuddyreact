@@ -5,7 +5,8 @@ import axios from "axios";
 import "./SearchBar.css";
 import PropTypes from "prop-types";
 
-const URL = "http://localhost:8080/dogs?query=";
+const BASE_URL = process.env.REACT_APP_HOST_URL;
+const KEY = process.env.REACT_APP_API_KEY;
 //"https://videostore-hac.herokuapp.com/movies?query=";
 
 class Search extends Component {
@@ -13,13 +14,16 @@ class Search extends Component {
     super(props);
     this.state = {
       resultList: [],
+      dogs: this.props.dogs,
+      zipCodesInRadius: [],
       alertMessage: ""
     };
+    console.log(props);
   }
-  onSearchChange = query => {
-    if (query === "") {
+  onSearchChange = (zipCode, radius) => {
+    if (zipCode === "") {
       this.setState({
-        alertMessage: "Please enter a search term"
+        alertMessage: "Please enter a zip code"
       });
     } else {
       this.setState({
@@ -28,33 +32,44 @@ class Search extends Component {
           ""
         )
       });
-      this.listResults(query);
+      // Do request to get zip codes
+      // use helper method to get search results
+      // this.listResults(query);
+      console.log("inside on search change");
+      console.log(zipCode);
+      this.getZipCodes(zipCode, radius);
     }
   };
 
-  listResults = query => {
+  getZipCodes = (zipCode, radius) => {
+    if (radius === null) {
+      radius = 5;
+    }
+    this.request_url =
+      process.env.REACT_APP_HOST_URL +
+      "/" +
+      process.env.REACT_APP_API_KEY +
+      "/radius.json/" +
+      `${zipCode}` +
+      "/" +
+      `${radius}` +
+      "/mile?minimal";
+    console.log(this.request_url);
     axios
-      .get(URL + `${query}`)
+      .get(this.request_url)
 
       .then(response => {
-        const resultList = response.data.map(result => {
-          const newResult = {
-            ...result
-            //TODO Update this...
-            // imageURL: result.image_url,
-            // title: result.title,
-            // releaseDate: result.release_date,
-            // overview: result.overview ? result.overview : ""
-          };
-          return newResult;
-        });
+        console.log(response.data.zip_codes);
         this.setState({
-          resultList
+          zipCodesInRadius: response.data.zip_codes
         });
-        if (this.state.resultList.length < 1) {
+
+        if (response.data.zip_codes < 1) {
           this.setState({
-            alertMessage: "No Results Found"
+            alertMessage: "No Results Found For Entered Zip Code and Radius"
           });
+        } else {
+          this.findDogsWithinZipCodes();
         }
       })
       .catch(error => {
@@ -62,6 +77,41 @@ class Search extends Component {
           alertMessage: error.message
         });
       });
+  };
+
+  findDogsWithinZipCodes = () => {
+    console.log("find dogs within zip code");
+    // loop through zip codes
+    // call backend to push dog results
+    // into results array in state
+    this.state.zipCodesInRadius.forEach(zipCode => {
+      // call backend
+      console.log(
+        `http://localhost:8080/dogs/search/findByPerson_ZipCode?zipCode=${zipCode}`
+      );
+      axios
+        .get(
+          `http://localhost:8080/dogs/search/findByPerson_ZipCode?zipCode=${zipCode}`
+        )
+
+        .then(response => {
+          console.log("response data for a zip code");
+          console.log(response.data._embedded.dogs);
+          // push results into existing list
+          //this.state.resultList = this.state.resultList.concat(response.data._embedded.dogs);
+          // update the state
+          this.setState({
+            resultList: this.state.resultList.concat(
+              response.data._embedded.dogs
+            )
+          });
+        })
+        .catch(error => {
+          this.setState({
+            alertMessage: error.message
+          });
+        });
+    });
   };
 
   render() {
