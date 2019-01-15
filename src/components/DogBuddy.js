@@ -289,7 +289,7 @@ class DogBuddy extends Component {
   // will load current user's dogs/playdates and
   // will pass those to the dashboard
   findByUid(uid) {
-    console.log(uid);
+    //console.log(uid);
     axios
       .get(`http://localhost:8080/persons/search/findByUid?uid=${uid}`)
       .then(response => {
@@ -471,7 +471,7 @@ class DogBuddy extends Component {
 
   loadPersonsRecievedPlayDates(personId) {
     console.log("loading recieved playdates");
-    console.log(`http://localhost:8080/persons/${personId}/recievedPlaydates`);
+    //console.log(`http://localhost:8080/persons/${personId}/recievedPlaydates`);
     axios
       .get(`http://localhost:8080/persons/${personId}/recievedPlaydates`)
       .then(response => {

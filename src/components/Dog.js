@@ -32,8 +32,6 @@ class Dog extends Component {
       showAddPlayDateButton: true,
       showEditDogForm: false
     };
-    console.log(this.props.gender);
-    console.log(this.props.vaccinated);
   }
   loadOwner() {
     axios
