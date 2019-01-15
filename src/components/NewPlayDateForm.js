@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import "./NewPlayDateForm.css";
 import PropTypes from "prop-types";
-import { RadioGroup, RadioButton } from "react-radio-buttons";
 import axios from "axios";
-import Dog from "./Dog";
 
 let requestorDog = "";
 
@@ -39,7 +37,6 @@ class NewPlayDateForm extends Component {
   };
 
   onRequestorDogChange = event => {
-    const value = event.target.value;
     requestorDog = event.target.value;
   };
 
@@ -83,7 +80,6 @@ class NewPlayDateForm extends Component {
       })
       .catch(error => {
         this.changeMessage(error.message);
-        console.log(error.message);
       });
   }
 
@@ -91,8 +87,7 @@ class NewPlayDateForm extends Component {
     if (this.props.currentUserObject) {
       this.loadPersonsDogs();
     } else {
-      console.log("no current user object in state");
-      console.log(this.state);
+      this.changeMessage("There is no user logged in");
     }
   }
 
@@ -123,7 +118,6 @@ class NewPlayDateForm extends Component {
       requestorDog === "Select A Dog"
     ) {
       this.setState({ errorMessages: "field is blank or invalid" });
-      console.log("something is blank or invalid");
       return;
     }
 
@@ -140,16 +134,9 @@ class NewPlayDateForm extends Component {
       recievingDogName: this.state.recievingDogName,
       dogNames: []
     };
-    console.log("submitting form");
-    console.log(newPlayDate);
     let recieverId = this.props.reciever.props.id;
 
-    this.props.addPlayDateCallback(
-      newPlayDate,
-      recieverId,
-      requestorDogName
-      // recieverDogName
-    );
+    this.props.addPlayDateCallback(newPlayDate, recieverId, requestorDogName);
     this.resetState();
   };
 

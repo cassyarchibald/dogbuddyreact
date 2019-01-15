@@ -23,7 +23,6 @@ class PlayDate extends Component {
       requestorObject: null,
       alertMessage: []
     };
-    console.log(props);
   }
 
   changeMessage = message => {
@@ -41,7 +40,6 @@ class PlayDate extends Component {
       })
       .catch(error => {
         this.changeMessage(error.message);
-        console.log(error.message);
       });
   }
 
@@ -55,7 +53,6 @@ class PlayDate extends Component {
       })
       .catch(error => {
         this.changeMessage(error.message);
-        console.log(error.message);
       });
   }
 
@@ -71,8 +68,6 @@ class PlayDate extends Component {
     // load requestor name and reciever name
     this.loadPlayDateRequestor();
     this.loadPlayDateReciever();
-    // console.log(this.props);
-    // console.log(this.state);
   }
 
   approvePlayDate = () => {

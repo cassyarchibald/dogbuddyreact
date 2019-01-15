@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Person from "./Person";
 import "./PersonCollection.css";
 
 const PersonCollection = props => {

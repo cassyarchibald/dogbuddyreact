@@ -1,0 +1,8 @@
+.new-user-form,
+.edit-user-form {
+  margin-bottom: 1rem;
+}
+
+label {
+  font-weight: bold;
+}

@@ -376,8 +376,6 @@ class DogBuddy extends Component {
   };
 
   loadPersonsDogs() {
-    // console.log("loading user dogs");
-    // console.log(this.state.currentUserObject);
     axios
       .get(
         `http://localhost:8080/persons/${
@@ -394,7 +392,7 @@ class DogBuddy extends Component {
           return (
             <Dog
               user={this.state.currentUserObject}
-              key={dog.resourceId}
+              key={`${dog.name}${dog.resourceId}`}
               currentUserObject={this.state.currentUserObject}
               id={dog.resourceId}
               name={dog.name}

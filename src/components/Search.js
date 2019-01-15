@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 
 const BASE_URL = process.env.REACT_APP_HOST_URL;
 const KEY = process.env.REACT_APP_API_KEY;
-//"https://videostore-hac.herokuapp.com/movies?query=";
 
 class Search extends Component {
   constructor(props) {
@@ -18,7 +17,6 @@ class Search extends Component {
       zipCodesInRadius: [],
       alertMessage: ""
     };
-    console.log(props);
   }
   onSearchChange = (zipCode, radius) => {
     if (zipCode === "") {
@@ -52,7 +50,6 @@ class Search extends Component {
       "/" +
       `${radius}` +
       "/mile?minimal";
-    console.log(this.request_url);
     axios
       .get(this.request_url)
 
@@ -77,7 +74,7 @@ class Search extends Component {
   };
 
   findDogsWithinZipCodes = () => {
-    console.log("find dogs within zip code");
+    //console.log("find dogs within zip code");
     // clear out dogs from last result search
     this.setState({
       resultList: []
@@ -93,8 +90,8 @@ class Search extends Component {
         )
 
         .then(response => {
-          console.log("response data for a zip code");
-          console.log(response.data._embedded.dogs);
+          // console.log("response data for a zip code");
+          // console.log(response.data._embedded.dogs);
           // update the state
           this.setState({
             resultList: this.state.resultList.concat(
@@ -135,7 +132,11 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-  // updateMoviesCallback: PropTypes.func
+  addDogCallback: PropTypes.func,
+  editDogCallback: PropTypes.func,
+  removeDogCallback: PropTypes.func,
+  resultList: PropTypes.array,
+  isLoggedIn: PropTypes.bool
 };
 
 export default Search;

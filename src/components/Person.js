@@ -103,7 +103,7 @@ class Person extends Component {
         const dogComponents = response.data._embedded.dogs.map(dog => {
           return (
             <Dog
-              key={dog.resourceId}
+              key={`${dog.name}${dog.resourceId}`}
               id={dog.resourceId}
               name={dog.name}
               age={dog.age}

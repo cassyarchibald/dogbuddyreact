@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Dog from "./Dog";
 import "./DogCollection.css";
 
 const DogCollection = props => {
