@@ -82,7 +82,7 @@ class PlayDate extends Component {
 
   render() {
     return (
-      <div className="col-sm-6">
+      <div className="col-sm-6 playDate">
         <div className="card">
           <h4 duration={5000} className="alertMessage text-center">
             {this.state.alertMessage}
