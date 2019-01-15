@@ -32,6 +32,8 @@ class Dog extends Component {
       showAddPlayDateButton: true,
       showEditDogForm: false
     };
+    console.log(this.props.gender);
+    console.log(this.props.vaccinated);
   }
   loadOwner() {
     axios
@@ -173,7 +175,11 @@ Dog.propTypes = {
   about: PropTypes.string,
   photo: PropTypes.string,
   breed: PropTypes.string,
-  preferredPlayBuddy: PropTypes.string
+  gender: PropTypes.string,
+  preferredPlayBuddy: PropTypes.string,
+  addPlayDateCallback: PropTypes.func,
+  editDogCallback: PropTypes.func,
+  removeDogCallback: PropTypes.func
 };
 
 export default Dog;

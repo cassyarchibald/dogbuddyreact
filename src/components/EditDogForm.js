@@ -14,12 +14,13 @@ class EditDogForm extends Component {
       about: this.props.dog.about,
       photo: this.props.dog.photo,
       breed: this.props.dog.breed,
-      gender: this.props.gender,
+      gender: this.props.dog.gender,
       preferredPlayBuddy: this.props.dog.preferredPlayBuddy,
       owner: this.props.dog.owner,
       errorMessages: []
     };
-    console.log(this.props.gender);
+    console.log(this.props.dog.gender);
+    console.log(this.props.dog.vaccinated);
   }
   onInputChange = event => {
     const field = event.target.name;
@@ -164,7 +165,7 @@ class EditDogForm extends Component {
               type="radio"
               name="vaccinated"
               value="true"
-              checked={this.state.vaccinated === "true"}
+              checked={this.state.vaccinated === true}
               onChange={this.onInputChange}
             />
             True
@@ -172,7 +173,7 @@ class EditDogForm extends Component {
               type="radio"
               name="vaccinated"
               value="false"
-              checked={this.state.vaccinated === "false"}
+              checked={this.state.vaccinated === false}
               onChange={this.onInputChange}
             />
             False
