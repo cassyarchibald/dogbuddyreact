@@ -70,10 +70,11 @@ class NewDogForm extends Component {
       about === "" ||
       breed === "" ||
       preferredPlayBuddy === "" ||
-      gender === "" ||
-      gender !== ("Male" || "Female")
-    )
+      gender === ""
+    ) {
+      console.log("problem");
       return;
+    }
     const newDog = {
       name: this.state.name,
       age: this.state.age,

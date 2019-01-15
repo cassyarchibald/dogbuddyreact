@@ -32,7 +32,6 @@ class Dog extends Component {
       showAddPlayDateButton: true,
       showEditDogForm: false
     };
-    console.log(this.props.gender);
   }
   loadOwner() {
     axios
@@ -41,7 +40,7 @@ class Dog extends Component {
         // Add owner to state
         let owner = (
           <Person
-            key={response.data.resourceId}
+            key={`${response.data.firstName}${response.data.resourceId}`}
             id={response.data.resourceId}
             firstName={response.data.firstName}
             lastName={response.data.lastName}

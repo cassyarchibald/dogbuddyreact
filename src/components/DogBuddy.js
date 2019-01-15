@@ -170,7 +170,7 @@ class DogBuddy extends Component {
               isLoggedIn={this.state.isLoggedIn}
               zipCode={null}
               currentUserObject={this.state.currentUserObject}
-              key={dog.resourceId}
+              key={`${dog.name}${dog.resourceId}`}
               id={dog.resourceId}
               name={dog.name}
               age={dog.age}
@@ -257,7 +257,7 @@ class DogBuddy extends Component {
           person => {
             return (
               <Person
-                key={person.resourceId}
+                key={`${person.firstName}${person.resourceId}`}
                 id={person.resourceId}
                 firstName={person.firstName}
                 lastName={person.lastName}

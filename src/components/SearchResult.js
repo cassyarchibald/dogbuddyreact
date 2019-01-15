@@ -29,7 +29,7 @@ class SearchResult extends Component {
         // Add owner to state
         let owner = (
           <Person
-            key={response.data.resourceId}
+            key={`${response.data.firstName}${response.data.resourceId}`}
             id={response.data.resourceId}
             firstName={response.data.firstName}
             lastName={response.data.lastName}
