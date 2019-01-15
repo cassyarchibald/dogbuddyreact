@@ -55,7 +55,7 @@ class CreateProfile extends Component {
         <section className="errors">
           <ul>{errorMessages}</ul>
         </section>
-        <form className="new-user-form" onSubmit={this.onFormSubmit}>
+        <form className="new-user-form container" onSubmit={this.onFormSubmit}>
           <div className="form-group">
             <label htmlFor="firstName">First Name</label>
             <input
