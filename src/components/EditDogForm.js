@@ -87,7 +87,7 @@ class EditDogForm extends Component {
         <section className="errors">
           <ul>{errorMessages}</ul>
         </section>
-        <form className="edit-dog-form" onSubmit={this.onFormSubmit}>
+        <form className="new-dog-form" onSubmit={this.onFormSubmit}>
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input
@@ -104,25 +104,52 @@ class EditDogForm extends Component {
               className="form-control"
               name="age"
               onChange={this.onInputChange}
+              type="number"
             />
           </div>
           <div className="form-group">
-            <label htmlFor="size">Size</label>
             <input
-              value={this.state.size}
-              className="form-control"
+              type="radio"
               name="size"
+              value="Small"
               onChange={this.onInputChange}
+              checked={this.state.size === "Small"}
             />
+            Small
+            <input
+              type="radio"
+              name="size"
+              value="Medium"
+              onChange={this.onInputChange}
+              checked={this.state.size === "Medium"}
+            />
+            Medium
+            <input
+              type="radio"
+              name="size"
+              value="Large"
+              onChange={this.onInputChange}
+              checked={this.state.size === "Large"}
+            />
+            Large
           </div>
           <div className="form-group">
-            <label htmlFor="vaccinated">Vaccinated</label>
             <input
-              value={this.state.vaccinated}
-              className="form-control"
+              type="radio"
               name="vaccinated"
+              value="true"
               onChange={this.onInputChange}
+              checked={this.state.vaccinated === true}
             />
+            True
+            <input
+              type="radio"
+              name="vaccinated"
+              value="false"
+              onChange={this.onInputChange}
+              checked={this.state.vaccinated === false}
+            />
+            False
           </div>
           <div>
             <label htmlFor="about">About</label>
