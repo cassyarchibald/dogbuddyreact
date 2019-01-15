@@ -6,6 +6,7 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.2.1",
     "firebase": "^5.7.2",
+    "moment": "^2.23.0",
     "proxy": "localhost:8080",
     "react": "^16.7.0",
     "react-date-picker": "^7.1.1",

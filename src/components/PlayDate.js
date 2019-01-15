@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "./PlayDate.css";
 import axios from "axios";
 import { RadioGroup, RadioButton } from "react-radio-buttons";
+import moment from "moment";
 
 class PlayDate extends Component {
   constructor(props) {
@@ -111,8 +112,14 @@ class PlayDate extends Component {
               ? ` and ${this.state.requestorDogName}`
               : null}
           </p>
-          <p>Start Time: {this.state.startTime}</p>
-          <p>End Time: {this.state.endTime}</p>
+          <p>
+            Start Time:
+            {moment(this.state.startTime).format(`dddd, MMMM Do YYYY, h:mm a`)}
+          </p>
+          <p>
+            End Time:
+            {moment(this.state.endTime).format(`dddd, MMMM Do YYYY, h:mm a`)}
+          </p>
           <p>City: {this.state.city}</p>
           <p>State: {this.state.state}</p>
           <p>Zip Code: {this.state.zipCode}</p>
