@@ -122,11 +122,14 @@ class SearchResult extends Component {
   }
 }
 SearchResult.propTypes = {
-  releaseDate: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  overview: PropTypes.string,
-  imageURL: PropTypes.string.isRequired
-  //updateMoviesCallback: PropTypes.func
+  name: PropTypes.string,
+  age: PropTypes.number,
+  size: PropTypes.string,
+  breed: PropTypes.string,
+  vaccinated: PropTypes.bool,
+  about: PropTypes.string,
+  preferredPlayBuddy: PropTypes.string,
+  addPlayDateCallback: PropTypes.func
 };
 
 export default SearchResult;
