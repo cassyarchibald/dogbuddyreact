@@ -141,13 +141,20 @@ class NewDogForm extends Component {
             Large
           </div>
           <div className="form-group">
-            <label htmlFor="vaccinated">Vaccinated</label>
             <input
-              value={this.state.vaccinated}
-              className="form-control"
+              type="radio"
               name="vaccinated"
+              value="true"
               onChange={this.onInputChange}
             />
+            True
+            <input
+              type="radio"
+              name="vaccinated"
+              value="false"
+              onChange={this.onInputChange}
+            />
+            False
           </div>
           <div>
             <label htmlFor="about">About</label>
