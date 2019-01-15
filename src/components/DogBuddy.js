@@ -542,7 +542,8 @@ class DogBuddy extends Component {
         this.setState({
           currentUserObject: updatedPerson
         });
-        //this.loadPersons();
+        // reloading people
+        this.loadPersons();
       })
       .catch(error => {
         console.log("unable to update person");

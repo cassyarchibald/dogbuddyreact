@@ -54,6 +54,7 @@ class Search extends Component {
       .get(this.request_url)
 
       .then(response => {
+        console.log(response.data.zip_codes);
         this.setState({
           zipCodesInRadius: response.data.zip_codes
         });

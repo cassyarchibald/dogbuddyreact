@@ -15,6 +15,7 @@ class EditUserForm extends Component {
       about: this.props.person.about,
       errorMessages: []
     };
+    console.log(this.props);
   }
 
   onInputChange = event => {

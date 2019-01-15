@@ -21,8 +21,6 @@ class Dashboard extends Component {
       recieverObject: this.props.recieverObject,
       requestorObject: this.props.requestorObject
     };
-    console.log(this.props.currentUserObject);
-    console.log(this.props.currentUserDogs);
   }
 
   render() {
@@ -53,6 +51,8 @@ class Dashboard extends Component {
                   this.setState({
                     showEditUserForm: !this.state.showEditUserForm
                   });
+                  console.log(this.state.showEditUserForm);
+                  console.log(this.props.currentUserObject);
                 }}
               >
                 Edit Profile
@@ -60,10 +60,10 @@ class Dashboard extends Component {
             </section>
           ) : null}
 
-          {this.state.currentUserObject && this.state.showEditUserForm ? (
+          {this.props.currentUserObject && this.state.showEditUserForm ? (
             <EditUserForm
               editPersonCallback={this.props.editPersonCallback}
-              person={this.state.currentUserObject}
+              person={this.props.currentUserObject}
             />
           ) : null}
           <h2>Dogs</h2>
