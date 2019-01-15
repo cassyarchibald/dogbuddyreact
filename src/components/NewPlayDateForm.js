@@ -68,7 +68,7 @@ class NewPlayDateForm extends Component {
         console.log("loading dogs from response");
         const dogNames = response.data._embedded.dogs.map(dog => {
           return (
-            <option value={dog.name} key={dog.id}>
+            <option value={dog.name} key={`${dog.name}${dog.id}`}>
               {dog.name}
             </option>
           );

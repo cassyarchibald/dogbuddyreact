@@ -21,27 +21,32 @@ class Dashboard extends Component {
       recieverObject: this.props.recieverObject,
       requestorObject: this.props.requestorObject
     };
-    //console.log(this.props);
+    console.log(this.props.currentUserObject);
+    console.log(this.props.currentUserDogs);
   }
 
   render() {
+    // TODO QUESTION
+    // Not updating when I use the edit form
+    // data is tied to the currentUserObject
+    // received via props
+    let currentUserObject = this.props.currentUserObject;
     return (
       <div className="container">
         <div id="dashboard-container">
           <h1>Welcome</h1>
-          {this.state.currentUserObject ? (
+          {currentUserObject ? (
             <section id="user-information">
               <h2>
-                {this.state.currentUserObject.firstName}{" "}
-                {this.state.currentUserObject.lastName}
+                {currentUserObject.firstName} {currentUserObject.lastName}
               </h2>
-              <p>{this.state.currentUserObject.city}</p>
-              <p>{this.state.currentUserObject.state}</p>
+              <p>{currentUserObject.city}</p>
+              <p>{currentUserObject.state}</p>
 
-              <p>{this.state.currentUserObject.zipCode}</p>
+              <p>{currentUserObject.zipCode}</p>
 
-              <p>{this.state.currentUserObject.about}</p>
-              <p>{this.state.currentUserObject.photo}</p>
+              <p>{currentUserObject.about}</p>
+              <p>{currentUserObject.photo}</p>
               <button
                 className="btn btn-primary"
                 onClick={() => {
@@ -77,17 +82,19 @@ class Dashboard extends Component {
             <NewDogForm addDogCallback={this.props.addDogCallback} />
           ) : null}
           <section className="user-dogs row mt-5">
-            {this.state.dogs ? this.state.dogs : null}
+            {this.props.currentUserDogs ? this.props.currentUserDogs : null}
           </section>
           <section className="user-playdates row mt-5">
             <h2 className="w-100">Requested Playdates</h2>
-            {this.state.requestedPlaydates
-              ? this.state.requestedPlaydates
+            {this.props.currentUserRequestedPlayDates
+              ? this.props.currentUserRequestedPlayDates
               : null}
           </section>
           <section className="user-playdates row mt-5">
             <h2 className="w-100">Recieved Playdates</h2>
-            {this.state.recievedPlaydates ? this.state.recievedPlaydates : null}
+            {this.props.currentUserRecievedPlayDates
+              ? this.props.currentUserRecievedPlayDates
+              : null}
           </section>
         </div>
       </div>

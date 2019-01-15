@@ -80,7 +80,7 @@ class DogBuddy extends Component {
         console.log("updated data value");
         console.log(updatedData);
         console.log(this.state.dogs);
-        this.loadPersonsDogs(this.state.currentUserObject.resourceId);
+        this.loadPersonsDogs();
         this.loadPersons();
       })
       .catch(error => {
@@ -102,6 +102,9 @@ class DogBuddy extends Component {
         updatedData.push(updatedDog);
         this.setState({ dogs: updatedData });
         console.log(this.state.dogs);
+        // reloading person's dogs
+        // so dogs passed to dashboard via props
+        // will be updated
         this.loadPersonsDogs();
         this.loadDogs();
       })
@@ -305,7 +308,7 @@ class DogBuddy extends Component {
           // Load requested playdates for the current person
           // Load recieved playdates for the current person
           // pass them to dashboard
-          this.loadPersonsDogs(this.state.currentUserObject.resourceId);
+          this.loadPersonsDogs();
           this.loadDogs();
           this.loadPersonsRecievedPlayDates(
             this.state.currentUserObject.resourceId
@@ -383,7 +386,7 @@ class DogBuddy extends Component {
         }/dogs`
       )
       .then(response => {
-        console.log("loading dogs from response");
+        console.log("loading person's dogs from response");
         // console.log(response.data);
         const dogComponents = response.data._embedded.dogs.map(dog => {
           // console.log("value of user in loading dogs");
@@ -412,7 +415,7 @@ class DogBuddy extends Component {
             />
           );
         });
-        // console.log(dogComponents);
+        console.log(dogComponents);
 
         this.setState({
           currentUserDogs: dogComponents
@@ -421,6 +424,7 @@ class DogBuddy extends Component {
       })
       .catch(error => {
         this.changeMessage(error.message);
+        console.log("could not load perons's dogs");
         console.log(error.message);
       });
   }
@@ -532,7 +536,13 @@ class DogBuddy extends Component {
         let updatedData = this.state.persons;
         updatedData.push(updatedPerson);
         this.setState({ persons: updatedData });
-        this.loadPersons();
+        // update current user in state
+        console.log(updatedPerson);
+        console.log("updating current user object with updated person");
+        this.setState({
+          currentUserObject: updatedPerson
+        });
+        //this.loadPersons();
       })
       .catch(error => {
         console.log("unable to update person");
