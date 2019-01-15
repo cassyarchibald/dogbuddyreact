@@ -23,7 +23,8 @@ class NewDogForm extends Component {
   onInputChange = event => {
     const field = event.target.name;
     const value = event.target.value;
-
+    console.log(field);
+    console.log(value);
     const newState = {};
     newState[field] = value;
     this.setState(newState);
@@ -58,7 +59,16 @@ class NewDogForm extends Component {
       owner
     } = this.state;
 
-    if (name === "") return;
+    if (
+      name === "" ||
+      age === "" ||
+      size === "" ||
+      vaccinated === "" ||
+      about === "" ||
+      breed === "" ||
+      preferredPlayBuddy === ""
+    )
+      return;
     const newDog = {
       name: this.state.name,
       age: this.state.age,
@@ -69,6 +79,7 @@ class NewDogForm extends Component {
       breed: this.state.breed,
       preferredPlayBuddy: this.state.preferredPlayBuddy
     };
+    console.log(newDog);
 
     // Need to add the dog to state and do post request
     // to /dogs then reload the dogs/persons...
@@ -103,16 +114,31 @@ class NewDogForm extends Component {
               className="form-control"
               name="age"
               onChange={this.onInputChange}
+              type="number"
             />
           </div>
           <div className="form-group">
-            <label htmlFor="size">Size</label>
             <input
-              value={this.state.size}
-              className="form-control"
+              type="radio"
               name="size"
+              value="Small"
               onChange={this.onInputChange}
             />
+            Small
+            <input
+              type="radio"
+              name="size"
+              value="Medium"
+              onChange={this.onInputChange}
+            />
+            Medium
+            <input
+              type="radio"
+              name="size"
+              value="Large"
+              onChange={this.onInputChange}
+            />
+            Large
           </div>
           <div className="form-group">
             <label htmlFor="vaccinated">Vaccinated</label>

@@ -11,7 +11,7 @@ import {
 import PropTypes from "prop-types";
 import "./DogBuddy.css";
 import Login from "./Login";
-
+import NewDogForm from "./NewDogForm";
 import Person from "./Person";
 import PersonCollection from "./PersonCollection";
 import CreateProfile from "./CreateProfile";
@@ -62,6 +62,12 @@ class DogBuddy extends Component {
     console.log("in add dog in dogbuddy");
     console.log(this.state.currentUserObject);
     newDog.person = `/persons/${this.state.currentUserObject.resourceId}`;
+    // update string boolean to actual boolean before post
+    if (newDog.vaccinated === "true") {
+      newDog.vaccinated = true;
+    } else {
+      newDog.vaccinated = false;
+    }
 
     axios
       .post(`http://localhost:8080/dogs/`, newDog)
