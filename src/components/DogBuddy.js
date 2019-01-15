@@ -59,8 +59,8 @@ class DogBuddy extends Component {
   // ***************** DOGS *****************
   // new dog form/post to /persons/${personId}/dogs
   addDog = newDog => {
-    console.log("in add dog in dogbuddy");
-    console.log(this.state.currentUserObject);
+    // console.log("in add dog in dogbuddy");
+    // console.log(this.state.currentUserObject);
     newDog.person = `/persons/${this.state.currentUserObject.resourceId}`;
     // update string boolean to actual boolean before post
     if (newDog.vaccinated === "true") {

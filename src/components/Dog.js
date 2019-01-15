@@ -31,7 +31,8 @@ class Dog extends Component {
       showAddPlayDateButton: true,
       showEditDogForm: false
     };
-    // console.log(props);
+    console.log(props.vaccinated);
+    console.log(this.state.vaccinated);
     // console.log(this.state.vaccinated);
   }
   loadOwner() {
@@ -97,7 +98,8 @@ class Dog extends Component {
         <p>Age:{this.state.age}</p>
         <p>Size:{this.state.size}</p>
         <p>Breed:{this.state.breed}</p>
-        <p>Vaccinated:{this.state.vaccinated}</p>
+
+        <p>Vaccinated:{`${this.state.vaccinated}`}</p>
         <p>About:{this.state.about}</p>
         <p>Preferred Play Buddy:{this.state.preferredPlayBuddy}</p>
 
