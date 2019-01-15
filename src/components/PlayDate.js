@@ -126,16 +126,21 @@ class PlayDate extends Component {
           <p>Location: {this.state.location}</p>
           <p>Details: {this.state.details}</p>
           <p className={this.statusColor()}>Status: {this.state.status}</p>
-          {this.props.showStatusChangeButton ? (
-            <button className="btn btn-success" onClick={this.approvePlayDate}>
-              Approve
-            </button>
-          ) : null}
-          {this.props.showStatusChangeButton ? (
-            <button className="btn btn-danger" onClick={this.denyPlayDate}>
-              Deny
-            </button>
-          ) : null}
+          <div className="d-flex justify-content-around">
+            {this.props.showStatusChangeButton ? (
+              <button
+                className="btn btn-success"
+                onClick={this.approvePlayDate}
+              >
+                Approve
+              </button>
+            ) : null}
+            {this.props.showStatusChangeButton ? (
+              <button className="btn btn-danger" onClick={this.denyPlayDate}>
+                Deny
+              </button>
+            ) : null}
+          </div>
         </div>
       </div>
     );

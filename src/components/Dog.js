@@ -100,29 +100,30 @@ class Dog extends Component {
           <p>Vaccinated:{`${this.state.vaccinated}`}</p>
           <p>About:{this.state.about}</p>
           <p>Preferred Play Buddy:{this.state.preferredPlayBuddy}</p>
-
-          {this.props.showEditDelete ? (
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                this.setState({
-                  showEditDogForm: !this.state.showEditDogForm
-                });
-              }}
-            >
-              Edit
-            </button>
-          ) : null}
-          {this.props.showEditDelete ? (
-            <button
-              className="btn btn-danger"
-              onClick={() => {
-                this.props.removeDogCallback(this.props.id);
-              }}
-            >
-              Delete
-            </button>
-          ) : null}
+          <div className="d-flex justify-content-around">
+            {this.props.showEditDelete ? (
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  this.setState({
+                    showEditDogForm: !this.state.showEditDogForm
+                  });
+                }}
+              >
+                Edit
+              </button>
+            ) : null}
+            {this.props.showEditDelete ? (
+              <button
+                className="btn btn-danger"
+                onClick={() => {
+                  this.props.removeDogCallback(this.props.id);
+                }}
+              >
+                Delete
+              </button>
+            ) : null}
+          </div>
 
           {this.state.owner && this.state.showEditDogForm ? (
             <EditDogForm
