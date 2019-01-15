@@ -14,10 +14,12 @@ class EditDogForm extends Component {
       about: this.props.dog.about,
       photo: this.props.dog.photo,
       breed: this.props.dog.breed,
+      gender: this.props.gender,
       preferredPlayBuddy: this.props.dog.preferredPlayBuddy,
       owner: this.props.dog.owner,
       errorMessages: []
     };
+    console.log(this.props.gender);
   }
   onInputChange = event => {
     const field = event.target.name;
@@ -37,6 +39,7 @@ class EditDogForm extends Component {
       about: "",
       photo: "",
       breed: "",
+      gender: "",
       preferredPlayBuddy: "",
       owner: ""
     });
@@ -53,6 +56,7 @@ class EditDogForm extends Component {
       about,
       photo,
       breed,
+      gender,
       preferredPlayBuddy,
       owner
     } = this.state;
@@ -66,6 +70,7 @@ class EditDogForm extends Component {
       size: this.state.size,
       vaccinated: this.state.vaccinated,
       about: this.state.about,
+      gender: this.state.gender,
       photo: this.state.photo,
       breed: this.state.breed,
       preferredPlayBuddy: this.state.preferredPlayBuddy
@@ -108,46 +113,67 @@ class EditDogForm extends Component {
             />
           </div>
           <div className="form-group">
+            <label htmlFor="gender">Gender</label>
+            <input
+              type="radio"
+              name="gender"
+              value="Male"
+              checked={this.state.gender === "Male"}
+              onChange={this.onInputChange}
+            />
+            Male
+            <input
+              type="radio"
+              name="gender"
+              value="Female"
+              checked={this.state.gender === "Female"}
+              onChange={this.onInputChange}
+            />
+            Female
+          </div>
+          <div className="form-group">
+            <label htmlFor="size">Size</label>
             <input
               type="radio"
               name="size"
               value="Small"
-              onChange={this.onInputChange}
               checked={this.state.size === "Small"}
+              onChange={this.onInputChange}
             />
             Small
             <input
               type="radio"
               name="size"
               value="Medium"
-              onChange={this.onInputChange}
               checked={this.state.size === "Medium"}
+              onChange={this.onInputChange}
             />
             Medium
             <input
               type="radio"
               name="size"
               value="Large"
-              onChange={this.onInputChange}
               checked={this.state.size === "Large"}
+              onChange={this.onInputChange}
             />
             Large
           </div>
           <div className="form-group">
+            <label htmlFor="vaccinated">Vaccinated</label>
             <input
               type="radio"
               name="vaccinated"
               value="true"
+              checked={this.state.vaccinated === "true"}
               onChange={this.onInputChange}
-              checked={this.state.vaccinated === true}
             />
             True
             <input
               type="radio"
               name="vaccinated"
               value="false"
+              checked={this.state.vaccinated === "false"}
               onChange={this.onInputChange}
-              checked={this.state.vaccinated === false}
             />
             False
           </div>

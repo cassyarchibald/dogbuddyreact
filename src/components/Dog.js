@@ -18,6 +18,7 @@ class Dog extends Component {
       age: this.props.age,
       size: this.props.size,
       breed: this.props.breed,
+      gender: this.props.gender,
       vaccinated: this.props.vaccinated,
       about: this.props.about,
       preferredPlayBuddy: this.props.preferredPlayBuddy,
@@ -31,6 +32,7 @@ class Dog extends Component {
       showAddPlayDateButton: true,
       showEditDogForm: false
     };
+    console.log(this.props.gender);
   }
   loadOwner() {
     axios
@@ -94,6 +96,7 @@ class Dog extends Component {
             {this.state.name}
           </h3>
           <p>Age:{this.state.age}</p>
+          <p>Gender:{this.state.gender}</p>
           <p>Size:{this.state.size}</p>
           <p>Breed:{this.state.breed}</p>
 

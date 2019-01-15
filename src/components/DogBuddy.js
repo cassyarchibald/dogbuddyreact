@@ -74,7 +74,12 @@ class DogBuddy extends Component {
         console.log("adding dog success");
         let updatedData = this.state.dogs;
         updatedData.push(newDog);
+
         this.setState({ dogs: updatedData });
+
+        console.log("updated data value");
+        console.log(updatedData);
+        console.log(this.state.dogs);
         this.loadPersonsDogs(this.state.currentUserObject.resourceId);
         this.loadPersons();
       })
@@ -170,6 +175,7 @@ class DogBuddy extends Component {
               name={dog.name}
               age={dog.age}
               size={dog.size}
+              gender={dog.gender}
               vaccinated={dog.vaccinated}
               about={dog.about}
               photo={dog.photo}
@@ -394,6 +400,7 @@ class DogBuddy extends Component {
               name={dog.name}
               age={dog.age}
               size={dog.size}
+              gender={dog.gender}
               vaccinated={dog.vaccinated}
               about={dog.about}
               photo={dog.photo}

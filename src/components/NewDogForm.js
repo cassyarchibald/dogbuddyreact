@@ -17,6 +17,7 @@ class NewDogForm extends Component {
       breed: "",
       preferredPlayBuddy: "",
       owner: "",
+      gender: "",
       errorMessages: []
     };
   }
@@ -40,6 +41,7 @@ class NewDogForm extends Component {
       photo: "",
       breed: "",
       preferredPlayBuddy: "",
+      gender: "",
       owner: ""
     });
   };
@@ -54,6 +56,7 @@ class NewDogForm extends Component {
       vaccinated,
       about,
       photo,
+      gender,
       breed,
       preferredPlayBuddy,
       owner
@@ -66,7 +69,9 @@ class NewDogForm extends Component {
       vaccinated === "" ||
       about === "" ||
       breed === "" ||
-      preferredPlayBuddy === ""
+      preferredPlayBuddy === "" ||
+      gender === "" ||
+      gender !== ("Male" || "Female")
     )
       return;
     const newDog = {
@@ -77,9 +82,11 @@ class NewDogForm extends Component {
       about: this.state.about,
       photo: this.state.photo,
       breed: this.state.breed,
+      gender: this.state.gender,
       preferredPlayBuddy: this.state.preferredPlayBuddy
     };
     console.log(newDog);
+    console.log(this.props);
 
     // Need to add the dog to state and do post request
     // to /dogs then reload the dogs/persons...
@@ -118,6 +125,24 @@ class NewDogForm extends Component {
             />
           </div>
           <div className="form-group">
+            <label htmlFor="gender">Gender</label>
+            <input
+              type="radio"
+              name="gender"
+              value="Male"
+              onChange={this.onInputChange}
+            />
+            Male
+            <input
+              type="radio"
+              name="gender"
+              value="Female"
+              onChange={this.onInputChange}
+            />
+            Female
+          </div>
+          <div className="form-group">
+            <label htmlFor="size">Size</label>
             <input
               type="radio"
               name="size"
@@ -141,6 +166,7 @@ class NewDogForm extends Component {
             Large
           </div>
           <div className="form-group">
+            <label htmlFor="vaccinated">Vaccinated</label>
             <input
               type="radio"
               name="vaccinated"
