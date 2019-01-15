@@ -88,72 +88,74 @@ class Dog extends Component {
 
   render() {
     return (
-      <div className="card d-inline-block">
-        <h3 className="text-center" id="dog-name">
-          {this.state.name}
-        </h3>
-        <p>Age:{this.state.age}</p>
-        <p>Size:{this.state.size}</p>
-        <p>Breed:{this.state.breed}</p>
+      <div className="col-sm-6">
+        <div className="card">
+          <h3 className="text-center" id="dog-name">
+            {this.state.name}
+          </h3>
+          <p>Age:{this.state.age}</p>
+          <p>Size:{this.state.size}</p>
+          <p>Breed:{this.state.breed}</p>
 
-        <p>Vaccinated:{`${this.state.vaccinated}`}</p>
-        <p>About:{this.state.about}</p>
-        <p>Preferred Play Buddy:{this.state.preferredPlayBuddy}</p>
+          <p>Vaccinated:{`${this.state.vaccinated}`}</p>
+          <p>About:{this.state.about}</p>
+          <p>Preferred Play Buddy:{this.state.preferredPlayBuddy}</p>
 
-        {this.props.showEditDelete ? (
-          <button
-            className="btn btn-primary"
-            onClick={() => {
-              this.setState({
-                showEditDogForm: !this.state.showEditDogForm
-              });
-            }}
-          >
-            Edit
-          </button>
-        ) : null}
-        {this.props.showEditDelete ? (
-          <button
-            className="btn btn-danger"
-            onClick={() => {
-              this.props.removeDogCallback(this.props.id);
-            }}
-          >
-            Delete
-          </button>
-        ) : null}
+          {this.props.showEditDelete ? (
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                this.setState({
+                  showEditDogForm: !this.state.showEditDogForm
+                });
+              }}
+            >
+              Edit
+            </button>
+          ) : null}
+          {this.props.showEditDelete ? (
+            <button
+              className="btn btn-danger"
+              onClick={() => {
+                this.props.removeDogCallback(this.props.id);
+              }}
+            >
+              Delete
+            </button>
+          ) : null}
 
-        {this.state.owner && this.state.showEditDogForm ? (
-          <EditDogForm
-            editDogCallback={this.props.editDogCallback}
-            dog={this.props}
-          />
-        ) : null}
+          {this.state.owner && this.state.showEditDogForm ? (
+            <EditDogForm
+              editDogCallback={this.props.editDogCallback}
+              dog={this.props}
+            />
+          ) : null}
 
-        {this.state.isLoggedIn && this.state.showAddPlayDateButton ? (
-          <button
-            className="btn btn-primary"
-            onClick={() => {
-              this.setState({
-                showAddPlayDateForm: !this.state.showAddPlayDateForm
-              });
-            }}
-          >
-            {this.state.showAddPlayDateForm
-              ? "Hide Form"
-              : "Send Play Date Request"}
-          </button>
-        ) : null}
+          {this.state.isLoggedIn && this.state.showAddPlayDateButton ? (
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                this.setState({
+                  showAddPlayDateForm: !this.state.showAddPlayDateForm
+                });
+              }}
+            >
+              {this.state.showAddPlayDateForm
+                ? "Hide Form"
+                : "Send Play Date Request"}
+            </button>
+          ) : null}
 
-        {this.state.showAddPlayDateForm ? (
-          <NewPlayDateForm
-            addPlayDateCallback={this.props.addPlayDateCallback}
-            reciever={this.state.owner}
-            recievingDogName={this.state.name}
-            requestor={this.state.currentUserObject}
-            currentUserObject={this.props.currentUserObject}
-          />
-        ) : null}
+          {this.state.showAddPlayDateForm ? (
+            <NewPlayDateForm
+              addPlayDateCallback={this.props.addPlayDateCallback}
+              reciever={this.state.owner}
+              recievingDogName={this.state.name}
+              requestor={this.state.currentUserObject}
+              currentUserObject={this.props.currentUserObject}
+            />
+          ) : null}
+        </div>
       </div>
     );
   }

@@ -17,8 +17,12 @@
 }
 
 .card {
-  width: 30rem;
-  margin: 4rem;
+  margin-top: 1rem;
+  padding: 0.5rem;
+}
+
+.mt-5 {
+  margin-top: 5rem;
 }
 
 img {

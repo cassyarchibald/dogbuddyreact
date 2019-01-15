@@ -62,32 +62,34 @@ class Dashboard extends Component {
             />
           ) : null}
           <h2>Dogs</h2>
-          <section className="user-dogs">
+          <div className="d-flex justify-content-center">
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                this.setState({ showAddDogForm: !this.state.showAddDogForm });
+              }}
+            >
+              {this.state.showAddDogForm ? "Hide Form" : "Add Dog"}
+            </button>
+          </div>
+
+          {this.state.showAddDogForm ? (
+            <NewDogForm addDogCallback={this.props.addDogCallback} />
+          ) : null}
+          <section className="user-dogs row mt-5">
             {this.state.dogs ? this.state.dogs : null}
           </section>
-          <section className="user-playdates">
-            <h2>Requested Playdates</h2>
+          <section className="user-playdates row mt-5">
+            <h2 className="w-100">Requested Playdates</h2>
             {this.state.requestedPlaydates
               ? this.state.requestedPlaydates
               : null}
           </section>
-          <section className="user-playdates">
-            <h2>Recieved Playdates</h2>
+          <section className="user-playdates row mt-5">
+            <h2 className="w-100">Recieved Playdates</h2>
             {this.state.recievedPlaydates ? this.state.recievedPlaydates : null}
           </section>
         </div>
-
-        <button
-          className="btn btn-primary"
-          onClick={() => {
-            this.setState({ showAddDogForm: !this.state.showAddDogForm });
-          }}
-        >
-          {this.state.showAddDogForm ? "Hide Form" : "Add Dog"}
-        </button>
-        {this.state.showAddDogForm ? (
-          <NewDogForm addDogCallback={this.props.addDogCallback} />
-        ) : null}
       </div>
     );
   }

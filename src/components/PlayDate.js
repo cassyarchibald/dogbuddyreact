@@ -86,48 +86,50 @@ class PlayDate extends Component {
 
   render() {
     return (
-      <div className="card d-inline-block">
-        <h4 duration={5000} className="alertMessage text-center">
-          {this.state.alertMessage}
-        </h4>
-        <p>
-          {this.state.recieverObject
-            ? ` To: ${this.state.recieverObject.firstName} ${
-                this.state.recieverObject.lastName
-              }`
-            : null}
-          {this.state.recievingDogName
-            ? ` and ${this.state.recievingDogName}`
-            : null}
-        </p>
-        <p>
-          {this.state.requestorObject
-            ? `From: ${this.state.requestorObject.firstName} ${
-                this.state.requestorObject.lastName
-              }`
-            : null}
-          {this.state.requestorDogName
-            ? ` and ${this.state.requestorDogName}`
-            : null}
-        </p>
-        <p>Start Time: {this.state.startTime}</p>
-        <p>End Time: {this.state.endTime}</p>
-        <p>City: {this.state.city}</p>
-        <p>State: {this.state.state}</p>
-        <p>Zip Code: {this.state.zipCode}</p>
-        <p>Location: {this.state.location}</p>
-        <p>Details: {this.state.details}</p>
-        <p className={this.statusColor()}>Status: {this.state.status}</p>
-        {this.props.showStatusChangeButton ? (
-          <button className="btn btn-success" onClick={this.approvePlayDate}>
-            Approve
-          </button>
-        ) : null}
-        {this.props.showStatusChangeButton ? (
-          <button className="btn btn-danger" onClick={this.denyPlayDate}>
-            Deny
-          </button>
-        ) : null}
+      <div className="col-sm-6">
+        <div className="card">
+          <h4 duration={5000} className="alertMessage text-center">
+            {this.state.alertMessage}
+          </h4>
+          <p>
+            {this.state.recieverObject
+              ? ` To: ${this.state.recieverObject.firstName} ${
+                  this.state.recieverObject.lastName
+                }`
+              : null}
+            {this.state.recievingDogName
+              ? ` and ${this.state.recievingDogName}`
+              : null}
+          </p>
+          <p>
+            {this.state.requestorObject
+              ? `From: ${this.state.requestorObject.firstName} ${
+                  this.state.requestorObject.lastName
+                }`
+              : null}
+            {this.state.requestorDogName
+              ? ` and ${this.state.requestorDogName}`
+              : null}
+          </p>
+          <p>Start Time: {this.state.startTime}</p>
+          <p>End Time: {this.state.endTime}</p>
+          <p>City: {this.state.city}</p>
+          <p>State: {this.state.state}</p>
+          <p>Zip Code: {this.state.zipCode}</p>
+          <p>Location: {this.state.location}</p>
+          <p>Details: {this.state.details}</p>
+          <p className={this.statusColor()}>Status: {this.state.status}</p>
+          {this.props.showStatusChangeButton ? (
+            <button className="btn btn-success" onClick={this.approvePlayDate}>
+              Approve
+            </button>
+          ) : null}
+          {this.props.showStatusChangeButton ? (
+            <button className="btn btn-danger" onClick={this.denyPlayDate}>
+              Deny
+            </button>
+          ) : null}
+        </div>
       </div>
     );
   }
