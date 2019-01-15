@@ -135,18 +135,20 @@ class Dog extends Component {
           ) : null}
 
           {this.state.isLoggedIn && this.state.showAddPlayDateButton ? (
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                this.setState({
-                  showAddPlayDateForm: !this.state.showAddPlayDateForm
-                });
-              }}
-            >
-              {this.state.showAddPlayDateForm
-                ? "Hide Form"
-                : "Send Play Date Request"}
-            </button>
+            <div className="d-flex justify-content-center mb-1">
+              <button
+                className="btn btn-primary mb-1"
+                onClick={() => {
+                  this.setState({
+                    showAddPlayDateForm: !this.state.showAddPlayDateForm
+                  });
+                }}
+              >
+                {this.state.showAddPlayDateForm
+                  ? "Hide Form"
+                  : "Send Play Date Request"}
+              </button>
+            </div>
           ) : null}
 
           {this.state.showAddPlayDateForm ? (
