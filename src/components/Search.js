@@ -116,7 +116,7 @@ class Search extends Component {
         <SearchBar onSearchCallback={this.onSearchChange} />
         <h3>
           {this.state.resultList.length > 0 &&
-            `Showing ${this.state.resultList.length} results`}
+            `There are ${this.state.resultList.length} dogs near you`}
         </h3>
         <SearchList
           resultList={this.state.resultList}

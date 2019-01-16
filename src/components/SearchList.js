@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import SearchResult from "./SearchResult";
+import "./SearchList.css";
 
 const SearchList = props => {
   console.log(props);
@@ -18,7 +19,11 @@ const SearchList = props => {
     );
   });
 
-  return <section className="container">{SearchList}</section>;
+  return (
+    <section className="row" id="searchlist">
+      {SearchList}
+    </section>
+  );
 };
 
 SearchList.propTypes = {
