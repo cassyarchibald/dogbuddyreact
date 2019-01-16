@@ -724,7 +724,9 @@ class DogBuddy extends Component {
             className="d-flex w-100 justify-content-around align--items-center"
           >
             <Link to="/">Login/Sign Up</Link>
-            <Link to="/createProfile">Create Profile</Link>
+            {this.state.profileCreated === false && (
+              <Link to="/createProfile">Create Profile</Link>
+            )}
             <Link to="/dashboard">Dashboard</Link>
             <Link to="/dogs">View Dogs</Link>
             <Link to="/users">View Users</Link>
@@ -749,6 +751,10 @@ class DogBuddy extends Component {
                   user={this.state.user}
                   loginCallback={this.login}
                   logoutCallback={this.logout}
+                  isLoggedIn={this.state.isLoggedIn}
+                  profileCreated={this.state.profileCreated}
+                  uid={this.state.uid}
+                  addPersonCallback={this.addPerson}
                 />
               )}
             />
