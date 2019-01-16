@@ -88,8 +88,9 @@ class PlayDate extends Component {
             {this.state.alertMessage}
           </h4>
           <p>
+            <span>To</span>
             {this.state.recieverObject
-              ? ` To: ${this.state.recieverObject.firstName} ${
+              ? `${this.state.recieverObject.firstName} ${
                   this.state.recieverObject.lastName
                 }`
               : null}
@@ -98,8 +99,9 @@ class PlayDate extends Component {
               : null}
           </p>
           <p>
+            <span>From:</span>
             {this.state.requestorObject
-              ? `From: ${this.state.requestorObject.firstName} ${
+              ? `${this.state.requestorObject.firstName} ${
                   this.state.requestorObject.lastName
                 }`
               : null}
@@ -108,20 +110,38 @@ class PlayDate extends Component {
               : null}
           </p>
           <p>
-            Start Time:
+            <span>Start Time:</span>
             {moment(this.state.startTime).format(`dddd, MMMM Do YYYY, h:mm a`)}
           </p>
           <p>
-            End Time:
+            <span>End Time:</span>
             {moment(this.state.endTime).format(`dddd, MMMM Do YYYY, h:mm a`)}
           </p>
-          <p>City: {this.state.city}</p>
-          <p>State: {this.state.state}</p>
-          <p>Zip Code: {this.state.zipCode}</p>
-          <p>Location: {this.state.location}</p>
-          <p>Details: {this.state.details}</p>
-          <p className={this.statusColor()}>Status: {this.state.status}</p>
-          <div className="d-flex justify-content-around">
+          <p>
+            <span>City: </span>
+            {this.state.city}
+          </p>
+          <p>
+            <span>State: </span>
+            {this.state.state}
+          </p>
+          <p>
+            <span>Zip Code: </span>
+            {this.state.zipCode}
+          </p>
+          <p>
+            <span>Location: </span>
+            {this.state.location}
+          </p>
+          <p>
+            <span>Details: </span>
+            {this.state.details}
+          </p>
+          <p className={this.statusColor()}>
+            <span className={this.statusColor()}>Status: </span>
+            {this.state.status}
+          </p>
+          <div className="d-flex justify-content-center">
             {this.props.showStatusChangeButton ? (
               <button
                 className="btn btn-success"
