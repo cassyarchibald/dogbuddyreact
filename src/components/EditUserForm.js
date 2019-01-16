@@ -55,7 +55,10 @@ class EditUserForm extends Component {
         <section className="errors">
           <ul>{errorMessages}</ul>
         </section>
-        <form className="edit-user-form" onSubmit={this.props.editUserCallback}>
+        <form
+          className="edit-user-form w-75"
+          onSubmit={this.props.editUserCallback}
+        >
           <div className="form-group">
             <label htmlFor="firstName">First Name</label>
             <input
@@ -103,11 +106,12 @@ class EditUserForm extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="about">About</label>
-            <input
+            <textarea
               value={this.state.about}
               className="form-control"
               name="about"
               onChange={this.onInputChange}
+              rows="3"
             />
           </div>
 

@@ -30,18 +30,19 @@ Router {
   margin: 1rem;
 }
 
-nav #router-list {
+nav {
   margin: 2rem;
-  background-color: 167ffb;
+  background-color: #167ffb;
 }
 
 #router-list li {
   list-style-type: none;
+  margin: 0;
 }
 
 #router-list a {
   padding: 1rem;
-  margin-bottom: 2rem;
+  color: white;
 }
 
 img {

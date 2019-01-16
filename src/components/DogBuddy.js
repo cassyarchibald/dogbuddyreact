@@ -719,7 +719,10 @@ class DogBuddy extends Component {
       //<section>
       <Router>
         <div>
-          <nav id="router-list">
+          <nav
+            id="router-list"
+            className="d-flex w-100 justify-content-around align--items-center"
+          >
             <Link to="/">Login/Sign Up</Link>
             <Link to="/createProfile">Create Profile</Link>
             <Link to="/dashboard">Dashboard</Link>
