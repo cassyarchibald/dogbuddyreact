@@ -21,6 +21,7 @@ class Dog extends Component {
       gender: this.props.gender,
       vaccinated: this.props.vaccinated,
       about: this.props.about,
+      photo: this.props.photo,
       preferredPlayBuddy: this.props.preferredPlayBuddy,
       owner: "",
       ownerLink: this.props.ownerLink,
@@ -32,6 +33,7 @@ class Dog extends Component {
       showAddPlayDateButton: true,
       showEditDogForm: false
     };
+    console.log(props);
   }
   loadOwner() {
     axios
@@ -94,93 +96,102 @@ class Dog extends Component {
           <h3 className="text-center" id="dog-name">
             {this.state.name}
           </h3>
-          <p>
-            <span>Age:</span>
-            {this.state.age}
-          </p>
-          <p>
-            <span>Gender:</span>
-            {this.state.gender}
-          </p>
-          <p>
-            <span>Size:</span>
-            {this.state.size}
-          </p>
-          <p>
-            <span>Breed:</span>
-            {this.state.breed}
-          </p>
+          <div className="text-center">
+            <img
+              src={`${this.state.photo}`}
+              alt={`${this.state.name}'`}
+              mx-auto
+            />
+          </div>
+          <div className="dog-information">
+            <p>
+              <span>Age:</span>
+              {this.state.age}
+            </p>
+            <p>
+              <span>Gender:</span>
+              {this.state.gender}
+            </p>
+            <p>
+              <span>Size:</span>
+              {this.state.size}
+            </p>
+            <p>
+              <span>Breed:</span>
+              {this.state.breed}
+            </p>
 
-          <p>
-            <span>Vaccinated:</span>
-            {`${this.state.vaccinated}`}
-          </p>
-          <p>
-            <span>About:</span>
-            {this.state.about}
-          </p>
-          <p>
-            <span>Preferred Play Buddy:</span>
-            {this.state.preferredPlayBuddy}
-          </p>
-          <div className="d-flex justify-content-center">
-            {this.props.showEditDelete ? (
-              <button
-                className="btn btn-primary"
-                onClick={() => {
-                  this.setState({
-                    showEditDogForm: !this.state.showEditDogForm
-                  });
-                }}
-              >
-                Edit
-              </button>
+            <p>
+              <span>Vaccinated:</span>
+              {`${this.state.vaccinated}`}
+            </p>
+            <p>
+              <span>About:</span>
+              {this.state.about}
+            </p>
+            <p>
+              <span>Preferred Play Buddy:</span>
+              {this.state.preferredPlayBuddy}
+            </p>
+            <div className="d-flex justify-content-center">
+              {this.props.showEditDelete ? (
+                <button
+                  className="btn btn-primary"
+                  onClick={() => {
+                    this.setState({
+                      showEditDogForm: !this.state.showEditDogForm
+                    });
+                  }}
+                >
+                  Edit
+                </button>
+              ) : null}
+              {this.props.showEditDelete ? (
+                <button
+                  className="btn btn-danger"
+                  onClick={() => {
+                    this.props.removeDogCallback(this.props.id);
+                  }}
+                >
+                  Delete
+                </button>
+              ) : null}
+            </div>
+
+            {this.state.owner && this.state.showEditDogForm ? (
+              <EditDogForm
+                editDogCallback={this.props.editDogCallback}
+                dog={this.props}
+              />
             ) : null}
-            {this.props.showEditDelete ? (
-              <button
-                className="btn btn-danger"
-                onClick={() => {
-                  this.props.removeDogCallback(this.props.id);
-                }}
-              >
-                Delete
-              </button>
+
+            {this.state.isLoggedIn && this.state.showAddPlayDateButton ? (
+              <div className="d-flex justify-content-center mb-1">
+                <button
+                  className="btn btn-primary mb-1"
+                  onClick={() => {
+                    this.setState({
+                      showAddPlayDateForm: !this.state.showAddPlayDateForm
+                    });
+                  }}
+                >
+                  {this.state.showAddPlayDateForm
+                    ? "Hide Form"
+                    : "Send Play Date Request"}
+                </button>
+              </div>
+            ) : null}
+
+            {this.state.showAddPlayDateForm ? (
+              <NewPlayDateForm
+                addPlayDateCallback={this.props.addPlayDateCallback}
+                reciever={this.state.owner}
+                recievingDogName={this.state.name}
+                requestor={this.state.currentUserObject}
+                currentUserObject={this.props.currentUserObject}
+              />
             ) : null}
           </div>
-
-          {this.state.owner && this.state.showEditDogForm ? (
-            <EditDogForm
-              editDogCallback={this.props.editDogCallback}
-              dog={this.props}
-            />
-          ) : null}
-
-          {this.state.isLoggedIn && this.state.showAddPlayDateButton ? (
-            <div className="d-flex justify-content-center mb-1">
-              <button
-                className="btn btn-primary mb-1"
-                onClick={() => {
-                  this.setState({
-                    showAddPlayDateForm: !this.state.showAddPlayDateForm
-                  });
-                }}
-              >
-                {this.state.showAddPlayDateForm
-                  ? "Hide Form"
-                  : "Send Play Date Request"}
-              </button>
-            </div>
-          ) : null}
-
-          {this.state.showAddPlayDateForm ? (
-            <NewPlayDateForm
-              addPlayDateCallback={this.props.addPlayDateCallback}
-              reciever={this.state.owner}
-              recievingDogName={this.state.name}
-              requestor={this.state.currentUserObject}
-              currentUserObject={this.props.currentUserObject}
-            />
-          ) : null}
         </div>
       </div>
     );
