@@ -90,19 +90,40 @@ class Dog extends Component {
   render() {
     return (
       <div className="col-sm-6">
-        <div className="card">
+        <div className="card dog-card">
           <h3 className="text-center" id="dog-name">
             {this.state.name}
           </h3>
-          <p>Age:{this.state.age}</p>
-          <p>Gender:{this.state.gender}</p>
-          <p>Size:{this.state.size}</p>
-          <p>Breed:{this.state.breed}</p>
+          <p>
+            <span>Age:</span>
+            {this.state.age}
+          </p>
+          <p>
+            <span>Gender:</span>
+            {this.state.gender}
+          </p>
+          <p>
+            <span>Size:</span>
+            {this.state.size}
+          </p>
+          <p>
+            <span>Breed:</span>
+            {this.state.breed}
+          </p>
 
-          <p>Vaccinated:{`${this.state.vaccinated}`}</p>
-          <p>About:{this.state.about}</p>
-          <p>Preferred Play Buddy:{this.state.preferredPlayBuddy}</p>
-          <div className="d-flex justify-content-around">
+          <p>
+            <span>Vaccinated:</span>
+            {`${this.state.vaccinated}`}
+          </p>
+          <p>
+            <span>About:</span>
+            {this.state.about}
+          </p>
+          <p>
+            <span>Preferred Play Buddy:</span>
+            {this.state.preferredPlayBuddy}
+          </p>
+          <div className="d-flex justify-content-center">
             {this.props.showEditDelete ? (
               <button
                 className="btn btn-primary"

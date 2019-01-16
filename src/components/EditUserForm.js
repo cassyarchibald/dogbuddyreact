@@ -95,7 +95,7 @@ class EditUserForm extends Component {
               onChange={this.onInputChange}
             />
           </div>
-          <div>
+          <div className="form-group">
             <label htmlFor="zipCode">Zip Code</label>
             <input
               value={this.state.zipCode}

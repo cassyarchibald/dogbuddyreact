@@ -3,6 +3,14 @@
   margin: 3rem;
   padding: 1rem;
 } */
+.dog-card {
+  text-align: center;
+}
+
+span {
+  font-weight: bold;
+  margin-right: 1rem;
+}
 
 img {
   margin-bottom: 2rem;
