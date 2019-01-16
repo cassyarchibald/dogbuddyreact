@@ -725,7 +725,7 @@ class DogBuddy extends Component {
             id="router-list"
             className="d-flex w-100 justify-content-around align--items-center"
           >
-            <Link to="/">Login/Sign Up</Link>
+            {this.state.isLoggedIn === false && <Link to="/">Login</Link>}
             {this.state.profileCreated === false && (
               <Link to="/createProfile">Create Profile</Link>
             )}
