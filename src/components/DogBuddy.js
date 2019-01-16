@@ -715,6 +715,8 @@ class DogBuddy extends Component {
 
   render() {
     const { redirect } = this.state.redirecToCreateProfile;
+    const isAuthenticated = this.state.isLoggedIn && this.state.profileCreated;
+    console.log(isAuthenticated);
     return (
       //<section>
       <Router>
@@ -727,6 +729,7 @@ class DogBuddy extends Component {
             {this.state.profileCreated === false && (
               <Link to="/createProfile">Create Profile</Link>
             )}
+
             <Link to="/dashboard">Dashboard</Link>
             <Link to="/dogs">View Dogs</Link>
             <Link to="/users">View Users</Link>
@@ -736,12 +739,13 @@ class DogBuddy extends Component {
             <Route
               exact
               path="/"
-              render={() => (
-                // this.state.isLoggedIn && this.state.profileCreated ? (
-                //   <Redirect to="/dashboard" />
-
-                <Redirect to="/login" />
-              )}
+              render={() =>
+                isAuthenticated ? (
+                  <Redirect to="/dashboard" />
+                ) : (
+                  <Redirect to="/login" />
+                )
+              }
             />
 
             <Route
@@ -760,39 +764,47 @@ class DogBuddy extends Component {
             />
             <Route
               path="/createProfile"
-              render={() => (
-                <CreateProfile
-                  uid={this.state.uid}
-                  addPersonCallback={this.addPerson}
-                />
-              )}
+              render={() =>
+                isAuthenticated ? (
+                  <Redirect to="/dashboard" />
+                ) : (
+                  <CreateProfile
+                    uid={this.state.uid}
+                    addPersonCallback={this.addPerson}
+                  />
+                )
+              }
             />
             <Route
               isLoggedIn={this.state.isLoggedIn}
               profileCreated={this.state.profileCreated}
               path="/dashboard"
-              render={() => (
-                <Dashboard
-                  isLoggedIn={this.state.isLoggedIn}
-                  profileCreated={this.state.profileCreated}
-                  user={this.state.user}
-                  currentUserObject={this.state.currentUserObject}
-                  persons={this.state.persons}
-                  addDogCallback={this.addDog}
-                  removeDogCallback={this.removeDog}
-                  editDogCallback={this.updateDog}
-                  editPersonCallback={this.updatePerson}
-                  addPlayDateCallback={this.addPlayDate}
-                  editPlayDateCallback={this.updatePlayDate}
-                  currentUserDogs={this.state.currentUserDogs}
-                  currentUserRecievedPlayDates={
-                    this.state.currentUserRecievedPlayDates
-                  }
-                  currentUserRequestedPlayDates={
-                    this.state.currentUserRequestedPlayDates
-                  }
-                />
-              )}
+              render={() =>
+                isAuthenticated === false ? (
+                  <Redirect to="/login" />
+                ) : (
+                  <Dashboard
+                    isLoggedIn={this.state.isLoggedIn}
+                    profileCreated={this.state.profileCreated}
+                    user={this.state.user}
+                    currentUserObject={this.state.currentUserObject}
+                    persons={this.state.persons}
+                    addDogCallback={this.addDog}
+                    removeDogCallback={this.removeDog}
+                    editDogCallback={this.updateDog}
+                    editPersonCallback={this.updatePerson}
+                    addPlayDateCallback={this.addPlayDate}
+                    editPlayDateCallback={this.updatePlayDate}
+                    currentUserDogs={this.state.currentUserDogs}
+                    currentUserRecievedPlayDates={
+                      this.state.currentUserRecievedPlayDates
+                    }
+                    currentUserRequestedPlayDates={
+                      this.state.currentUserRequestedPlayDates
+                    }
+                  />
+                )
+              }
             />
             <Route
               path="/dogs"
@@ -807,12 +819,16 @@ class DogBuddy extends Component {
             />
             <Route
               path="/users"
-              render={() => (
-                <PersonCollection
-                  persons={this.state.persons}
-                  addPersonCallback={this.state.addPerson}
-                />
-              )}
+              render={() =>
+                isAuthenticated === false ? (
+                  <Redirect to="/login" />
+                ) : (
+                  <PersonCollection
+                    persons={this.state.persons}
+                    addPersonCallback={this.state.addPerson}
+                  />
+                )
+              }
               isLoggedIn={this.state.isLoggedIn}
               profileCreated={this.state.profileCreated}
             />
