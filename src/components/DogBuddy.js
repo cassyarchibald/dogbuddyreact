@@ -750,17 +750,21 @@ class DogBuddy extends Component {
 
             <Route
               path="/login"
-              render={() => (
-                <Login
-                  user={this.state.user}
-                  loginCallback={this.login}
-                  logoutCallback={this.logout}
-                  isLoggedIn={this.state.isLoggedIn}
-                  profileCreated={this.state.profileCreated}
-                  uid={this.state.uid}
-                  addPersonCallback={this.addPerson}
-                />
-              )}
+              render={() =>
+                isAuthenticated ? (
+                  <Redirect to="/dashboard" />
+                ) : (
+                  <Login
+                    user={this.state.user}
+                    loginCallback={this.login}
+                    logoutCallback={this.logout}
+                    isLoggedIn={this.state.isLoggedIn}
+                    profileCreated={this.state.profileCreated}
+                    uid={this.state.uid}
+                    addPersonCallback={this.addPerson}
+                  />
+                )
+              }
             />
             <Route
               path="/createProfile"
