@@ -28,7 +28,7 @@ class SearchBar extends Component {
   render() {
     return (
       <form onSubmit={this.onSubmit} className="text-center">
-        <div className="form-group" id="search-container">
+        <div className="form-group w-75" id="search-container">
           <label htmlFor="zipCode">Zip Code</label>
           <input
             type="text"
