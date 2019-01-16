@@ -185,11 +185,12 @@ class NewDogForm extends Component {
           </div>
           <div>
             <label htmlFor="about">About</label>
-            <input
+            <textarea
               value={this.state.about}
               className="form-control"
               name="about"
               onChange={this.onInputChange}
+              rows="3"
             />
           </div>
           <div className="form-group">
@@ -212,11 +213,12 @@ class NewDogForm extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="preferredPlayBuddy">Preferred Play Buddy</label>
-            <input
+            <textarea
               value={this.state.preferredPlayBuddy}
               className="form-control"
               name="preferredPlayBuddy"
               onChange={this.onInputChange}
+              rows="3"
             />
           </div>
           <input
