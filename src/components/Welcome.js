@@ -2,6 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Welcome.css";
 import dogsplaying from "../img/dogsplaying.jpg";
+import signup from "../img/signup.jpg";
+import personanddog from "../img/personanddog.png";
+import magnifier from "../img/magnifier.png";
 
 const Welcome = props => {
   return (
@@ -22,6 +25,7 @@ const Welcome = props => {
           className="welcome-detail-container"
           id="first-detail-container"
         >
+          <img src={signup} alt="person icon" />
           <h3>Create a profile</h3>
           <p>Create profile and tell use about your dog</p>
         </section>
@@ -29,10 +33,12 @@ const Welcome = props => {
           className="welcome-detail-container"
           id="second-detail-container"
         >
+          <img src={magnifier} alt="magnifying glass" />
           <h3>Find playmates nearby</h3>
           <p>View profiles of dogs in your area</p>
         </section>
         <section className="welcome-detail-container">
+          <img src={personanddog} alt="icon of person and dog" />
           <h3>Meetup</h3>
           <p>
             Find the right playmate for your pup? Reach out to setup a playdate!

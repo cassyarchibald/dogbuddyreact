@@ -27,6 +27,11 @@
   margin: 2rem;
 }
 
+#welcome-details img {
+  height: 4rem;
+  width: auto;
+}
+
 #first-details-container {
   /* grid-column: 1; */
 }
