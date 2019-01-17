@@ -20,7 +20,7 @@ const Login = props => {
           Logout
         </button>
       ) : (
-        <GoogleButton onClick={props.loginCallback} />
+        <GoogleButton onClick={props.loginCallback} id="google-login" />
       )}
       {showCreateProfileForm
         ? (console.log("show form"),

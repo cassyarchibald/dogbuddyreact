@@ -8,7 +8,7 @@
   border-style: inset;
 }
 
-span {
+div[type="dark"] span {
   background-color: inherit;
   color: white;
   margin-right: 0;
