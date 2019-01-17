@@ -7,6 +7,7 @@ import Dog from "./Dog";
 import EditUserForm from "./EditUserForm";
 
 let viewPlayDates = "View All Playdates";
+let viewByStatus = "All";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -22,49 +23,77 @@ class Dashboard extends Component {
       showEditUserForm: false,
       recieverObject: this.props.recieverObject,
       requestorObject: this.props.requestorObject,
-      viewPlayDates: "View All Playdates"
+      viewPlayDates: "View All Playdates",
+      viewByStatus: "All"
     };
-    console.log(this.props.requestedPlaydates);
-    console.log(this.state.viewPlayDates);
   }
 
   onViewPlayDatesChange = event => {
     viewPlayDates = event.target.value;
     this.setState({ viewPlayDates: event.target.value });
-    console.log(this.state.viewPlayDates);
+  };
+
+  onViewStatusChange = event => {
+    viewByStatus = event.target.value;
+    this.setState({ viewByStatus: event.target.value });
+  };
+
+  statusFilter = playDates => {
+    if (viewByStatus === "All") {
+      return playDates;
+    } else if (viewByStatus === "Pending") {
+      // filter playdates by status
+      let result = playDates.filter(playdate => {
+        return playdate.props.status === "Pending";
+      });
+      return result;
+    } else if (viewByStatus === "Approved") {
+      let result = playDates.filter(playdate => {
+        return playdate.props.status === "Approved";
+      });
+      return result;
+    } else if (viewByStatus === "Denied") {
+      let result = playDates.filter(playdate => {
+        return playdate.props.status === "Denied";
+      });
+      return result;
+    }
+  };
+
+  filteredRequestedPlayDates = () => {
+    return this.props.currentUserRequestedPlayDates
+      ? this.statusFilter(this.props.currentUserRequestedPlayDates)
+      : null;
+  };
+
+  filteredRecievedPlayDates = () => {
+    return this.props.currentUserRecievedPlayDates
+      ? this.statusFilter(this.props.currentUserRecievedPlayDates)
+      : null;
   };
 
   showPlayDates = () => {
     if (viewPlayDates === "View All Playdates") {
-      console.log("view all");
       return (
         <section className="user-playdates row mt-5">
           <h2 className="w-100">Requested Playdates</h2>
-          {this.props.currentUserRequestedPlayDates
-            ? this.props.currentUserRequestedPlayDates
-            : null}
+          {this.filteredRequestedPlayDates()}
           <h2 className="w-100">Recieved Playdates</h2>
-          {this.props.currentUserRecievedPlayDates
-            ? this.props.currentUserRecievedPlayDates
-            : null}
+          {this.filteredRecievedPlayDates()}
         </section>
       );
     } else if (viewPlayDates === "View Requested Playdates") {
       return (
         <section className="user-playdates row mt-5">
           <h2 className="w-100">Requested Playdates</h2>
-          {this.props.currentUserRequestedPlayDates
-            ? this.props.currentUserRequestedPlayDates
-            : null}
+          {this.filteredRequestedPlayDates()}
         </section>
       );
     } else if (viewPlayDates === "View Recieved Playdates") {
       return (
         <section className="user-playdates row mt-5">
           <h2 className="w-100">Recieved Playdates</h2>
-          {this.props.currentUserRecievedPlayDates
-            ? this.props.currentUserRecievedPlayDates
-            : null}
+          {this.filteredRecievedPlayDates()}
         </section>
       );
     } else {
@@ -97,7 +126,6 @@ class Dashboard extends Component {
   };
 
   render() {
-    console.log(this.props.currentUserRequestedPlayDates);
     // TODO QUESTION
     // Not updating when I use the edit form
     // data is tied to the currentUserObject
@@ -165,19 +193,15 @@ class Dashboard extends Component {
             <option>View Requested Playdates</option>
             <option>View Recieved Playdates</option>
           </select>
+          <select name="viewByStatus" onChange={this.onViewStatusChange}>
+            <option>All</option>
+            <option>Approved</option>
+            <option>Pending</option>
+            <option>Denied</option>
+          </select>
           {this.showPlayDates()}
         </section>
       </div>
-
-      //   {this.props.currentUserRequestedPlayDates
-      //     ? this.props.currentUserRequestedPlayDates
-      //     : null}
-      // </section>
-      // <section className="user-playdates row mt-5">
-      //   <h2 className="w-100">Recieved Playdates</h2>
-      //   {this.props.currentUserRecievedPlayDates
-      //     ? this.props.currentUserRecievedPlayDates
-      // : null}
     );
   }
 }
