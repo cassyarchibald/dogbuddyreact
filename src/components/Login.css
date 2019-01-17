@@ -7,3 +7,19 @@
 .loginBtn:hover {
   border-style: inset;
 }
+
+span {
+  background-color: inherit;
+  color: white;
+  margin-right: 0;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+div[type="dark"] {
+  margin-left: auto;
+  margin-right: auto;
+}

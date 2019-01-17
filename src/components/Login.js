@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 //import Dashboard from "./Dashboard";
 import "./Login.css";
 import CreateProfile from "./CreateProfile";
+import GoogleButton from "react-google-button";
 
 const Login = props => {
   let showCreateProfileForm = false;
@@ -19,9 +20,7 @@ const Login = props => {
           Logout
         </button>
       ) : (
-        <button className="loginBtn--google" onClick={props.loginCallback}>
-          Log In
-        </button>
+        <GoogleButton onClick={props.loginCallback} />
       )}
       {showCreateProfileForm
         ? (console.log("show form"),
