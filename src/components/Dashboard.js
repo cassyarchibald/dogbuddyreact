@@ -78,7 +78,7 @@ class Dashboard extends Component {
         <section className="user-playdates row mt-5">
           <h2 className="w-100">Requested Playdates</h2>
           {this.filteredRequestedPlayDates()}
-          <h2 className="w-100">Recieved Playdates</h2>
+          <h2 className="w-100 mt-5">Recieved Playdates</h2>
           {this.filteredRecievedPlayDates()}
         </section>
       );
