@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./Welcome.css";
+import dogsplaying from "../img/dogsplaying.jpg";
 
 const Welcome = props => {
   return (
     <section className="welcome-container">
       <header>
         <h1>Welcome To DogBuddy!</h1>
+        <img src={dogsplaying} alt="dogs playing" />
       </header>
       <section id="welcome-statement">
         <h1>Find your dog a playmate today!</h1>
