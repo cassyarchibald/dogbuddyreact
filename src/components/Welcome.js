@@ -16,13 +16,19 @@ const Welcome = props => {
       <section id="welcome-statement">
         <h1>Find your dog a playmate today!</h1>
       </section>
+      <h2 className="mb-1">How It Works</h2>
       <section id="welcome-details">
-        <h2>How It Works</h2>
-        <section className="welcome-detail-container">
+        <section
+          className="welcome-detail-container"
+          id="first-detail-container"
+        >
           <h3>Create a profile</h3>
           <p>Create profile and tell use about your dog</p>
         </section>
-        <section className="welcome-detail-container">
+        <section
+          className="welcome-detail-container"
+          id="second-detail-container"
+        >
           <h3>Find playmates nearby</h3>
           <p>View profiles of dogs in your area</p>
         </section>
