@@ -187,18 +187,25 @@ class Dashboard extends Component {
         <section className="user-dogs row mt-5">
           {this.props.currentUserDogs ? this.props.currentUserDogs : null}
         </section>
+
         <section className="user-playdates row mt-5">
-          <select name="viewPlayDates" onChange={this.onViewPlayDatesChange}>
-            <option>View All Playdates</option>
-            <option>View Requested Playdates</option>
-            <option>View Recieved Playdates</option>
-          </select>
-          <select name="viewByStatus" onChange={this.onViewStatusChange}>
-            <option>All</option>
-            <option>Approved</option>
-            <option>Pending</option>
-            <option>Denied</option>
-          </select>
+          <section className="dropdowns">
+            <select
+              className="viewPlayDates"
+              onChange={this.onViewPlayDatesChange}
+            >
+              <option>View All Playdates</option>
+              <option>View Requested Playdates</option>
+              <option>View Recieved Playdates</option>
+            </select>
+            <select className="viewByStatus" onChange={this.onViewStatusChange}>
+              <option>All</option>
+              <option>Approved</option>
+              <option>Pending</option>
+              <option>Denied</option>
+            </select>
+          </section>
+
           {this.showPlayDates()}
         </section>
       </div>

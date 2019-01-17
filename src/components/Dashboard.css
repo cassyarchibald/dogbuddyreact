@@ -35,3 +35,12 @@ img {
 .user-dogs {
   display: flex;
 }
+
+.dropdowns {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+select .viewPlayDates,
+select .viewByStatus {
+}
