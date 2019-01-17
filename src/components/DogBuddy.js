@@ -733,7 +733,7 @@ class DogBuddy extends Component {
             {this.state.profileCreated === false && (
               <Link to="/createProfile">Create Profile</Link>
             )}
-
+            <Link to="/home">Home</Link>
             <Link to="/dashboard">Dashboard</Link>
             <Link to="/dogs">View Dogs</Link>
             <Link to="/users">View Users</Link>
@@ -741,7 +741,7 @@ class DogBuddy extends Component {
           </nav>
           <Switch>
             <Route exact path="/" render={() => <Welcome />} />
-
+            <Route exact path="/home" render={() => <Welcome />} />
             <Route
               path="/login"
               render={() =>

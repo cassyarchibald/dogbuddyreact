@@ -7,8 +7,11 @@ const Welcome = props => {
   return (
     <section className="welcome-container">
       <header>
-        <h1>Welcome To DogBuddy!</h1>
-        <img src={dogsplaying} alt="dogs playing" />
+        <div className="header-container">
+          <div className="headline-text-container">
+            <h1>Welcome To DogBuddy!</h1>
+          </div>
+        </div>
       </header>
       <section id="welcome-statement">
         <h1>Find your dog a playmate today!</h1>
