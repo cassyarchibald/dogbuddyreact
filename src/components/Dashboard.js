@@ -6,6 +6,8 @@ import NewDogForm from "./NewDogForm";
 import Dog from "./Dog";
 import EditUserForm from "./EditUserForm";
 
+let viewPlayDates = "View All Playdates";
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -19,10 +21,56 @@ class Dashboard extends Component {
       showAddDogForm: false,
       showEditUserForm: false,
       recieverObject: this.props.recieverObject,
-      requestorObject: this.props.requestorObject
+      requestorObject: this.props.requestorObject,
+      viewPlayDates: "View All Playdates"
     };
     console.log(this.props.requestedPlaydates);
+    console.log(this.state.viewPlayDates);
   }
+
+  onViewPlayDatesChange = event => {
+    viewPlayDates = event.target.value;
+    this.setState({ viewPlayDates: event.target.value });
+    console.log(this.state.viewPlayDates);
+  };
+
+  showPlayDates = () => {
+    if (viewPlayDates === "View All Playdates") {
+      console.log("view all");
+      return (
+        <section className="user-playdates row mt-5">
+          <h2 className="w-100">Requested Playdates</h2>
+          {this.props.currentUserRequestedPlayDates
+            ? this.props.currentUserRequestedPlayDates
+            : null}
+          <h2 className="w-100">Recieved Playdates</h2>
+          {this.props.currentUserRecievedPlayDates
+            ? this.props.currentUserRecievedPlayDates
+            : null}
+        </section>
+      );
+    } else if (viewPlayDates === "View Requested Playdates") {
+      return (
+        <section className="user-playdates row mt-5">
+          <h2 className="w-100">Requested Playdates</h2>
+          {this.props.currentUserRequestedPlayDates
+            ? this.props.currentUserRequestedPlayDates
+            : null}
+        </section>
+      );
+    } else if (viewPlayDates === "View Recieved Playdates") {
+      return (
+        <section className="user-playdates row mt-5">
+          <h2 className="w-100">Recieved Playdates</h2>
+          {this.props.currentUserRecievedPlayDates
+            ? this.props.currentUserRecievedPlayDates
+            : null}
+        </section>
+      );
+    } else {
+      console.log(viewPlayDates);
+    }
+  };
 
   requestedPlayDateData = () => {
     // loop through requested play dates if there are any
@@ -56,7 +104,7 @@ class Dashboard extends Component {
     // received via props
     let currentUserObject = this.props.currentUserObject;
 
-    let recievedPlayDateData = null;
+    let recievedPlayDateData = false;
 
     return (
       <div id="dashboard-container">
@@ -89,7 +137,7 @@ class Dashboard extends Component {
 
         {this.props.currentUserObject && this.state.showEditUserForm ? (
           <EditUserForm
-            editPersonCallback={this.props.editPersonCallback}
+            editPersonCallback={this.editPersonCallback}
             person={this.props.currentUserObject}
           />
         ) : null}
@@ -112,19 +160,24 @@ class Dashboard extends Component {
           {this.props.currentUserDogs ? this.props.currentUserDogs : null}
         </section>
         <section className="user-playdates row mt-5">
-          <h2 className="w-100">Requested Playdates</h2>
-
-          {this.props.currentUserRequestedPlayDates
-            ? this.props.currentUserRequestedPlayDates
-            : null}
-        </section>
-        <section className="user-playdates row mt-5">
-          <h2 className="w-100">Recieved Playdates</h2>
-          {this.props.currentUserRecievedPlayDates
-            ? this.props.currentUserRecievedPlayDates
-            : null}
+          <select name="viewPlayDates" onChange={this.onViewPlayDatesChange}>
+            <option>View All Playdates</option>
+            <option>View Requested Playdates</option>
+            <option>View Recieved Playdates</option>
+          </select>
+          {this.showPlayDates()}
         </section>
       </div>
+
+      //   {this.props.currentUserRequestedPlayDates
+      //     ? this.props.currentUserRequestedPlayDates
+      //     : null}
+      // </section>
+      // <section className="user-playdates row mt-5">
+      //   <h2 className="w-100">Recieved Playdates</h2>
+      //   {this.props.currentUserRecievedPlayDates
+      //     ? this.props.currentUserRecievedPlayDates
+      // : null}
     );
   }
 }
