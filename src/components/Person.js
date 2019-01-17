@@ -141,14 +141,18 @@ class Person extends Component {
 
   render() {
     return (
-      <div className="card d-inline-block">
-        <h3 className="text-center" id="person-name">
-          {this.state.firstName} {this.state.lastName}
-        </h3>
-        <p>City: {this.state.city}</p>
-        <p>State: {this.state.state}</p>
-        <p>Zip Code: {this.state.zipCode}</p>
-        <p>About: {this.state.about}</p>
+      <div className="col-sm-6 col-md-6">
+        <div className="card person-card">
+          <h3 className="card=-itle" id="person-name">
+            {this.state.firstName} {this.state.lastName}
+          </h3>
+          <div className="card-body">
+            <p>City: {this.state.city}</p>
+            <p>State: {this.state.state}</p>
+            <p>Zip Code: {this.state.zipCode}</p>
+            <p>About: {this.state.about}</p>
+          </div>
+        </div>
       </div>
     );
   }
