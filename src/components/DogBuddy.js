@@ -292,7 +292,7 @@ class DogBuddy extends Component {
   // will load current user's dogs/playdates and
   // will pass those to the dashboard
   findByUid(uid) {
-    //console.log(uid);
+    console.log(uid);
     axios
       .get(`http://localhost:8080/persons/search/findByUid?uid=${uid}`)
       .then(response => {
@@ -308,6 +308,8 @@ class DogBuddy extends Component {
           // Load requested playdates for the current person
           // Load recieved playdates for the current person
           // pass them to dashboard
+          console.log("loading dogs/playdates for person");
+          console.log(response.data._embedded.persons[0]);
           this.loadPersonsDogs();
           this.loadDogs();
           this.loadPersonsRecievedPlayDates(
@@ -435,7 +437,8 @@ class DogBuddy extends Component {
       .get(`http://localhost:8080/persons/${personId}/requestedPlaydates`)
       .then(response => {
         console.log("success loading users requested playdates");
-        // console.log(response.data);
+        console.log(response.data);
+        console.log(personId);
         const requestedPlayDatesComponents = response.data._embedded.playDates.map(
           playDate => {
             return (
@@ -465,7 +468,7 @@ class DogBuddy extends Component {
         this.setState({
           currentUserRequestedPlayDates: requestedPlayDatesComponents
         });
-        // console.log(this.state.currentUserRequestedPlayDates);
+        console.log(this.state.currentUserRequestedPlayDates);
       })
       .catch(error => {
         this.changeMessage(error.message);
@@ -480,7 +483,7 @@ class DogBuddy extends Component {
       .get(`http://localhost:8080/persons/${personId}/recievedPlaydates`)
       .then(response => {
         console.log("success loading recieved playdates?");
-        //console.log(response);
+        console.log(response);
         const recievedPlayDatesComponents = response.data._embedded.playDates.map(
           playDate => {
             //console.log(playDate);
@@ -716,7 +719,7 @@ class DogBuddy extends Component {
   render() {
     const { redirect } = this.state.redirecToCreateProfile;
     const isAuthenticated = this.state.isLoggedIn && this.state.profileCreated;
-    console.log(isAuthenticated);
+    //console.log(isAuthenticated);
     return (
       //<section>
       <Router>

@@ -21,13 +21,14 @@ class Dashboard extends Component {
       recieverObject: this.props.recieverObject,
       requestorObject: this.props.requestorObject
     };
+    console.log(this.props.requestedPlaydates);
   }
 
   requestedPlayDateData = () => {
     // loop through requested play dates if there are any
     // return data in json format?
-    if (this.state.requestedPlaydates) {
-      let playDateData = this.state.requestedPlaydates.map(playdate => {
+    if (this.props.requestedPlaydates) {
+      let playDateData = this.props.requestedPlaydates.map(playdate => {
         // how to access the owner of each from playdate?
         // happens during playdate mount/lives in playdate state
         return {
@@ -48,7 +49,7 @@ class Dashboard extends Component {
   };
 
   render() {
-    console.log(this.props);
+    console.log(this.props.currentUserRequestedPlayDates);
     // TODO QUESTION
     // Not updating when I use the edit form
     // data is tied to the currentUserObject
