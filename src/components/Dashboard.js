@@ -23,12 +23,40 @@ class Dashboard extends Component {
     };
   }
 
+  requestedPlayDateData = () => {
+    // loop through requested play dates if there are any
+    // return data in json format?
+    if (this.state.requestedPlaydates) {
+      let playDateData = this.state.requestedPlaydates.map(playdate => {
+        // how to access the owner of each from playdate?
+        // happens during playdate mount/lives in playdate state
+        return {
+          startTime: playdate.props.startTime,
+          endTime: playdate.props.endTime,
+          city: playdate.props.city,
+          state: playdate.props.state,
+          zipCode: playdate.props.zipCode,
+          status: playdate.props.status,
+          location: playdate.props.location,
+          details: playdate.props.details,
+          requestorDogName: playdate.props.requestorDogName,
+          recievingDogName: playdate.props.recievingDogName
+        };
+      });
+      return playDateData;
+    }
+  };
+
   render() {
+    console.log(this.props);
     // TODO QUESTION
     // Not updating when I use the edit form
     // data is tied to the currentUserObject
     // received via props
     let currentUserObject = this.props.currentUserObject;
+
+    let recievedPlayDateData = null;
+
     return (
       <div id="dashboard-container">
         {currentUserObject ? (
@@ -84,6 +112,7 @@ class Dashboard extends Component {
         </section>
         <section className="user-playdates row mt-5">
           <h2 className="w-100">Requested Playdates</h2>
+
           {this.props.currentUserRequestedPlayDates
             ? this.props.currentUserRequestedPlayDates
             : null}

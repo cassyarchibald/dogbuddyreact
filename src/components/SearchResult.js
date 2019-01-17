@@ -13,8 +13,10 @@ class SearchResult extends Component {
       isLoggedIn: this.props.isLoggedIn,
       currentUserObject: this.props.currentUserObject,
       showAddPlayDateButton: true,
+      photo: this.props.photo,
       owner: null
     };
+    console.log(props);
   }
   changeMessage = message => {
     this.setState({ alertMessage: message });
@@ -82,42 +84,76 @@ class SearchResult extends Component {
   render() {
     console.log(this.state);
     return (
-      <div className="col-lg-6 col-med-6 col-sm-12">
-        <div className="card">
+      <div className="col-sm-6">
+        <div className="card dog-card">
           <h3 className="text-center" id="dog-name">
             {this.props.name}
           </h3>
-          <p>Age:{this.props.age}</p>
-          <p>Size:{this.props.size}</p>
-          <p>Breed:{this.props.breed}</p>
-          <p>Vaccinated:{this.props.vaccinated}</p>
-          <p>About:{this.props.about}</p>
-          <p>Preferred Play Buddy:{this.props.preferredPlayBuddy}</p>
-
-          {this.state.isLoggedIn && this.state.showAddPlayDateButton ? (
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                this.setState({
-                  showAddPlayDateForm: !this.state.showAddPlayDateForm
-                });
-              }}
-            >
-              {this.state.showAddPlayDateForm
-                ? "Hide Form"
-                : "Send Play Date Request"}
-            </button>
-          ) : null}
-
-          {this.state.showAddPlayDateForm ? (
-            <NewPlayDateForm
-              addPlayDateCallback={this.props.addPlayDateCallback}
-              reciever={this.props.owner}
-              recievingDogName={this.props.name}
-              requestor={this.props.currentUserObject}
-              currentUserObject={this.props.currentUserObject}
+          <div className="text-center">
+            <img
+              src={`${this.props.photo}`}
+              alt={`${this.props.name}'`}
+              className="img-thumbnail mx-auto"
             />
-          ) : null}
+          </div>
+          <div className="dog-information">
+            <p>
+              <span>Age:</span>
+              {this.props.age}
+            </p>
+            <p>
+              <span>Gender:</span>
+              {this.props.gender}
+            </p>
+            <p>
+              <span>Size:</span>
+              {this.props.size}
+            </p>
+            <p>
+              <span>Breed:</span>
+              {this.props.breed}
+            </p>
+
+            <p>
+              <span>Vaccinated:</span>
+              {`${this.props.vaccinated}`}
+            </p>
+            <p>
+              <span>About:</span>
+              {this.props.about}
+            </p>
+            <p>
+              <span>Preferred Play Buddy:</span>
+              {this.props.preferredPlayBuddy}
+            </p>
+
+            {this.state.isLoggedIn && this.state.showAddPlayDateButton ? (
+              <div className="d-flex justify-content-center mb-1">
+                <button
+                  className="btn btn-primary mb-1"
+                  onClick={() => {
+                    this.setState({
+                      showAddPlayDateForm: !this.state.showAddPlayDateForm
+                    });
+                  }}
+                >
+                  {this.state.showAddPlayDateForm
+                    ? "Hide Form"
+                    : "Send Play Date Request"}
+                </button>
+              </div>
+            ) : null}
+
+            {this.state.showAddPlayDateForm ? (
+              <NewPlayDateForm
+                addPlayDateCallback={this.props.addPlayDateCallback}
+                reciever={this.state.owner}
+                recievingDogName={this.props.name}
+                requestor={this.state.currentUserObject}
+                currentUserObject={this.props.currentUserObject}
+              />
+            ) : null}
+          </div>
         </div>
       </div>
     );
