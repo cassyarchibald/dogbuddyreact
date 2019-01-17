@@ -27,7 +27,7 @@ const Welcome = props => {
         >
           <img src={signup} alt="person icon" />
           <h3>Create a profile</h3>
-          <p>Create profile and tell use about your dog</p>
+          <p>Create profile and tell us about your dog</p>
         </section>
         <section
           className="welcome-detail-container"
