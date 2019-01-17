@@ -23,6 +23,7 @@ import DogCollection from "./DogCollection";
 // import NewDogForm from "./NewDogForm";
 import axios from "axios";
 import Search from "./Search";
+import Welcome from "./Welcome";
 import firebase, { auth, provider } from "../firebase.js";
 
 class DogBuddy extends Component {
@@ -739,17 +740,7 @@ class DogBuddy extends Component {
             <Link to="search">Search</Link>
           </nav>
           <Switch>
-            <Route
-              exact
-              path="/"
-              render={() =>
-                isAuthenticated ? (
-                  <Redirect to="/dashboard" />
-                ) : (
-                  <Redirect to="/login" />
-                )
-              }
-            />
+            <Route exact path="/" render={() => <Welcome />} />
 
             <Route
               path="/login"
