@@ -96,7 +96,7 @@ class DogBuddy extends Component {
     // do axios patch request or
     // would it be a put?
     axios
-      .patch(`http://localhost:8080/dogs/${dogId}`, updatedDog)
+      .put(`http://localhost:8080/dogs/${dogId}`, updatedDog)
       .then(response => {
         console.log("update dog successful");
         let updatedData = this.state.dogs;
@@ -529,7 +529,7 @@ class DogBuddy extends Component {
     // do axios patch request or
     // would it be a put?
     axios
-      .patch(
+      .put(
         `http://localhost:8080/persons/${
           this.state.currentUserObject.resourceId
         }`,
