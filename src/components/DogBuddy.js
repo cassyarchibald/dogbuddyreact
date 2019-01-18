@@ -646,6 +646,7 @@ class DogBuddy extends Component {
   };
 
   // load playdates axios get method saved as loadMessages
+  // TODO - Change this to update the current user's requested playdates instead
   loadPlaydates() {
     axios
       .get("http://localhost:8080/playDates")
