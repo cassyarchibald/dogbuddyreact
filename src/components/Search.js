@@ -3,6 +3,7 @@ import SearchList from "./SearchList";
 import SearchBar from "./SearchBar";
 import axios from "axios";
 import "./SearchBar.css";
+import "./Search.css";
 import PropTypes from "prop-types";
 
 const BASE_URL = process.env.REACT_APP_HOST_URL;
@@ -110,7 +111,7 @@ class Search extends Component {
 
   render() {
     return (
-      <section>
+      <section className="search-container">
         <h4 className="alertMessage text-center">{this.state.alertMessage}</h4>
 
         <SearchBar onSearchCallback={this.onSearchChange} />
