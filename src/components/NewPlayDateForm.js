@@ -185,7 +185,7 @@ class NewPlayDateForm extends Component {
               className="form-control"
               name="city"
               onChange={this.onInputChange}
-              value={this.state.city}
+              value={this.state.city ? this.state.city : "Seattle"}
             />
           </div>
           <div>
@@ -194,7 +194,7 @@ class NewPlayDateForm extends Component {
               className="form-control"
               name="state"
               onChange={this.onInputChange}
-              value={this.state.state}
+              value={this.state.state ? this.state.state : "Washington"}
             />
           </div>
           <div>
@@ -204,7 +204,7 @@ class NewPlayDateForm extends Component {
               name="zipCode"
               type="number"
               onChange={this.onInputChange}
-              value={this.state.zipCode}
+              value={this.state.zipCode ? this.state.zipCode : 98133}
             />
           </div>
           <div>
@@ -213,7 +213,8 @@ class NewPlayDateForm extends Component {
               className="form-control"
               name="location"
               onChange={this.onInputChange}
-              value={this.state.location}
+              value={this.state.location ? this.state.location : "Seattle"}
+              rows="3"
             />
           </div>
           <div>
@@ -222,6 +223,7 @@ class NewPlayDateForm extends Component {
               className="form-control"
               name="details"
               type="textarea"
+              rows="3"
               onChange={this.onInputChange}
               value={this.state.details}
             />
