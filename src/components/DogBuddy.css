@@ -31,7 +31,6 @@ Router {
 }
 
 nav {
-  margin: 2rem;
   background-color: #167ffb;
 }
 
@@ -78,4 +77,10 @@ span {
   li {
     list-style-type: disc;
   }
+}
+
+.app-nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
 }

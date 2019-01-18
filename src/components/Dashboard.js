@@ -165,7 +165,7 @@ class Dashboard extends Component {
 
         {this.props.currentUserObject && this.state.showEditUserForm ? (
           <EditUserForm
-            editPersonCallback={this.editPersonCallback}
+            editPersonCallback={this.props.editPersonCallback}
             person={this.props.currentUserObject}
           />
         ) : null}

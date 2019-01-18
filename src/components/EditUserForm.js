@@ -29,9 +29,9 @@ class EditUserForm extends Component {
 
   onFormSubmit = event => {
     event.preventDefault();
-
+    console.log("in on form submit");
     const updatedPerson = {
-      uid: this.state.uid,
+      uid: this.props.person.uid,
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       city: this.state.city,
@@ -39,6 +39,8 @@ class EditUserForm extends Component {
       zipCode: this.state.zipCode,
       about: this.state.about
     };
+    console.log(updatedPerson);
+    console.log(this.props);
 
     // Need to add the user to the parent collection/do post request
     this.props.editPersonCallback(updatedPerson);
@@ -55,10 +57,7 @@ class EditUserForm extends Component {
         <section className="errors">
           <ul>{errorMessages}</ul>
         </section>
-        <form
-          className="edit-user-form w-75"
-          onSubmit={this.props.editUserCallback}
-        >
+        <form className="edit-user-form w-75" onSubmit={this.onFormSubmit}>
           <div className="form-group">
             <label htmlFor="firstName">First Name</label>
             <input

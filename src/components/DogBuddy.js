@@ -725,10 +725,7 @@ class DogBuddy extends Component {
       //<section>
       <Router>
         <div>
-          <nav
-            id="router-list"
-            className="d-flex w-100 justify-content-around align--items-center"
-          >
+          <nav id="router-list" className="app-nav">
             {this.state.isLoggedIn === false && <Link to="/login">Login</Link>}
             {this.state.profileCreated === false && (
               <Link to="/createProfile">Create Profile</Link>
@@ -739,110 +736,112 @@ class DogBuddy extends Component {
             <Link to="/users">View Users</Link>
             <Link to="search">Search</Link>
           </nav>
-          <Switch>
-            <Route exact path="/" render={() => <Welcome />} />
-            <Route exact path="/home" render={() => <Welcome />} />
-            <Route
-              path="/login"
-              render={() =>
-                isAuthenticated ? (
-                  <Redirect to="/dashboard" />
-                ) : (
-                  <Login
-                    user={this.state.user}
-                    loginCallback={this.login}
-                    logoutCallback={this.logout}
+          <div className="App-header">
+            <Switch>
+              <Route exact path="/" render={() => <Welcome />} />
+              <Route exact path="/home" render={() => <Welcome />} />
+              <Route
+                path="/login"
+                render={() =>
+                  isAuthenticated ? (
+                    <Redirect to="/dashboard" />
+                  ) : (
+                    <Login
+                      user={this.state.user}
+                      loginCallback={this.login}
+                      logoutCallback={this.logout}
+                      isLoggedIn={this.state.isLoggedIn}
+                      profileCreated={this.state.profileCreated}
+                      uid={this.state.uid}
+                      addPersonCallback={this.addPerson}
+                    />
+                  )
+                }
+              />
+              <Route
+                path="/createProfile"
+                render={() =>
+                  isAuthenticated ? (
+                    <Redirect to="/dashboard" />
+                  ) : (
+                    <CreateProfile
+                      uid={this.state.uid}
+                      addPersonCallback={this.addPerson}
+                    />
+                  )
+                }
+              />
+              <Route
+                isLoggedIn={this.state.isLoggedIn}
+                profileCreated={this.state.profileCreated}
+                path="/dashboard"
+                render={() =>
+                  isAuthenticated === false ? (
+                    <Redirect to="/login" />
+                  ) : (
+                    <Dashboard
+                      isLoggedIn={this.state.isLoggedIn}
+                      profileCreated={this.state.profileCreated}
+                      user={this.state.user}
+                      currentUserObject={this.state.currentUserObject}
+                      persons={this.state.persons}
+                      addDogCallback={this.addDog}
+                      removeDogCallback={this.removeDog}
+                      editDogCallback={this.updateDog}
+                      editPersonCallback={this.updatePerson}
+                      addPlayDateCallback={this.addPlayDate}
+                      editPlayDateCallback={this.updatePlayDate}
+                      currentUserDogs={this.state.currentUserDogs}
+                      currentUserRecievedPlayDates={
+                        this.state.currentUserRecievedPlayDates
+                      }
+                      currentUserRequestedPlayDates={
+                        this.state.currentUserRequestedPlayDates
+                      }
+                    />
+                  )
+                }
+              />
+              <Route
+                path="/dogs"
+                render={() => (
+                  <DogCollection
+                    dogComponentsCollection={this.state.dogs}
+                    addPlayDateCallback={this.addPlaydate}
+                  />
+                )}
+                isLoggedIn={this.state.isLoggedIn}
+                profileCreated={this.state.profileCreated}
+              />
+              <Route
+                path="/users"
+                render={() =>
+                  isAuthenticated === false ? (
+                    <Redirect to="/login" />
+                  ) : (
+                    <PersonCollection
+                      persons={this.state.persons}
+                      addPersonCallback={this.state.addPerson}
+                    />
+                  )
+                }
+                isLoggedIn={this.state.isLoggedIn}
+                profileCreated={this.state.profileCreated}
+              />
+              <Route
+                path="/search"
+                render={() => (
+                  <Search
+                    dogs={this.state.dogs}
                     isLoggedIn={this.state.isLoggedIn}
                     profileCreated={this.state.profileCreated}
-                    uid={this.state.uid}
-                    addPersonCallback={this.addPerson}
-                  />
-                )
-              }
-            />
-            <Route
-              path="/createProfile"
-              render={() =>
-                isAuthenticated ? (
-                  <Redirect to="/dashboard" />
-                ) : (
-                  <CreateProfile
-                    uid={this.state.uid}
-                    addPersonCallback={this.addPerson}
-                  />
-                )
-              }
-            />
-            <Route
-              isLoggedIn={this.state.isLoggedIn}
-              profileCreated={this.state.profileCreated}
-              path="/dashboard"
-              render={() =>
-                isAuthenticated === false ? (
-                  <Redirect to="/login" />
-                ) : (
-                  <Dashboard
-                    isLoggedIn={this.state.isLoggedIn}
-                    profileCreated={this.state.profileCreated}
-                    user={this.state.user}
-                    currentUserObject={this.state.currentUserObject}
-                    persons={this.state.persons}
-                    addDogCallback={this.addDog}
-                    removeDogCallback={this.removeDog}
-                    editDogCallback={this.updateDog}
-                    editPersonCallback={this.updatePerson}
                     addPlayDateCallback={this.addPlayDate}
-                    editPlayDateCallback={this.updatePlayDate}
-                    currentUserDogs={this.state.currentUserDogs}
-                    currentUserRecievedPlayDates={
-                      this.state.currentUserRecievedPlayDates
-                    }
-                    currentUserRequestedPlayDates={
-                      this.state.currentUserRequestedPlayDates
-                    }
+                    currentUserObject={this.state.currentUserObject}
                   />
-                )
-              }
-            />
-            <Route
-              path="/dogs"
-              render={() => (
-                <DogCollection
-                  dogComponentsCollection={this.state.dogs}
-                  addPlayDateCallback={this.addPlaydate}
-                />
-              )}
-              isLoggedIn={this.state.isLoggedIn}
-              profileCreated={this.state.profileCreated}
-            />
-            <Route
-              path="/users"
-              render={() =>
-                isAuthenticated === false ? (
-                  <Redirect to="/login" />
-                ) : (
-                  <PersonCollection
-                    persons={this.state.persons}
-                    addPersonCallback={this.state.addPerson}
-                  />
-                )
-              }
-              isLoggedIn={this.state.isLoggedIn}
-              profileCreated={this.state.profileCreated}
-            />
-            <Route
-              path="/search"
-              render={() => (
-                <Search
-                  dogs={this.state.dogs}
-                  isLoggedIn={this.state.isLoggedIn}
-                  profileCreated={this.state.profileCreated}
-                  addPlayDateCallback={this.addPlayDate}
-                  currentUserObject={this.state.currentUserObject}
-                />
-              )}
-            />
-          </Switch>
+                )}
+              />
+            </Switch>
+          </div>
         </div>
       </Router>
     );
