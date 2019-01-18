@@ -134,6 +134,7 @@ class NewPlayDateForm extends Component {
       recievingDogName: this.state.recievingDogName,
       dogNames: []
     };
+    console.log(newPlayDate);
     let recieverId = this.props.reciever.props.id;
 
     this.props.addPlayDateCallback(newPlayDate, recieverId, requestorDogName);

@@ -23,6 +23,8 @@ class PlayDate extends Component {
       requestorObject: null,
       alertMessage: []
     };
+    console.log(this.props.startTime);
+    console.log(this.props.endTime);
   }
 
   changeMessage = message => {
@@ -111,7 +113,7 @@ class PlayDate extends Component {
           </p>
           <p>
             <span>Start Time:</span>
-            {moment(this.state.startTime).format(`dddd, MMMM Do YYYY, h:mm a`)}
+            {moment(this.state.startTime).format(`dddd, MMMM YYYY, h:mm a`)}
           </p>
           <p>
             <span>End Time:</span>

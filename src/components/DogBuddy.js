@@ -559,10 +559,10 @@ class DogBuddy extends Component {
   // ***************** PLAYDATES *****************
 
   addPlayDate = (newPlayDate, recieverId, requestorDogName) => {
+    // time is correct here ex. 1pm to 2pm is T13:00 and T14:00
     console.log("in add playdate in dogbuddy");
-    console.log(newPlayDate);
-    console.log(newPlayDate.requestorDogName);
-    console.log(newPlayDate.recievingDogName);
+    console.log(newPlayDate.startTime);
+    console.log(newPlayDate.endTime);
 
     newPlayDate.requestor = `/persons/${
       this.state.currentUserObject.resourceId
@@ -570,18 +570,17 @@ class DogBuddy extends Component {
 
     newPlayDate.reciever = `/persons/${recieverId}`;
     newPlayDate.status = "Pending";
-    // newPlayDate.requestorDogName = requestorDogName;
-    // newPlayDate.recievingDogName = recievingDogName;
-
-    // console.log(newPlayDate.requestor);
-    // console.log(newPlayDate.reciever);
-    // console.log(newPlayDate);
-
+    // during post the value changes to 8:00 for time?
     axios
       .post("http://localhost:8080/playDates", newPlayDate)
       .then(response => {
         console.log("response of addplaydate, successful?");
-        // console.log(response);
+        // response has correct start/end time but postman shows database does not
+        // example: earlier post of 13:00 to 14:00 now shows
+        // T01:00 and T02:00
+        console.log(response.data.startTime);
+        console.log(response.data.endTime);
+        console.log(response);
         let updatedData = this.state.playDates;
         updatedData.push(newPlayDate);
         this.setState({ playDates: updatedData });
