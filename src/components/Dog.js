@@ -123,7 +123,7 @@ class Dog extends Component {
 
             <p>
               <span>Vaccinated:</span>
-              {`${this.state.vaccinated}`}
+              {this.state.vaccinated === true ? "Yes" : "No"}
             </p>
             <p>
               <span>About:</span>

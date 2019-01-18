@@ -205,9 +205,8 @@ class Dashboard extends Component {
               <option>Denied</option>
             </select>
           </section>
-
-          {this.showPlayDates()}
         </section>
+        {this.showPlayDates()}
       </div>
     );
   }
