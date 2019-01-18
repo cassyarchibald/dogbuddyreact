@@ -93,7 +93,7 @@ class NewPlayDateForm extends Component {
 
   onFormSubmit = event => {
     event.preventDefault();
-
+    console.log("inside form submit");
     const {
       startTime,
       endTime,
@@ -118,6 +118,7 @@ class NewPlayDateForm extends Component {
       requestorDog === "Select A Dog"
     ) {
       this.setState({ errorMessages: "field is blank or invalid" });
+      console.log("something is blank");
       return;
     }
 
@@ -185,7 +186,7 @@ class NewPlayDateForm extends Component {
               className="form-control"
               name="city"
               onChange={this.onInputChange}
-              value={this.state.city ? this.state.city : "Seattle"}
+              value={this.state.city}
             />
           </div>
           <div>
@@ -194,7 +195,7 @@ class NewPlayDateForm extends Component {
               className="form-control"
               name="state"
               onChange={this.onInputChange}
-              value={this.state.state ? this.state.state : "Washington"}
+              value={this.state.state}
             />
           </div>
           <div>
@@ -204,7 +205,7 @@ class NewPlayDateForm extends Component {
               name="zipCode"
               type="number"
               onChange={this.onInputChange}
-              value={this.state.zipCode ? this.state.zipCode : 98133}
+              value={this.state.zipCode}
             />
           </div>
           <div>
@@ -213,7 +214,7 @@ class NewPlayDateForm extends Component {
               className="form-control"
               name="location"
               onChange={this.onInputChange}
-              value={this.state.location ? this.state.location : "Seattle"}
+              value={this.state.location}
               rows="3"
             />
           </div>

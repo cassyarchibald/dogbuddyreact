@@ -152,6 +152,9 @@ class Person extends Component {
             <p>Zip Code: {this.state.zipCode}</p>
             <p>About: {this.state.about}</p>
           </div>
+          <div className="d-flex justify-content-center">
+            <button className="btn btn-primary">Send Message</button>
+          </div>
         </div>
       </div>
     );
