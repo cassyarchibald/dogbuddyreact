@@ -211,7 +211,8 @@ Dog.propTypes = {
   preferredPlayBuddy: PropTypes.string,
   addPlayDateCallback: PropTypes.func,
   editDogCallback: PropTypes.func,
-  removeDogCallback: PropTypes.func
+  removeDogCallback: PropTypes.func,
+  isLoggedIn: PropTypes.bool
 };
 
 export default Dog;

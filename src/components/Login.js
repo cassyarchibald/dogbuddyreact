@@ -16,7 +16,10 @@ const Login = props => {
   return (
     <div className="wrapper">
       {props.user ? (
-        <button className="loginBtn" onClick={props.logoutCallback}>
+        <button
+          className="loginBtn btn btn-primary"
+          onClick={props.logoutCallback}
+        >
           Logout
         </button>
       ) : (

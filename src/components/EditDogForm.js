@@ -19,8 +19,6 @@ class EditDogForm extends Component {
       owner: this.props.dog.owner,
       errorMessages: []
     };
-    console.log(this.props.dog.gender);
-    console.log(this.props.dog.vaccinated);
   }
   onInputChange = event => {
     const field = event.target.name;
@@ -224,7 +222,8 @@ class EditDogForm extends Component {
 }
 
 EditDogForm.propTypes = {
-  addDogCallback: PropTypes.func
+  addDogCallback: PropTypes.func,
+  editDogCallback: PropTypes.func
 };
 
 export default EditDogForm;
