@@ -726,7 +726,12 @@ class DogBuddy extends Component {
       <Router>
         <div>
           <nav id="router-list" className="app-nav">
-            <Link to="/login">
+            <Link
+              to="/login"
+              onClick={() => {
+                this.state.isLoggedIn && this.logout();
+              }}
+            >
               {this.state.isLoggedIn ? "Logout" : "Login"}
             </Link>
             {this.state.profileCreated === false && (
@@ -745,11 +750,10 @@ class DogBuddy extends Component {
               <Route exact path="/home" render={() => <Welcome />} />
               <Route
                 path="/login"
-                render={
-                  () => (
-                    // isAuthenticated ? (
-                    //   <Redirect to="/dashboard" />
-                    // ) : (
+                render={() =>
+                  isAuthenticated ? (
+                    <Redirect to="/dashboard" />
+                  ) : (
                     <Login
                       user={this.state.user}
                       loginCallback={this.login}
@@ -760,7 +764,6 @@ class DogBuddy extends Component {
                       addPersonCallback={this.addPerson}
                     />
                   )
-                  // )
                 }
               />
               <Route
