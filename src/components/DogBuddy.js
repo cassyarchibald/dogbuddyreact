@@ -585,6 +585,9 @@ class DogBuddy extends Component {
         updatedData.push(newPlayDate);
         this.setState({ playDates: updatedData });
         this.loadPlaydates();
+        this.loadPersonsRequestedPlayDates(
+          this.state.currentUserObject.resourceId
+        );
       })
       .catch(error => {
         console.log("error with adding playdate");
