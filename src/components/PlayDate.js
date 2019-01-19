@@ -112,12 +112,13 @@ class PlayDate extends Component {
               : null}
           </p>
           <p>
-            <span>Start Time:</span>
-            {moment(this.state.startTime).format(`dddd, MMMM Do YYYY, h:mm a`)}
+            <span>Date</span>
+            {moment(this.state.startTime).format(`LL`)}
           </p>
           <p>
-            <span>End Time:</span>
-            {moment(this.state.endTime).format(`dddd, MMMM Do YYYY, h:mm a`)}
+            <span>From:</span>
+            {moment(this.state.startTime).format(`LT`)} to{" "}
+            {moment(this.state.endTime).format(`LT`)}
           </p>
           <p>
             <span>City: </span>
