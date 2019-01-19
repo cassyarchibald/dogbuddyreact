@@ -116,7 +116,7 @@ class SearchResult extends Component {
 
             <p>
               <span>Vaccinated:</span>
-              {`${this.props.vaccinated}`}
+              {this.props.vaccinated ? "Yes" : "No"}
             </p>
             <p>
               <span>About:</span>
