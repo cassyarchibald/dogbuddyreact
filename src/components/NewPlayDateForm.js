@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 
 let requestorDog = "";
+let requestorDogImage = null;
 
 class NewPlayDateForm extends Component {
   constructor(props) {
@@ -22,6 +23,8 @@ class NewPlayDateForm extends Component {
       requestorDogName: requestorDog,
       recievingDogName: this.props.recievingDogName,
       currentUserObject: this.props.currentUserObject,
+      currentUserDogs: null,
+      requestorDogImage: null,
       errorMessages: [],
       currentUserDogs: null,
       currentUserdogNames: null
@@ -75,8 +78,10 @@ class NewPlayDateForm extends Component {
         });
 
         this.setState({
-          currentUserdogNames: dogNames
+          currentUserdogNames: dogNames,
+          currentUserDogs: response.data._embedded.dogs
         });
+        console.log(this.state.currentUserDogs);
       })
       .catch(error => {
         this.changeMessage(error.message);
@@ -105,7 +110,8 @@ class NewPlayDateForm extends Component {
       reciever,
       requestor,
       requestorDogName,
-      recievingDogName
+      recievingDogName,
+      recievingDogImage
     } = this.state;
 
     if (
@@ -122,6 +128,16 @@ class NewPlayDateForm extends Component {
       return;
     }
 
+    // getting requestor dog image
+    {
+      requestorDog &&
+        this.state.currentUserDogs.forEach(function(dog) {
+          if (dog.name === requestorDog) {
+            requestorDogImage = dog.photo;
+          }
+        });
+    }
+
     const newPlayDate = {
       startTime: this.state.startTime,
       endTime: this.state.endTime,
@@ -133,6 +149,8 @@ class NewPlayDateForm extends Component {
       reciever: this.props.reciever,
       requestorDogName: requestorDog,
       recievingDogName: this.state.recievingDogName,
+      receivingDogPhoto: this.state.recievingDogImage,
+      requestorDogPhoto: requestorDogImage,
       dogNames: []
     };
     console.log(newPlayDate);

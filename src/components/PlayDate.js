@@ -19,12 +19,14 @@ class PlayDate extends Component {
       details: this.props.details,
       requestorDogName: this.props.requestorDogName,
       recievingDogName: this.props.recievingDogName,
+      recievingDogImage: this.props.recievingDogImage,
+      requestorDogImage: null,
       recieverObject: null,
       requestorObject: null,
       alertMessage: []
     };
-    console.log(this.props.startTime);
-    console.log(this.props.endTime);
+    console.log(this.props);
+    console.log(this.state);
   }
 
   changeMessage = message => {
@@ -39,6 +41,7 @@ class PlayDate extends Component {
         this.setState({
           requestorObject: response.data
         });
+        this.loadPlayDateRequestorDogImage();
       })
       .catch(error => {
         this.changeMessage(error.message);
@@ -51,6 +54,43 @@ class PlayDate extends Component {
       .then(response => {
         this.setState({
           recieverObject: response.data
+        });
+        this.loadPlayDateRecieverDogImage();
+      })
+      .catch(error => {
+        this.changeMessage(error.message);
+      });
+  }
+
+  loadPlayDateRequestorDogImage() {
+    console.log("loading reciever dog image");
+    axios
+      .get(
+        `http://localhost:8080/dogs/search/findByName?name=${
+          this.state.requestorDogName
+        }`
+      )
+      .then(response => {
+        this.setState({
+          requestorDogImage: response.data._embedded.dogs[0].photo
+        });
+      })
+      .catch(error => {
+        this.changeMessage(error.message);
+      });
+  }
+
+  loadPlayDateRecieverDogImage() {
+    console.log("loading reciever dog image");
+    axios
+      .get(
+        `http://localhost:8080/dogs/search/findByName?name=${
+          this.state.recievingDogName
+        }`
+      )
+      .then(response => {
+        this.setState({
+          recievingDogImage: response.data._embedded.dogs[0].photo
         });
       })
       .catch(error => {
@@ -69,6 +109,7 @@ class PlayDate extends Component {
   componentDidMount() {
     // load requestor name and reciever name
     this.loadPlayDateRequestor();
+    // loading reciever also loads reciever dogs/the recieving dog's photo
     this.loadPlayDateReciever();
   }
 
@@ -84,80 +125,92 @@ class PlayDate extends Component {
 
   render() {
     return (
-      <div className="col-sm-6 playDate">
+      <div className="col-lg-6 playDate">
         <div className="card">
           <h4 duration={5000} className="alertMessage text-center">
             {this.state.alertMessage}
           </h4>
-          <p>
-            <span>To</span>
-            {this.state.recieverObject
-              ? `${this.state.recieverObject.firstName} ${
-                  this.state.recieverObject.lastName
-                }`
-              : null}
-            {this.state.recievingDogName
-              ? ` and ${this.state.recievingDogName}`
-              : null}
-          </p>
-          <p>
-            <span>From:</span>
-            {this.state.requestorObject
-              ? `${this.state.requestorObject.firstName} ${
-                  this.state.requestorObject.lastName
-                }`
-              : null}
-            {this.state.requestorDogName
-              ? ` and ${this.state.requestorDogName}`
-              : null}
-          </p>
-          <p>
-            <span>Date</span>
-            {moment(this.state.startTime).format(`LL`)}
-          </p>
-          <p>
-            <span>From:</span>
-            {moment(this.state.startTime).format(`LT`)} to{" "}
-            {moment(this.state.endTime).format(`LT`)}
-          </p>
-          <p>
-            <span>City: </span>
-            {this.state.city}
-          </p>
-          <p>
-            <span>State: </span>
-            {this.state.state}
-          </p>
-          <p>
-            <span>Zip Code: </span>
-            {this.state.zipCode}
-          </p>
-          <p>
-            <span>Location: </span>
-            {this.state.location}
-          </p>
-          <p>
-            <span>Details: </span>
-            {this.state.details}
-          </p>
-          <p className={this.statusColor()}>
-            <span className={this.statusColor()}>Status: </span>
-            {this.state.status}
-          </p>
-          <div className="d-flex justify-content-center">
-            {this.props.showStatusChangeButton ? (
-              <button
-                className="btn btn-success"
-                onClick={this.approvePlayDate}
-              >
-                Approve
-              </button>
-            ) : null}
-            {this.props.showStatusChangeButton ? (
-              <button className="btn btn-danger" onClick={this.denyPlayDate}>
-                Deny
-              </button>
-            ) : null}
+          <div className="playdate-grid-container">
+            <h4>Let's Play!</h4>
+            <p className="requestor-info">
+              <h4>To</h4>
+              {this.state.recievingDogImage && (
+                <img
+                  className="recieving-dog-photo img-fluid max-width: 100% height: auto"
+                  alt="recieving dog"
+                  src={this.state.recievingDogImage}
+                />
+              )}
+              {this.state.recieverObject
+                ? `${this.state.recieverObject.firstName} ${
+                    this.state.recieverObject.lastName
+                  }`
+                : null}
+              {this.state.recievingDogName
+                ? ` and ${this.state.recievingDogName}`
+                : null}
+            </p>
+
+            <p className="reciever-info">
+              <h4>From</h4>
+              {this.state.requestorDogImage && (
+                <img
+                  className="requestor-dog-photo img-fluid max-width: 100% height: auto"
+                  alt="requestor dog"
+                  src={this.state.requestorDogImage}
+                />
+              )}
+              {this.state.requestorObject
+                ? `${this.state.requestorObject.firstName} ${
+                    this.state.requestorObject.lastName
+                  }`
+                : null}
+              {this.state.requestorDogName
+                ? ` and ${this.state.requestorDogName}`
+                : null}
+            </p>
+            <section className="playdate-content-container">
+              <section className="playdate-details">
+                <p>
+                  <h4>When</h4>
+                  {moment(this.state.startTime).format(`LL`)},
+                  {moment(this.state.startTime).format(`LT`)} to{" "}
+                  {moment(this.state.endTime).format(`LT`)}
+                </p>
+                <h4>Where</h4>
+                <p>
+                  {this.state.city} {this.state.state} {this.state.zipCode}
+                </p>
+                <p>{this.state.location}</p>
+                <p>
+                  <h4>Details: </h4>
+                  {this.state.details}
+                </p>
+                <p className={this.statusColor()}>
+                  <h4 className={this.statusColor()}>Status: </h4>
+                  {this.state.status}
+                </p>
+              </section>
+
+              <div className="d-flex justify-content-center update-status">
+                {this.props.showStatusChangeButton ? (
+                  <button
+                    className="btn btn-success approve-btn"
+                    onClick={this.approvePlayDate}
+                  >
+                    Approve
+                  </button>
+                ) : null}
+                {this.props.showStatusChangeButton ? (
+                  <button
+                    className="btn btn-danger deny-btn"
+                    onClick={this.denyPlayDate}
+                  >
+                    Deny
+                  </button>
+                ) : null}
+              </div>
+            </section>
           </div>
         </div>
       </div>

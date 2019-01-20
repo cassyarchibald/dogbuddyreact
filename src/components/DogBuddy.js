@@ -574,13 +574,6 @@ class DogBuddy extends Component {
     axios
       .post("http://localhost:8080/playDates", newPlayDate)
       .then(response => {
-        console.log("response of addplaydate, successful?");
-        // response has correct start/end time but postman shows database does not
-        // example: earlier post of 13:00 to 14:00 now shows
-        // T01:00 and T02:00
-        console.log(response.data.startTime);
-        console.log(response.data.endTime);
-        console.log(response);
         let updatedData = this.state.playDates;
         updatedData.push(newPlayDate);
         this.setState({ playDates: updatedData });
@@ -598,9 +591,6 @@ class DogBuddy extends Component {
 
   updatePlayDate = (updatedPlayDate, playDateId) => {
     console.log("in update playdate in dogbuddy");
-    // do axios patch request or
-    // would it be a put?
-    // reload all playdates?
     axios
       .patch(`http://localhost:8080/playDates/${playDateId}`, updatedPlayDate)
       .then(response => {

@@ -96,7 +96,7 @@ class Dog extends Component {
           <h3 className="text-center" id="dog-name">
             {this.state.name}
           </h3>
-          <div className="text-center">
+          <div className="">
             <img
               src={`${this.state.photo}`}
               alt={`${this.state.name}'`}
@@ -133,10 +133,10 @@ class Dog extends Component {
               <span>Preferred Play Buddy:</span>
               {this.state.preferredPlayBuddy}
             </p>
-            <div className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center btn-container">
               {this.props.showEditDelete ? (
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary edit-btn"
                   onClick={() => {
                     this.setState({
                       showEditDogForm: !this.state.showEditDogForm
@@ -187,6 +187,7 @@ class Dog extends Component {
                 addPlayDateCallback={this.props.addPlayDateCallback}
                 reciever={this.state.owner}
                 recievingDogName={this.state.name}
+                recievingDogImage={this.props.photo}
                 requestor={this.state.currentUserObject}
                 currentUserObject={this.props.currentUserObject}
               />

@@ -4,7 +4,12 @@
   padding: 1rem;
 } */
 .dog-card {
-  text-align: center;
+  text-align: left;
+  padding: 1rem;
+}
+
+.dog-information {
+  margin: 1rem;
 }
 
 span {
@@ -42,5 +47,14 @@ button {
 }
 
 mb-1 {
+  margin-bottom: 1rem;
+}
+
+.btn-container .edit-btn {
+  margin-right: 1rem;
+}
+
+.btn-container {
+  margin-top: 1rem;
   margin-bottom: 1rem;
 }
