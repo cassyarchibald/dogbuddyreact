@@ -7,3 +7,9 @@ input[type="radio"] {
   margin-left: auto;
   margin-right: auto;
 }
+
+.new-dog-form .submit {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}

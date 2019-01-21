@@ -152,7 +152,6 @@ class Dashboard extends Component {
             <p>{currentUserObject.zipCode}</p>
 
             <p>{currentUserObject.about}</p>
-            <p>{currentUserObject.photo}</p>
             <button
               className="btn btn-primary"
               onClick={() => {

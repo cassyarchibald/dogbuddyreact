@@ -8,9 +8,9 @@ const DogCollection = props => {
     return <section className="componentcontainer">{dog}</section>;
   } else if (props.dogComponentsCollection.length === 0) {
     return (
-      <div>
+      <section>
         <h1>There are no dogs</h1>
-      </div>
+      </section>
     );
   } else {
     return <p>Loading</p>;

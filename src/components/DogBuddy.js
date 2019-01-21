@@ -593,7 +593,7 @@ class DogBuddy extends Component {
   updatePlayDate = (updatedPlayDate, playDateId) => {
     console.log("in update playdate in dogbuddy");
     axios
-      .patch(`http://localhost:8080/playDates/${playDateId}`, updatedPlayDate)
+      .put(`http://localhost:8080/playDates/${playDateId}`, updatedPlayDate)
       .then(response => {
         console.log("update playdate successful");
         let updatedData = this.state.playDates;

@@ -223,7 +223,7 @@ class NewDogForm extends Component {
           </div>
           <input
             type="submit"
-            className="btn btn-primary"
+            className="btn btn-primary submit"
             value="Create Dog Profile"
           />
         </form>
