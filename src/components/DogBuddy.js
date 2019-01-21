@@ -70,7 +70,7 @@ class DogBuddy extends Component {
     }
 
     axios
-      .post(`http://dogbuddyapi.herokuapp.com/dogs/`, newDog)
+      .post(`https://dogbuddyapi.herokuapp.com/dogs/`, newDog)
       .then(response => {
         console.log("adding dog success");
         let updatedData = this.state.dogs;
@@ -93,7 +93,7 @@ class DogBuddy extends Component {
     // do axios patch request or
     // would it be a put?
     axios
-      .put(`http://dogbuddyapi.herokuapp.com/dogs/${dogId}`, updatedDog)
+      .put(`https://dogbuddyapi.herokuapp.com/dogs/${dogId}`, updatedDog)
       .then(response => {
         console.log("update dog successful");
         let updatedData = this.state.dogs;
@@ -120,9 +120,9 @@ class DogBuddy extends Component {
     // splice that index out
     // update the state to equal the new value
     // do delete axios request
-    console.log(`http://dogbuddyapi.herokuapp.com/dogs/${dogId}`);
+    console.log(`https://dogbuddyapi.herokuapp.com/dogs/${dogId}`);
     axios
-      .delete(`http://dogbuddyapi.herokuapp.com/dogs/${dogId}`)
+      .delete(`https://dogbuddyapi.herokuapp.com/dogs/${dogId}`)
       .then(response => {
         console.log("remove dog successful?");
         console.log(response);
@@ -160,7 +160,7 @@ class DogBuddy extends Component {
   //load dogs axios get method saved as loadDogs
   loadDogs() {
     axios
-      .get("http://dogbuddyapi.herokuapp.com/dogs")
+      .get("https://dogbuddyapi.herokuapp.com/dogs")
       .then(response => {
         const dogComponents = response.data._embedded.dogs.map(dog => {
           return (
@@ -203,7 +203,7 @@ class DogBuddy extends Component {
     console.log("in add person in dogbuddy");
     newPerson.uid = this.state.uid;
     axios
-      .post("http://dogbuddyapi.herokuapp.com/persons", newPerson)
+      .post("https://dogbuddyapi.herokuapp.com/persons", newPerson)
       .then(response => {
         console.log(response);
         console.log("Added person");
@@ -230,7 +230,7 @@ class DogBuddy extends Component {
     // QUESTION should I also do axios request to delete their dogs/
     // any playdates associated with them (might be a cascade setting in api)
     axios
-      .delete(`http://dogbuddyapi.herokuapp.com/persons/${personId}`)
+      .delete(`https://dogbuddyapi.herokuapp.com/persons/${personId}`)
       .then(response => {
         let deleteIndex = -1;
         this.state.persons.forEach((person, index) => {
@@ -252,7 +252,7 @@ class DogBuddy extends Component {
 
   loadPersons() {
     axios
-      .get("http://dogbuddyapi.herokuapp.com/persons")
+      .get("https://dogbuddyapi.herokuapp.com/persons")
       .then(response => {
         const PersonComponenets = response.data._embedded.persons.map(
           person => {
@@ -293,7 +293,7 @@ class DogBuddy extends Component {
     console.log(uid);
     axios
       .get(
-        `http://dogbuddyapi.herokuapp.com/persons/search/findByUid?uid=${uid}`
+        `https://dogbuddyapi.herokuapp.com/persons/search/findByUid?uid=${uid}`
       )
       .then(response => {
         // If successful, update profile created
@@ -387,7 +387,7 @@ class DogBuddy extends Component {
   loadPersonsDogs() {
     axios
       .get(
-        `http://dogbuddyapi.herokuapp.com/persons/${
+        `https://dogbuddyapi.herokuapp.com/persons/${
           this.state.currentUserObject.resourceId
         }/dogs`
       )
@@ -439,7 +439,7 @@ class DogBuddy extends Component {
     console.log("loading users requested playdates");
     axios
       .get(
-        `http://dogbuddyapi.herokuapp.com/persons/${personId}/requestedPlaydates`
+        `https://dogbuddyapi.herokuapp.com/persons/${personId}/requestedPlaydates`
       )
       .then(response => {
         console.log("success loading users requested playdates");
@@ -484,10 +484,10 @@ class DogBuddy extends Component {
 
   loadPersonsRecievedPlayDates(personId) {
     console.log("loading recieved playdates");
-    //console.log(`http://dogbuddyapi.herokuapp.com/persons/${personId}/recievedPlaydates`);
+    //console.log(`https://dogbuddyapi.herokuapp.com/persons/${personId}/recievedPlaydates`);
     axios
       .get(
-        `http://dogbuddyapi.herokuapp.com/persons/${personId}/recievedPlaydates`
+        `https://dogbuddyapi.herokuapp.com/persons/${personId}/recievedPlaydates`
       )
       .then(response => {
         console.log("success loading recieved playdates?");
@@ -537,7 +537,7 @@ class DogBuddy extends Component {
     // would it be a put?
     axios
       .put(
-        `http://dogbuddyapi.herokuapp.com/persons/${
+        `https://dogbuddyapi.herokuapp.com/persons/${
           this.state.currentUserObject.resourceId
         }`,
         updatedPerson
@@ -579,7 +579,7 @@ class DogBuddy extends Component {
     newPlayDate.status = "Pending";
     // during post the value changes to 8:00 for time?
     axios
-      .post("http://dogbuddyapi.herokuapp.com/playDates", newPlayDate)
+      .post("https://dogbuddyapi.herokuapp.com/playDates", newPlayDate)
       .then(response => {
         let updatedData = this.state.playDates;
         updatedData.push(newPlayDate);
@@ -600,7 +600,7 @@ class DogBuddy extends Component {
     console.log("in update playdate in dogbuddy");
     axios
       .put(
-        `http://dogbuddyapi.herokuapp.com/playDates/${playDateId}`,
+        `https://dogbuddyapi.herokuapp.com/playDates/${playDateId}`,
         updatedPlayDate
       )
       .then(response => {
@@ -625,7 +625,7 @@ class DogBuddy extends Component {
     // do delete axios request for playdate
     // reload all playdates to update requestor/reciever sides
     axios
-      .delete(`http://dogbuddyapi.herokuapp.com/playDates/${playDateId}`)
+      .delete(`https://dogbuddyapi.herokuapp.com/playDates/${playDateId}`)
       .then(response => {
         console.log("remove playdate successful?");
         let deleteIndex = -1;
@@ -652,7 +652,7 @@ class DogBuddy extends Component {
   // TODO - Change this to update the current user's requested playdates instead
   loadPlaydates() {
     axios
-      .get("http://dogbuddyapi.herokuapp.com/playDates")
+      .get("https://dogbuddyapi.herokuapp.com/playDates")
       .then(response => {
         // might need to do response.playDates
         const PlayDateComponents = response.data._embedded.playDates.map(

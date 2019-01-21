@@ -63,7 +63,7 @@ class NewPlayDateForm extends Component {
   loadPersonsDogs() {
     axios
       .get(
-        `http://dogbuddyapi.herokuapp.com/persons/${
+        `https://dogbuddyapi.herokuapp.com/persons/${
           this.props.currentUserObject.resourceId
         }/dogs`
       )

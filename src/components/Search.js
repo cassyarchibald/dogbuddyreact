@@ -88,7 +88,7 @@ class Search extends Component {
       // call backend for dogs that have owner's with zipcode
       axios
         .get(
-          `http://dogbuddyapi.herokuapp.com/dogs/search/findByPerson_ZipCode?zipCode=${zipCode}`
+          `https://dogbuddyapi.herokuapp.com/dogs/search/findByPerson_ZipCode?zipCode=${zipCode}`
         )
 
         .then(response => {
