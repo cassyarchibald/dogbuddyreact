@@ -298,8 +298,12 @@ class DogBuddy extends Component {
       .get(`http://localhost:8080/persons/search/findByUid?uid=${uid}`)
       .then(response => {
         // If successful, update profile created
+        console.log(response);
 
-        if (response.status === 200) {
+        if (
+          response.status === 200 &&
+          response.data._embedded.persons.length > 0
+        ) {
           this.setState({
             profileCreated: true,
             currentUserObject: response.data._embedded.persons[0]

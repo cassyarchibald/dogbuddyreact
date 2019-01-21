@@ -136,7 +136,7 @@ class PlayDate extends Component {
               <h4>To</h4>
               {this.state.recievingDogImage && (
                 <img
-                  className="recieving-dog-photo img-fluid max-width: 100% height: auto"
+                  className="recieving-dog-photo img-fluid max-width: 100% height: auto img-thumbnail"
                   alt="recieving dog"
                   src={this.state.recievingDogImage}
                 />
@@ -155,7 +155,7 @@ class PlayDate extends Component {
               <h4>From</h4>
               {this.state.requestorDogImage && (
                 <img
-                  className="requestor-dog-photo img-fluid max-width: 100% height: auto"
+                  className="requestor-dog-photo img-fluid max-width: 100% height: auto img-thumbnail"
                   alt="requestor dog"
                   src={this.state.requestorDogImage}
                 />
