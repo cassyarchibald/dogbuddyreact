@@ -6,7 +6,7 @@ const PersonCollection = props => {
   if (props.persons.length > 0) {
     let persons = props.persons;
     return (
-      <section>
+      <section className="persons-container">
         <div className="componentcontainer">{persons}</div>
       </section>
     );

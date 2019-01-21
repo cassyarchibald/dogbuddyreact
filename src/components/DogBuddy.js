@@ -78,9 +78,6 @@ class DogBuddy extends Component {
 
         this.setState({ dogs: updatedData });
 
-        console.log("updated data value");
-        console.log(updatedData);
-        console.log(this.state.dogs);
         this.loadPersonsDogs();
         this.loadPersons();
       })
