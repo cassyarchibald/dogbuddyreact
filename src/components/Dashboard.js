@@ -141,6 +141,11 @@ class Dashboard extends Component {
             <h2>
               {`${currentUserObject.firstName} ${currentUserObject.lastName}`}
             </h2>
+            <img
+              src={`${currentUserObject.photo}`}
+              alt={`${currentUserObject.firstName}`}
+              className="img-thumbnail "
+            />
             <p>{currentUserObject.city}</p>
             <p>{currentUserObject.state}</p>
 

@@ -146,6 +146,11 @@ class Person extends Component {
           <h3 className="card=-itle" id="person-name">
             {this.state.firstName} {this.state.lastName}
           </h3>
+          <img
+            src={`${this.state.photo}`}
+            alt={`${this.state.firstName}`}
+            className="card-img-top"
+          />
           <div className="card-body">
             <p>City: {this.state.city}</p>
             <p>State: {this.state.state}</p>
