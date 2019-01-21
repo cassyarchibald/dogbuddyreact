@@ -66,7 +66,7 @@ class PlayDate extends Component {
     console.log("loading reciever dog image");
     axios
       .get(
-        `http://localhost:8080/dogs/search/findByName?name=${
+        `http://dogbuddyapi.herokuapp.com/dogs/search/findByName?name=${
           this.state.requestorDogName
         }`
       )
@@ -84,7 +84,7 @@ class PlayDate extends Component {
     console.log("loading reciever dog image");
     axios
       .get(
-        `http://localhost:8080/dogs/search/findByName?name=${
+        `http://dogbuddyapi.herokuapp.com/dogs/search/findByName?name=${
           this.state.recievingDogName
         }`
       )
