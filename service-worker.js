@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/dogbuddyreact/precache-manifest.925f5a71d3e8175089f9cb24a63f290f.js"
+  "/dogbuddyreact/precache-manifest.80b621aa2bc3ccd4f4c87f6af529a972.js"
 );
 
 workbox.clientsClaim();
