@@ -143,19 +143,23 @@ class Person extends Component {
     return (
       <div className="col-sm-6 col-md-6">
         <div className="card person-card">
-          <h3 className="card=-itle" id="person-name">
+          <h3 className="card-title" id="person-name">
             {this.state.firstName} {this.state.lastName}
           </h3>
           <img
             src={`${this.state.photo}`}
             alt={`${this.state.firstName}`}
-            className="card-img-top"
+            className="card-img-top w-75"
           />
           <div className="card-body">
-            <p>City: {this.state.city}</p>
-            <p>State: {this.state.state}</p>
-            <p>Zip Code: {this.state.zipCode}</p>
-            <p>About: {this.state.about}</p>
+            <p>
+              <span>Location</span>
+              {this.state.city}, {this.state.state} {this.state.zipCode}
+            </p>
+            <p>
+              <span>About</span>
+              {this.state.about}
+            </p>
           </div>
           <div className="d-flex justify-content-center">
             <button className="btn btn-primary">Send Message</button>

@@ -5,14 +5,25 @@
 
 .person-card img {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.person-card h3 {
-  font-weight: bold;
-  margin-bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .person-card *,
 #person-name {
   color: black;
+}
+
+.person-card {
+  text-align: left;
+}
+
+.person-card h3 {
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.person-card button {
+  margin-bottom: 1rem;
 }
