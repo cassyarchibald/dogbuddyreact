@@ -45,7 +45,7 @@ class Search extends Component {
     this.request_url =
       process.env.REACT_APP_HOST_URL +
       "/" +
-      process.env.REACT_APP_API_KEY +
+      process.env.REACT_APP_CLIENT_KEY +
       "/radius.json/" +
       `${zipCode}` +
       "/" +
