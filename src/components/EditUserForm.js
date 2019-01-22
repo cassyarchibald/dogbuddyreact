@@ -13,6 +13,7 @@ class EditUserForm extends Component {
       state: this.props.person.state,
       zipCode: this.props.person.zipCode,
       about: this.props.person.about,
+      photo: this.props.person.photo,
       errorMessages: []
     };
     console.log(this.props);
@@ -37,7 +38,8 @@ class EditUserForm extends Component {
       city: this.state.city,
       state: this.state.state,
       zipCode: this.state.zipCode,
-      about: this.state.about
+      about: this.state.about,
+      photo: this.state.photo
     };
     console.log(updatedPerson);
     console.log(this.props);
@@ -73,6 +75,15 @@ class EditUserForm extends Component {
               value={this.state.lastName}
               className="form-control"
               name="lastName"
+              onChange={this.onInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="photo">Photo</label>
+            <input
+              value={this.state.photo}
+              className="form-control"
+              name="photo"
               onChange={this.onInputChange}
             />
           </div>

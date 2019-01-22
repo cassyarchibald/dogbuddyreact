@@ -83,6 +83,7 @@ class DogBuddy extends Component {
       })
       .catch(error => {
         console.log("adding dog failure");
+        console.log(newDog);
         this.changeMessage(error.message);
         console.log(error.message);
       });
