@@ -137,34 +137,40 @@ class Dashboard extends Component {
     return (
       <div id="dashboard-container">
         {currentUserObject ? (
-          <section id="user-information">
+          <div id="user-information" className="card person-card">
             <h2>
               {`${currentUserObject.firstName} ${currentUserObject.lastName}`}
             </h2>
             <img
               src={`${currentUserObject.photo}`}
               alt={`${currentUserObject.firstName}`}
-              className="img-thumbnail "
+              className="img-thumbnail profile-photo w-50"
             />
-            <p>{currentUserObject.city}</p>
-            <p>{currentUserObject.state}</p>
+            <p>
+              <span>Location</span>
+              {currentUserObject.city}, {currentUserObject.state}{" "}
+              {currentUserObject.zipCode}
+            </p>
 
-            <p>{currentUserObject.zipCode}</p>
-
-            <p>{currentUserObject.about}</p>
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                this.setState({
-                  showEditUserForm: !this.state.showEditUserForm
-                });
-                console.log(this.state.showEditUserForm);
-                console.log(this.props.currentUserObject);
-              }}
-            >
-              Edit Profile
-            </button>
-          </section>
+            <p>
+              <span>About</span>
+              {currentUserObject.about}
+            </p>
+            <div className="d-flex justify-content-center btn-container">
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  this.setState({
+                    showEditUserForm: !this.state.showEditUserForm
+                  });
+                  console.log(this.state.showEditUserForm);
+                  console.log(this.props.currentUserObject);
+                }}
+              >
+                Edit Profile
+              </button>
+            </div>
+          </div>
         ) : null}
 
         {this.props.currentUserObject && this.state.showEditUserForm ? (
