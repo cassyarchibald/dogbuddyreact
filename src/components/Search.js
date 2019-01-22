@@ -51,6 +51,8 @@ class Search extends Component {
       "/" +
       `${radius}` +
       "/mile?minimal";
+
+    console.log(this.request_url);
     axios
       .get(this.request_url)
 
