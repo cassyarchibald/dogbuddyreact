@@ -105,7 +105,11 @@ class NewDogForm extends Component {
         <section className="errors">
           <ul>{errorMessages}</ul>
         </section>
-        <form className="new-dog-form w-75" onSubmit={this.onFormSubmit}>
+        <form
+          id="dog-form"
+          className="new-dog-form w-75"
+          onSubmit={this.onFormSubmit}
+        >
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input

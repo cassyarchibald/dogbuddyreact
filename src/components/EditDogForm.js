@@ -214,7 +214,11 @@ class EditDogForm extends Component {
               rows="3"
             />
           </div>
-          <input type="submit" className="btn btn-primary" value="Update Dog" />
+          <input
+            type="submit"
+            className="btn btn-primary submit"
+            value="Update Dog"
+          />
         </form>
       </div>
     );
