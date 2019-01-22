@@ -201,14 +201,19 @@ class Dashboard extends Component {
         <section className="user-playdates row mt-5">
           <section className="dropdowns">
             <select
-              className="viewPlayDates"
+              className="btn btn-info"
+              id="viewPlayDates"
               onChange={this.onViewPlayDatesChange}
             >
               <option>View All Playdates</option>
               <option>View Requested Playdates</option>
               <option>View Recieved Playdates</option>
             </select>
-            <select className="viewByStatus" onChange={this.onViewStatusChange}>
+            <select
+              className="btn btn-info"
+              id="viewByStatus"
+              onChange={this.onViewStatusChange}
+            >
               <option>All</option>
               <option>Approved</option>
               <option>Pending</option>
