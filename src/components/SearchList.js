@@ -5,8 +5,8 @@ import "./SearchList.css";
 
 const SearchList = props => {
   console.log(props);
+  let regex = /\d/;
   const SearchList = props.resultList.map((result, i) => {
-    console.log(result);
     // need to pass owner link down to search result
     return (
       <SearchResult

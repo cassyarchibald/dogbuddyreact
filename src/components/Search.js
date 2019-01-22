@@ -6,9 +6,6 @@ import "./SearchBar.css";
 import "./Search.css";
 import PropTypes from "prop-types";
 
-const BASE_URL = process.env.REACT_APP_HOST_URL;
-const KEY = process.env.REACT_APP_API_KEY;
-
 class Search extends Component {
   constructor(props) {
     super(props);
