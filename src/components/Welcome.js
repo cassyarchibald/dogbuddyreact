@@ -19,7 +19,7 @@ const Welcome = props => {
       <section id="welcome-statement">
         <h2 id="welcome-subheading">Find your dog a playmate today!</h2>
       </section>
-      <h2 className="mb-1">How It Works</h2>
+      <h2 id="welcome-how-heading">How It Works</h2>
       <section id="welcome-details">
         <section
           className="welcome-detail-container"

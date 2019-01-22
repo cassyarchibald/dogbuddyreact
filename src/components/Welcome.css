@@ -30,7 +30,11 @@
 #welcome-subheading {
   font-family: "Monoton", cursive;
   font-size: 4rem;
-  margin: 3rem;
+  margin: 4rem;
+}
+
+#welcome-how-heading {
+  margin: 1rem;
 }
 
 .headline-text-container {
@@ -54,6 +58,10 @@
   margin: 0 10px;
   padding: 1rem;
   box-sizing: border-box;
+}
+
+.welcome-detail-container {
+  padding: 1rem;
 }
 
 #welcome-details img {
