@@ -9,6 +9,10 @@
   margin-right: auto;
 }
 
+.person-card button {
+  color: white;
+}
+
 .person-card *,
 #person-name {
   color: black;
