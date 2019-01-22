@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "5b27e6a060750226a9f4",
+    "revision": "5a7faab77636e64a9fd3",
     "url": "/dogbuddyreact/static/css/main.f0951f51.chunk.css"
   },
   {
-    "revision": "5b27e6a060750226a9f4",
-    "url": "/dogbuddyreact/static/js/main.5b27e6a0.chunk.js"
+    "revision": "5a7faab77636e64a9fd3",
+    "url": "/dogbuddyreact/static/js/main.5a7faab7.chunk.js"
   },
   {
-    "revision": "f39bd6b28236708db5d8",
+    "revision": "803e00c749d0a87e94de",
     "url": "/dogbuddyreact/static/css/1.f7c1a407.chunk.css"
   },
   {
-    "revision": "f39bd6b28236708db5d8",
-    "url": "/dogbuddyreact/static/js/1.f39bd6b2.chunk.js"
+    "revision": "803e00c749d0a87e94de",
+    "url": "/dogbuddyreact/static/js/1.803e00c7.chunk.js"
   },
   {
     "revision": "9e61e5fa2ed24d433e6c",
@@ -28,7 +28,7 @@ self.__precacheManifest = [
     "url": "/dogbuddyreact/static/media/dogsplaying.681ad1e5.jpg"
   },
   {
-    "revision": "08daac099a214d04cf372a61ea735e2b",
+    "revision": "fbbb60e0c64e2e86aef12d981161d0a3",
     "url": "/dogbuddyreact/index.html"
   }
 ];
