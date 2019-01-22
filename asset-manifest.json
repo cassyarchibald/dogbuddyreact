@@ -1,7 +1,7 @@
 {
-  "main.css": "/dogbuddyreact/static/css/main.4bb49b34.chunk.css",
-  "main.js": "/dogbuddyreact/static/js/main.91780792.chunk.js",
-  "main.js.map": "/dogbuddyreact/static/js/main.91780792.chunk.js.map",
+  "main.css": "/dogbuddyreact/static/css/main.613d6a88.chunk.css",
+  "main.js": "/dogbuddyreact/static/js/main.f243c618.chunk.js",
+  "main.js.map": "/dogbuddyreact/static/js/main.f243c618.chunk.js.map",
   "static/css/1.f7c1a407.chunk.css": "/dogbuddyreact/static/css/1.f7c1a407.chunk.css",
   "static/js/1.803cc002.chunk.js": "/dogbuddyreact/static/js/1.803cc002.chunk.js",
   "static/js/1.803cc002.chunk.js.map": "/dogbuddyreact/static/js/1.803cc002.chunk.js.map",
@@ -9,9 +9,9 @@
   "runtime~main.js.map": "/dogbuddyreact/static/js/runtime~main.9e61e5fa.js.map",
   "static/media/signup.jpg": "/dogbuddyreact/static/media/signup.7692576f.jpg",
   "static/media/dogsplaying.jpg": "/dogbuddyreact/static/media/dogsplaying.681ad1e5.jpg",
-  "static/css/main.4bb49b34.chunk.css.map": "/dogbuddyreact/static/css/main.4bb49b34.chunk.css.map",
+  "static/css/main.613d6a88.chunk.css.map": "/dogbuddyreact/static/css/main.613d6a88.chunk.css.map",
   "static/css/1.f7c1a407.chunk.css.map": "/dogbuddyreact/static/css/1.f7c1a407.chunk.css.map",
   "index.html": "/dogbuddyreact/index.html",
-  "precache-manifest.e3d8680bf2766482fd3c56d0a11f30f4.js": "/dogbuddyreact/precache-manifest.e3d8680bf2766482fd3c56d0a11f30f4.js",
+  "precache-manifest.25d76d0c63fa8c0a638175bae5182599.js": "/dogbuddyreact/precache-manifest.25d76d0c63fa8c0a638175bae5182599.js",
   "service-worker.js": "/dogbuddyreact/service-worker.js"
 }
