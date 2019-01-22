@@ -12,12 +12,12 @@ const Welcome = props => {
       <header>
         <div className="header-container">
           <div className="headline-text-container">
-            <h1>Welcome To DogBuddy!</h1>
+            <h1 id="welcome-heading">Welcome To DogBuddy!</h1>
           </div>
         </div>
       </header>
       <section id="welcome-statement">
-        <h1>Find your dog a playmate today!</h1>
+        <h2 id="welcome-subheading">Find your dog a playmate today!</h2>
       </section>
       <h2 className="mb-1">How It Works</h2>
       <section id="welcome-details">

@@ -6,20 +6,32 @@
       rgba(255, 255, 255, 0.3)
     ),
     url("../img/dogsplaying.jpg") no-repeat center center / cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#welcome-heading {
+  font-family: "Monoton", cursive;
+  font-size: 7rem;
+  padding: 1rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#welcome-subheading {
+  font-family: "Monoton", cursive;
+  font-size: 4rem;
+  margin: 3rem;
 }
 
 .headline-text-container {
-  font-size: 72px;
+  /* font-size: 72px; */
   font-weight: bold;
   width: 100%;
   padding: 0px;
   margin: 0px;
   display: flex;
   flex-direction: column;
-}
-
-.headline-text-container h1 {
-  margin-top: 15%;
 }
 
 .welcome-container {
