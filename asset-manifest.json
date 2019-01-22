@@ -1,10 +1,10 @@
 {
   "main.css": "/dogbuddyreact/static/css/main.f0951f51.chunk.css",
-  "main.js": "/dogbuddyreact/static/js/main.5a7faab7.chunk.js",
-  "main.js.map": "/dogbuddyreact/static/js/main.5a7faab7.chunk.js.map",
+  "main.js": "/dogbuddyreact/static/js/main.155baa50.chunk.js",
+  "main.js.map": "/dogbuddyreact/static/js/main.155baa50.chunk.js.map",
   "static/css/1.f7c1a407.chunk.css": "/dogbuddyreact/static/css/1.f7c1a407.chunk.css",
-  "static/js/1.803e00c7.chunk.js": "/dogbuddyreact/static/js/1.803e00c7.chunk.js",
-  "static/js/1.803e00c7.chunk.js.map": "/dogbuddyreact/static/js/1.803e00c7.chunk.js.map",
+  "static/js/1.803cc002.chunk.js": "/dogbuddyreact/static/js/1.803cc002.chunk.js",
+  "static/js/1.803cc002.chunk.js.map": "/dogbuddyreact/static/js/1.803cc002.chunk.js.map",
   "runtime~main.js": "/dogbuddyreact/static/js/runtime~main.9e61e5fa.js",
   "runtime~main.js.map": "/dogbuddyreact/static/js/runtime~main.9e61e5fa.js.map",
   "static/media/signup.jpg": "/dogbuddyreact/static/media/signup.7692576f.jpg",
@@ -12,6 +12,6 @@
   "static/css/main.f0951f51.chunk.css.map": "/dogbuddyreact/static/css/main.f0951f51.chunk.css.map",
   "static/css/1.f7c1a407.chunk.css.map": "/dogbuddyreact/static/css/1.f7c1a407.chunk.css.map",
   "index.html": "/dogbuddyreact/index.html",
-  "precache-manifest.e16ddc7b80124eae55e3c5551b98554f.js": "/dogbuddyreact/precache-manifest.e16ddc7b80124eae55e3c5551b98554f.js",
+  "precache-manifest.642fd13352f790ae7efa0866c09bca41.js": "/dogbuddyreact/precache-manifest.642fd13352f790ae7efa0866c09bca41.js",
   "service-worker.js": "/dogbuddyreact/service-worker.js"
 }
