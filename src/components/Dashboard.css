@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Alegreya:400,700|Lato");
+
 #user-information {
   display: flex;
   flex-direction: column;
@@ -57,4 +59,8 @@
   margin-left: auto;
   margin-right: auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#person-name {
+  font-family: "Alegreya", serif;
 }

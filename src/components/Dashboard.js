@@ -138,24 +138,26 @@ class Dashboard extends Component {
       <div id="dashboard-container">
         {currentUserObject ? (
           <div id="user-information" className="card person-card">
-            <h2>
+            <h2 className="card-title" id="person-name">
               {`${currentUserObject.firstName} ${currentUserObject.lastName}`}
             </h2>
             <img
               src={`${currentUserObject.photo}`}
               alt={`${currentUserObject.firstName}`}
-              className="img-thumbnail profile-photo w-50"
+              className="img-thumbnail card-img-top profile-photo w-50"
             />
-            <p>
-              <span>Location</span>
-              {currentUserObject.city}, {currentUserObject.state}{" "}
-              {currentUserObject.zipCode}
-            </p>
+            <div className="card-body">
+              <p>
+                <span>Location</span>
+                {currentUserObject.city}, {currentUserObject.state}{" "}
+                {currentUserObject.zipCode}
+              </p>
 
-            <p>
-              <span>About</span>
-              {currentUserObject.about}
-            </p>
+              <p>
+                <span>About</span>
+                {currentUserObject.about}
+              </p>
+            </div>
             <div className="d-flex justify-content-center btn-container">
               <button
                 className="btn btn-primary"
