@@ -3,6 +3,20 @@
   margin: 3rem;
   padding: 1rem;
 } */
+@import url("https://fonts.googleapis.com/css?family=Alegreya:400,700|Lato");
+body {
+  font-family: "Lato", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+span {
+  font-family: "Alegreya", serif;
+}
+
 .dog-card {
   text-align: left;
   padding: 1rem;

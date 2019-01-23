@@ -197,7 +197,7 @@ class Dashboard extends Component {
           <NewDogForm addDogCallback={this.props.addDogCallback} />
         ) : null}
         <section className="user-dogs row mt-5">
-          {this.props.currentUserDogs ? this.props.currentUserDogs : null}
+          {this.props.currentUserDogs && this.props.currentUserDogs}
         </section>
 
         <section className="user-playdates row mt-5">
