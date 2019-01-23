@@ -75,6 +75,7 @@ class DogBuddy extends Component {
         console.log("adding dog success");
         let updatedData = this.state.dogs;
         updatedData.push(newDog);
+        console.log(newDog);
 
         this.setState({ dogs: updatedData });
 
@@ -116,39 +117,13 @@ class DogBuddy extends Component {
 
   removeDog = dogId => {
     console.log("in remove dog from dogbuddy");
-    // loop through dogs
-    // if id matches, set delete index to that index
-    // splice that index out
-    // update the state to equal the new value
+
     // do delete axios request
-    console.log(`https://dogbuddyapi.herokuapp.com/dogs/${dogId}`);
     axios
       .delete(`https://dogbuddyapi.herokuapp.com/dogs/${dogId}`)
       .then(response => {
         console.log("remove dog successful?");
-        console.log(response);
-        let deleteIndex = -1;
-        this.state.dogs.forEach((dog, index) => {
-          if (dogId === dog.props.id) {
-            deleteIndex = index;
-          }
-        });
-
-        let deleteIndexCurrentUserDogs = -1;
-        this.state.currentUserDogs.forEach((dog, index) => {
-          if (dogId === dog.props.id) {
-            deleteIndexCurrentUserDogs = index;
-          }
-        });
-
-        this.state.dogs.splice(deleteIndex, 1);
-        this.state.currentUserDogs.splice(deleteIndexCurrentUserDogs, 1);
-        this.setState({
-          dogs: this.state.dogs,
-          currentUserDogs: this.state.currentUserDogs
-        });
-
-        // also reload the current user dogs?
+        this.loadDogs();
         this.loadPersonsDogs();
       })
       .catch(error => {
