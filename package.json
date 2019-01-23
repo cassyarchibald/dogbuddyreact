@@ -1,9 +1,4 @@
 {
-  "proxy": "www.zipcodeapi.com/",
-  "/search": {
-    "target": "http://www.zipcodeapi.com/",
-    "changeOrigin": true
-  },
   "homepage": "http://cassyarchibald.github.io/dogbuddyreact",
   "name": "dogbuddy",
   "version": "0.1.0",
@@ -21,14 +16,12 @@
     "react-dom": "^16.7.0",
     "react-flash-message": "^1.0.2",
     "react-google-button": "^0.5.3",
-    "react-radio-buttons": "^1.2.2",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.1",
-    "react-select": "^2.2.0",
     "react-social-login-buttons": "^2.3.0",
-    "react-time-picker": "^3.1.1",
     "reactstrap": "^6.5.0",
-    "webpack-cli": "^3.2.1"
+    "webpack-cli": "^3.2.1",
+    "zipcodes": "^8.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

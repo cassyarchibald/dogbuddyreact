@@ -5,7 +5,7 @@ import axios from "axios";
 import "./SearchBar.css";
 import "./Search.css";
 import PropTypes from "prop-types";
-axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
+import zipcodes from "zipcodes";
 
 class Search extends Component {
   constructor(props) {
@@ -13,7 +13,6 @@ class Search extends Component {
     this.state = {
       resultList: [],
       dogs: this.props.dogs,
-      zipCodesInRadius: [],
       alertMessage: ""
     };
   }
@@ -40,48 +39,20 @@ class Search extends Component {
     if (radius === null) {
       radius = 5;
     }
-    this.request_url =
-      process.env.REACT_APP_HOST_URL +
-      "/" +
-      process.env.REACT_APP_API_KEY +
-      "/radius.json/" +
-      `${zipCode}` +
-      "/" +
-      `${radius}` +
-      "/mile?minimal";
+    let result = zipcodes.radius(zipCode, radius);
+    // convert to numbers
+    let zipCodesInRadiusResult = result.map(Number);
 
-    console.log(this.request_url);
-    axios
-      .get(this.request_url, {
-        crossDomain: true,
-        headers: {
-          "Access-Control-Allow-Origin": "*"
-        }
-      })
-
-      .then(response => {
-        console.log(response.data.zip_codes);
-        this.setState({
-          zipCodesInRadius: response.data.zip_codes
-        });
-
-        if (response.data.zip_codes < 1) {
-          this.setState({
-            alertMessage: "No Results Found For Entered Zip Code and Radius"
-          });
-        } else {
-          this.findDogsWithinZipCodes();
-        }
-      })
-      .catch(error => {
-        this.setState({
-          alertMessage: error.message
-        });
-        console.log(error);
+    if (result.length < 1) {
+      this.setState({
+        alertMessage: `No results found within ${radius} miles of ${zipCode}`
       });
+    } else {
+      this.findDogsWithinZipCodes(zipCodesInRadiusResult);
+    }
   };
 
-  findDogsWithinZipCodes = () => {
+  findDogsWithinZipCodes = zipCodesInRadiusResult => {
     //console.log("find dogs within zip code");
     // clear out dogs from last result search
     this.setState({
@@ -90,7 +61,7 @@ class Search extends Component {
     // loop through zip codes
     // call backend to push dog results
     // into results array in state
-    this.state.zipCodesInRadius.forEach(zipCode => {
+    zipCodesInRadiusResult.forEach(zipCode => {
       // call backend for dogs that have owner's with zipcode
       axios
         .get(
@@ -98,8 +69,6 @@ class Search extends Component {
         )
 
         .then(response => {
-          // console.log("response data for a zip code");
-          // console.log(response.data._embedded.dogs);
           // update the state
           this.setState({
             resultList: this.state.resultList.concat(
