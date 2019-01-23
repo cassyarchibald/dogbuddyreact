@@ -11,6 +11,10 @@
   margin-right: auto;
 }
 
+#add-dog {
+  margin-top: 1rem;
+}
+
 #user-information h2 {
   text-align: center;
 }

@@ -181,10 +181,11 @@ class Dashboard extends Component {
             person={this.props.currentUserObject}
           />
         ) : null}
-        <h2>Dogs</h2>
+        <h2>Your Dogs</h2>
         <div className="d-flex justify-content-center">
           <button
             className="btn btn-primary"
+            id="add-dog"
             onClick={() => {
               this.setState({ showAddDogForm: !this.state.showAddDogForm });
             }}
