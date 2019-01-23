@@ -6,6 +6,18 @@
   color: #fff;
 } */
 
+body {
+  font-family: ;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: ;
+}
+
 .alertMessage {
   color: MediumVioletRed;
 }
@@ -41,13 +53,13 @@ nav {
   color: white;
 }
 
-img {
-  width: 25rem;
+#router-list a:hover {
+  font-weight: bold;
+  text-decoration: none;
 }
 
-a:hover {
-  /* text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080, 0 0 30px #ff0080,
-    0 0 40px #ff0080, 0 0 55px #ff0080, 0 0 75px #ff0080; */
+img {
+  width: 25rem;
 }
 
 a::after {
