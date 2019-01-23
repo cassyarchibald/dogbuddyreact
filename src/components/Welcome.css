@@ -1,3 +1,17 @@
+@import url("https://fonts.googleapis.com/css?family=Alegreya:400,700|Lato");
+body {
+  font-family: "Lato", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+span {
+  font-family: "Alegreya", serif;
+}
+
 .header-container {
   width: 100%;
   height: 100%;
@@ -38,6 +52,7 @@
 
 #welcome-how-heading {
   margin: 1rem;
+  font-family: "Alegreya", serif;
 }
 
 .headline-text-container {
@@ -70,6 +85,10 @@
 #welcome-details img {
   height: 4rem;
   width: auto;
+}
+
+#welcome-details h3 {
+  font-family: "Alegreya", serif;
 }
 
 #first-details-container {
