@@ -1,4 +1,4 @@
-input {
+#search-container input {
   color: black;
   padding: 1rem;
   margin-right: 2rem;
@@ -22,8 +22,12 @@ input {
 .form-group {
 }
 
-label {
+#search-container label {
+  margin-right: 1rem;
+  margin-top: 2rem;
+  margin-bottom: auto;
 }
 
-input[type="search"] {
+#search-container input[type="submit"] {
+  color: white;
 }

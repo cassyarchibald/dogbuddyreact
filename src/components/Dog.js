@@ -91,7 +91,7 @@ class Dog extends Component {
 
   render() {
     return (
-      <div className="col-sm-6">
+      <div className="col-md-6">
         <div className="card dog-card">
           <h3 className="text-center" id="dog-name">
             {this.state.name}

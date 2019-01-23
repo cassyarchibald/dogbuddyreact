@@ -141,7 +141,7 @@ class Person extends Component {
 
   render() {
     return (
-      <div className="col-sm-6 col-md-6 person-container">
+      <div className="col-md-6 person-container">
         <div className="card person-card">
           <h3 className="card-title" id="person-name">
             {this.state.firstName} {this.state.lastName}

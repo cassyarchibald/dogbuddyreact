@@ -90,10 +90,7 @@ class Search extends Component {
         <h4 className="alertMessage text-center">{this.state.alertMessage}</h4>
 
         <SearchBar onSearchCallback={this.onSearchChange} />
-        <h3>
-          {this.state.resultList.length > 0 &&
-            `There are ${this.state.resultList.length} dogs near you`}
-        </h3>
+
         <SearchList
           resultList={this.state.resultList}
           addDogCallback={this.props.addDogCallback}
