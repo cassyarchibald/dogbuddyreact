@@ -165,8 +165,10 @@ class NewPlayDateForm extends Component {
       <div>
         <section className="errors" />
         <form className="form-group" onSubmit={this.onFormSubmit}>
-          <p>Playdate request for {this.props.recieverDogName} to play with </p>
-          <div>
+          <p>
+            Playdate request for {this.props.recievingDogName} to play with{" "}
+          </p>
+          <div className="form-group">
             <select
               name="requestorDogName"
               onChange={this.onRequestorDogChange}
@@ -178,7 +180,8 @@ class NewPlayDateForm extends Component {
                 ? this.state.currentUserdogNames
                 : null}
             </select>
-            <br />
+          </div>
+          <div className="form-group">
             <label htmlFor="startTime">Start Time</label>
             <input
               className="form-control"
@@ -188,7 +191,8 @@ class NewPlayDateForm extends Component {
               value={this.state.startTime}
             />
           </div>
-          <div>
+
+          <div className="form-group">
             <label htmlFor="endTime">End Time</label>
             <input
               className="form-control"
@@ -198,7 +202,7 @@ class NewPlayDateForm extends Component {
               value={this.state.endTime}
             />
           </div>
-          <div>
+          <div className="form-group">
             <label htmlFor="city">City</label>
             <input
               className="form-control"
@@ -207,7 +211,7 @@ class NewPlayDateForm extends Component {
               value={this.state.city}
             />
           </div>
-          <div>
+          <div className="form-group">
             <label htmlFor="state">State</label>
             <input
               className="form-control"
@@ -216,7 +220,7 @@ class NewPlayDateForm extends Component {
               value={this.state.state}
             />
           </div>
-          <div>
+          <div className="form-group">
             <label htmlFor="zipCode">Zip Code</label>
             <input
               className="form-control"
@@ -226,7 +230,7 @@ class NewPlayDateForm extends Component {
               value={this.state.zipCode}
             />
           </div>
-          <div>
+          <div className="form-group">
             <label htmlFor="location">Location</label>
             <input
               className="form-control"
@@ -236,7 +240,7 @@ class NewPlayDateForm extends Component {
               rows="3"
             />
           </div>
-          <div>
+          <div className="form-group">
             <label htmlFor="details">Details</label>
             <input
               className="form-control"
@@ -247,11 +251,13 @@ class NewPlayDateForm extends Component {
               value={this.state.details}
             />
           </div>
-          <input
-            type="submit"
-            value="Send Playdate Request"
-            className="btn btn-primary"
-          />
+          <div className="d-flex justify-content-center btn-container">
+            <input
+              type="submit"
+              value="Send Playdate Request"
+              className="btn btn-primary"
+            />
+          </div>
         </form>
       </div>
     );
