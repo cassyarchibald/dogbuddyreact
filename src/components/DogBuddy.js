@@ -754,7 +754,7 @@ class DogBuddy extends Component {
           </nav>
           <div className="App-header">
             <Switch>
-              <Route exact path="/" render={() => <Welcome />} />
+              <Route exact path="/" render={() => <Redirect to="/home" />} />
               <Route exact path="/home" render={() => <Welcome />} />
               <Route
                 path="/login"
