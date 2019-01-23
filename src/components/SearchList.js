@@ -5,9 +5,8 @@ import "./SearchList.css";
 
 const SearchList = props => {
   console.log(props);
-  let regex = /\d/;
   const SearchList = props.resultList.map((result, i) => {
-    // need to pass owner link down to search result
+    console.log(result);
     return (
       <SearchResult
         {...result}
@@ -28,7 +27,6 @@ const SearchList = props => {
 
 SearchList.propTypes = {
   resultList: PropTypes.array.isRequired
-  //updateMoviesCallback: PropTypes.func
 };
 
 export default SearchList;

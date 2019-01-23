@@ -105,7 +105,7 @@ class DogBuddy extends Component {
         // so dogs passed to dashboard via props
         // will be updated
         this.loadPersonsDogs();
-        this.loadDogs();
+        // this.loadDogs();
       })
       .catch(error => {
         console.log("update dog not successful");
@@ -308,7 +308,7 @@ class DogBuddy extends Component {
             profileCreated: true,
             currentUserObject: response.data._embedded.persons[0]
           });
-
+          console.log(this.state.currentUserObject);
           // Load the dogs for the current person
           // Load requested playdates for the current person
           // Load recieved playdates for the current person
@@ -386,6 +386,8 @@ class DogBuddy extends Component {
   };
 
   loadPersonsDogs() {
+    console.log(this.state.currentUserObject);
+
     axios
       .get(
         `https://dogbuddyapi.herokuapp.com/persons/${
@@ -532,8 +534,10 @@ class DogBuddy extends Component {
   }
 
   updatePerson = updatedPerson => {
+    updatedPerson.resourceId = this.state.currentUserObject.resourceId;
     console.log("in update person in dog buddy");
     console.log(updatedPerson);
+    console.log(this.state.currentUserObject);
     // do axios patch request or
     // would it be a put?
     axios
