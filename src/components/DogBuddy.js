@@ -105,7 +105,7 @@ class DogBuddy extends Component {
         // so dogs passed to dashboard via props
         // will be updated
         this.loadPersonsDogs();
-        // this.loadDogs();
+        this.loadDogs();
       })
       .catch(error => {
         console.log("update dog not successful");

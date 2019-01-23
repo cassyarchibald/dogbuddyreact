@@ -5,6 +5,7 @@ import axios from "axios";
 import "./SearchBar.css";
 import "./Search.css";
 import PropTypes from "prop-types";
+axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
 
 class Search extends Component {
   constructor(props) {
@@ -51,7 +52,12 @@ class Search extends Component {
 
     console.log(this.request_url);
     axios
-      .get(this.request_url)
+      .get(this.request_url, {
+        crossDomain: true,
+        headers: {
+          "Access-Control-Allow-Origin": "*"
+        }
+      })
 
       .then(response => {
         console.log(response.data.zip_codes);
@@ -71,6 +77,7 @@ class Search extends Component {
         this.setState({
           alertMessage: error.message
         });
+        console.log(error);
       });
   };
 

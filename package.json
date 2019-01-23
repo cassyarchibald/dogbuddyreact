@@ -1,4 +1,9 @@
 {
+  "proxy": "www.zipcodeapi.com/",
+  "/search": {
+    "target": "http://www.zipcodeapi.com/",
+    "changeOrigin": true
+  },
   "homepage": "http://cassyarchibald.github.io/dogbuddyreact",
   "name": "dogbuddy",
   "version": "0.1.0",
