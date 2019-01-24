@@ -48,6 +48,7 @@ span {
   font-family: "Monoton", cursive;
   font-size: 4rem;
   margin: 4rem;
+  line-height: 150%;
 }
 
 #welcome-how-heading {
