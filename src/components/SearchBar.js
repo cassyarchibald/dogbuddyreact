@@ -37,6 +37,7 @@ class SearchBar extends Component {
             name="zipCode"
             className="search-bar"
             placeholder="Zip Code"
+            id="zipCode"
           />
           <label htmlFor="radius">Miles</label>
           <input

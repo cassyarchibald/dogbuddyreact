@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Alegreya:400,700|Lato");
 body {
   font-family: "Lato", sans-serif;
+  color: #208db8;
 }
 
 h1,
@@ -10,6 +11,11 @@ h4,
 h5,
 span {
   font-family: "Alegreya", serif;
+  color: #055c7d;
+}
+
+#welcome-how-heading {
+  color: #055c7d;
 }
 
 .header-container {
@@ -27,6 +33,11 @@ span {
   align-items: center;
 }
 
+#welcome-statement {
+  background-color: #208db8;
+  color: white;
+}
+
 #welcome-heading {
   font-family: "Monoton", cursive;
   font-size: 7rem;
@@ -35,7 +46,7 @@ span {
   margin-bottom: auto;
   letter-spacing: 0.5rem;
 
-  color: black;
+  color: #055c7d;
   /* text-shadow: 6px 6px 0px rgba(0, 0, 0, 2); */
   text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9,
     0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1),
@@ -53,6 +64,7 @@ span {
 
 #welcome-how-heading {
   margin: 1rem;
+  margin-top: 2rem;
   font-family: "Alegreya", serif;
 }
 
@@ -81,6 +93,11 @@ span {
 
 .welcome-detail-container {
   padding: 1rem;
+  color: #208db8;
+}
+
+.welcome-detail-container p {
+  color: #208db8;
 }
 
 #welcome-details img {
@@ -90,6 +107,7 @@ span {
 
 #welcome-details h3 {
   font-family: "Alegreya", serif;
+  color: #055c7d;
 }
 
 #first-details-container {

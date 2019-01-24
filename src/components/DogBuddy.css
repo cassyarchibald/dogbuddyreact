@@ -10,6 +10,7 @@
 
 body {
   font-family: "Lato", sans-serif;
+  color: #208db8;
 }
 
 h1,
@@ -18,10 +19,11 @@ h3,
 h4,
 h5 {
   font-family: "Alegreya", serif;
+  color: #055c7d;
 }
 
 .alertMessage {
-  color: MediumVioletRed;
+  color: #055c7d;
 }
 
 li {
@@ -42,7 +44,7 @@ Router {
 }
 
 nav {
-  background-color: #167ffb;
+  background-color: #288eb6;
 }
 
 #router-list li {

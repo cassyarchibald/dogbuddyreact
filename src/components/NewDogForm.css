@@ -9,11 +9,25 @@ input[type="radio"] {
 }
 
 #dog-form {
-  text-align: center;
+  text-align: left;
 }
 
 .new-dog-form {
-  text-align: center;
+  text-align: left;
   margin-left: auto;
   margin-right: auto;
+  color: #208db8;
+}
+
+.new-dog-form label {
+  color: #055c7d;
+}
+
+.new-dog-form input,
+.new-dog-form textarea {
+  color: #208db8;
+}
+
+.new-dog-form input[type="submit"] {
+  color: white;
 }

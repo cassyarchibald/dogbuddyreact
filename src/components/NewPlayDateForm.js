@@ -162,7 +162,7 @@ class NewPlayDateForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className="playdate-form-container">
         <section className="errors" />
         <form className="form-group" onSubmit={this.onFormSubmit}>
           <p>
@@ -172,6 +172,8 @@ class NewPlayDateForm extends Component {
             <select
               name="requestorDogName"
               onChange={this.onRequestorDogChange}
+              className="btn btn-info"
+              id="requestor-dog-dropdown"
             >
               <option value="" disables="true">
                 Select Dog

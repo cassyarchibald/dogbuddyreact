@@ -11,23 +11,36 @@
   margin-right: auto;
 }
 
+#user-information span {
+  color: #055c7d;
+}
+
+#user-information p,
+.user-playdates {
+  color: #208db8;
+}
+
 #add-dog {
   margin-top: 1rem;
 }
 
-#user-information h2 {
+#user-information h2,
+.user-playdates h2 {
   text-align: center;
+  color: #055c7d;
 }
 
 #dashboard-container {
   display: flex;
   flex-direction: column;
   margin: 2rem;
+  color: #208db8;
 }
 
 .card {
   margin-top: 1rem;
   padding: 0.5rem;
+  color: #208db8;
 }
 
 .mt-5 {
@@ -67,4 +80,5 @@
 
 #person-name {
   font-family: "Alegreya", serif;
+  color: #055c7d;
 }

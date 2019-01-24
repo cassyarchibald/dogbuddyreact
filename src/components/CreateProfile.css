@@ -3,6 +3,7 @@
   margin-bottom: 1.5rem;
   margin-left: auto;
   margin-right: auto;
+  text-align: left;
 }
 
 .edit-user-form .form-group {
@@ -10,6 +11,20 @@
   margin-right: auto; */
   /* margin-top: 1rem;
   margin-bottom: 1rem; */
+}
+
+.edit-user-form input,
+.new-user-form input,
+.edit-user-form textarea,
+.new-user-form textarea {
+  color: #208db8;
+}
+
+input[type="submit"] {
+  color: white;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 label {

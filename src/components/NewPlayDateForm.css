@@ -1,0 +1,17 @@
+.playdate-form-container input {
+  color: #208db8;
+}
+
+.playdate-form-container label {
+  color: #055c7d;
+}
+
+.playdate-form-container input[type="submit"] {
+  color: white;
+}
+
+#requestor-dog-dropdown {
+  font-size: 1rem;
+  margin: 0;
+  padding: 1rem;
+}

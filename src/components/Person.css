@@ -13,19 +13,23 @@
   color: white;
 }
 
-.person-card *,
-#person-name {
-  color: black;
+.person-card * {
+  color: #208db8;
 }
 
 .person-card {
   text-align: left;
 }
 
+.person-card span {
+  color: #055c7d;
+}
+
 .person-card h3 {
   font-weight: bold;
   margin-bottom: 2rem;
   text-align: center;
+  color: #055c7d;
 }
 
 .person-card button {

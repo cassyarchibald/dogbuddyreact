@@ -11,3 +11,12 @@
 .dog-card img {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.dog-card h3,
+span {
+  color: #055c7d;
+}
+
+.dog-information span {
+  color: #055c7d;
+}

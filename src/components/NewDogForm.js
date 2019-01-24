@@ -225,11 +225,13 @@ class NewDogForm extends Component {
               rows="3"
             />
           </div>
-          <input
-            type="submit"
-            className="btn btn-primary submit"
-            value="Create Dog Profile"
-          />
+          <div className="d-flex justify-content-center btn-container">
+            <input
+              type="submit"
+              className="btn btn-primary submit"
+              value="Create Dog Profile"
+            />
+          </div>
         </form>
       </div>
     );

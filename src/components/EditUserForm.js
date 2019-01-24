@@ -124,12 +124,13 @@ class EditUserForm extends Component {
               rows="3"
             />
           </div>
-
-          <input
-            type="submit"
-            value="Update Profile"
-            className="btn btn-primary"
-          />
+          <div className="d-flex justify-content-center btn-container">
+            <input
+              type="submit"
+              value="Update Profile"
+              className="btn btn-primary"
+            />
+          </div>
         </form>
       </div>
     );

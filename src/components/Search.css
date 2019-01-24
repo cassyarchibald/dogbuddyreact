@@ -1,4 +1,8 @@
-.search-container {
-  /* display: flex;
-  flex-direction: column; */
+.search-container *,
+.search-container input {
+  color: #208db8;
+}
+
+.search-container label {
+  color: #055c7d;
 }
