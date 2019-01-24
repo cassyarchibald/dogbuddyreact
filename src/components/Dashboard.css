@@ -11,8 +11,10 @@
   margin-right: auto;
 }
 
-#user-information span {
+#user-information span,
+#user-information h2 {
   color: #055c7d;
+  font-family: "Alegreya", serif;
 }
 
 #user-information p,
@@ -78,7 +80,9 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#person-name {
+#person-name,
+.user-playdates h2 {
   font-family: "Alegreya", serif;
   color: #055c7d;
+  font-weight: bold;
 }

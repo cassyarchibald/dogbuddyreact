@@ -5,9 +5,13 @@
   grid-column-gap: 1rem;
 }
 
-.playdate-grid-container h4 {
+.playdate-grid-container h3 {
   grid-row: 1;
   grid-column: 1 / span 2;
+  color: #055c7d;
+}
+
+.playdate-grid-container h4 {
   color: #055c7d;
 }
 
@@ -71,5 +75,11 @@
 
 .Green {
   color: #51b764;
+  font-weight: bold;
+}
+
+#playdate-heading {
+  font-family: Monoton, cursive;
+  text-align: center;
   font-weight: bold;
 }

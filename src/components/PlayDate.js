@@ -131,7 +131,9 @@ class PlayDate extends Component {
             {this.state.alertMessage}
           </h4>
           <div className="playdate-grid-container">
-            <h4>Let's Play!</h4>
+            <h3 classname="card-title" id="playdate-heading">
+              Let's Play!
+            </h3>
             <p className="requestor-info">
               <h4>To</h4>
               {this.state.recievingDogImage && (
