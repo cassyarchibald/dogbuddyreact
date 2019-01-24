@@ -8,6 +8,14 @@
   text-align: center;
 }
 
+#search-container label[for="radius"] {
+  margin-left: 1rem;
+}
+
+#search-container #search-submit {
+  margin-left: 1rem;
+}
+
 #search-container input[type="text"],
 #zipCode {
   color: #055c7d;
