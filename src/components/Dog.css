@@ -51,6 +51,9 @@ h3 {
 #dog-name {
   color: #055c7d;
   margin-bottom: 1rem;
+  font-family: "Alegreya", serif;
+  text-align: center;
+  font-weight: bold;
 }
 
 button {

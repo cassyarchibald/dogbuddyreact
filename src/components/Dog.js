@@ -93,7 +93,7 @@ class Dog extends Component {
     return (
       <div className="col-md-6">
         <div className="card dog-card">
-          <h3 className="text-center" id="dog-name">
+          <h3 className="card-title" id="dog-name">
             {this.state.name}
           </h3>
           <div className="">
