@@ -39,7 +39,7 @@ span {
 }
 
 #welcome-statement #welcome-subheading {
-  color: white;
+  color: #fff !important;
 }
 
 #welcome-heading {
