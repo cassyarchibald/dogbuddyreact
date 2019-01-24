@@ -35,10 +35,12 @@ span {
 
 #welcome-statement {
   background-color: #208db8;
-  color: white;
+  color: white !important;
 }
 
-#welcome-statement #welcome-subheading {
+#welcome-statement #welcome-subheading,
+#welcome-statement h2,
+#welcome-subheading h2 {
   color: #fff !important;
 }
 
