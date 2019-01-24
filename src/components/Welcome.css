@@ -38,6 +38,10 @@ span {
   color: white;
 }
 
+#welcome-statement #welcome-subheading {
+  color: white;
+}
+
 #welcome-heading {
   font-family: "Monoton", cursive;
   font-size: 7rem;
@@ -60,6 +64,7 @@ span {
   font-size: 4rem;
   margin: 4rem;
   line-height: 150%;
+  color: white;
 }
 
 #welcome-how-heading {
