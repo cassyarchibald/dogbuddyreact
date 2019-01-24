@@ -31,9 +31,9 @@ span {
   margin-right: 1rem;
 }
 
-img {
+/* #dog-image {
   margin-bottom: 2rem;
-}
+} */
 
 h3 {
   font-weight: bold;
@@ -54,6 +54,7 @@ p {
 
 #dog-name {
   color: black;
+  margin-bottom: 1rem;
 }
 
 button {

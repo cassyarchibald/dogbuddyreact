@@ -100,7 +100,8 @@ class Dog extends Component {
             <img
               src={`${this.state.photo}`}
               alt={`${this.state.name}'`}
-              className="img-thumbnail mx-auto"
+              className="card-img-top mx-auto"
+              id="dog-image"
             />
           </div>
           <div className="dog-information">
