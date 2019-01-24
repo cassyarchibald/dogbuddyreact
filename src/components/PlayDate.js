@@ -135,7 +135,7 @@ class PlayDate extends Component {
               Let's Play!
             </h3>
             <p className="requestor-info">
-              <h4>To</h4>
+              <span>To</span>
               {this.state.recievingDogImage && (
                 <img
                   className="recieving-dog-photo img-fluid max-width: 100% height: auto img-thumbnail"
@@ -154,7 +154,7 @@ class PlayDate extends Component {
             </p>
 
             <p className="reciever-info">
-              <h4>From</h4>
+              <span>From</span>
               {this.state.requestorDogImage && (
                 <img
                   className="requestor-dog-photo img-fluid max-width: 100% height: auto img-thumbnail"
@@ -174,22 +174,23 @@ class PlayDate extends Component {
             <section className="playdate-content-container">
               <section className="playdate-details">
                 <p>
-                  <h4>When</h4>
+                  <span>When</span>
                   {moment(this.state.startTime).format(`LL`)},
                   {moment(this.state.startTime).format(`LT`)} to{" "}
                   {moment(this.state.endTime).format(`LT`)}
                 </p>
-                <h4>Where</h4>
+                <span>Where</span>
+                <p>{this.state.location}</p>
                 <p>
                   {this.state.city} {this.state.state} {this.state.zipCode}
                 </p>
-                <p>{this.state.location}</p>
+
                 <p>
-                  <h4>Details: </h4>
+                  <span>Details: </span>
                   {this.state.details}
                 </p>
                 <p className={this.statusColor()}>
-                  <h4 className={this.statusColor()}>Status: </h4>
+                  <span className={this.statusColor()}>Status: </span>
                   {this.state.status}
                 </p>
               </section>
