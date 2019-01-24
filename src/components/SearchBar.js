@@ -50,7 +50,12 @@ class SearchBar extends Component {
             className="search-bar"
             placeholder="Radius"
           />
-          <input className="btn btn-info" type="submit" name="submit" />
+          <input
+            className="btn btn-info"
+            id="search-submit"
+            type="submit"
+            name="submit"
+          />
         </div>
       </form>
     );
