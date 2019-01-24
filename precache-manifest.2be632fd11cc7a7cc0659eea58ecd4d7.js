@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "b32e5c535b305079ddba",
-    "url": "/dogbuddyreact/static/css/main.bab937d1.chunk.css"
+    "revision": "f51cd295b295620c1d69",
+    "url": "/dogbuddyreact/static/css/main.25da01aa.chunk.css"
   },
   {
-    "revision": "b32e5c535b305079ddba",
-    "url": "/dogbuddyreact/static/js/main.b32e5c53.chunk.js"
+    "revision": "f51cd295b295620c1d69",
+    "url": "/dogbuddyreact/static/js/main.f51cd295.chunk.js"
   },
   {
     "revision": "06849a2378cfb496ba40",
@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "url": "/dogbuddyreact/static/media/dogsplaying.681ad1e5.jpg"
   },
   {
-    "revision": "d8b48afba3a1164a0e6d350aaf49bd59",
+    "revision": "03b0027f40f2036d5adf8a6777f561f3",
     "url": "/dogbuddyreact/index.html"
   }
 ];
