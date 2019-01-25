@@ -10,6 +10,9 @@ I was inspired to build this project when I moved to a new town and my dog no lo
  - Users can send playdates between one of their dogs/another dog 
  - Users can approve/deny recieved playdates 
  
+ # Tech/Framework Used 
+- The frontend of this project uses React 
+- The backend of this project uses Spring Boot, MySql, and Firebase 
  
  ## Other 
  This is the frontend of the project. The api was build via Spring/MySql and can be found at https://github.com/cassyarchibald/dogbuddymysql. 
